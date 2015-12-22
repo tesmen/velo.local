@@ -4,7 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\BuyAdEnt as BuyAds;
 
-class SellAdvertisementRepository extends GeneralRepository
+class SellAdRepository extends GeneralRepository
 {
     public function create($data)
     {
