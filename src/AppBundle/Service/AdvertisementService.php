@@ -13,5 +13,16 @@ class AdvertisementService
     {
         $this->em = $em;
     }
+
+    public function createAds()
+    {
+        $repo = $this->em->getRepository('AppBundle:BuyAdvertisement');
+        $repo->create(
+            [
+                'title' => 'tiiitle',
+                'price' => 100,
+            ]
+        );
+    }
 }
 
