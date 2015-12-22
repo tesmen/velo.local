@@ -18,9 +18,23 @@ class AdController extends Controller
     }
 
     /**
-     * @Route("/ad-list")
+     * @Route("/ad-list", name="ad_list")
      */
     public function adListAction(Request $request)
+    {
+
+        return $this->render(
+            'ad/list.html.twig',
+            [
+                'ads' => $this->get('advertisement_service')->getAllAds(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/ad-new", name="ad_new")
+     */
+    public function adNewAction(Request $request)
     {
 
         return $this->render(
