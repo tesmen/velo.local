@@ -4,6 +4,6 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    advertisement_service:
+        class: AppBundle\Service\AdvertisementService
+        arguments: ["@doctrine.orm.entity_manager"]
