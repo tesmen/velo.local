@@ -19,7 +19,7 @@ class AdvertisementService
         $repo->create(
             [
                 'title' => 'tiiitle',
-                'price' => rand(0,100),
+                'price' => rand(0, 100),
             ]
         );
     }
@@ -28,11 +28,16 @@ class AdvertisementService
     {
         $ads = $this->em->getRepository('AppBundle:AdEnt')->findAll();
 
-        foreach ($ads as $ad){
+        foreach ($ads as $ad) {
             $result[] = new Ad($ad);
         }
 
         return $ads;
+    }
+
+    public function getFormsDataForNewAd()
+    {
+        return null;
     }
 }
 

@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Form\Ad\NewAdForm;
 
 class AdController extends Controller
 {
@@ -36,10 +37,12 @@ class AdController extends Controller
      */
     public function adNewAction(Request $request)
     {
+        $form = $this->createForm(NewAdForm::class);
 
         return $this->render(
-            'ad/list.html.twig',
+            'ad/ad_new.html.twig',
             [
+                'form' => $form->createView(),
                 'ads' => $this->get('advertisement_service')->getAllAds(),
             ]
         );
