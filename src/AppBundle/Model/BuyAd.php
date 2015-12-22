@@ -2,7 +2,7 @@
 
 namespace AppBundle\Model;
 
-class SellAdvertisement extends Advertisement
+class BuyAd extends Ad
 {
     private $ent;
 

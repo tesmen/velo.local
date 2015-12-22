@@ -5,10 +5,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BuyAdvertisementRepository")
+ * @ORM\Table(name="sell_ad")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SellAdRepository")
  */
-class SellAdvertisement
+class SellAdEnt
 {
     /**
      * @var integer
@@ -69,7 +69,7 @@ class SellAdvertisement
      *
      * @param string $title
      *
-     * @return BuyAdvertisement
+     * @return SellAdEnt
      */
     public function setTitle($title)
     {
@@ -93,7 +93,7 @@ class SellAdvertisement
      *
      * @param string $text
      *
-     * @return BuyAdvertisement
+     * @return SellAdEnt
      */
     public function setText($text)
     {
@@ -117,7 +117,7 @@ class SellAdvertisement
      *
      * @param integer $price
      *
-     * @return BuyAdvertisement
+     * @return SellAdEnt
      */
     public function setPrice($price)
     {
@@ -141,7 +141,7 @@ class SellAdvertisement
      *
      * @param string $place
      *
-     * @return BuyAdvertisement
+     * @return SellAdEnt
      */
     public function setPlace($place)
     {
@@ -165,7 +165,7 @@ class SellAdvertisement
      *
      * @param string $photos
      *
-     * @return BuyAdvertisement
+     * @return SellAdEnt
      */
     public function setPhotos($photos)
     {

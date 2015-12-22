@@ -2,9 +2,6 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Model\SellAdvertisement;
-use AppBundle\Model\BuyAdvertisement;
-
 class AdvertisementService
 {
     private $em;
@@ -16,11 +13,11 @@ class AdvertisementService
 
     public function createAds()
     {
-        $repo = $this->em->getRepository('AppBundle:BuyAdvertisement');
+        $repo = $this->em->getRepository('AppBundle:BuyAdEnt');
         $repo->create(
             [
                 'title' => 'tiiitle',
-                'price' => 100,
+                'price' => rand(0,100),
             ]
         );
     }

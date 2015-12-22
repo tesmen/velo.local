@@ -2,7 +2,7 @@
 
 namespace AppBundle\Model;
 
-class Advertisement
+class Ad
 {
     private  $ent;
 

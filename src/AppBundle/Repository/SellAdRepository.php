@@ -2,7 +2,7 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\BuyAdvertisement as BuyAds;
+use AppBundle\Entity\BuyAdEnt as BuyAds;
 
 class SellAdvertisementRepository extends GeneralRepository
 {

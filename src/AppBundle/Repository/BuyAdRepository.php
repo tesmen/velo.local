@@ -2,13 +2,13 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\BuyAdvertisement as BuyAds;
+use AppBundle\Entity\BuyAdEnt;
 
-class BuyAdvertisementRepository extends GeneralRepository
+class BuyAdRepository extends GeneralRepository
 {
     public function create($data)
     {
-        $ent = new BuyAds();
+        $ent = new BuyAdEnt();
 
         $ent
             ->setTitle($data['title'])
