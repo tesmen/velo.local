@@ -7,3 +7,8 @@ services:
     advertisement_service:
         class: AppBundle\Service\AdvertisementService
         arguments: ["@doctrine.orm.entity_manager"]
+
+    twig.cast_to_array:
+         class: AppBundle\Twig\CastToArrayExtension
+         tags:
+             - { name: twig.extension }
