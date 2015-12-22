@@ -32,7 +32,7 @@ class AdvertisementService
             $result[] = new Ad($ad);
         }
 
-        return $result;
+        return $ads;
     }
 }
 

@@ -23,5 +23,10 @@ class Ad
         $this->place = $ent->getPlace();
         $this->photos = $ent->getPhotos();
     }
+
+    public function getId()
+    {
+
+    }
 }
 

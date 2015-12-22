@@ -2,6 +2,6 @@
 
 {% block body %}
     {% for ad in ads %}
-        {{ ad.title }} - {{ ad.price }}
+        {{ ad.getTitle() }} - {{ ad.getPrice() }}<br>
     {% endfor %}
 {% endblock %}
