@@ -4,6 +4,7 @@ namespace AppBundle\Form\Ad;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use AppBundle\C;
@@ -13,7 +14,7 @@ class NewAdForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            C::FORM_CATEGORY,
+            C::FORM_TARIFF,
             ChoiceType::class,
             [
                 'label'    => 'Категория',
@@ -23,20 +24,28 @@ class NewAdForm extends AbstractType
         );
 
         $builder->add(
-            C::FORM_SUBJECT,
+            C::FORM_TITLE,
             TextType::class,
             [
-                'label'    => 'Тема',
+                'label'    => C::FORM_TITLE,
                 'required' => true,
             ]
         );
 
         $builder->add(
-            C::FORM_TEXT,
+            C::FORM_PRICE,
             TextType::class,
             [
-                'label'    => 'Текст',
+                'label'    => C::FORM_PRICE,
                 'required' => true,
+            ]
+        );
+
+        $builder->add(
+            C::FORM_SUBMIT,
+            SubmitType::class,
+            [
+                'label'    => 'New!',
             ]
         );
     }

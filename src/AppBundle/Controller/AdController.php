@@ -39,6 +39,15 @@ class AdController extends Controller
     {
         $form = $this->createForm(NewAdForm::class);
 
+        try{
+            if($request->isMethod('POST')){
+                $form->handleRequest($request);
+                $this->get('advertisement_service')->createAd($form->getData());
+            }
+        }catch (\Exception $e){
+            var_dump($e->getMessage());
+        }
+
         return $this->render(
             'ad/ad_new.html.twig',
             [

@@ -13,6 +13,7 @@ class C
     const VPS_P_APPROVAL_CODE = 'approvalCode';
     const FORM_DOMAIN = 'domain';
     const FORM_TARIFF = 'tariff';
+    const FORM_TITLE = 'title';
     const FORM_PROLONG_PERIODS = 'prolongPeriods';
     const FORM_BUTTONS_LIST = 'button_list';
     const FORM_AUTOPROLONG = 'autoprolong';
@@ -25,6 +26,7 @@ class C
     const FORM_PANEL = 'panel';
     const FORM_BUTTON = 'button';
     const FORM_PERIOD = 'period';
+    const FORM_PRICE = 'price';
     const FORM_BACKUP = 'backup';
     const FORM_PROMOCODE = 'promoCode';
     const FORM_IS_TRIAL = 'is_trial';
@@ -33,6 +35,7 @@ class C
     const FORM_PRODUCT = 'product';
     const FORM_IMPORTANCE = 'importance';
     const FORM_SUBJECT = 'subject';
+    const FORM_SUBMIT = 'submit';
     const FORM_TEXT = 'text';
     const FORM_ATTACH = 'attach';
 }

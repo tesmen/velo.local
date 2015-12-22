@@ -3,6 +3,7 @@
 namespace AppBundle\Service;
 
 use AppBundle\Model\Ad;
+use AppBundle\C;
 
 class AdvertisementService
 {
@@ -13,13 +14,13 @@ class AdvertisementService
         $this->em = $em;
     }
 
-    public function createAd()
+    public function createAd($formsData)
     {
         $repo = $this->em->getRepository('AppBundle:AdEnt');
         $repo->create(
             [
-                'title' => 'tiiitle',
-                'price' => rand(0, 100),
+                'title' => $formsData[C::FORM_TITLE],
+                'price' => $formsData[C::FORM_PRICE],
             ]
         );
     }
