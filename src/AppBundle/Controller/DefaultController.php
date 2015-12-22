@@ -13,9 +13,8 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $this->get('advertisement_service')->createAds();
+        $this->get('advertisement_service')->createAd();
 
-        // replace this example code with whatever you need
         return $this->render(
             'default/index.html.twig',
             [

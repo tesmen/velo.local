@@ -2,8 +2,7 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Model\BuyAd;
-use AppBundle\Model\SellAd;
+use AppBundle\Model\Ad;
 
 class AdvertisementService
 {
@@ -16,7 +15,7 @@ class AdvertisementService
 
     public function createAd()
     {
-        $repo = $this->em->getRepository('AppBundle:BuyAdEnt');
+        $repo = $this->em->getRepository('AppBundle:AdEnt');
         $repo->create(
             [
                 'title' => 'tiiitle',
@@ -27,11 +26,10 @@ class AdvertisementService
 
     public function getAllAds()
     {
-        $buyAds = $this->em->getRepository('AppBundle:BuyAdEnt')->findAll();
-        $sellAds = $this->em->getRepository('AppBundle:SellAdEnt')->findAll();
+        $ads = $this->em->getRepository('AppBundle:AdEnt')->findAll();
 
-        foreach (array_merge($buyAds, $sellAds) as $ad){
-            $result[] = new BuyAd($ad);
+        foreach ($ads as $ad){
+            $result[] = new Ad($ad);
         }
 
         return $result;
