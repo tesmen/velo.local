@@ -1,7 +1,0 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    {% for ad in ads %}
-        {{ ad.getTitle() }} - {{ ad.getPrice() }}<br>
-    {% endfor %}
-{% endblock %}

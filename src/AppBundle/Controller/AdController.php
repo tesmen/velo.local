@@ -6,18 +6,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Form\Ad\NewAdForm;
+use AppBundle\Form\Ad\AdNewForm;
 
 class AdController extends Controller
 {
-    /**
-     * @Route("/ad-view/{id}")
-     */
-    public function indexAction(Request $request, $id)
-    {
-        return new Response($id, 200);
-    }
-
     /**
      * @Route("/ad-list", name="ad_list")
      */
@@ -25,7 +17,7 @@ class AdController extends Controller
     {
 
         return $this->render(
-            'ad/list.html.twig',
+            'ad/ad_list.html.twig',
             [
                 'ads' => $this->get('advertisement_service')->getAllAds(),
             ]
@@ -37,12 +29,13 @@ class AdController extends Controller
      */
     public function adNewAction(Request $request)
     {
-        $form = $this->createForm(NewAdForm::class);
+        $form = $this->createForm(AdNewForm::class);
 
         try{
             if($request->isMethod('POST')){
                 $form->handleRequest($request);
                 $this->get('advertisement_service')->createAd($form->getData());
+                return $this->redirectToRoute('ad_list');
             }
         }catch (\Exception $e){
             var_dump($e->getMessage());
@@ -53,6 +46,19 @@ class AdController extends Controller
             [
                 'form' => $form->createView(),
                 'ads' => $this->get('advertisement_service')->getAllAds(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/ad-view/{adId}", name="ad_view")
+     */
+    public function adViewAction(Request $request, $adId)
+    {
+        return $this->render(
+            'ad/ad_view.html.twig',
+            [
+                'ad' => $this->get('advertisement_service')->getAdById($adId),
             ]
         );
     }

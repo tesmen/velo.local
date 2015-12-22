@@ -36,9 +36,8 @@ class AdvertisementService
         return $ads;
     }
 
-    public function getFormsDataForNewAd()
+    public function getAdById($adId)
     {
-        return null;
+        return $this->em->getRepository('AppBundle:AdEnt')->findOneById($adId);
     }
 }
-

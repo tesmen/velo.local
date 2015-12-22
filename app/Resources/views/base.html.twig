@@ -4,13 +4,14 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <a href="{{ url('ad_new') }}">Add new</a>
         <a href="{{ url('ad_list') }}">List</a>
     </head>
     <hr>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}                    {% endblock %}
+
     </body>
 </html>

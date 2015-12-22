@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for ad in ads %}
+        <a href="{{ url('ad_view', {adId: ad.getid()}) }}">{{ ad.getTitle() }} - {{ ad.getPrice() }}</a><br>
+    {% endfor %}
+{% endblock %}
