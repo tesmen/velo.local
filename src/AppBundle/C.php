@@ -8,6 +8,9 @@ class C
     const AD_SELL = 2;
     const AD_EXCHANGE = 3;
 
+    const REPO_AD = 'AppBundle:Ad';
+    const REPO_PARTS_VENDOR = 'AppBundle:PartsVendor';
+
     const SP = 'serializedParams';
     const AD_ID = 'adId';
     const VPS_P_APPROVAL_CODE = 'approvalCode';

@@ -5,10 +5,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="advertisement")
+ * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AdRepository")
  */
-class AdEnt
+class Ad
 {
     /**
      * @var integer

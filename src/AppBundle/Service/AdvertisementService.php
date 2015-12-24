@@ -16,7 +16,7 @@ class AdvertisementService
 
     public function createAd($formsData)
     {
-        $repo = $this->em->getRepository('AppBundle:AdEnt');
+        $repo = $this->em->getRepository(C::REPO_AD);
         $repo->create(
             [
                 'title' => $formsData[C::FORM_TITLE],
@@ -27,7 +27,7 @@ class AdvertisementService
 
     public function getAllAds()
     {
-        $ads = $this->em->getRepository('AppBundle:AdEnt')->findAll();
+        $ads = $this->em->getRepository(C::REPO_AD)->findAll();
 
         foreach ($ads as $ad) {
             $result[] = new Ad($ad);
@@ -38,6 +38,6 @@ class AdvertisementService
 
     public function getAdById($adId)
     {
-        return $this->em->getRepository('AppBundle:AdEnt')->findOneById($adId);
+        return $this->em->getRepository(C::REPO_AD)->findOneById($adId);
     }
 }
