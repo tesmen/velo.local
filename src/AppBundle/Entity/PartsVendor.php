@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AdRepository")
  */
-class PartsVendor
+class PartsVendor extends ReferenceEntityType
 {
     /**
      * @var integer

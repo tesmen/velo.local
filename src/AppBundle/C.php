@@ -8,6 +8,8 @@ class C
     const AD_SELL = 2;
     const AD_EXCHANGE = 3;
 
+    const ENTITY_TYPE_REFERENCE = 1;
+
     const REPO_AD = 'AppBundle:Ad';
     const REPO_PARTS_VENDOR = 'AppBundle:PartsVendor';
 
