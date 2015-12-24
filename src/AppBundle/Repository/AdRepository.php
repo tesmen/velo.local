@@ -2,13 +2,13 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\AdEnt;
+use AppBundle\Entity\Ad;
 
 class AdRepository extends GeneralRepository
 {
     public function create($data)
     {
-        $ent = new AdEnt();
+        $ent = new Ad;
 
         $ent
             ->setTitle($data['title'])

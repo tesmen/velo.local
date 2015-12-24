@@ -5,7 +5,7 @@ parameters:
 
 services:
     advertisement_service:
-        class: AppBundle\Service\AdvertisementService
+        class: AppBundle\Model\AdvertisementModel
         arguments: ["@doctrine.orm.entity_manager"]
 
     twig.cast_to_array:

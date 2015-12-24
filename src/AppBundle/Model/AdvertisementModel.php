@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Service;
+namespace AppBundle\Model;
 
-use AppBundle\Model\Ad;
 use AppBundle\C;
+use AppBundle\Entity\Ad;
 
-class AdvertisementService
+class AdvertisementModel
 {
     private $em;
 
