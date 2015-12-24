@@ -19,7 +19,7 @@ class AdController extends Controller
         return $this->render(
             'reference/reference_list.html.twig',
             [
-                'ads' => $this->get('advertisement_service')->getAllAds(),
+                'ads' => $this->get('advertisement_model')->getAllAds(),
             ]
         );
     }
@@ -34,7 +34,7 @@ class AdController extends Controller
         try{
             if($request->isMethod('POST')){
                 $form->handleRequest($request);
-                $this->get('advertisement_service')->createAd($form->getData());
+                $this->get('advertisement_model')->createAd($form->getData());
                 return $this->redirectToRoute('ad_list');
             }
         }catch (\Exception $e){
@@ -45,7 +45,7 @@ class AdController extends Controller
             'reference/reference_new.html.twig',
             [
                 'form' => $form->createView(),
-                'ads' => $this->get('advertisement_service')->getAllAds(),
+                'ads' => $this->get('advertisement_model')->getAllAds(),
             ]
         );
     }
@@ -58,7 +58,7 @@ class AdController extends Controller
         return $this->render(
             'reference/reference_view.html.twig',
             [
-                'ad' => $this->get('advertisement_service')->getAdById($adId),
+                'ad' => $this->get('advertisement_model')->getAdById($adId),
             ]
         );
     }

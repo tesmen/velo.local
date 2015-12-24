@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Form\Ad\AdNewForm;
+use AppBundle\C;
 
 class AdController extends Controller
 {
@@ -19,7 +20,7 @@ class AdController extends Controller
         return $this->render(
             'ad/ad_list.html.twig',
             [
-                'ads' => $this->get('advertisement_service')->getAllAds(),
+                'ads' => $this->get(C::MODEL_ADVERTISEMENT)->getAllAds(),
             ]
         );
     }
@@ -45,7 +46,7 @@ class AdController extends Controller
             'ad/ad_new.html.twig',
             [
                 'form' => $form->createView(),
-                'ads' => $this->get('advertisement_service')->getAllAds(),
+                'ads' => $this->get(C::MODEL_ADVERTISEMENT)->getAllAds(),
             ]
         );
     }
@@ -58,7 +59,7 @@ class AdController extends Controller
         return $this->render(
             'ad/ad_view.html.twig',
             [
-                'ad' => $this->get('advertisement_service')->getAdById($adId),
+                'ad' => $this->get(C::MODEL_ADVERTISEMENT)->getAdById($adId),
             ]
         );
     }
