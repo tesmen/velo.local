@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Form\Ad\AdNewForm;
 
-class AdController extends Controller
+class ReferenceController extends Controller
 {
     /**
      * @Route("/reference-list", name="ad_list")

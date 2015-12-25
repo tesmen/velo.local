@@ -16,7 +16,6 @@ class AdController extends Controller
      */
     public function adListAction(Request $request)
     {
-
         return $this->render(
             'ad/ad_list.html.twig',
             [
