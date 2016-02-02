@@ -92,30 +92,6 @@ class User implements UserInterface, \Serializable
      */
     private $status;
 
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     /**
      * Get username
      *
@@ -127,19 +103,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set password
-     *
-     * @param string $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
      * Get password
      *
      * @return string
@@ -147,19 +110,6 @@ class User implements UserInterface, \Serializable
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
     }
 
     /**
@@ -180,18 +130,6 @@ class User implements UserInterface, \Serializable
     public function getRoles()
     {
         return [$this->role->getName()];
-    }
-
-    public function getRole()
-    {
-        return $this->role->getName();
-    }
-
-    public function setRoles($role)
-    {
-        $this->role = $role;
-
-        return $this;
     }
 
     public function eraseCredentials()
@@ -216,9 +154,44 @@ class User implements UserInterface, \Serializable
             ) = \json_decode($serialized);
     }
 
-    /**
-     * @return string
-     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    public function getRole()
+    {
+        return $this->role->getName();
+    }
+
+    public function setRoles($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
     public function getEmail()
     {
         return $this->email;
@@ -243,9 +216,6 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLastName()
     {
         return $this->lastName;
@@ -258,9 +228,6 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getMiddleName()
     {
         return $this->middleName;

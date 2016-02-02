@@ -28,6 +28,25 @@ class SecurityController extends Controller
             ]
         );
     }
+    /**
+     * @Route("/register", name="register")
+     */
+    public function registerAction(Request $request)
+    {
+        if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(Security::AUTHENTICATION_ERROR);
+        } else {
+            $error = $request->getSession()->get(Security::AUTHENTICATION_ERROR);
+        }
+
+        return $this->render(
+            'security/login.html.twig',
+            [
+                'last_username' => $request->getSession()->get(Security::LAST_USERNAME),
+                'error' => $error,
+            ]
+        );
+    }
 
     /**
      * @Route("/login_check", name="login_check")
