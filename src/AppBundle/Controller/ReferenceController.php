@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Form\Ad\AdNewForm;
+use AppBundle\C;
 
 class ReferenceController extends Controller
 {
@@ -45,7 +46,7 @@ class ReferenceController extends Controller
             'reference/reference_new.html.twig',
             [
                 'form' => $form->createView(),
-                'ads' => $this->get('advertisement_model')->getAllAds(),
+                'ads' => $this->get(C::MODEL)->getAllAds(),
             ]
         );
     }
