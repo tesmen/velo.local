@@ -1,8 +1,0 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-
-    {% for key, value in ad | cast_to_array %}
-       {{ key }}    {{ value }} <br>
-    {% endfor %}
-{% endblock %}
