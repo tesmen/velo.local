@@ -1,14 +1,15 @@
-<?php
-
-namespace AppBundle\Entity;
+<?php namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
+ * Role
+ *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Repository\AdRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\RoleRepository")
  */
-class PartsVendor extends ReferenceEntityType
+class Role implements RoleInterface
 {
     /**
      * @var integer
@@ -22,16 +23,27 @@ class PartsVendor extends ReferenceEntityType
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $parent;
+    private $createdAt;
+
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    public function getRole()
+    {
+        return $this->getName();
+    }
 
 
     /**
@@ -48,8 +60,7 @@ class PartsVendor extends ReferenceEntityType
      * Set name
      *
      * @param string $name
-     *
-     * @return PartsVendor
+     * @return Role
      */
     public function setName($name)
     {
@@ -69,26 +80,25 @@ class PartsVendor extends ReferenceEntityType
     }
 
     /**
-     * Set parent
+     * Set createdAt
      *
-     * @param integer $parent
-     *
-     * @return PartsVendor
+     * @param \DateTime $createdAt
+     * @return Role
      */
-    public function setParent($parent)
+    public function setCreatedAt($createdAt)
     {
-        $this->parent = $parent;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get parent
+     * Get createdAt
      *
-     * @return integer
+     * @return \DateTime
      */
-    public function getParent()
+    public function getCreatedAt()
     {
-        return $this->parent;
+        return $this->createdAt;
     }
 }
