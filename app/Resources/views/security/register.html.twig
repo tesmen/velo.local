@@ -1,0 +1,20 @@
+{% extends "security/layout.html.twig" %}
+{% block content %}
+    <form  method="POST">
+
+        <div class="form-group">
+            <label for="username">Имя пользователя</label>
+
+            <input type="text" class="form-control" id="username"
+                   name="username"  placeholder="имя пользователя" required="true" style="margin-bottom: 10px"/>
+
+            <label for="password">Пароль</label>
+
+            <input type="password" class="form-control" id="password"
+                   name="password" placeholder="пароль"
+                   required="true" style="margin-bottom: 10px"/>
+
+            <input type="submit" class="btn-primary form-control" name="login" value="Катать!"/><br>
+        </div>
+    </form>
+{% endblock %}

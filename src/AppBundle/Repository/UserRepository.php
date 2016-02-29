@@ -12,6 +12,7 @@ class UserRepository extends EntityRepository
     public function create($params)
     {
         $this->_em->beginTransaction();
+
         try {
             $user = new User();
             $user->setUsername($params['username'])

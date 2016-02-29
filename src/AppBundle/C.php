@@ -10,6 +10,11 @@ class C
 
     const ENTITY_TYPE_REFERENCE = 1;
 
+    const ROLE_USER = 1;
+    const STATUS_USER_ACTIVE = 1;
+
+
+
     const REPO_AD = 'AppBundle:Ad';
     const REPO_PARTS_VENDOR = 'AppBundle:PartsVendor';
 

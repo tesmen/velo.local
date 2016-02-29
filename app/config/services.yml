@@ -12,7 +12,19 @@ services:
         class: AppBundle\Model\DefaultModel
         arguments: ["@doctrine.orm.entity_manager", "@kernel", "@session"]
 
+    model.security:
+        class: AppBundle\Model\SecurityModel
+        arguments: ["@doctrine.orm.entity_manager", "@kernel"]
+
     twig.cast_to_array:
         class: AppBundle\Twig\CastToArrayExtension
         tags:
             - { name: twig.extension }
+
+    wsse.security.authentication.provider:
+        class: AppBundle\Security\Authentication\Provider\WsseProvider
+        arguments: ["", "", "@session"]
+
+    wsse.security.authentication.listener:
+        class: AppBundle\Security\Firewall\WsseListener
+        arguments: ["@security.token_storage", "@security.authentication.manager", "@session"]

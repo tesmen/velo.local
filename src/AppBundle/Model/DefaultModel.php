@@ -6,7 +6,7 @@ use AppBundle\C;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Exception\ParseException;
 
-class AdvertisementModel
+class DefaultModel
 {
     private $em;
 

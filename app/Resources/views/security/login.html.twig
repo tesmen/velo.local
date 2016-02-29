@@ -2,7 +2,7 @@
 {% block content %}
     <form action="{{ url('login_check') }}" method="POST">
 
-        <div class="form-group">
+        <a class="form-group">
             <label for="username">Имя пользователя</label>
             <input type="text" class="form-control" id="username"
                    name="_username" value="{{ last_username }}"
@@ -16,7 +16,8 @@
                 <div class="bg-danger" style="margin-bottom: 10px">Неверное имя пользователя или пароль</div>
             {% endif %}
 
-            <input type="submit" class="btn-primary form-control" name="login" value="войти"/>
+            <input type="submit" class="btn-primary form-control" name="login" value="войти"/><br>
+            <a href="{{ url('register') }}" class="btn-primary form-control">Регистрация</a>
         </div>
     </form>
 {% endblock %}
