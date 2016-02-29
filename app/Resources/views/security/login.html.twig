@@ -2,7 +2,7 @@
 {% block content %}
     <form action="{{ url('login_check') }}" method="POST">
 
-        <a class="form-group">
+        <div class="form-group">
             <label for="username">Имя пользователя</label>
             <input type="text" class="form-control" id="username"
                    name="_username" value="{{ last_username }}"

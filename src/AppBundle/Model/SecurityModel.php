@@ -21,8 +21,8 @@ class SecurityModel
     {
         $params = [
             'username' => $username,
-            'email'    => $password,
-            'password' => $email,
+            'email'    => $email,
+            'password' => $password,
             'role' => $this->em->getRepository('AppBundle:Role')->findOneByName('ROLE_USER'),
         ];
 
