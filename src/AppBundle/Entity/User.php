@@ -37,20 +37,6 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
-     */
-    private $lastName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="middle_name", type="string", length=255, nullable=true)
-     */
-    private $middleName;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="phone_name", type="string", length=255, nullable=true)
      */
     private $phone;
@@ -212,30 +198,6 @@ class User implements UserInterface, \Serializable
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getMiddleName()
-    {
-        return $this->middleName;
-    }
-
-    public function setMiddleName($middleName)
-    {
-        $this->middleName = $middleName;
 
         return $this;
     }

@@ -19,8 +19,6 @@ class UserRepository extends EntityRepository
                 ->setRoles($params['role'])
                 ->setEmail($params['email'])
                 ->setFirstName(isset($params['first_name']) ? $params['first_name'] : null)
-                ->setLastName(isset($params['last_name']) ? $params['last_name'] : null)
-                ->setMiddleName(isset($params['middle_name']) ? $params['middle_name'] : null)
                 ->setPhone(isset($params['phone']) ? $params['phone'] : null)
                 ->setStatus(C::STATUS_USER_ACTIVE);
 
@@ -42,15 +40,13 @@ class UserRepository extends EntityRepository
         return $user;
     }
 
-    public function update($user, $params)
+    public function update(User $user, array $params)
     {
         $this->_em->beginTransaction();
 
         try {
             $user->setEmail(isset($params['email']) ? $params['email'] : null)
                 ->setFirstName(isset($params['first_name']) ? $params['first_name'] : null)
-                ->setLastName(isset($params['last_name']) ? $params['last_name'] : null)
-                ->setMiddleName(isset($params['middle_name']) ? $params['middle_name'] : null)
                 ->setPhone(isset($params['phone']) ? $params['phone'] : null);
 
 
