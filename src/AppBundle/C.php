@@ -11,6 +11,14 @@ class C
     const ENTITY_TYPE_REFERENCE = 1;
 
     const ROLE_USER = 1;
+    const ROLE_MODERATOR = 2;
+    const ROLE_ADMIN = 3;
+
+    const REPO_ROLE = 'AppBundle:Role';
+    const REPO_USER = 'AppBundle:User';
+
+    const MODEL_MAINTENANCE = 'model.maintenance';
+
     const STATUS_USER_ACTIVE = 1;
 
 

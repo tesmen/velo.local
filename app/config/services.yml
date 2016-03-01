@@ -4,8 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
-    model.advertisement:
-        class: AppBundle\Model\AdvertisementModel
+    model.maintenance:
+        class: AppBundle\Model\Maintenance\MaintenanceModel
         arguments: ["@doctrine.orm.entity_manager"]
 
     model.default:
