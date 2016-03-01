@@ -1,20 +1,85 @@
 {% extends "security/layout.html.twig" %}
 {% block content %}
-    <form  method="POST">
+    <form method="POST" id="register_form">
+        <div class="form-group" >
+            <div>
+                <label for="username">Имя пользователя</label>
 
-        <div class="form-group">
-            <label for="username">Имя пользователя</label>
+                <input type="text" class="form-control" id="username"
+                       name="username"
+                       placeholder="имя пользователя" required style="margin-bottom: 10px"/>
+            </div>
 
-            <input type="text" class="form-control" id="username"
-                   name="username"  placeholder="имя пользователя" required="true" style="margin-bottom: 10px"/>
+            <div>
+                <label for="email">Электронная почта</label>
 
-            <label for="password">Пароль</label>
+                <input type="email" class="form-control" id="email"
+                       name="email"
+                       placeholder="электронная почта" required style="margin-bottom: 10px"/>
+            </div>
 
-            <input type="password" class="form-control" id="password"
-                   name="password" placeholder="пароль"
-                   required="true" style="margin-bottom: 10px"/>
+            <div>
+                <label for="password">Пароль</label>
 
-            <input type="submit" class="btn-primary form-control" name="login" value="Катать!"/><br>
+                <input type="password" class="form-control" id="password"
+                       name="password" placeholder="пароль"
+                       required style="margin-bottom: 10px"/>
+            </div>
+
+            <div>
+                <input type="password" class="form-control" id="confirm_password"
+                       name="confirm_password" placeholder="подтверждение пароля"
+                       required style="margin-bottom: 10px"/>
+            </div>
+
+            <input type="submit" class="btn-primary form-control" name="login" value="Регистрация"/><br>
         </div>
     </form>
+{% endblock %}
+
+
+
+{% block js %}
+    <script>
+        $(function () {
+            $("#register_form").validate({
+                rules: {
+                    'username': {
+                        required: true,
+                        maxlength: 32
+                    },
+                    'email': {
+                        required: true,
+                        maxlength: 32
+                    },
+                    'password': {
+                        required: true,
+                        maxlength: 16
+                    },
+                    'confirm_password': {
+                        required: true,
+                        maxlength: 16
+                    }
+                },
+                messages: {
+                    'username': {
+                        required: "Обязательное поле",
+                        maxlength: "Максимальная длина 128 символов"
+                    },
+                    'email': {
+                        required: "Обязательное поле",
+                        maxlength: "Максимальная длина 128 символов"
+                    },
+                    'password': {
+                        required: "Обязательное поле",
+                        maxlength: "Максимальная длина 128 символов"
+                    },
+                    'confirm_password': {
+                        required: "Обязательное поле",
+                        maxlength: "Максимальная длина 128 символов"
+                    }
+                }
+            });
+        })
+    </script>
 {% endblock %}

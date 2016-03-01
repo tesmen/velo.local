@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Login page</title>
+    <title>Регистрация</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
+
+
+    <script src="{{  asset('js/jquery-2.2.1.min.js') }}"></script>
+    <script src="{{  asset('js/jquery.validate.min.js') }}"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="row">
@@ -18,11 +23,6 @@
         </div>
     </div>
 </div>
-
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="{{  asset('js/common.js') }}"></script>
-<script src="{{  asset('js/price.js') }}"></script>
+{% block js %}{% endblock %}
 </body>
 </html>
