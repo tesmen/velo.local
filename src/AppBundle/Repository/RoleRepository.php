@@ -41,6 +41,7 @@ class RoleRepository extends GeneralRepository
         }
 
         $this->_em->beginTransaction();
+
         try {
             $ent->setName($name);
 

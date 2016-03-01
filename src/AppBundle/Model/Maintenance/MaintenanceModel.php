@@ -4,8 +4,6 @@ namespace AppBundle\Model\Maintenance;
 
 use AppBundle\C;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Exception\ParseException;
 
 class MaintenanceModel
 {
@@ -24,6 +22,6 @@ class MaintenanceModel
             C::ROLE_ADMIN     => 'ROLE_ADMIN',
         ];
 
-        $repo = $this->em->getRepository(C::REPO_ROLE)->load($roles);
+        $this->em->getRepository(C::REPO_ROLE)->load($roles);
     }
 }
