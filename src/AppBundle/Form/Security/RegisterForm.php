@@ -9,6 +9,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use AppBundle\C;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class RegisterForm extends AbstractType
 {
@@ -62,6 +65,28 @@ class RegisterForm extends AbstractType
             [
                 'label' => 'Регистрация',
             ]
+        );
+
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+                $data = $event->getData();
+
+                $username = $data[C::FORM_USERNAME];
+                if ($username === '') {
+                    $form->get(C::FORM_USERNAME)->addError(new FormError('Обязательное поле'));
+                } elseif (!preg_match('/^([A-Za-z]){2,32}$/', $username)) {
+                    $form->get(C::FORM_USERNAME)->addError(new FormError('Неверно указано имя пользователя'));
+                }
+
+                $email = $data[C::FORM_EMAIL];
+                if ($email === '') {
+                    $form->get(C::FORM_EMAIL)->addError(new FormError('Обязательное поле'));
+                } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $form->get(C::FORM_EMAIL)->addError(new FormError('Неверно указан email'));
+                }
+            }
         );
     }
 
