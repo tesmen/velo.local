@@ -1,0 +1,312 @@
+{% macro bootstrapInput(form) %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+        {#<span class="glyphicon glyphicon-remove form-control-feedback"></span>#}
+    </div>
+{% endmacro %}
+
+{% macro prototype() %}
+    <input autocomplete="off" placeholder="Введите MSISDN" type="text"
+           id="contract_msisdns_$$name$$" name="contract[msisdns][$$name$$]" class="msisdn"/>
+{% endmacro %}
+
+{% macro new_contract_prototype() %}
+    <input autocomplete="off" placeholder="Введите ID, чтобы добавить новое устройство" type="text"
+           id="contract_device_ids_$$name$$" name="contract[device_ids][$$name$$]" class="device_id"/>
+{% endmacro %}
+
+{% macro new_order_prototype() %}
+    <input autocomplete="off" placeholder="Введите ID, чтобы добавить новое устройство" type="text"
+           id="order_device_ids_$$name$$" name="order[device_ids][$$name$$]" class="device_id"/>
+{% endmacro %}
+
+{% macro my_text_widget(form, class, isVisible, isRequired) %}
+    <tr {% if not class == "" %}class="{{ class }}"{% endif %}{% if not isVisible %} style="display: none;" {% endif %}>
+        <td>
+            <div class="field_item">
+                <div class="textfield">
+                    <div>
+                        {{ form_widget(form) }}
+                        <div class="smileyes hide"></div>
+                        <div class="smileno {% if form_errors(form) == '' %}hide{% endif %}">
+                            <div class="note">
+                                <span></span>
+
+                                <div>
+                                    <i></i>
+                                    <b>{% if form_errors(form) %}<label
+                                            class="invalid" for="{{ form.vars.id }}"
+                                            generated="true">{{ form_errors(form) }}</label>{% endif %}
+                                    </b>
+                                </div>
+                            </div>
+                        </div>
+                        {% if isRequired %}
+                            <div class="required"></div>{% endif %}
+                    </div>
+                </div>
+                <div class="error"></div>
+            </div>
+        </td>
+        <td width="20">
+            <div class="notesign">
+                <div class="note">
+                    <span></span>
+
+                    <div>{{ form.vars.help }}</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% macro my_text_widget_small(form) %}
+    <td>
+        <div class="field_item">
+            <div class="textfield">
+                <div>
+                    {{ form_widget(form) }}
+                    <div class="smileyes hide"></div>
+                    <div class="smileno {% if form_errors(form) == '' %}hide{% endif %}">
+                        <div class="note">
+                            <span></span>
+
+                            <div>
+                                <i></i>
+                                <b>{{ form_errors(form) }}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </td>
+    <td width="20">
+        <div class="notesign">
+            <div class="note">
+                <span></span>
+
+                <div>{{ form.vars.help }}</div>
+            </div>
+        </div>
+    </td>
+{% endmacro %}
+
+{% macro my_text_document_issue_widget(form, class, subclass, isVisible, isRequired) %}
+    <tr {% if not class == "" %} class="{{ class }}" {% endif %}>
+        <td {% if not subclass == "" %} class="{{ subclass }}" {% endif %}{% if not isVisible %} style="display: none;" {% endif %}>
+            <div class="field_item">
+                <div class="textfield">
+                    <div>
+                        {{ form_widget(form) }}
+                        <div class="smileyes hide"></div>
+                        <div class="smileno {% if form_errors(form) == '' %}hide{% endif %}">
+                            <div class="note">
+                                <span></span>
+
+                                <div>
+                                    <i></i>
+                                    <b>{% if form_errors(form) %}<label
+                                            class="invalid" for="{{ form.vars.id }}"
+                                            generated="true">{{ form_errors(form) }}</label>{% endif %}</b>
+                                </div>
+                            </div>
+                        </div>
+                        {% if isRequired %}
+                            <div class="required"></div>{% endif %}
+                    </div>
+                </div>
+                <div class="error"></div>
+            </div>
+        </td>
+        <td {% if not subclass == "" %} class="{{ subclass }}"
+                {% endif %}width="20"{% if not isVisible %} style="display: none;" {% endif %}>
+            <div class="notesign">
+                <div class="note">
+                    <span></span>
+
+                    <div>{{ form.vars.help }}</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% macro my_text_area_widget(form, isRequired) %}
+    <tr>
+        <td>
+            <div class="field_item">
+                <div class="textfield text_area">
+                    <div>
+                        {{ form_widget(form) }}
+                        <div class="smileyes hide"></div>
+                        <div class="smileno {% if form_errors(form) == '' %}hide{% endif %}">
+                            <div class="note">
+                                <span></span>
+
+                                <div>
+                                    <i></i>
+                                    <b>{{ form_errors(form) }}</b>
+                                </div>
+                            </div>
+                        </div>
+                        {% if isRequired %}
+                            <div class="required comment_required"></div>{% endif %}
+                    </div>
+                </div>
+                <div class="error"></div>
+            </div>
+        </td>
+        <td width="20">
+            <div class="notesign">
+                <div class="note">
+                    <span></span>
+
+                    <div>{{ form.vars.help }}</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% macro my_choice_widget(form, class, isVisible, isRequired) %}
+    <tr {% if not class == "" %} class="{{ class }}" {% endif %} {% if not isVisible %}style='display: none;'{% endif %}>
+        <td class="ie">
+            <div class="field_item">
+                <div style="position: relative;">
+                    <div>
+                        {{ form_widget(form) }}
+                        {% if isRequired %}
+                            <div class="required"></div>{% endif %}
+                        <div class="smileno {% if form_errors(form) == '' %}hide{% endif %}">
+                            <div class="note">
+                                <span></span>
+
+                                <div>
+                                    <i></i>
+                                    <b>{{ form_errors(form) }}</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td width="20">
+            <div class="notesign">
+                <div class="note">
+                    <span></span>
+
+                    <div>{{ form.vars.help }}</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% macro my_multi_choice_widget(form) %}
+    <tr>
+        <td class="ie">
+            {#<div class="field_item">#}
+            {#{{ form_widget(form) }}#}
+            {#</div>#}
+            <div class="multy_field_item">
+                {{ form_widget(form) }}
+                <div class="smileyes hide"></div>
+                <div class="smileno {% if form_errors(form) == '' %}hide{% endif %}">
+                    <div class="note">
+                        <span></span>
+
+                        <div>
+                            <i></i>
+                            <b>{{ form_errors(form) }}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td width="20">
+            <div class="notesign">
+                <div class="note">
+                    <span></span>
+
+                    <div>{{ form.vars.help }}</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% macro my_checkbox_wrapper(form) %}
+    <div class="checkbox_wrapper">
+        <div class="group">
+            <div>
+                <label>
+                    {{ form_label(form) }}
+                    <div class="notesign">
+                        <div class="note">
+                            <span></span>
+
+                            <div>{{ form_label(form) }}</div>
+                        </div>
+                    </div>
+                </label>
+                {{ form_widget(form) }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro my_radio_wrapper(form) %}
+    <tr>
+        <td>
+            <div class="field_item" style="margin-bottom: 6px;">
+                {{ form_widget(form) }}
+            </div>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% macro my_cancel_button(class, subclass, buttonId, isVisible, isButtonVisible) %}
+    <tr {% if not class == "" %}class="{{ class }}"{% endif %}{% if not isVisible %} style="display: none;"{% endif %}>
+        <td {% if not subclass == "" %}class="{{ subclass }}"{% endif %}
+            align="left"{% if not isButtonVisible %} style="display: none;" {% endif %}>
+            <button {% if not buttonId == "" %}id="{{ buttonId }}"{% endif %} type="button"><span>Отменить</span>
+            </button>
+            <br><br>
+        </td>
+        <td width="20"{% if not isButtonVisible %} style="display: none;" {% endif %}></td>
+    </tr>
+{% endmacro %}
+
+{% macro my_date_choice_widget(form) %}
+    <td>
+        <div class="field_item">
+            <div class="textfield datafield">
+                <div>
+                    {{ form_widget(form) }}
+                    <div class="smileno {% if form_errors(form) == '' %}hide{% endif %}">
+                        <div class="note">
+                            <span></span>
+
+                            <div>
+                                <i></i>
+                                <b>{{ form_errors(form) }}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </td>
+    <td width="30">
+        <div class="notesign">
+            <div class="note">
+                <span></span>
+
+                <div>{{ form.vars.help }}</div>
+            </div>
+        </div>
+    </td>
+{% endmacro %}

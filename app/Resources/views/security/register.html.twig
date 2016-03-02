@@ -1,35 +1,13 @@
 {% extends "security/layout.html.twig" %}
+{% import 'templates/macroses.html.twig' as macroses %}
 {% block content %}
-    <form method="POST" id="register_form">
-        <div class="form-group has-error has-feedback">
-            <label for="username">Имя пользователя</label>
-            <input type="text" required class="form-control" id="username" name="username"
-                   placeholder="имя пользователя">
-            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-        </div>
-
-        <div class="form-group has-error has-feedback">
-            <label for="email">Электронная почта</label>
-            <input type="email" required class="form-control" id="email" name="email"
-                   placeholder="email">
-            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-        </div>
-
-        <div class="form-group has-error has-feedback">
-            <label for="password">Пароль</label>
-            <input type="password" required class="form-control" id="password" name="password"
-                   placeholder="пароль">
-            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-        </div>
-
-        <div class="form-group has-error has-feedback">
-            <input type="password" required class="form-control" id="confirm_password" name="confirm_password"
-                   placeholder="подтверждение пароля">
-            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-        </div>
-
-        <input type="submit" class="btn-primary form-control" name="login" value="Регистрация"/><br>
-    </form>
+    {{ form_start(form) }}
+    {{ macroses.bootstrapInput(form.username) }}
+    {{ macroses.bootstrapInput(form.email) }}
+    {{ macroses.bootstrapInput(form.password) }}
+    {{ macroses.bootstrapInput(form.confirm_password) }}
+    {{ form_widget(form.submit, {'attr':{'class' : 'btn-primary form-control'}}) }}
+    {{ form_end(form) }}
 {% endblock %}
 
 
@@ -37,63 +15,79 @@
 {% block js %}
     <script>
         $(function () {
-            $("#register_form").validate({
+            $("form").validate({
                 rules: {
-                    'username': {
+                    'register_form[username]': {
                         required: true,
+                        minlength: 3,
                         maxlength: 32
                     },
-                    'email': {
+                    'register_form[email]': {
                         required: true,
+                        minlength: 3,
                         maxlength: 32
                     },
-                    'password': {
+                    'register_form[password]': {
                         required: true,
+                        minlength: 8,
                         maxlength: 16
                     },
-                    'confirm_password': {
+                    'register_form[confirm_password]': {
                         required: true,
-                        maxlength: 16
+                        minlength: 8,
+                        maxlength: 16,
+                        equalTo: "#password"
                     }
                 },
                 messages: {
-                    'username': {
+                    'register_form[username]': {
                         required: "Обязательное поле",
+                        minlength: "Минимальная длина 3 символа",
                         maxlength: "Максимальная длина 128 символов"
                     },
-                    'email': {
+                    'register_form[email': {
                         required: "Обязательное поле",
+                        minlength: "Минимальная длина 3 символа",
                         maxlength: "Максимальная длина 128 символов"
                     },
-                    'password': {
+                    'register_form[password]': {
                         required: "Обязательное поле",
+                        minlength: "Минимальная длина 8 символов",
                         maxlength: "Максимальная длина 128 символов"
                     },
-                    'confirm_password': {
+                    'register_form[confirm_password]': {
                         required: "Обязательное поле",
-                        maxlength: "Максимальная длина 128 символов"
+                        minlength: "Минимальная длина 8 символов",
+                        maxlength: "Максимальная длина 128 символов",
+                        equalTo:  "Пароли должны совпадать",
                     }
                 },
-                errorPlacement: function (error, element) {
-                    console.log(error);
-                    console.log(element);
-                    var parent = element.parent();
-                    parent.addClass('has-error');
-                    parent
-                            .find('span.glyphicon')
-                            .removeClass('hide')
-                            .removeClass('glyphicon-remove')
-                            .addClass('glyphicon-ok');
-                },
-                success: function (element) {
-                    var parent = element.parent();
-                    parent.removeClass('has-error');
-                    parent
-                            .find('span.glyphicon')
-                            .removeClass('hide')
-                            .removeClass('glyphicon-remove')
-                            .addClass('glyphicon-ok');
-                }
+//                errorPlacement: function (error, element) {
+//                    console.log('error '+$(element).attr('id'));
+//                    var parent = element.parent();
+//                    parent.addClass('has-error');
+//                    parent
+//                            .find('span.glyphicon')
+//                            .removeClass('hide')
+//                            .addClass('glyphicon-remove')
+//                            .removeClass('glyphicon-ok');
+//                },
+//                success: function (element) {
+//                    console.log('success '+$(element).attr('id'));
+//                    var parent = element.parent();
+//                    parent.removeClass('has-error');
+//                    parent
+//                            .find('span.glyphicon')
+//                            .removeClass('hide')
+//                            .removeClass('glyphicon-remove')
+//                            .addClass('glyphicon-ok');
+//                },
+//                highlight: function (element, errorClass) {
+//                    console.log('highlight '+$(element).attr('id'));
+//                    $(element).parents('.textfield').addClass('wrong');
+//                    $(element).parents('.field_item').find('div.smileyes').addClass('hide');
+//                    $(element).parents('.field_item').find('div.smileno').removeClass('bluenote').removeClass('hide');
+//                }
             });
         })
     </script>

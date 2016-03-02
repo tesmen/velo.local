@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\Security\RegisterForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,10 +21,13 @@ class SecurityController extends Controller
             $error = $request->getSession()->get(Security::AUTHENTICATION_ERROR);
         }
 
-        return $this->render('security/login.html.twig', array(
-            'last_username' => $request->getSession()->get(Security::LAST_USERNAME),
-            'error' => $error
-        ));
+        return $this->render(
+            'security/login.html.twig',
+            [
+                'last_username' => $request->getSession()->get(Security::LAST_USERNAME),
+                'error'         => $error,
+            ]
+        );
     }
 
     /**
@@ -31,7 +35,13 @@ class SecurityController extends Controller
      */
     public function registerAction(Request $request)
     {
+        $form = $this->createForm(RegisterForm::class);
+
         if ($request->isMethod('POST')) {
+            if ($request->get('username') !== $request->get('confirm_username')) {
+
+            }
+
             $this->get('model.security')->createUser(
                 $request->get('username'),
                 $request->get('password'),
@@ -39,7 +49,12 @@ class SecurityController extends Controller
             );
         }
 
-        return $this->render('security/register.html.twig');
+        return $this->render(
+            'security/register.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
