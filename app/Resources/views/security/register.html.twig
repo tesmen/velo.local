@@ -7,7 +7,7 @@
     {{ macroses.bootstrapInput(form.username) }}
     {{ macroses.bootstrapInput(form.email) }}
     {{ macroses.bootstrapInput(form.password) }}
-    {{ macroses.bootstrapInput(form.confirm_password) }}
+    {{ macroses.bootstrapInputNoLabel(form.confirm_password) }}
     {{ form_widget(form.submit, {'attr':{'class' : 'btn-primary form-control'}}) }}
     {{ form_end(form) }}
 {% endblock %}

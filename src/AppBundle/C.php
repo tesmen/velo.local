@@ -17,11 +17,13 @@ class C
     const REPO_ROLE = 'AppBundle:Role';
     const REPO_USER = 'AppBundle:User';
 
+    const ROUTE_HOMEPAGE = 'homepage';
+    const ROUTE_LOGIN = 'login';
+    const ROUTE_LOGOUT = 'logout';
+
     const MODEL_MAINTENANCE = 'model.maintenance';
 
     const STATUS_USER_ACTIVE = 1;
-
-
 
     const REPO_AD = 'AppBundle:Ad';
     const REPO_PARTS_VENDOR = 'AppBundle:PartsVendor';

@@ -45,8 +45,11 @@ class RegisterForm extends AbstractType
             C::FORM_PASSWORD,
             PasswordType::class,
             [
-                'label'    => C::FORM_PASSWORD,
+                'label'    => 'Пароль',
                 'required' => true,
+                'attr'     => [
+                    'placeholder' => 'Пароль',
+                ],
             ]
         );
 
@@ -54,8 +57,11 @@ class RegisterForm extends AbstractType
             C::FORM_CONFIRM_PASSWORD,
             PasswordType::class,
             [
-                'label'    => C::FORM_CONFIRM_PASSWORD,
+                'label'    => 'Подтверждение пароля',
                 'required' => true,
+                'attr'     => [
+                    'placeholder' => 'Подтверждение пароля',
+                ],
             ]
         );
 
@@ -76,7 +82,7 @@ class RegisterForm extends AbstractType
                 $username = $data[C::FORM_USERNAME];
                 if ($username === '') {
                     $form->get(C::FORM_USERNAME)->addError(new FormError('Обязательное поле'));
-                } elseif (!preg_match('/^([A-Za-z]){2,32}$/', $username)) {
+                } elseif (!preg_match('/^([0-9A-Za-z]){2,32}$/', $username)) {
                     $form->get(C::FORM_USERNAME)->addError(new FormError('Неверно указано имя пользователя'));
                 }
 

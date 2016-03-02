@@ -49,6 +49,10 @@ class SecurityController extends Controller
                     $formData[C::FORM_PASSWORD],
                     $formData[C::FORM_EMAIL]
                 );
+
+                $this->addFlash('success', 'Регистрация пройдена, теперь вы можете войти указав свои данные');
+
+                return $this->redirectToRoute(C::ROUTE_HOMEPAGE);
             } else {
                 $this->addFlash('warning', 'Форма заполнена неверно');
             }
