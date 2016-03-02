@@ -1,6 +1,8 @@
 {% extends "security/layout.html.twig" %}
 {% import 'templates/macroses.html.twig' as macroses %}
 {% block content %}
+    {% include 'templates/alert.html.twig' %}
+
     {{ form_start(form) }}
     {{ macroses.bootstrapInput(form.username) }}
     {{ macroses.bootstrapInput(form.email) }}
@@ -9,8 +11,6 @@
     {{ form_widget(form.submit, {'attr':{'class' : 'btn-primary form-control'}}) }}
     {{ form_end(form) }}
 {% endblock %}
-
-
 
 {% block js %}
     <script>
@@ -36,7 +36,7 @@
                         required: true,
                         minlength: 8,
                         maxlength: 16,
-                        equalTo: "#password"
+                        equalTo: "#register_form_password"
                     }
                 },
                 messages: {

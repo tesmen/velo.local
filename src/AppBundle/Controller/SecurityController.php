@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\Security\RegisterForm;
+use AppBundle\C;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,15 +39,19 @@ class SecurityController extends Controller
         $form = $this->createForm(RegisterForm::class);
 
         if ($request->isMethod('POST')) {
-            if ($request->get('username') !== $request->get('confirm_username')) {
+            $form->handleRequest($request);
 
+            if ($form->isValid()) {
+                $formData = $form->getData();
+
+                $this->get('model.security')->createUser(
+                    $formData[C::FORM_USERNAME],
+                    $formData[C::FORM_PASSWORD],
+                    $formData[C::FORM_EMAIL]
+                );
+            } else {
+                $this->addFlash('warning', 'Форма заполнена неверно');
             }
-
-            $this->get('model.security')->createUser(
-                $request->get('username'),
-                $request->get('password'),
-                'mail'
-            );
         }
 
         return $this->render(
