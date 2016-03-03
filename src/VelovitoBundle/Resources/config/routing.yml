@@ -1,0 +1,3 @@
+velovito_homepage:
+    path:     /velovito
+    defaults: { _controller: VelovitoBundle:Default:index }
