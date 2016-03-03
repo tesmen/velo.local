@@ -1,0 +1,34 @@
+@import "bootstrap/bootstrap.less";
+@import "variables.less";
+
+.no-select{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn-general {
+  &:extend(.btn);
+  width: 160px;
+  padding: 13px 0;
+  font-size: 16px;
+  &:hover,
+  &:focus {
+    &:extend(.btn:hover);
+  }
+}
+
+.btn-cancel {
+  .btn-general();
+  background-color: #fff;
+  &:hover {
+    background-color: #f1f1f1;
+  }
+  &,
+  &:hover,
+  &:focus {
+    color: @gray-text-btn;
+    text-decoration: none;
+  }
+}
