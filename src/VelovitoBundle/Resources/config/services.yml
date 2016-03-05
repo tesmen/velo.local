@@ -1,4 +1,16 @@
 services:
-#    velovito.example:
-#        class: VelovitoBundle\Example
+#    VelovitoBundle.example:
+#        class: VelovitoBundleBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+
+    model.maintenance:
+        class: VelovitoBundle\Model\Maintenance\MaintenanceModel
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    model.default:
+        class: VelovitoBundle\Model\DefaultModel
+        arguments: ["@doctrine.orm.entity_manager", "@kernel", "@session"]
+
+    model.security:
+        class: VelovitoBundle\Model\SecurityModel
+        arguments: ["@doctrine.orm.entity_manager", "@kernel"]

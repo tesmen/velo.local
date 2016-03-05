@@ -2,8 +2,8 @@
 
 namespace VelovitoBundle\Controller;
 
-use AppBundle\Form\Security\RegisterForm;
-use AppBundle\C;
+use VelovitoBundle\Form\Security\RegisterForm;
+use VelovitoBundle\C;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

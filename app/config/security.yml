@@ -1,6 +1,6 @@
 security:
     encoders:
-        AppBundle\Entity\User:
+        VelovitoBundle\Entity\User:
             algorithm: sha512
             encode-as-base64: true
             iterations: 10
@@ -11,7 +11,7 @@ security:
     providers:
         main:
             entity:
-                class: AppBundle\Entity\User
+                class: VelovitoBundle\Entity\User
                 property: username
 
     firewalls:
