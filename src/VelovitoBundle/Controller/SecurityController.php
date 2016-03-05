@@ -28,7 +28,7 @@ class SecurityController extends Controller
         );
     }
 
-    public function registerAction(Request $request)
+    public function registrationAction(Request $request)
     {
         $form = $this->createForm(RegisterForm::class);
 
@@ -53,7 +53,7 @@ class SecurityController extends Controller
         }
 
         return $this->render(
-            'VelovitoBundle:security:register.html.twig',
+            'VelovitoBundle:security:registration.html.twig',
             [
                 'form' => $form->createView(),
             ]

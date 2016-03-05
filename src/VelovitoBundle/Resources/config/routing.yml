@@ -1,3 +1,22 @@
+login_check:
+    path: /login-check
+
+logout:
+    path: /logout
+
+#routes for real pages
+login:
+    path: /login
+    defaults:
+        _controller: VelovitoBundle:Security:login
+        title: Вход
+
+registration:
+    path: /registration
+    defaults:
+        _controller: VelovitoBundle:Security:registration
+        title: Регистрация
+
 velovito:
     path:     /velovito
     defaults: { _controller: VelovitoBundle:Default:velovito }
