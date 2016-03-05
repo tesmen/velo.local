@@ -1,7 +1,7 @@
-{% extends "security/layout.html.twig" %}
-{% import 'templates/macroses.html.twig' as macroses %}
+{% extends "VelovitoBundle:security:layout.html.twig" %}
+{% import 'VelovitoBundle:templates:macroses.html.twig' as macroses %}
 {% block content %}
-    {% include 'templates/alert.html.twig' %}
+    {% include 'VelovitoBundle:templates:alert.html.twig' %}
 
     {{ form_start(form) }}
     {{ macroses.bootstrapInput(form.username) }}

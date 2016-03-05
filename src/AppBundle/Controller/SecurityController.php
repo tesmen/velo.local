@@ -23,7 +23,7 @@ class SecurityController extends Controller
         }
 
         return $this->render(
-            'security/login.html.twig',
+            'VelovitoBundle:security:login.html.twig',
             [
                 'last_username' => $request->getSession()->get(Security::LAST_USERNAME),
                 'error'         => $error,
@@ -59,7 +59,7 @@ class SecurityController extends Controller
         }
 
         return $this->render(
-            'security/register.html.twig',
+            'VelovitoBundle:security:register.html.twig',
             [
                 'form' => $form->createView(),
             ]
