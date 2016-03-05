@@ -1,3 +1,7 @@
-velovito_homepage:
+velovito:
     path:     /velovito
+    defaults: { _controller: VelovitoBundle:Default:velovito }
+
+homepage:
+    path:     /
     defaults: { _controller: VelovitoBundle:Default:index }
