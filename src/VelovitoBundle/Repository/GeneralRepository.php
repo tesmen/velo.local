@@ -7,8 +7,55 @@ use Doctrine\ORM\EntityRepository;
 
 class GeneralRepository extends EntityRepository
 {
-    protected function truncateTable($tableName, $cascade = false)
+    public function updateEntity($entity, array $data)
     {
+        $entFields = $this->_em->getClassMetadata($this->_entityName)->getFieldNames();
+
+        foreach ($data as $field => $value) {
+            if (!in_array($field, $entFields)) {
+                continue;
+            }
+
+            $setMethod = 'set'.$field;
+            $entity->$setMethod($value);
+        }
+
+        $this->_em->flush();
+    }
+
+    public function update($data)
+    {
+        $entFields = $this->_em->getClassMetadata($this->_entityName)->getFieldNames();
+
+        $ent = $this->findOneOrFail(
+            ['id' => $data['id']]
+        );
+
+        unset($data['id']);
+
+        foreach ($data as $field => $value) {
+            if (!in_array($field, $entFields)) {
+                continue;
+            }
+
+            $setMethod = 'set'.$field;
+            $ent->$setMethod($value);
+        }
+
+        $this->_em->flush();
+    }
+
+    public function getTableName()
+    {
+        return $this->_em->getClassMetadata($this->_entityName)->getTableName();
+    }
+
+    protected function truncateTable($tableName = null, $cascade = false)
+    {
+        if (is_null($tableName)) {
+            $tableName = $this->getTableName();
+        }
+
         $connection = $this->_em->getConnection();
         $platform = $connection->getDatabasePlatform();
         $connection->executeQuery('SET FOREIGN_KEY_CHECKS = 0;');
