@@ -9,15 +9,15 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use VelovitoBundle\C;
 
-class DeployCommand extends ContainerAwareCommand
+class LoadCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('deploy')
+            ->setName('load')
             ->setDescription('Greet someone')
             ->addArgument(
-                'name',
+                'task',
                 InputArgument::OPTIONAL,
                 'Who do you want to greet?'
             )
@@ -31,7 +31,14 @@ class DeployCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadRoles();
-        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadcategories();
+
+        $task = $input->getArgument('task');
+
+        if ($task) {
+            $task = 'load'.$task;
+            $this->getContainer()->get(C::MODEL_MAINTENANCE)->$task();
+        } else {
+            $output->writeln('task not defined');
+        }
     }
 }

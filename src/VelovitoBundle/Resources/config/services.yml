@@ -5,7 +5,7 @@ services:
 
     model.maintenance:
         class: VelovitoBundle\Model\Maintenance\MaintenanceModel
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: ["@doctrine.orm.entity_manager", "@model.default"]
 
     model.default:
         class: VelovitoBundle\Model\DefaultModel

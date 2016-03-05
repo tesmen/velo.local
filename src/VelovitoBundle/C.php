@@ -14,8 +14,10 @@ class C
     const ROLE_MODERATOR = 2;
     const ROLE_ADMIN = 3;
 
-    const REPO_ROLE = 'AppBundle:Role';
-    const REPO_USER = 'AppBundle:User';
+    const REPO_ROLE = 'VelovitoBundle:Role';
+    const REPO_USER = 'VelovitoBundle:User';
+    const REPO_PRODUCT_CATEGORIES = 'VelovitoBundle:ProductCatefories';
+    const REPO_PARTS_VENDOR = 'VelovitoBundle:PartsVendor';
 
     const ROUTE_HOMEPAGE = 'homepage';
     const ROUTE_LOGIN = 'login';
@@ -24,9 +26,6 @@ class C
     const MODEL_MAINTENANCE = 'model.maintenance';
 
     const STATUS_USER_ACTIVE = 1;
-
-    const REPO_AD = 'AppBundle:Ad';
-    const REPO_PARTS_VENDOR = 'AppBundle:PartsVendor';
 
     const MODEL_ADVERTISEMENT = 'model.advertisement';
     const MODEL_DEFAULT = 'model.default:';

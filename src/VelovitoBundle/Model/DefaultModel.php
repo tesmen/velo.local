@@ -2,6 +2,8 @@
 
 namespace VelovitoBundle\Model;
 
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpKernel\KernelInterface;
 use VelovitoBundle\C;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -10,8 +12,8 @@ class DefaultModel
 {
     private $em;
 
-    public function __construct($em, $kernel)
-    {
+    public function __construct(EntityManager $em, KernelInterface $kernel)
+     {
         $this->em = $em;
         $this->kernel = $kernel;
     }
@@ -20,7 +22,8 @@ class DefaultModel
     {
         $yaml = new Parser();
         try {
-            $path = $this->kernel->locateResource('@VelovitoBundle/Config/lk/'.$config.'.yml');
+            $path = $this->kernel->locateResource('@VelovitoBundle/Resources/config/'.$config.'.yml');
+
         } catch (ParseException $e) {
             throw new \Exception($config.'.yml not found');
         }
