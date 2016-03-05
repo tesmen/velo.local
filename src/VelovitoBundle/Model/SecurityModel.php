@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Model;
+namespace VelovitoBundle\Model;
 
-use AppBundle\C;
+use VelovitoBundle\C;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -23,10 +23,10 @@ class SecurityModel
             'username' => $username,
             'email'    => $email,
             'password' => $password,
-            'role' => $this->em->getRepository('AppBundle:Role')->findOneByName('ROLE_USER'),
+            'role' => $this->em->getRepository('VelovitoBundle:Role')->findOneByName('ROLE_USER'),
         ];
 
-        $this->em->getRepository('AppBundle:User')->create($params);
+        $this->em->getRepository('VelovitoBundle:User')->create($params);
 
     }
 }

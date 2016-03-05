@@ -1,4 +1,4 @@
-<?php namespace AppBundle\Entity;
+<?php namespace VelovitoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * User
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable
 {
@@ -66,7 +66,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Role")
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Role")
      * @ORM\JoinColumn(name="role", referencedColumnName="id")
      */
     private $role;

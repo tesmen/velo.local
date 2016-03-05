@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Model\Maintenance;
+namespace VelovitoBundle\Model\Maintenance;
 
-use AppBundle\C;
+use VelovitoBundle\C;
 use Doctrine\ORM\EntityManager;
 
 class MaintenanceModel

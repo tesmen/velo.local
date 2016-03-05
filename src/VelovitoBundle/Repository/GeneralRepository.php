@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Repository;
+namespace VelovitoBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

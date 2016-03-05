@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Model;
+namespace VelovitoBundle\Model;
 
-use AppBundle\C;
+use VelovitoBundle\C;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Exception\ParseException;
 
@@ -20,7 +20,7 @@ class DefaultModel
     {
         $yaml = new Parser();
         try {
-            $path = $this->kernel->locateResource('@AppBundle/Config/lk/'.$config.'.yml');
+            $path = $this->kernel->locateResource('@VelovitoBundle/Config/lk/'.$config.'.yml');
         } catch (ParseException $e) {
             throw new \Exception($config.'.yml not found');
         }

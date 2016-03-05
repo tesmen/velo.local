@@ -1,4 +1,4 @@
-<?php namespace AppBundle\Entity;
+<?php namespace VelovitoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\RoleInterface;
@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  * Role
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Repository\RoleRepository")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\RoleRepository")
  */
 class Role implements RoleInterface
 {

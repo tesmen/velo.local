@@ -1,9 +1,8 @@
 <?php
 
-namespace AppBundle\Repository;
+namespace VelovitoBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-use AppBundle\Entity\Role;
+use VelovitoBundle\Entity\Role;
 
 class RoleRepository extends GeneralRepository
 {

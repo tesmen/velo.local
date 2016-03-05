@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Repository;
+namespace VelovitoBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-use AppBundle\C;
-use AppBundle\Entity\User;
+use VelovitoBundle\C;
+use VelovitoBundle\Entity\User;
 
 class UserRepository extends EntityRepository
 {
