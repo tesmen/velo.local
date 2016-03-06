@@ -1,45 +1,35 @@
 -
     alias: chassis
     name: Ходовая часть
-    parent:
 
 -
     alias: rims
     name: Обода
-    parent: chassis
 
 -
     alias: spokes
     name: Спицы
-    parent: chassis
 
 -
     alias: tyres
     name: Покрышки
-    parent: chassis
 
-#--------------------------------------------------
 -
     alias: brakes
     name: Тормоза
-    parent:
 
 -
     alias: adapters
     name: Адаптеры для калипера
-    parent: brakes
 
 -
     alias: accessories
     name: Аксессуары к тормозам
-    parent: brakes
 
 -
     alias: hydrolines_and_fittings
     name: Гидролинии и фиттинги
-    parent: brakes
 
 -
     alias: misc
     name: Запчасти для тормозов
-    parent: brakes

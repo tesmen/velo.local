@@ -17,6 +17,7 @@ class C
     const REPO_ROLE = 'VelovitoBundle:Role';
     const REPO_USER = 'VelovitoBundle:User';
     const REPO_CATALOG = 'VelovitoBundle:Catalog';
+    const REPO_CATEGORIES = 'VelovitoBundle:Categories';
     const REPO_PARTS_VENDOR = 'VelovitoBundle:PartsVendor';
 
     const ROUTE_HOMEPAGE = 'homepage';

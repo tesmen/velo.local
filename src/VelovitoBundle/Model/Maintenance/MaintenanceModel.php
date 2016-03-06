@@ -28,6 +28,12 @@ class MaintenanceModel
         $this->em->getRepository(C::REPO_ROLE)->load($roles);
     }
 
+    function loadCategories()
+    {
+        $list = $this->defaultModel->loadConfigFromYaml('categories');
+        $this->em->getRepository(C::REPO_CATEGORIES)->load($list);
+    }
+
     function loadCatalog()
     {
         $list = $this->defaultModel->loadConfigFromYaml('catalog');

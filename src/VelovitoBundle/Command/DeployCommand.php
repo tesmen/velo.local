@@ -32,6 +32,7 @@ class DeployCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadRoles();
-        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadcategories();
+        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCategories();
+        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCatalog();
     }
 }
