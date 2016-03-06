@@ -32,27 +32,4 @@ class RoleRepository extends GeneralRepository
 
         return $role;
     }
-
-    public function update($id, $name)
-    {
-        if(!$ent = $this->find($id)){
-            return $this->create($id, $name);
-        }
-
-        $this->_em->beginTransaction();
-
-        try {
-            $ent->setName($name);
-
-            $this->_em->persist($ent);
-
-            $this->_em->flush();
-            $this->_em->commit();
-        } catch (\Exception $e) {
-            $this->_em->rollback();
-            throw $e;
-        }
-
-        return $ent;
-    }
 }

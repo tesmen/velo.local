@@ -1,22 +1,18 @@
+{% for topItem in menu %}
+    <ul>
+        <li>
+            <a href="{{ url('homepage') }}">{{ topItem.name }}</a>
 
-<ul class="ordering">
-    <li {% if currentPath == path('my_orders') %} class="active" {% endif %}><a href="{{ url('my_orders') }}" class="docker-icon di-case">Мои заказы</a></li>
-    <li {% if currentPath == path('my_finance') %} class="active" {% endif %}><a href="{{ url('my_finance') }}" class="docker-icon di-rub">Мои финансы</a></li>
-    {# <li {% if currentPath == path('users') %} class="active" {% endif %}><a href="{{ url('users') }}" class="docker-icon di-people dis">Пользователи</a></li> #}
-    {# <li {% if currentPath == path('affiliate_program') %} class="active" {% endif %}><a href="{{ url('affiliate_program') }}" class="docker-icon di-rocket dis">Партнерская программа</a></li> #}
-    {# <li {% if currentPath == path('acts') %} class="active" {% endif %}><a href="{{ url('acts') }}" class="docker-icon di-list dis">Акты выполненных работ</a></li> #}
-</ul>
-<ul class="orders">
-    <li {% if currentPath == path('hostings') %} class="active" {% endif %}><a href="{{ url('hostings') }}" class="docker-icon di-browser">Хостинги</a></li>
-    <li {% if currentPath == path('domains') %} class="active" {% endif %}><a href="{{ url('domains') }}" class="docker-icon di-glob">Домены</a></li>
-    <li {% if currentPath == path('virtual_servers') %} class="active" {% endif %}><a href="{{ url('virtual_servers') }}" class="docker-icon di-server-cloud">Виртуальные серверы</a></li>
-    {# <li {% if currentPath == path('dedicated_servers') %} class="active" {% endif %}><a href="{{ url('dedicated_servers') }}" class="docker-icon di-server dis">Выделенные серверы</a></li> #}
-    {# <li {% if currentPath == path('supports_vip') %} class="active" {% endif %}><a href="{{ url('supports_vip') }}" class="docker-icon di-speak dis">Тех. поддержка VIP</a></li> #}
-</ul>
-<a href="{{ url('order') }}" class="btn-toOrder" data-goal="lk_sidebar_order">Заказать услугу</a>
-<ul class="support">
-    <li {% if currentPath == path('supports') %} class="active" {% endif %}><a href="{{ url('supports') }}" class="docker-icon di-big-speak">Тех. поддержка</a></li>
-    {#<li {% if currentPath == path('documentation') %} class="active" {% endif %}><a href="{{ url('documentation') }}" class="docker-icon di-ask dis">Читать документацию</a></li>#}
-</ul>
-<a href="{{ url('support_new_ticket') }}" class="btn-toSupport">Задать вопрос</a> <br>
-<a href="{{ url('old_panel') }}" class="old-lk-link">Старый личный кабинет</a>
+            {% if not topItem.subCats is null %}
+                <ul>
+                    {% for subItem in topItem.subCats %}
+                        <li>
+                            <a href="{{ url('homepage') }}">{{ subItem.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    </ul>
+{% endfor %}
+

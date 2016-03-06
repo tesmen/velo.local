@@ -2,16 +2,24 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>
+        {% if (page_title is defined) and ('' != page_title) %}
+            {{ page_title ~ ' - ' }}
+        {% endif %}
+        Velovito
+    </title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
-    {% block javascripts %}{% endblock %}
+    {% block js %}    {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 
 <hr>
 <body>
+{#{{ render(controller('VelovitoBundle:Default:header')) }}#}
+{{ render(controller('VelovitoBundle:Default:menu')) }}
 
 {% block body %}
+
 {% endblock %}
 
 </body>
