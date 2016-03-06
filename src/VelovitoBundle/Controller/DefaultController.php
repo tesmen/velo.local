@@ -32,6 +32,18 @@ class DefaultController extends Controller
         );
     }
 
+    public function headerAction(Request $request, $title = null)
+    {
+        $menu = $this->get(C::MODEL_DEFAULT)->getMenu();
+
+        return $this->render(
+            'VelovitoBundle:default:header.html.twig',
+            [
+                C::PAGE_TITLE => $title,
+                'menu'        => $menu,
+            ]
+        );
+    }
 
     public function indexAction(Request $request)
     {

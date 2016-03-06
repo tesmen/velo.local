@@ -1,28 +1,22 @@
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<style>
-    .ui-menu { width: 150px; }
-</style>
-<script>
-        $(function () {
-            $(".menu1").menu();
-        });
-    </script>
 
-{% for topItem in menu %}
-    <ul  class="menu1">
-        <li>
-            <a href="{{ url('homepage') }}">{{ topItem.name }}</a>
 
-            {% if not topItem.subCats is null %}
-                <ul>
-                    {% for subItem in topItem.subCats %}
-                        <li>
-                            <a href="{{ url('homepage') }}">{{ subItem.name }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </li>
-    </ul>
-{% endfor %}
 
+
+    {% for topItem in menu %}
+        <ul class="navmenu">
+            <li>
+                <a href="{{ url('homepage') }}">{{ topItem.name }}</a>
+
+                {% if not topItem.subCats is null %}
+                    <ul>
+                        {% for subItem in topItem.subCats %}
+                            <li>
+                                <a href="{{ url('homepage') }}">{{ subItem.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        </ul>
+    {% endfor %}
+</div>

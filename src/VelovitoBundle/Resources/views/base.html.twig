@@ -10,22 +10,33 @@
     </title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
     {% block js %}
         <script src="{{ asset('js/jquery-2.2.1.min.js') }}"></script>
         <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
         <script src="{{ asset('js/jquery-ui.js') }}"></script>
+
+        <script>
+            $(function () {
+                $(".navmenu").menu();
+            });
+        </script>
     {% endblock %}
 </head>
-
-<hr>
 <body>
-{#{{ render(controller('VelovitoBundle:Default:header')) }}#}
-{{ render(controller('VelovitoBundle:Default:menu')) }}
+<div class="wrapper">
+    <div class="col-md-12" style="border: 1px solid red">
+        {{ render(controller('VelovitoBundle:Default:header')) }}
+    </div>
 
-{% block body %}
+    <div class="col-md-2" style="border: 1px solid red">
+        {{ render(controller('VelovitoBundle:Default:menu')) }}
+    </div>
 
-{% endblock %}
-
+    <div class="col-md-10" style="border: 1px solid green;">
+        {% block body %}        {% endblock %}
+    </div>
+</div>
 </body>
 </html>
