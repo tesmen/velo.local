@@ -27,8 +27,17 @@ security:
             pattern:  ^/registration$
             anonymous: ~
 
+        homepage:
+            pattern:  ^/homepage
+            anonymous: ~
+
+        catalog:
+            pattern:  ^/catalog
+            anonymous: ~
+
         secured_area:
             pattern:  ^/
+            security: true
             form_login:
                 check_path: login_check
                 login_path: login
@@ -38,24 +47,9 @@ security:
                 path: logout
                 target: login
 
-            security: true
+
 
     access_control:
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/registration$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        - { path: ^/profile$, roles: [ROLE_USER, ROLE_ADMIN] }
-
-        - { path: ^/find-advert$, roles: [ROLE_USER, ROLE_ADMIN] }
-        - { path: ^/create-advert$, roles: [ROLE_USER, ROLE_ADMIN] }
-        - { path: ^/advert, roles: [ROLE_USER, ROLE_ADMIN] }
-        - { path: ^/find-advert-by-client$, roles: [ROLE_USER, ROLE_ADMIN] }
-
-        - { path: ^/find-client$, roles: [ROLE_USER, ROLE_ADMIN] }
-        - { path: ^/create-client$, roles: [ROLE_USER, ROLE_ADMIN] }
-        - { path: ^/client$, roles: [ROLE_USER, ROLE_ADMIN] }
-
-        - { path: ^/users$, roles: [ROLE_ADMIN] }
-        - { path: ^/create-user$, roles: [ROLE_ADMIN] }
-        - { path: ^/change-user-advert-list$, roles: [ROLE_ADMIN] }
-
+        - { path: ^/user, roles: [ROLE_USER] }
+        - { path: ^/admin, roles: [ROLE_ADMIN] }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

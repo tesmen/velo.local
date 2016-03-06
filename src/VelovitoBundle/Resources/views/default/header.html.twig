@@ -1,3 +1,13 @@
-
-    <h1>Header</h1>
+<div style="float: right;">
+    {% if app.user %}
+        {{ app.user.getUsername() }}
+        <a href="{{ url('logout') }}">Выход</a>
+    {% else %}
+        <a href="{{ url('login') }}">Вход</a>
+        <a href="{{ url('registration') }}">Регистрация</a>
+    {% endif %}
 </div>
+
+<a href="{{ url('homepage') }}">
+    <h1>VeloVito</h1>
+</a>

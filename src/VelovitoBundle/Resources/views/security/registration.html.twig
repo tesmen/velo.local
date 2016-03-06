@@ -1,15 +1,17 @@
-{% extends "VelovitoBundle:security:layout.html.twig" %}
+{% extends "VelovitoBundle::base.html.twig" %}
 {% import 'VelovitoBundle:templates:macroses.html.twig' as macroses %}
-{% block content %}
+{% block body %}
     {% include 'VelovitoBundle:templates:alert.html.twig' %}
 
-    {{ form_start(form) }}
-    {{ macroses.bootstrapInput(form.username) }}
-    {{ macroses.bootstrapInput(form.email) }}
-    {{ macroses.bootstrapInput(form.password) }}
-    {{ macroses.bootstrapInputNoLabel(form.confirm_password) }}
-    {{ form_widget(form.submit, {'attr':{'class' : 'btn-primary form-control'}}) }}
-    {{ form_end(form) }}
+    <div class="col-md-4">
+        {{ form_start(form) }}
+        {{ macroses.bootstrapInput(form.username) }}
+        {{ macroses.bootstrapInput(form.email) }}
+        {{ macroses.bootstrapInput(form.password) }}
+        {{ macroses.bootstrapInputNoLabel(form.confirm_password) }}
+        {{ form_widget(form.submit, {'attr':{'class' : 'btn-primary form-control'}}) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
 
 {% block js %}
@@ -59,7 +61,7 @@
                         required: "Обязательное поле",
                         minlength: "Минимальная длина 8 символов",
                         maxlength: "Максимальная длина 128 символов",
-                        equalTo:  "Пароли должны совпадать",
+                        equalTo: "Пароли должны совпадать",
                     }
                 },
 //                errorPlacement: function (error, element) {
