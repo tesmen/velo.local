@@ -2,28 +2,28 @@
 
 namespace VelovitoBundle\Repository;
 
-use VelovitoBundle\Entity\Catalog;
+use VelovitoBundle\Entity\CatalogItem;
 
-class CatalogRepository extends GeneralRepository
+class CatalogItemRepository extends GeneralRepository
 {
     public function load(array $data)
     {
-        foreach ($data as $catalogItemData) {
-            $this->create($catalogItemData);
+        foreach ($data as $CatalogItemItemData) {
+            $this->create($CatalogItemItemData);
         }
 
-        foreach ($data as $catalogItemData) {
-            if (empty($catalogItemData['parent'])) {
+        foreach ($data as $CatalogItemItemData) {
+            if (empty($CatalogItemItemData['parent'])) {
                 continue;
             }
 
             $ent = $this->findOneOrFail(
-                ['alias' => $catalogItemData['alias']]
+                ['alias' => $CatalogItemItemData['alias']]
             );
 
             $parentEnt = $this->findOneOrFail(
                 [
-                    'alias' => $catalogItemData['parent'],
+                    'alias' => $CatalogItemItemData['parent'],
                 ]
             );
 
@@ -36,16 +36,16 @@ class CatalogRepository extends GeneralRepository
         }
     }
 
-    public function update1($id, $catalogItemData)
+    public function update1($id, $CatalogItemItemData)
     {
         if (!$ent = $this->find($id)) {
-            return $this->create($catalogItemData);
+            return $this->create($CatalogItemItemData);
         }
 
         $this->_em->beginTransaction();
 
         try {
-            $ent->setName($catalogItemData);
+            $ent->setName($CatalogItemItemData);
 
             $this->_em->persist($ent);
 
@@ -64,7 +64,7 @@ class CatalogRepository extends GeneralRepository
         $this->_em->beginTransaction();
 
         try {
-            $ent = new Catalog();
+            $ent = new CatalogItem();
             $ent->setName($data['name']);
             $ent->setAlias($data['alias']);
 

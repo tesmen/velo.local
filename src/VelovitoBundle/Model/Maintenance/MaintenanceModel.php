@@ -52,9 +52,9 @@ class MaintenanceModel
         $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->load($data);
     }
 
-    function loadCatalog()
+    function loadCatalogItems()
     {
         $list = $this->defaultModel->loadConfigFromYaml('catalog');
-        $this->em->getRepository(C::REPO_CATALOG)->load($list);
+        $this->em->getRepository(C::REPO_CATALOG_ITEM)->load($list);
     }
 }
