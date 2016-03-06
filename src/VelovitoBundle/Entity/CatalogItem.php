@@ -22,39 +22,25 @@ class CatalogItem
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=64)
+     * @ORM\ManyToOne(targetEntity="\VelovitoBundle\Entity\CatalogCategory")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
-    private $name;
+    private $item;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="alias", type="string", length=64)
-     */
-    private $alias;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="parent", type="smallint", nullable=true, options={"unsigned"=true})
+     * @ORM\ManyToOne(targetEntity="\VelovitoBundle\Entity\CatalogCategory")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
     private $parent;
 
-
-    
     /**
-     * Set id
+     * @var string
      *
-     * @param integer $id
-     *
-     * @return CategoryItem
+     * @ORM\Column(type="string", nullable=true, length=64)
      */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
+    private $override;
 
     /**
      * Get id
@@ -67,61 +53,61 @@ class CatalogItem
     }
 
     /**
-     * Set name
+     * Set override
      *
-     * @param string $name
+     * @param string $override
      *
-     * @return CategoryItem
+     * @return CatalogItem
      */
-    public function setName($name)
+    public function setOverride($override)
     {
-        $this->name = $name;
+        $this->override = $override;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get override
      *
      * @return string
      */
-    public function getName()
+    public function getOverride()
     {
-        return $this->name;
+        return $this->override;
     }
 
     /**
-     * Set alias
+     * Set item
      *
-     * @param string $alias
+     * @param \VelovitoBundle\Entity\CatalogCategory $item
      *
-     * @return CategoryItem
+     * @return CatalogItem
      */
-    public function setAlias($alias)
+    public function setItem(\VelovitoBundle\Entity\CatalogCategory $item = null)
     {
-        $this->alias = $alias;
+        $this->item = $item;
 
         return $this;
     }
 
     /**
-     * Get alias
+     * Get item
      *
-     * @return string
+     * @return \VelovitoBundle\Entity\CatalogCategory
      */
-    public function getAlias()
+    public function getItem()
     {
-        return $this->alias;
+        return $this->item;
     }
 
     /**
      * Set parent
      *
-     * @param integer $parent
+     * @param \VelovitoBundle\Entity\CatalogCategory $parent
      *
-     * @return CategoryItem
+     * @return CatalogItem
      */
-    public function setParent($parent)
+    public function setParent(\VelovitoBundle\Entity\CatalogCategory $parent = null)
     {
         $this->parent = $parent;
 
@@ -131,7 +117,7 @@ class CatalogItem
     /**
      * Get parent
      *
-     * @return integer
+     * @return \VelovitoBundle\Entity\CatalogCategory
      */
     public function getParent()
     {

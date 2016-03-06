@@ -54,7 +54,7 @@ class MaintenanceModel
 
     function loadCatalogItems()
     {
-        $list = $this->defaultModel->loadConfigFromYaml('catalog');
+        $list = $this->defaultModel->loadConfigFromYaml('catalog_items');
         $this->em->getRepository(C::REPO_CATALOG_ITEM)->load($list);
     }
 }

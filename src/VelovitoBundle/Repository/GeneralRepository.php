@@ -3,6 +3,7 @@
 namespace VelovitoBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use VelovitoBundle\Exception\NotFoundException;
 
 
 class GeneralRepository extends EntityRepository
@@ -71,8 +72,15 @@ class GeneralRepository extends EntityRepository
     public function findOneOrFail($fields, $order = null)
     {
         $ent = $this->findOneBy($fields, $order);
+
         if (!$ent) {
-            throw new NotFoundException($this->_entityName.' not found');
+            $search = [];
+
+            foreach ($fields as $k => $v) {
+                $search[] = "$k => $v";
+            }
+
+            throw new NotFoundException($this->_entityName.' not found with '.implode(', ', $search));
         }
 
         return $ent;
@@ -82,7 +90,13 @@ class GeneralRepository extends EntityRepository
     {
         $ents = $this->findBy($fields, $order);
         if (!$ents) {
-            throw new NotFoundException($this->_entityName.' not found');
+            $search = [];
+
+            foreach ($fields as $k => $v) {
+                $search[] = "$k => $v";
+            }
+
+            throw new NotFoundException($this->_entityName.' not found with '.implode(', ', $search));
         }
 
         return $ents;
