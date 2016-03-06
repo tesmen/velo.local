@@ -9,8 +9,13 @@
         Velovito
     </title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
-    {% block js %}    {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+
+    {% block js %}
+        <script src="{{ asset('js/jquery-2.2.1.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.js') }}"></script>
+    {% endblock %}
 </head>
 
 <hr>
