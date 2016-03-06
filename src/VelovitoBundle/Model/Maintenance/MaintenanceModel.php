@@ -28,10 +28,10 @@ class MaintenanceModel
         $this->em->getRepository(C::REPO_ROLE)->load($roles);
     }
 
-    function loadCategories()
+    function loadCatalogCategories()
     {
         $checkArray = [];
-        $data = $this->defaultModel->loadConfigFromYaml('categories');
+        $data = $this->defaultModel->loadConfigFromYaml('catalog_categories');
 
         foreach ($data as $item) {
             if (isset($checkArray[$item['id']])) {
@@ -49,7 +49,7 @@ class MaintenanceModel
         }
 
 
-        $this->em->getRepository(C::REPO_CATEGORIES)->load($data);
+        $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->load($data);
     }
 
     function loadCatalog()

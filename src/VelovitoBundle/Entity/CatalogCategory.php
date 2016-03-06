@@ -1,15 +1,15 @@
 <?php namespace VelovitoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Categories\CategoriesInterface;
+use Symfony\Component\Security\Core\CatalogCategory\CatalogCategoryInterface;
 
 /**
- * Categories
+ * CatalogCategory
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\CategoriesRepository")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\CatalogCategoryRepository")
  */
-class Categories
+class CatalogCategory
 {
     /**
      * @var integer
@@ -38,7 +38,7 @@ class Categories
      *
      * @param integer $id
      *
-     * @return Categories
+     * @return CatalogCategory
      */
     public function setId($id)
     {
@@ -62,7 +62,7 @@ class Categories
      *
      * @param string $name
      *
-     * @return Categories
+     * @return CatalogCategory
      */
     public function setName($name)
     {
@@ -86,7 +86,7 @@ class Categories
      *
      * @param string $alias
      *
-     * @return Categories
+     * @return CatalogCategory
      */
     public function setAlias($alias)
     {
