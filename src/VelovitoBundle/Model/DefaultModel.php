@@ -13,14 +13,45 @@ class DefaultModel
     private $em;
 
     public function __construct(EntityManager $em, KernelInterface $kernel)
-     {
+    {
         $this->em = $em;
         $this->kernel = $kernel;
+    }
+
+    public function getMenu($parentId = null)
+    {
+        $topEnts = $this->em->getRepository(C::REPO_CATALOG_ITEM)->findByOrFail(
+            ['parent' => null]
+        );
+
+        foreach ($topEnts as $ent) {
+            $result[$ent->getItem()->getId()] = [
+                'name'    => $ent->getItem()->getName(),
+                'catId'   => $ent->getItem()->getId(),
+                'subCats' => null,
+            ];
+        }
+
+        $childEnts = $this->em->getRepository(C::REPO_CATALOG_ITEM)->findAll();
+
+        foreach ($childEnts as $ent) {
+            if (empty($ent->getParent())) {
+                continue;
+            }
+
+            $result[$ent->getParent()->getId()]['subCats'][$ent->getItem()->getId()] = [
+                'name'  => $ent->getItem()->getName(),
+                'catId' => $ent->getItem()->getId(),
+            ];
+        }
+
+        return $result;
     }
 
     public function loadConfigFromYaml($config)
     {
         $yaml = new Parser();
+
         try {
             $path = $this->kernel->locateResource('@VelovitoBundle/Resources/config/'.$config.'.yml');
 

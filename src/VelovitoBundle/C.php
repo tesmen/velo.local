@@ -4,12 +4,6 @@ namespace VelovitoBundle;
 
 class C
 {
-    const AD_BUY = 1;
-    const AD_SELL = 2;
-    const AD_EXCHANGE = 3;
-
-    const ENTITY_TYPE_REFERENCE = 1;
-
     const ROLE_USER = 1;
     const ROLE_MODERATOR = 2;
     const ROLE_ADMIN = 3;
@@ -25,15 +19,13 @@ class C
     const ROUTE_LOGOUT = 'logout';
 
     const MODEL_MAINTENANCE = 'model.maintenance';
+    const MODEL_DEFAULT = 'model.default';
 
+    const PAGE_TITLE = 'page_title';
     const STATUS_USER_ACTIVE = 1;
 
-    const MODEL_ADVERTISEMENT = 'model.advertisement';
-    const MODEL_DEFAULT = 'model.default:';
-
     const SP = 'serializedParams';
-    const AD_ID = 'adId';
-    const VPS_P_APPROVAL_CODE = 'approvalCode';
+
     const FORM_SUBJECT = 'subject';
     const FORM_SUBMIT = 'submit';
     const FORM_TEXT = 'text';
