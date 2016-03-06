@@ -8,6 +8,8 @@ class CategoriesRepository extends GeneralRepository
 {
     public function load(array $data)
     {
+        $this->truncateTable();
+
         foreach ($data as $CategoriesItemData) {
             $this->create($CategoriesItemData);
         }
@@ -19,6 +21,7 @@ class CategoriesRepository extends GeneralRepository
 
         try {
             $ent = new Categories();
+            $ent->setId($data['id']);
             $ent->setName($data['name']);
             $ent->setAlias($data['alias']);
 

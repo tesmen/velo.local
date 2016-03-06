@@ -16,7 +16,6 @@ class Categories
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -33,6 +32,20 @@ class Categories
      * @ORM\Column(name="alias", type="string", length=64)
      */
     private $alias;
+
+    /**
+     * Set id
+     *
+     * @param integer $id
+     *
+     * @return Categories
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id

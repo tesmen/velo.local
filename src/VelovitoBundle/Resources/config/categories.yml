@@ -1,35 +1,49 @@
 -
+    id: 1
     alias: chassis
     name: Ходовая часть
 
 -
+    id: 2
     alias: rims
     name: Обода
 
 -
+    id: 3
     alias: spokes
     name: Спицы
 
 -
+    id: 4
     alias: tyres
     name: Покрышки
 
 -
+    id: 5
     alias: brakes
     name: Тормоза
 
 -
+    id: 6
     alias: adapters
     name: Адаптеры для калипера
 
 -
+    id: 7
     alias: accessories
     name: Аксессуары к тормозам
 
 -
+    id: 8
     alias: hydrolines_and_fittings
     name: Гидролинии и фиттинги
 
 -
+    id: 9
+    alias: misc
+    name: Запчасти для тормозов
+
+-
+    id: 9
     alias: misc
     name: Запчасти для тормозов

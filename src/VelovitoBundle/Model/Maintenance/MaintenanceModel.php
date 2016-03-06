@@ -30,8 +30,26 @@ class MaintenanceModel
 
     function loadCategories()
     {
-        $list = $this->defaultModel->loadConfigFromYaml('categories');
-        $this->em->getRepository(C::REPO_CATEGORIES)->load($list);
+        $checkArray = [];
+        $data = $this->defaultModel->loadConfigFromYaml('categories');
+
+        foreach ($data as $item) {
+            if (isset($checkArray[$item['id']])) {
+                throw new \Exception(
+                    sprintf(
+                        'duplicate category (%s - %s - %s)',
+                        $item['id'],
+                        $item['name'],
+                        $item['alias']
+                    )
+                );
+            }
+
+            $checkArray[$item['id']] = $item;
+        }
+
+
+        $this->em->getRepository(C::REPO_CATEGORIES)->load($data);
     }
 
     function loadCatalog()
