@@ -6761,6 +6761,8 @@ button.close {
 .advert {
   width: 100%;
   border: 1px solid #9f9f9f;
+  border-radius: 5px;
+  margin: 10px auto;
   min-height: 75px;
 }
 .advert:hover {
