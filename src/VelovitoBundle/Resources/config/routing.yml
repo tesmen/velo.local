@@ -22,7 +22,7 @@ velovito:
     defaults: { _controller: VelovitoBundle:Default:velovito }
 
 homepage:
-    path:     /homepage
+    path:     /
     defaults: { _controller: VelovitoBundle:Default:index }
 
 catalog:

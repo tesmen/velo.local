@@ -19,25 +19,25 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login:
-            pattern:  ^/login$
-            anonymous: ~
-
-        registration:
-            pattern:  ^/registration$
-            anonymous: ~
-
-        homepage:
-            pattern:  ^/homepage
-            anonymous: ~
-
-        catalog:
-            pattern:  ^/catalog
-            anonymous: ~
+#        login:
+#            pattern:  ^/login$
+#            anonymous: ~
+#
+#        registration:
+#            pattern:  ^/registration$
+#            anonymous: ~
+#
+#        homepage:
+#            pattern:  ^/homepage
+#            anonymous: ~
+#
+#        catalog:
+#            pattern:  ^/catalog
+#            anonymous: ~
 
         secured_area:
             pattern:  ^/
-            security: true
+            anonymous: true
             form_login:
                 check_path: login_check
                 login_path: login
