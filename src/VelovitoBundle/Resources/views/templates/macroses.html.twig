@@ -15,11 +15,9 @@
     </div>
 {% endmacro %}
 
-{% macro bootstrapInputNoLabel(form) %}
+{% macro advert() %}
     <div class="advert">
-        {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form) }}
-        {#<span class="glyphicon glyphicon-remove form-control-feedback"></span>#}
+        <h1>Advert</h1>
     </div>
 {% endmacro %}
 
