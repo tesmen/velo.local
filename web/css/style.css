@@ -6758,3 +6758,11 @@ button.close {
   color: #9f9f9f;
   text-decoration: none;
 }
+.advert {
+  width: 100%;
+  border: 1px solid #9f9f9f;
+  min-height: 75px;
+}
+.advert:hover {
+  border: 1px solid #666666;
+}
