@@ -23,7 +23,7 @@ class CatalogItem
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="\VelovitoBundle\Entity\CatalogCategory")
-     * @ORM\JoinColumn(referencedColumnName="id")
+     * @ORM\JoinColumn(referencedColumnName="id", unique=true)
      */
     private $item;
 
