@@ -32,6 +32,7 @@ class C
     const FORM_ATTACH = 'attach';
     const FORM_USERNAME = 'username';
     const FORM_EMAIL = 'email';
+    const FORM_REGISTERED_DATE = 'registered_date';
     const FORM_PASSWORD = 'password';
     const FORM_CONFIRM_PASSWORD = 'confirm_password';
 }

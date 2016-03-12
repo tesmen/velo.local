@@ -28,3 +28,8 @@ homepage:
 catalog:
     path:     /catalog
     defaults: { _controller: VelovitoBundle:Default:index }
+
+
+profile:
+    path:     /profile
+    defaults: { _controller: VelovitoBundle:User:profile }

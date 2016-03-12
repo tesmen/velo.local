@@ -6,10 +6,10 @@
 
     <div class="col-md-4">
         {{ form_start(form) }}
-        {{ macroses.bootstrapInput(form.username) }}
-        {{ macroses.bootstrapInput(form.email) }}
-        {{ macroses.bootstrapInput(form.password) }}
-        {{ macroses.bootstrapInputNoLabel(form.confirm_password) }}
+        {{ macroses.bootstrapFormInput(form.username) }}
+        {{ macroses.bootstrapFormInput(form.email) }}
+        {{ macroses.bootstrapFormInput(form.password) }}
+        {{ macroses.bootstrapFormInputNoLabel(form.confirm_password) }}
         {{ form_widget(form.submit, {'attr':{'class' : 'btn-primary form-control'}}) }}
         {{ form_end(form) }}
     </div>

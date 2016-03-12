@@ -1,6 +1,7 @@
 <div style="float: right;">
     {% if app.user %}
         {{ app.user.getUsername() }}
+        <a href="{{ url('profile') }}">Выход</a>
         <a href="{{ url('logout') }}">Выход</a>
     {% else %}
         <a href="{{ url('login') }}">Вход</a>

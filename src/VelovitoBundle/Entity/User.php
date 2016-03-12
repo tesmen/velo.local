@@ -79,6 +79,13 @@ class User implements UserInterface, \Serializable
     private $status;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registered_date", type="datetime")
+     */
+    private $registeredDate;
+
+    /**
      * Get username
      *
      * @return string
@@ -222,6 +229,44 @@ class User implements UserInterface, \Serializable
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Set registeredDate
+     *
+     * @param \DateTime $registeredDate
+     *
+     * @return User
+     */
+    public function setRegisteredDate($registeredDate)
+    {
+        $this->registeredDate = $registeredDate;
+
+        return $this;
+    }
+
+    /**
+     * Get registeredDate
+     *
+     * @return \DateTime
+     */
+    public function getRegisteredDate()
+    {
+        return $this->registeredDate;
+    }
+
+    /**
+     * Set role
+     *
+     * @param \VelovitoBundle\Entity\Role $role
+     *
+     * @return User
+     */
+    public function setRole(\VelovitoBundle\Entity\Role $role = null)
+    {
+        $this->role = $role;
 
         return $this;
     }
