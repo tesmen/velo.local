@@ -2,13 +2,12 @@
 
 namespace VelovitoBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use VelovitoBundle\C;
 use VelovitoBundle\Form\User\UserProfileForm;
 
-class UserController extends Controller
+class UserController extends GeneralController
 {
     public function profileAction(Request $request)
     {
@@ -31,37 +30,19 @@ class UserController extends Controller
     }
     public function myAdsAction(Request $request)
     {
-        $form = $this->createForm(UserProfileForm::class, $this->getUser());
-
-        if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(Security::AUTHENTICATION_ERROR);
-        } else {
-            $error = $request->getSession()->get(Security::AUTHENTICATION_ERROR);
-        }
-
         return $this->render(
-            'VelovitoBundle:user:profile.html.twig',
+            'VelovitoBundle:user:my_ads.html.twig',
             [
-                'last_username' => $request->getSession()->get(Security::LAST_USERNAME),
-                'error'         => $error,
-                'form'          => $form->createView(),
+                'userAds' => $this->get(C::MODEL_ADVERTISEMENT)->getAdsByUserId($this->getUser()->getId())
             ]
         );
     }
     public function favoritesAction(Request $request)
     {
-        $form = $this->createForm(UserProfileForm::class, $this->getUser());
-
-        if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(Security::AUTHENTICATION_ERROR);
-        } else {
-            $error = $request->getSession()->get(Security::AUTHENTICATION_ERROR);
-        }
-
         return $this->render(
-            'VelovitoBundle:user:profile.html.twig',
+            'VelovitoBundle:user:favorited_ads.html.twig',
             [
-                'favorites' => $this->get('se')
+                'favoritesAds' => $this->get(C::MODEL_ADVERTISEMENT)->getFavoritedAdsByUserId($this->getUser()->getId())
             ]
         );
     }

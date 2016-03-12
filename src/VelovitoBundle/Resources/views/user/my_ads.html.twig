@@ -3,12 +3,12 @@
 {% block body %}
     <div class="col-md-9">
         <div class="section-title" style="display: block;">
-            Профиль
+            Избранное
         </div>
 
-        {{ macro.bootstrapFormInput(form.username) }}
-        {{ macro.bootstrapFormInput(form.email) }}
-        {{ macro.bootstrapFormInput(form.registered_date) }}
+        {% for ad in userAds %}
+            {{ macroses.advert() }}
+        {% endfor %}
     </div>
 
     <div class="profile-navbar col-md-3">
@@ -24,4 +24,6 @@
             <span>Избранное</span>
         </a>
     </div>
+
+
 {% endblock %}

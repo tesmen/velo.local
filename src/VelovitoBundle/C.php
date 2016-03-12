@@ -8,12 +8,13 @@ class C
     const ROLE_MODERATOR = 2;
     const ROLE_ADMIN = 3;
 
+    const REPO_AD = 'VelovitoBundle:Advertisement';
     const REPO_ROLE = 'VelovitoBundle:Role';
     const REPO_USER = 'VelovitoBundle:User';
     const REPO_CATALOG_ITEM = 'VelovitoBundle:CatalogItem';
     const REPO_CATALOG_CATEGORY = 'VelovitoBundle:CatalogCategory';
     const REPO_PARTS_VENDOR = 'VelovitoBundle:PartsVendor';
-    const REPO_USER_FAVORITES = 'VelovitoBundle:UserFavorite';
+    const REPO_USER_FAVORITES = 'VelovitoBundle:UserFavoriteAd';
 
     const ROUTE_HOMEPAGE = 'homepage';
     const ROUTE_LOGIN = 'login';
@@ -21,6 +22,8 @@ class C
 
     const MODEL_MAINTENANCE = 'model.maintenance';
     const MODEL_DEFAULT = 'model.default';
+    const MODEL_ADVERTISEMENT = 'model.advertisement';
+    const MODEL_USER = 'model.user';
 
     const PAGE_TITLE = 'page_title';
     const STATUS_USER_ACTIVE = 1;

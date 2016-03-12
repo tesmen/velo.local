@@ -14,3 +14,11 @@ services:
     model.security:
         class: VelovitoBundle\Model\SecurityModel
         arguments: ["@doctrine.orm.entity_manager", "@kernel"]
+
+    model.advertisement:
+        class: VelovitoBundle\Model\Advertisement\AdvertisementModel
+        arguments: ["@doctrine.orm.entity_manager", "@kernel"]
+
+    model.user:
+        class: VelovitoBundle\Model\User\UserModel
+        arguments: ["@doctrine.orm.entity_manager", "@kernel"]

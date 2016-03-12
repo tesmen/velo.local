@@ -2,12 +2,10 @@
 
 namespace VelovitoBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\C;
 
-class DefaultController extends Controller
+class DefaultController extends GeneralController
 {
     public function velovitoAction(Request $request)
     {
