@@ -1,7 +1,14 @@
 @import "bootstrap/bootstrap.less";
 @import "variables.less";
 
-.no-select{
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.no-select {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -39,7 +46,34 @@
   border-radius: 5px;
   margin: 10px auto;
   min-height: 75px;
-  &:hover{
+  &:hover {
     border: 1px solid @velo-dark;
+  }
+}
+
+.section-title {
+  font-size: 22pt;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.profile-navbar {
+  display: block;
+  float: right;
+  height: 100%;
+}
+
+.profile-navbar span {
+  vertical-align: middle;
+}
+
+.profile-navbar-item {
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 5px;
+  width: 100%;
+  height: 20px;
+  &:hover {
+    border-bottom: 1px dotted @velo-gray;
   }
 }

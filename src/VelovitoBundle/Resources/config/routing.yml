@@ -33,3 +33,13 @@ catalog:
 profile:
     path:     /profile
     defaults: { _controller: VelovitoBundle:User:profile }
+
+
+my_ads:
+    path:     /my_ads
+    defaults: { _controller: VelovitoBundle:User:myAds }
+
+
+favorites:
+    path:     /favorites
+    defaults: { _controller: VelovitoBundle:User:favorites }

@@ -6732,6 +6732,12 @@ button.close {
     display: none !important;
   }
 }
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
 .no-select {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -6767,4 +6773,27 @@ button.close {
 }
 .advert:hover {
   border: 1px solid #666666;
+}
+.section-title {
+  font-size: 22pt;
+  width: 100%;
+  margin: 20px 0;
+}
+.profile-navbar {
+  display: block;
+  float: right;
+  height: 100%;
+}
+.profile-navbar span {
+  vertical-align: middle;
+}
+.profile-navbar-item {
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 5px;
+  width: 100%;
+  height: 20px;
+}
+.profile-navbar-item:hover {
+  border-bottom: 1px dotted #9f9f9f;
 }

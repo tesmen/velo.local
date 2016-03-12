@@ -1,7 +1,7 @@
-<div style="float: right;">
+<div style="float: right;  display: inline-block;">
     {% if app.user %}
-        {{ app.user.getUsername() }}
-        <a href="{{ url('profile') }}">Выход</a>
+        {{ app.user.getUsername() }}<br>
+        <a href="{{ url('profile') }}">Профиль</a>
         <a href="{{ url('logout') }}">Выход</a>
     {% else %}
         <a href="{{ url('login') }}">Вход</a>
@@ -9,6 +9,9 @@
     {% endif %}
 </div>
 
-<a href="{{ url('homepage') }}">
-    <h1>VeloVito</h1>
-</a>
+
+<div style="float: left; display: inline-block;">
+    <a href="{{ url('homepage') }}">
+        <h1>VeloVito</h1>
+    </a>
+</div>

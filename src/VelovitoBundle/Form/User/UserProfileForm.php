@@ -33,6 +33,9 @@ class UserProfileForm extends AbstractType
                 'data'     => $user->getEmail(),
                 'label'    => 'Почта',
                 'required' => true,
+                'attr'     => [
+                    'disabled' => 'disabled',
+                ],
             ]
         );
 
@@ -43,6 +46,9 @@ class UserProfileForm extends AbstractType
                 'data'     => $user->getRegisteredDate()->format('d m Y'),
                 'label'    => 'С нами с...',
                 'required' => true,
+                'attr'     => [
+                    'disabled' => 'disabled',
+                ],
             ]
         );
 
