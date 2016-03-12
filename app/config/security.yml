@@ -6,6 +6,7 @@ security:
             iterations: 10
 
     role_hierarchy:
+        ROLE_USER: IS_AUTHENTICATED_ANONYMOUSLY
         ROLE_ADMIN: ROLE_USER
 
     providers:
@@ -19,22 +20,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-#        login:
-#            pattern:  ^/login$
-#            anonymous: ~
-#
-#        registration:
-#            pattern:  ^/registration$
-#            anonymous: ~
-#
-#        homepage:
-#            pattern:  ^/homepage
-#            anonymous: ~
-#
-#        catalog:
-#            pattern:  ^/catalog
-#            anonymous: ~
-
         secured_area:
             pattern:  ^/
             anonymous: true
@@ -46,8 +31,6 @@ security:
             logout:
                 path: logout
                 target: login
-
-
 
     access_control:
         - { path: ^/user, roles: [ROLE_USER] }
