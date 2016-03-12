@@ -12,12 +12,18 @@ class UserController extends GeneralController
 {
     public function newAdAction(Request $request)
     {
+        $adModel = $this->get(C::MODEL_ADVERTISEMENT);
+
         $this->denyUnlessAuthenticatedFully();
-        $form = $this->createForm(NewAdForm::class);
+        $formOptions = [
+            'ad_statuses' => $adModel->getAdStatusMap(),
+        ];
+
+        $form = $this->createForm(NewAdForm::class, $formOptions);
 
         if ($request->isMethod('POST')) {
             $formData = $form->handleRequest($request)->getData();
-            $this->get(C::MODEL_ADVERTISEMENT)->createNewAd($formData, $this->getUser());
+            $adModel->createNewAd($formData, $this->getUser());
             $this->addFlash('success', 'Объявление добавлено');
 
             return $this->redirectToRoute(C::ROUTE_MY_ADS);

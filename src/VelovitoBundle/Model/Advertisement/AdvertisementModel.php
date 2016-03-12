@@ -42,4 +42,13 @@ class AdvertisementModel
     {
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findAll();
     }
+
+    public function getAdStatusMap()
+    {
+        return $adStatusMap = [
+            'Черновик'           => C::AD_STATUS_DRAFT,
+            'Опубликовано'       => C::AD_STATUS_PUBLISHED,
+            'Снято с публикации' => C::AD_STATUS_DELETED,
+        ];
+    }
 }
