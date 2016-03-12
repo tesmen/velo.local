@@ -61,9 +61,7 @@ class UserController extends Controller
         return $this->render(
             'VelovitoBundle:user:profile.html.twig',
             [
-                'last_username' => $request->getSession()->get(Security::LAST_USERNAME),
-                'error'         => $error,
-                'form'          => $form->createView(),
+                'favorites' => $this->get('se')
             ]
         );
     }

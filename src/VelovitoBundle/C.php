@@ -13,6 +13,7 @@ class C
     const REPO_CATALOG_ITEM = 'VelovitoBundle:CatalogItem';
     const REPO_CATALOG_CATEGORY = 'VelovitoBundle:CatalogCategory';
     const REPO_PARTS_VENDOR = 'VelovitoBundle:PartsVendor';
+    const REPO_USER_FAVORITES = 'VelovitoBundle:UserFavorite';
 
     const ROUTE_HOMEPAGE = 'homepage';
     const ROUTE_LOGIN = 'login';
