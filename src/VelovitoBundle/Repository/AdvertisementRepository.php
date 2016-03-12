@@ -37,6 +37,7 @@ class AdvertisementRepository extends GeneralRepository
             $ent = new Advertisement();
             $ent->setTitle($data[C::FORM_TITLE]);
             $ent->setPrice($data[C::FORM_PRICE]);
+            $ent->setStatus($data[C::FORM_STATUS]);
             $ent->setUser($user);
 
             $this->_em->persist($ent);

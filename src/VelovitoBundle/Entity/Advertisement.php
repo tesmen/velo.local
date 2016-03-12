@@ -49,6 +49,13 @@ class Advertisement
     private $createdDate;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
+    /**
      * Get id
      *
      * @return integer
@@ -152,5 +159,29 @@ class Advertisement
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Advertisement
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

@@ -48,7 +48,7 @@ class DefaultController extends GeneralController
         return $this->render(
             'VelovitoBundle:default:index.html.twig',
             [
-                'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+                'ads' => $this->get(C::MODEL_ADVERTISEMENT)->getFewLastAds(),
             ]
         );
     }

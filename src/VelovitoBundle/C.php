@@ -8,7 +8,11 @@ class C
     const ROLE_MODERATOR = 2;
     const ROLE_ADMIN = 3;
 
-    const REPO_AD = 'VelovitoBundle:Advertisement';
+    const AD_STATUS_DRAFT = 1;
+    const AD_STATUS_PUBLISHED = 2;
+    const AD_STATUS_DELETED = 3;
+
+    const REPO_ADVERTISEMENT = 'VelovitoBundle:Advertisement';
     const REPO_ROLE = 'VelovitoBundle:Role';
     const REPO_USER = 'VelovitoBundle:User';
     const REPO_CATALOG_ITEM = 'VelovitoBundle:CatalogItem';
@@ -42,6 +46,7 @@ class C
     const FORM_CATEGORY = 'category';
     const FORM_TITLE = 'title';
     const FORM_PRICE = 'price';
+    const FORM_STATUS = 'status';
     const FORM_ATTACH = 'attach';
     const FORM_USERNAME = 'username';
     const FORM_EMAIL = 'email';

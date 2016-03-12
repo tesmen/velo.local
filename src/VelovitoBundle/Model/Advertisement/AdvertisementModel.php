@@ -17,12 +17,12 @@ class AdvertisementModel
 
     public function createNewAd($formData, User $user)
     {
-        return $this->em->getRepository(C::REPO_AD)->create($formData, $user);
+        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->create($formData, $user);
     }
 
     public function getAdsByUserId($userId)
     {
-        return $this->em->getRepository(C::REPO_AD)->findBy(
+        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findBy(
             [
                 'user' => $userId,
             ]
@@ -36,5 +36,10 @@ class AdvertisementModel
                 'user' => $userId,
             ]
         );
+    }
+
+    public function getFewLastAds($limit = 15)
+    {
+        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findAll();
     }
 }
