@@ -18,7 +18,7 @@ class NewAdForm extends AbstractType
             ChoiceType::class,
             [
                 'label'    => 'Категория',
-                'choices'  => [1200, 200,'asd'],
+                'choices'  => $options['data']['categories'],
                 'required' => true,
             ]
         );
@@ -55,7 +55,7 @@ class NewAdForm extends AbstractType
             C::FORM_SAVE,
             SubmitType::class,
             [
-                'label'    => 'Cохранить',
+                'label' => 'Cохранить',
             ]
         );
 
@@ -63,7 +63,7 @@ class NewAdForm extends AbstractType
             C::FORM_PUBLISH,
             SubmitType::class,
             [
-                'label'    => 'Опубликовать',
+                'label' => 'Опубликовать',
             ]
         );
     }

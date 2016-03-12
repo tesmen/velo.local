@@ -17,6 +17,7 @@ class UserController extends GeneralController
         $this->denyUnlessAuthenticatedFully();
         $formOptions = [
             'ad_statuses' => $adModel->getAdStatusMap(),
+            'categories' => $this->get(C::MODEL_DEFAULT)->getMenu(),
         ];
 
         $form = $this->createForm(NewAdForm::class, $formOptions);
