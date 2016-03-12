@@ -8,14 +8,12 @@
 
         {% if(userAds is empty) %}
             У вас пока нет объявлений
-            <a href="{{ url('new_ad') }}">(+) Новое объявление</a>
         {% else %}
             {% for ad in userAds %}
-                {{ macro.advert(ad.getTitle()) }}
+                {{ macro.advert(ad.getTitle() ~ ' ' ~ ad.getPrice()) }}
             {% endfor %}
-
-            <a href="{{ url('new_ad') }}">(+) Новое объявление</a>
         {% endif %}
+        <a href="{{ url('new_ad') }}">(+) Новое объявление</a>
     </div>
 
     <div class="profile-navbar col-md-3">

@@ -44,7 +44,7 @@ class SecurityController extends GeneralController
 
                 $this->addFlash('success', 'Регистрация пройдена, теперь вы можете войти указав свои данные');
 
-                return $this->redirectToRoute(C::ROUTE_HOMEPAGE);
+                return $this->redirectToRoute(C::ROUTE_LOGIN);
             } else {
                 $this->addFlash('warning', 'Форма заполнена неверно');
             }
