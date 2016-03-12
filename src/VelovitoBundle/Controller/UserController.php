@@ -5,10 +5,29 @@ namespace VelovitoBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use VelovitoBundle\C;
+use VelovitoBundle\Form\Ad\NewAdForm;
 use VelovitoBundle\Form\User\UserProfileForm;
 
 class UserController extends GeneralController
 {
+    public function newAdAction(Request $request)
+    {
+        $this->denyUnlessAuthenticatedFully();
+        $form = $this->createForm(NewAdForm::class);
+
+        if ($request->isMethod('POST')) {
+            $formData = $form->handleRequest($request)->getData();
+            $this->get(C::MODEL_ADVERTISEMENT)->createNewAd($formData, $this->getUser());
+        }
+
+        return $this->render(
+            'VelovitoBundle:user:new_ad.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
     public function profileAction(Request $request)
     {
         $this->denyUnlessAuthenticatedFully();

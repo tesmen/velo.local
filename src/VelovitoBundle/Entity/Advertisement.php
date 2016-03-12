@@ -37,7 +37,7 @@ class Advertisement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_date", type="datetime")
+     * @ORM\Column(name="created_date", type="datetime", nullable=true)
      */
     private $createdDate;
 

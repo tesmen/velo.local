@@ -4,6 +4,7 @@ namespace VelovitoBundle\Model\Advertisement;
 
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
+use VelovitoBundle\Entity\User;
 
 class AdvertisementModel
 {
@@ -12,6 +13,11 @@ class AdvertisementModel
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
+    }
+
+    public function createNewAd($formData, User $user)
+    {
+        return $this->em->getRepository(C::REPO_AD)->create($formData, $user);
     }
 
     public function getAdsByUserId($userId)

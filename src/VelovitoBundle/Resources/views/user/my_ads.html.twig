@@ -3,12 +3,17 @@
 {% block body %}
     <div class="col-md-9">
         <div class="section-title" style="display: block;">
-            Избранное
+            Мои объявления
         </div>
 
-        {% for ad in userAds %}
-            {{ macroses.advert() }}
-        {% endfor %}
+        {% if(userAds is empty) %}
+            У вас пока нет объявлений
+            <a href="{{ url('new_ad') }}">(+) Новое объявление</a>
+        {% else %}
+            {% for ad in userAds %}
+                {{ macroses.advert() }}
+            {% endfor %}
+        {% endif %}
     </div>
 
     <div class="profile-navbar col-md-3">

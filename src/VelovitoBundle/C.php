@@ -32,7 +32,12 @@ class C
 
     const FORM_SUBJECT = 'subject';
     const FORM_SUBMIT = 'submit';
+    const FORM_PUBLISH = 'publish';
+    const FORM_SAVE = 'save';
     const FORM_TEXT = 'text';
+    const FORM_CATEGORY = 'category';
+    const FORM_TITLE = 'title';
+    const FORM_PRICE = 'price';
     const FORM_ATTACH = 'attach';
     const FORM_USERNAME = 'username';
     const FORM_EMAIL = 'email';

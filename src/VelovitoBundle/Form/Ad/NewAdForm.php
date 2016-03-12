@@ -9,12 +9,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use VelovitoBundle\C;
 
-class AdNewForm extends AbstractType
+class NewAdForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            C::FORM_TARIFF,
+            C::FORM_CATEGORY,
             ChoiceType::class,
             [
                 'label'    => 'Категория',
@@ -42,16 +42,24 @@ class AdNewForm extends AbstractType
         );
 
         $builder->add(
-            C::FORM_SUBMIT,
+            C::FORM_SAVE,
             SubmitType::class,
             [
-                'label'    => 'New!',
+                'label'    => 'Cохранить',
+            ]
+        );
+
+        $builder->add(
+            C::FORM_PUBLISH,
+            SubmitType::class,
+            [
+                'label'    => 'Опубликовать',
             ]
         );
     }
 
     public function getName()
     {
-        return 'new_ticket';
+        return 'new_ad';
     }
 }

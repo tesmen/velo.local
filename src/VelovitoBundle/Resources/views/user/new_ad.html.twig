@@ -1,0 +1,11 @@
+{% extends 'VelovitoBundle::base.html.twig' %}
+{% import '@Velovito/templates/macroses.html.twig' as macro %}
+{% block body %}
+    {{ form_start(form) }}
+    {{ macro.bootstrapFormInput(form.title) }}
+    {{ form_widget(form.save) }}
+    {{ form_widget(form.publish) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}
