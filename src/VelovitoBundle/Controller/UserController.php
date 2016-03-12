@@ -18,6 +18,9 @@ class UserController extends GeneralController
         if ($request->isMethod('POST')) {
             $formData = $form->handleRequest($request)->getData();
             $this->get(C::MODEL_ADVERTISEMENT)->createNewAd($formData, $this->getUser());
+            $this->addFlash('success', 'Объявление добавлено');
+
+            return $this->redirectToRoute(C::ROUTE_MY_ADS);
         }
 
         return $this->render(

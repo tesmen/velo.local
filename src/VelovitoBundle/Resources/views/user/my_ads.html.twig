@@ -11,8 +11,10 @@
             <a href="{{ url('new_ad') }}">(+) Новое объявление</a>
         {% else %}
             {% for ad in userAds %}
-                {{ macroses.advert() }}
+                {{ macro.advert(ad.getTitle()) }}
             {% endfor %}
+
+            <a href="{{ url('new_ad') }}">(+) Новое объявление</a>
         {% endif %}
     </div>
 

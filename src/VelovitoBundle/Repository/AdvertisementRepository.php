@@ -4,6 +4,7 @@ namespace VelovitoBundle\Repository;
 
 use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Entity\User;
+use VelovitoBundle\C;
 
 class AdvertisementRepository extends GeneralRepository
 {
@@ -34,7 +35,8 @@ class AdvertisementRepository extends GeneralRepository
         $this->_em->beginTransaction();
         try {
             $ent = new Advertisement();
-            $ent->setTitle($data['title']);
+            $ent->setTitle($data[C::FORM_TITLE]);
+            $ent->setPrice($data[C::FORM_PRICE]);
             $ent->setUser($user);
 
             $this->_em->persist($ent);

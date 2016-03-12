@@ -19,6 +19,10 @@ class C
     const ROUTE_HOMEPAGE = 'homepage';
     const ROUTE_LOGIN = 'login';
     const ROUTE_LOGOUT = 'logout';
+    const ROUTE_MY_ADS = 'my_ads';
+    const ROUTE_PROFILE = 'profile';
+    const ROUTE_FAVORITED_ADS = 'favorites';
+    const ROUTE_NEW_AD = 'new_ad';
 
     const MODEL_MAINTENANCE = 'model.maintenance';
     const MODEL_DEFAULT = 'model.default';

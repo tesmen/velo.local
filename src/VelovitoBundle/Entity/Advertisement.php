@@ -29,6 +29,13 @@ class Advertisement
     /**
      * @var string
      *
+     * @ORM\Column(name="price", type="integer")
+     */
+    private $price;
+
+    /**
+     * @var string
+     *
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\User")
      * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
@@ -121,5 +128,29 @@ class Advertisement
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set price
+     *
+     * @param integer $price
+     *
+     * @return Advertisement
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return integer
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }
