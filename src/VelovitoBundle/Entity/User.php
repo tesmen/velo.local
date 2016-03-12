@@ -240,9 +240,15 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setRegisteredDate($registeredDate)
+    public function setRegisteredDate($registeredDate = null)
     {
-        $this->registeredDate = $registeredDate;
+        if(is_null($registeredDate)){
+            $this->registeredDate = new \DateTime();
+        } else {
+            $this->registeredDate = $registeredDate;
+        }
+
+
 
         return $this;
     }

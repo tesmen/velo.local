@@ -20,6 +20,7 @@ class UserRepository extends EntityRepository
                 ->setEmail($params['email'])
                 ->setFirstName(isset($params['first_name']) ? $params['first_name'] : null)
                 ->setPhone(isset($params['phone']) ? $params['phone'] : null)
+                ->setRegisteredDate()
                 ->setStatus(C::STATUS_USER_ACTIVE);
 
             $salt = md5(time());
