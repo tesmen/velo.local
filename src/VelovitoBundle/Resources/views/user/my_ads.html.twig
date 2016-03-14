@@ -13,6 +13,7 @@
                 {{ macro.advert(ad) }}
             {% endfor %}
         {% endif %}
+
         <a href="{{ url('ad_new') }}">(+) Новое объявление</a>
     </div>
 
@@ -27,6 +28,10 @@
 
         <a href="{{ url('favorites') }}" class="profile-navbar-item">
             <span>Избранное</span>
+        </a>
+
+        <a href="{{ url('favorites') }}" class="profile-navbar-item">
+            <span>Корзина</span>
         </a>
     </div>
 

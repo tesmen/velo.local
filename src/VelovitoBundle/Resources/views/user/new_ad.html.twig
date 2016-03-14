@@ -4,6 +4,10 @@
     {{ form_start(form) }}
     {{ macro.bootstrapFormInput(form.title) }}
     {{ macro.bootstrapFormInput(form.price) }}
+    {{ macro.bootstrapFormInput(form.category) }}
+    {{ macro.bootstrapFormInput(form.status) }}
+    {{ macro.bootstrapFormInput(form.description) }}
+
     {{ form_widget(form.save) }}
     {{ form_widget(form.publish) }}
     {{ form_rest(form) }}

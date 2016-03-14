@@ -48,6 +48,7 @@ class C
     const FORM_CATEGORY = 'category';
     const FORM_TITLE = 'title';
     const FORM_PRICE = 'price';
+    const FORM_DESCRIPTION = 'description';
     const FORM_STATUS = 'status';
     const FORM_ATTACH = 'attach';
     const FORM_USERNAME = 'username';

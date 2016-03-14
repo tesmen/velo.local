@@ -3,6 +3,6 @@
 
 {% block body %}
     {% for ad in ads %}
-        {{ macroses.advert(ad.getTitle() ~ ' '~ ad.getUser().getUserName()) }}
+        {{ macroses.advert(ad) }}
     {% endfor %}
 {% endblock %}

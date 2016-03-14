@@ -5,6 +5,7 @@ namespace VelovitoBundle\Form\Ad;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use VelovitoBundle\C;
@@ -52,10 +53,19 @@ class NewAdForm extends AbstractType
         );
 
         $builder->add(
+            C::FORM_DESCRIPTION,
+            TextareaType::class,
+            [
+                'label'    => C::FORM_DESCRIPTION,
+                'required' => true,
+            ]
+        );
+
+        $builder->add(
             C::FORM_SAVE,
             SubmitType::class,
             [
-                'label' => 'Cохранить',
+                'label' => 'Cохранить черновик',
             ]
         );
 
