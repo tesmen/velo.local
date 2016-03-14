@@ -5,6 +5,7 @@ namespace VelovitoBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use VelovitoBundle\C;
+use VelovitoBundle\Form\Ad\EditAdForm;
 use VelovitoBundle\Form\Ad\NewAdForm;
 use VelovitoBundle\Form\User\UserProfileForm;
 
@@ -38,17 +39,18 @@ class UserController extends GeneralController
         );
     }
 
-    public function editAdAction(Request $request)
+    public function editAdAction(Request $request, $advertId)
     {
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
 
         $this->denyUnlessAuthenticatedFully();
         $formOptions = [
+            'obj' => $this->get(C::MODEL_ADVERTISEMENT)->getAdById($advertId),
             'ad_statuses' => $adModel->getAdStatusMap(),
             'categories' => $this->get(C::MODEL_DEFAULT)->getMenu(),
         ];
 
-        $form = $this->createForm(NewAdForm::class, $formOptions);
+        $form = $this->createForm(EditAdForm::class, $formOptions);
 
         if ($request->isMethod('POST')) {
             $formData = $form->handleRequest($request)->getData();

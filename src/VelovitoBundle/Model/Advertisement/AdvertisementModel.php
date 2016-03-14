@@ -51,4 +51,13 @@ class AdvertisementModel
             'Снято с публикации' => C::AD_STATUS_DELETED,
         ];
     }
+
+    public function getAdById($id)
+    {
+        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findOneOrFail(
+            [
+                'id' => $id,
+            ]
+        );
+    }
 }
