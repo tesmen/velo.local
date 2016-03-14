@@ -34,11 +34,15 @@ class AdvertisementRepository extends GeneralRepository
     {
         $this->_em->beginTransaction();
         try {
+            $currency = $this->_em->getRepository(C::REPO_CURRENCY)->find(1);
+
             $ent = new Advertisement();
-            $ent->setTitle($data[C::FORM_TITLE]);
-            $ent->setPrice($data[C::FORM_PRICE]);
-            $ent->setStatus($data[C::FORM_STATUS]);
-            $ent->setUser($user);
+            $ent
+                ->setTitle($data[C::FORM_TITLE])
+                ->setPrice($data[C::FORM_PRICE])
+                ->setStatus($data[C::FORM_STATUS])
+                ->setCurrency($currency)
+                ->setUser($user);
 
             $this->_em->persist($ent);
 

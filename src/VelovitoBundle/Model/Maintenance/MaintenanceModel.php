@@ -57,4 +57,19 @@ class MaintenanceModel
         $list = $this->defaultModel->loadConfigFromYaml('catalog_items');
         $this->em->getRepository(C::REPO_CATALOG_ITEM)->load($list);
     }
+
+    function loadCurrencys()
+    {
+        $arr = [
+            [
+                'name'      => 'Рубль',
+                'shortName' => 'руб.',
+                'htmlSign'  => '&#8381;',
+            ],
+        ];
+
+        foreach ($arr as $item) {
+            $this->em->getRepository(C::REPO_CURRENCY)->create($item);
+        }
+    }
 }

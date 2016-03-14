@@ -22,7 +22,7 @@
         </div>
 
         <div class="price">
-            {{ advert.getPrice() }}
+            {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}
         </div>
     </div>
 {% endmacro %}
