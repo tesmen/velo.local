@@ -22,7 +22,7 @@ class Advertisement
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=63)
+     * @ORM\Column(name="title", type="string", length=64)
      */
     private $title;
 
@@ -61,6 +61,13 @@ class Advertisement
      * @ORM\JoinColumn(name="currency", referencedColumnName="id")
      */
     private $currency;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=4096)
+     */
+    private $description;
 
     /**
      * Get id
@@ -195,7 +202,7 @@ class Advertisement
     /**
      * Set currency
      *
-     * @param integer $currency
+     * @param Currency $currency
      *
      * @return Advertisement
      */
@@ -214,5 +221,29 @@ class Advertisement
     public function getCurrency()
     {
         return $this->currency;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Advertisement
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

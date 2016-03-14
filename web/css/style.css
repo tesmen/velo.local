@@ -6782,6 +6782,14 @@ a:hover {
 .advert > .info {
   padding: 5px 10px;
 }
+.advert > .info > .title {
+  font-size: 18px;
+  font-weight: 500;
+}
+.advert > .info > .price {
+  font-size: 18px;
+  font-weight: 500;
+}
 .section-title {
   font-size: 22pt;
   width: 100%;

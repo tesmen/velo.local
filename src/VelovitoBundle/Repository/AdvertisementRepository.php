@@ -42,6 +42,7 @@ class AdvertisementRepository extends GeneralRepository
                 ->setPrice($data[C::FORM_PRICE])
                 ->setStatus($data[C::FORM_STATUS])
                 ->setCurrency($currency)
+                ->setDescription($data[C::FORM_DESCRIPTION])
                 ->setUser($user);
 
             $this->_em->persist($ent);

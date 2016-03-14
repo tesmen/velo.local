@@ -20,16 +20,21 @@
         <div class="photo">
             <img src="" alt="Image" height="100" width="100">
         </div>
+
         <div class="info">
             <div class="title">
-                <a href="#"><h3>{{ advert.getTitle() }}</h3></a>
+                <a href="#">{{ advert.getTitle() }}</a> {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}
+            </div>
+
+            <div class="description">
+                {{ advert.getDescription | slice(0, 150) ~ '...' }}
             </div>
 
             <div class="price">
-                {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}
+
             </div>
 
-            <div class="price">
+            <div class="menu">
                 <a href="{{ url('ad_edit', {'adId': advert.getId()}) }}">Редактировать</a>|
                 <a href="{{ url('ad_unpublish', {'adId': advert.getId()}) }}">Снять с публикации</a>|
                 <a href="{{ url('ad_delete', {'adId': advert.getId()}) }}">Удалить</a>
