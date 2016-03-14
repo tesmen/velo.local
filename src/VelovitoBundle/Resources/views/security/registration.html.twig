@@ -3,6 +3,7 @@
 
 {% block body %}
     {% include 'VelovitoBundle:templates:alert.html.twig' %}
+    <script src="{{ asset('js/vk_api.js') }}"></script>
 
     <div class="col-md-4">
         {{ form_start(form) }}
@@ -10,7 +11,7 @@
         {{ macroses.bootstrapFormInput(form.email) }}
         {{ macroses.bootstrapFormInput(form.password) }}
         {{ macroses.bootstrapFormInputNoLabel(form.confirm_password) }}
-        {{ form_widget(form.submit, {'attr':{'class' : 'btn-primary form-control'}}) }}
+        {{ form_widget(form.submit, {'attr':{'class' : 'btn-primary form-control' }}) }}
         {{ form_end(form) }}
     </div>
     <script>
@@ -89,6 +90,12 @@
 //                    $(element).parents('.field_item').find('div.smileno').removeClass('bluenote').removeClass('hide');
 //                }
             });
-        })
+        });
+
+        function callbackFunc(result) {
+            console.log(result);
+        }
+
+        var api = new vkApi();
     </script>
 {% endblock %}
