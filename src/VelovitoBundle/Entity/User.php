@@ -44,7 +44,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
 
@@ -81,14 +81,14 @@ class User implements UserInterface, \Serializable
     /**
      * @var integer
      *
-     * @ORM\Column(name="country", type="integer" )
+     * @ORM\Column(name="country", type="integer", nullable=true)
      */
     private $country;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="city", type="integer" )
+     * @ORM\Column(name="city", type="integer", nullable=true)
      */
     private $city;
 
@@ -289,5 +289,53 @@ class User implements UserInterface, \Serializable
         $this->role = $role;
 
         return $this;
+    }
+
+    /**
+     * Set country
+     *
+     * @param integer $country
+     *
+     * @return User
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return integer
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set city
+     *
+     * @param integer $city
+     *
+     * @return User
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return integer
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }
