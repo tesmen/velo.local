@@ -79,6 +79,20 @@ class User implements UserInterface, \Serializable
     private $status;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="country", type="integer" )
+     */
+    private $country;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="city", type="integer" )
+     */
+    private $city;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="registered_date", type="datetime")

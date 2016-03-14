@@ -4,8 +4,9 @@ function vkApi() {
     this.timer = 300;  // msec
 
     this.make = function (method, params) {
+        params.callback = 'callbackFunc';
         var script = document.createElement('SCRIPT');
-        script.src = "https://api.vk.com/method/" + method + "?callback=callbackFunc&" + $.param(params);
+        script.src = "https://api.vk.com/method/" + method + "?" + $.param(params);
 
         document.getElementsByTagName("head")[0].appendChild(script);
     };
