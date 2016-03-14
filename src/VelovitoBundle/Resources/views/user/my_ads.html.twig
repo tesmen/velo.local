@@ -10,7 +10,7 @@
             У вас пока нет объявлений
         {% else %}
             {% for ad in userAds %}
-                {{ macro.advert(ad.getTitle() ~ ' ' ~ ad.getPrice()) }}
+                {{ macro.advert(ad) }}
             {% endfor %}
         {% endif %}
         <a href="{{ url('new_ad') }}">(+) Новое объявление</a>

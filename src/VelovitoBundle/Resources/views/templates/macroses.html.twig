@@ -15,9 +15,15 @@
     </div>
 {% endmacro %}
 
-{% macro advert(text) %}
+{% macro advert(advert) %}
     <div class="advert">
-        <h3>{{ text }}</h3>
+        <div class="title">
+            <a href="#"><h1>{{ advert.getTitle() }}</h1></a>
+        </div>
+
+        <div class="price">
+            {{ advert.getPrice() }}
+        </div>
     </div>
 {% endmacro %}
 

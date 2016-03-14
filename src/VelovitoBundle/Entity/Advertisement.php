@@ -56,6 +56,13 @@ class Advertisement
     private $status;
 
     /**
+     * @var string
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Currency")
+     * @ORM\JoinColumn(name="currency", referencedColumnName="id")
+     */
+    private $currency;
+
+    /**
      * Get id
      *
      * @return integer
@@ -183,5 +190,29 @@ class Advertisement
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set currency
+     *
+     * @param integer $currency
+     *
+     * @return Advertisement
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Get currency
+     *
+     * @return integer
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }

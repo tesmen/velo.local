@@ -6797,3 +6797,21 @@ a:hover {
 .profile-navbar-item:hover {
   border-bottom: 1px dotted #9f9f9f;
 }
+.message--success {
+  background: #f0f2f5;
+  padding: 10px;
+  margin: 15px 0px 20px;
+  border-left: 3px solid #93adc8;
+  line-height: 160%;
+  color: #2b2f33;
+  font-size: 13px;
+  text-align: left;
+  direction: ltr;
+}
+.profile-block {
+  position: relative;
+  width: 215px;
+  padding: 14px 0px;
+  word-wrap: break-word;
+  background: #FFF;
+}
