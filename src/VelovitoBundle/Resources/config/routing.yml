@@ -44,8 +44,18 @@ favorites:
     path:     /favorites
     defaults: { _controller: VelovitoBundle:User:favorites }
 
-
-
-new_ad:
+ad_new:
     path:     /new_advertisement
     defaults: { _controller: VelovitoBundle:User:newAd }
+
+ad_edit:
+    path:     /edit_advertisement
+    defaults: { _controller: VelovitoBundle:User:editAd }
+
+ad_unpublish:
+    path:     /edit_advertisement
+    defaults: { _controller: VelovitoBundle:User:editAd }
+
+ad_delete:
+    path:     /edit_advertisement
+    defaults: { _controller: VelovitoBundle:User:editAd }

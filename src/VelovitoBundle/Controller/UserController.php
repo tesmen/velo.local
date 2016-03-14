@@ -38,6 +38,34 @@ class UserController extends GeneralController
         );
     }
 
+    public function editAdAction(Request $request)
+    {
+        $adModel = $this->get(C::MODEL_ADVERTISEMENT);
+
+        $this->denyUnlessAuthenticatedFully();
+        $formOptions = [
+            'ad_statuses' => $adModel->getAdStatusMap(),
+            'categories' => $this->get(C::MODEL_DEFAULT)->getMenu(),
+        ];
+
+        $form = $this->createForm(NewAdForm::class, $formOptions);
+
+        if ($request->isMethod('POST')) {
+            $formData = $form->handleRequest($request)->getData();
+            $adModel->createNewAd($formData, $this->getUser());
+            $this->addFlash('success', 'Объявление добавлено');
+
+            return $this->redirectToRoute(C::ROUTE_MY_ADS);
+        }
+
+        return $this->render(
+            'VelovitoBundle:user:new_ad.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
     public function profileAction(Request $request)
     {
         $this->denyUnlessAuthenticatedFully();
