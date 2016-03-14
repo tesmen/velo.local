@@ -6,14 +6,13 @@ function vkApi() {
     this.make = function (method, params) {
         var script = document.createElement('SCRIPT');
         script.src = "https://api.vk.com/method/" + method + "?callback=callbackFunc&" + $.param(params);
-        console.log(script.src);
 
         document.getElementsByTagName("head")[0].appendChild(script);
     };
 
     this.getCities = function (countryId, search) {
         if (undefined === countryId) {
-            countryId = 1;
+            countryId = 1; // Russian Federation
         }
 
         return this.make('database.getCities', {
