@@ -58,7 +58,7 @@ class Advertisement
     /**
      * @var integer
      *
-     * @ORM\Column(name="views_count", type="integer")
+     * @ORM\Column(name="views_count", type="integer", nullable=true)
      */
     private $viewsCount;
 

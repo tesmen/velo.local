@@ -36,7 +36,8 @@
             </div>
 
             <div class="menu">
-                {{ advert.getViewsCount() }} просмотров
+                <b>{{ advert.getUser().getUserName() }} </b>|
+                {{ advert.getViewsCount() }} просмотров |
                 <a href="{{ url('ad_edit', {'advertId': advert.getId()}) }}">Редактировать</a>|
                 <a href="{{ url('ad_unpublish', {'advertId': advert.getId()}) }}">Снять с публикации</a>|
                 <a href="{{ url('ad_delete', {'advertId': advert.getId()}) }}">Удалить</a> |

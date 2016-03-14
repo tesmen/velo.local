@@ -12,8 +12,6 @@ class AdvertController extends GeneralController
     {
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
 
-        $this->denyUnlessAuthenticatedFully();
-
         $advertEnt = $this->get(C::MODEL_ADVERTISEMENT)->getAdById($advertId);
 
         $formOptions = [
