@@ -49,11 +49,18 @@ class Advertisement
     private $createdDate;
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="status", type="integer")
      */
     private $status;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="views_count", type="integer")
+     */
+    private $viewsCount;
 
     /**
      * @var string
@@ -245,5 +252,29 @@ class Advertisement
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set viewsCount
+     *
+     * @param integer $viewsCount
+     *
+     * @return Advertisement
+     */
+    public function setViewsCount($viewsCount)
+    {
+        $this->viewsCount = $viewsCount;
+
+        return $this;
+    }
+
+    /**
+     * Get viewsCount
+     *
+     * @return integer
+     */
+    public function getViewsCount()
+    {
+        return $this->viewsCount;
     }
 }

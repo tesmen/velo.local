@@ -36,7 +36,7 @@ profile:
 
 
 my_ads:
-    path:     /my_ads
+    path:     /my_adverts
     defaults: { _controller: VelovitoBundle:User:myAds }
 
 
@@ -45,17 +45,21 @@ favorites:
     defaults: { _controller: VelovitoBundle:User:favorites }
 
 ad_new:
-    path:     /new_advertisement
+    path:     /new_advert
     defaults: { _controller: VelovitoBundle:User:newAd }
 
 ad_edit:
-    path:     /edit_advertisement/{advertId}
+    path:     /edit_advert/{advertId}
     defaults: { _controller: VelovitoBundle:User:editAd, advertId: null }
 
 ad_unpublish:
-    path:     /edit_advertisement
+    path:     /edit_advert
     defaults: { _controller: VelovitoBundle:User:editAd }
 
 ad_delete:
-    path:     /edit_advertisement
+    path:     /edit_advert
     defaults: { _controller: VelovitoBundle:User:editAd }
+
+ad_view:
+    path:     /view_advert/{advertId}
+    defaults: { _controller: VelovitoBundle:Advert:viewAdvert, advertId: null }

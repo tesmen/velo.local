@@ -23,7 +23,8 @@
 
         <div class="info">
             <div class="title">
-                <a href="#">{{ advert.getTitle() }}</a> {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}
+                <a href="{{ url('ad_view', {'advertId': advert.getId()}) }}">{{ advert.getTitle() }}</a>
+                {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}
             </div>
 
             <div class="description">
@@ -35,9 +36,10 @@
             </div>
 
             <div class="menu">
+                {{ advert.getViewsCount() }} просмотров
                 <a href="{{ url('ad_edit', {'advertId': advert.getId()}) }}">Редактировать</a>|
                 <a href="{{ url('ad_unpublish', {'advertId': advert.getId()}) }}">Снять с публикации</a>|
-                <a href="{{ url('ad_delete', {'advertId': advert.getId()}) }}">Удалить</a>
+                <a href="{{ url('ad_delete', {'advertId': advert.getId()}) }}">Удалить</a> |
             </div>
         </div>
     </div>

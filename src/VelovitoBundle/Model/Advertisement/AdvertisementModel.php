@@ -62,6 +62,14 @@ class AdvertisementModel
         );
     }
 
+    public function incrementViewed(Advertisement $ent)
+    {
+        $views = $ent->getViewsCount();
+        $views++;
+        $ent->setViewsCount($views);
+        $this->em->flush($ent);
+    }
+
     public function updateAdvert($advert, array $data)
     {
         if (!($advert instanceof Advertisement)) {
