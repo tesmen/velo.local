@@ -4,6 +4,7 @@ namespace VelovitoBundle\Model\Advertisement;
 
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
+use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Entity\User;
 
 class AdvertisementModel
@@ -59,5 +60,14 @@ class AdvertisementModel
                 'id' => $id,
             ]
         );
+    }
+
+    public function updateAdvert($advert, array $data)
+    {
+        if (!($advert instanceof Advertisement)) {
+            $advert = $this->getAdById($advert);
+        }
+
+        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->update($advert, $data);
     }
 }

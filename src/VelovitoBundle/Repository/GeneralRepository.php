@@ -24,7 +24,7 @@ class GeneralRepository extends EntityRepository
         $this->_em->flush();
     }
 
-    public function update($data)
+    public function updateOld($data)
     {
         $entFields = $this->_em->getClassMetadata($this->_entityName)->getFieldNames();
 

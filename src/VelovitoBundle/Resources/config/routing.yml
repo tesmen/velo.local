@@ -50,7 +50,7 @@ ad_new:
 
 ad_edit:
     path:     /edit_advertisement/{advertId}
-    defaults: { _controller: VelovitoBundle:User:editAd }
+    defaults: { _controller: VelovitoBundle:User:editAd, advertId: null }
 
 ad_unpublish:
     path:     /edit_advertisement

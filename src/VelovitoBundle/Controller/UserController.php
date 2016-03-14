@@ -18,7 +18,7 @@ class UserController extends GeneralController
         $this->denyUnlessAuthenticatedFully();
         $formOptions = [
             'ad_statuses' => $adModel->getAdStatusMap(),
-            'categories' => $this->get(C::MODEL_DEFAULT)->getMenu(),
+            'categories'  => $this->get(C::MODEL_DEFAULT)->getMenu(),
         ];
 
         $form = $this->createForm(NewAdForm::class, $formOptions);
@@ -44,17 +44,19 @@ class UserController extends GeneralController
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
 
         $this->denyUnlessAuthenticatedFully();
+
+        $advertEnt = $this->get(C::MODEL_ADVERTISEMENT)->getAdById($advertId);
         $formOptions = [
-            'obj' => $this->get(C::MODEL_ADVERTISEMENT)->getAdById($advertId),
+            'obj'         => $advertEnt,
             'ad_statuses' => $adModel->getAdStatusMap(),
-            'categories' => $this->get(C::MODEL_DEFAULT)->getMenu(),
+            'categories'  => $this->get(C::MODEL_DEFAULT)->getMenu(),
         ];
 
         $form = $this->createForm(EditAdForm::class, $formOptions);
 
         if ($request->isMethod('POST')) {
             $formData = $form->handleRequest($request)->getData();
-            $adModel->createNewAd($formData, $this->getUser());
+            $adModel->updateAdvert($advertEnt, $formData);
             $this->addFlash('success', 'Объявление добавлено');
 
             return $this->redirectToRoute(C::ROUTE_MY_ADS);
