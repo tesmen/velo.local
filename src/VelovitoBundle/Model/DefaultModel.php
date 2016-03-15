@@ -18,6 +18,11 @@ class DefaultModel
         $this->kernel = $kernel;
     }
 
+    public function getUploadRootDir()
+    {
+        return $this->kernel->getRootDir().'/../../'.C::UPLOAD_PATH;
+    }
+
     public function getMenu($parentId = null)
     {
         $topEnts = $this->em->getRepository(C::REPO_CATALOG_ITEM)->findByOrFail(

@@ -22,3 +22,7 @@ services:
     model.user:
         class: VelovitoBundle\Model\User\UserModel
         arguments: ["@doctrine.orm.entity_manager", "@kernel"]
+
+    model.document:
+        class: VelovitoBundle\Model\DocumentModel
+        arguments: ["@doctrine.orm.entity_manager", "@model.default"]

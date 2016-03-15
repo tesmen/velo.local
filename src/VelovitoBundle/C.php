@@ -12,6 +12,8 @@ class C
     const AD_STATUS_PUBLISHED = 2;
     const AD_STATUS_DELETED = 3;
 
+    const UPLOAD_PATH = 'upload';
+
     const REPO_ADVERTISEMENT = 'VelovitoBundle:Advertisement';
     const REPO_ROLE = 'VelovitoBundle:Role';
     const REPO_USER = 'VelovitoBundle:User';
@@ -33,6 +35,7 @@ class C
     const MODEL_DEFAULT = 'model.default';
     const MODEL_ADVERTISEMENT = 'model.advertisement';
     const MODEL_USER = 'model.user';
+    const MODEL_DOCUMENT = 'model.document';
 
     const PAGE_TITLE = 'page_title';
     const STATUS_USER_ACTIVE = 1;

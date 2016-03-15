@@ -2,7 +2,6 @@
 
 namespace VelovitoBundle\Controller;
 
-use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\Form\Ajax\UploadPhotoForm;
@@ -15,6 +14,7 @@ class AjaxController extends GeneralController
         $form = $this->createForm(UploadPhotoForm::class);
         $form->handleRequest($request);
         $data = $form->getData();
+        $this->get(C::MODEL_DOCUMENT)->createSupportAttach($data[C::FORM_PHOTO]);
 
         return new JsonResponse(get_class($data[C::FORM_PHOTO]));
     }
