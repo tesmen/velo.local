@@ -5,6 +5,7 @@ namespace VelovitoBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\C;
 use VelovitoBundle\Form\Ad\EditAdForm;
+use VelovitoBundle\Form\Ad\UploadPhotoForm;
 
 class AdvertController extends GeneralController
 {
@@ -23,7 +24,7 @@ class AdvertController extends GeneralController
         return $this->render(
             'VelovitoBundle:advert:view_ad.html.twig',
             [
-                'advert' => $advertEnt,
+                'advert'     => $advertEnt,
             ]
         );
     }

@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\Security;
 use VelovitoBundle\C;
 use VelovitoBundle\Form\Ad\EditAdForm;
 use VelovitoBundle\Form\Ad\NewAdForm;
+use VelovitoBundle\Form\Ajax\UploadPhotoForm;
 use VelovitoBundle\Form\User\UserProfileForm;
 
 class UserController extends GeneralController
@@ -35,6 +36,7 @@ class UserController extends GeneralController
             'VelovitoBundle:user:new_ad.html.twig',
             [
                 'form' => $form->createView(),
+                'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
             ]
         );
     }

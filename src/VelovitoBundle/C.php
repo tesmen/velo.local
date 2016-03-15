@@ -55,5 +55,6 @@ class C
     const FORM_EMAIL = 'email';
     const FORM_REGISTERED_DATE = 'registered_date';
     const FORM_PASSWORD = 'password';
+    const FORM_PHOTO = 'photo';
     const FORM_CONFIRM_PASSWORD = 'confirm_password';
 }

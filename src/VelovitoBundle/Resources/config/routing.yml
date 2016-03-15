@@ -17,6 +17,11 @@ registration:
         _controller: VelovitoBundle:Security:registration
         title: Регистрация
 
+#--------------------------------------------------------
+ajax_upload_photo:
+    path:     /ajax-upload-photo
+    defaults: { _controller: VelovitoBundle:Ajax:uploadPhoto }
+
 velovito:
     path:     /velovito
     defaults: { _controller: VelovitoBundle:Default:velovito }
