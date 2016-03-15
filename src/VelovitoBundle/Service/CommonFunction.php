@@ -201,20 +201,9 @@ class CommonFunction
         return $txt.$e1;
     }
 
-    public static function convertToBillingVpsStatus($state)
+    public static function getFileExtension($fileName)
     {
-        switch ($state) {
-            case true:
-                return C::BILLING_STATUS_ACTIVE;
-
-                break;
-            case false:
-                return C::BILLING_STATUS_HALTED;
-
-                break;
-            default:
-                return C::BILLING_STATUS_PROCESSED;
-        }
+        return CommonFunction::getDomainArea($fileName);
     }
 
     public static function getDomainArea($domain)

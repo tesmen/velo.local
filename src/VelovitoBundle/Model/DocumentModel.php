@@ -3,8 +3,10 @@
 namespace VelovitoBundle\Model;
 
 use Doctrine\ORM\EntityManager;
+use Gregwar\Image\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use VelovitoBundle\C;
+use VelovitoBundle\Service\CommonFunction;
 
 class DocumentModel
 {
@@ -17,13 +19,12 @@ class DocumentModel
         $this->defaultModel = $defaultModel;
     }
 
-    public function createSupportAttach(UploadedFile $file = null)
+    public function saveUploadedFile(UploadedFile $file = null)
     {
-        if (is_null($file)) {
-            throw new \Exception('no file is present');
-        }
+        $fileName = $file->getClientOriginalName();
+        $fileExtension = CommonFunction::getFileExtension($fileName);
 
-        $tmpFileName = md5($file->getClientOriginalName().microtime(true));
+        $tmpFileName = md5($fileName.microtime(true)).'.'.$fileExtension;
         $file->move($this->defaultModel->getUploadRootDir(), $tmpFileName);
 
         return $tmpFileName;
@@ -56,4 +57,22 @@ class DocumentModel
     {
         return file_get_contents($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName);
     }
+
+    public function resizeImage($fileName)
+    {
+        $inFile = $this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName;
+
+//        Image::open($inFile)
+
+        $image = new Image($inFile);
+        $image
+            ->resize(100, 100)
+            ->negate()
+            ->save($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.'out.jpg');
+
+
+        return file_get_contents($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName);
+    }
+
+
 }
