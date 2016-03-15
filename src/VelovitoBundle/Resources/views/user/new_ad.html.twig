@@ -12,14 +12,15 @@
     {{ form_widget(form.publish) }}
     {{ form_rest(form) }}
     {{ form_end(form) }}
+
     <br/>
+
     {{ form_start(uploadForm, {'attr':{ 'id': 'photo' }}) }}
     {{ form_widget(uploadForm.photo) }}
     {{ form_widget(uploadForm.submit) }}
     {{ form_end(uploadForm) }}
+
     <br/>
-    <input type="file" id="uploadfile" name="uploadfile"/>
-    <input type="button" value="upload" onclick="upload()"/>
 
     <script src="{{ asset('js/jquery.form.min.js') }}"></script>
 
@@ -31,18 +32,14 @@
         function upload() {
             var file = document.getElementById("uploadfile");
 
-            /* Create a FormData instance */
             var formData = new FormData();
-            /* Add the file */
             formData.append("upload", file.files[0]);
 
             client.open("post", "{{ url('ajax_upload_photo') }}", true);
             client.setRequestHeader("Content-Type", "multipart/form-data");
             client.send(formData);
-            /* Send to server */
         }
 
-        /* Check the response status */
         client.onreadystatechange = function () {
             if (client.readyState == 4 && client.status == 200) {
                 alert(client.statusText);
