@@ -26,11 +26,12 @@ class DocumentModel
 
         $tmpFileName = md5($fileName.microtime(true)).'.'.$fileExtension;
         $file->move($this->defaultModel->getUploadRootDir(), $tmpFileName);
+        $this->createUploadedImageSizes($tmpFileName);
 
         return $tmpFileName;
     }
 
-    public function removeSupportAttach($tmpFileName)
+    public function deleteUploadedFile($tmpFileName)
     {
         return unlink($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$tmpFileName);
     }
@@ -58,20 +59,26 @@ class DocumentModel
         return file_get_contents($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName);
     }
 
-    public function resizeImage($fileName)
+    public function createUploadedImageSizes($fileName)
     {
-        $inFile = $this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName;
+        $filePath = $this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName;
+        $image = new Image($filePath);
 
-//        Image::open($inFile)
+        $sizes = [
+            800,
+            512,
+            200,
+            150,
+            100,
+        ];
 
-        $image = new Image($inFile);
-        $image
-            ->resize(100, 100)
-            ->negate()
-            ->save($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.'out.jpg');
+        foreach ($sizes as $size) {
+            $image
+                ->scaleResize($size, $size)
+                ->save($this->defaultModel->getImagesDir().DIRECTORY_SEPARATOR.$size.DIRECTORY_SEPARATOR.$fileName);
+        }
 
-
-        return file_get_contents($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName);
+        return true;
     }
 
 

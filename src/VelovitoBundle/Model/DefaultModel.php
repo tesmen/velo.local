@@ -23,6 +23,11 @@ class DefaultModel
         return $this->kernel->getRootDir().'/../../'.C::UPLOAD_PATH;
     }
 
+    public function getImagesDir()
+    {
+        return $this->kernel->getRootDir().'/../web/img';
+    }
+
     public function getMenu($parentId = null)
     {
         $topEnts = $this->em->getRepository(C::REPO_CATALOG_ITEM)->findByOrFail(
