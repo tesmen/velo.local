@@ -12,24 +12,18 @@ class AdvertController extends GeneralController
     {
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
 
+        //$form = $this->createForm(EditAdForm::class, $formOptions);
         $advertEnt = $this->get(C::MODEL_ADVERTISEMENT)->getAdById($advertId);
+        $this->get(C::MODEL_ADVERTISEMENT)->incrementViewed($advertEnt);
 
-        $formOptions = [
-            'obj'         => $advertEnt,
-            'ad_statuses' => $adModel->getAdStatusMap(),
-            'categories'  => $this->get(C::MODEL_DEFAULT)->getMenu(),
-        ];
-
-        $form = $this->createForm(EditAdForm::class, $formOptions);
-        $advertEnt = $this->get(C::MODEL_ADVERTISEMENT)->incrementViewed($advertEnt);
         if ($request->isMethod('POST')) {
 
         }
 
         return $this->render(
-            'VelovitoBundle:user:new_ad.html.twig',
+            'VelovitoBundle:advert:view_ad.html.twig',
             [
-                'form' => $form->createView(),
+                'advert' => $advertEnt,
             ]
         );
     }
