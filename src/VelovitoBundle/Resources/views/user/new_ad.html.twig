@@ -25,7 +25,28 @@
     <script src="{{ asset('js/jquery.form.min.js') }}"></script>
 
     <script>
-        $("#photo").ajaxForm({url: '{{ url('ajax_upload_photo') }}', type: 'post'})
+        var tmpImagePath = '{{ app.request.getSchemeAndHttpHost() }}/img/temporary_thumbs/';
+        $("#photo").ajaxForm({
+            url: '{{ url('ajax_upload_photo') }}',
+            type: 'post',
+            beforeSubmit: onBeforeSubmit,
+            success: onSuccess
+        });
+
+        function onBeforeSubmit(formData, jqForm, options) {
+            var queryString = $.param(formData);
+            console.log('About to submit: \n\n' + queryString);
+
+            return true;
+        }
+
+        function onSuccess(responseText, statusText, xhr, $form) {
+            console.log('status: ' + statusText + '\n\nresponseText: \n' + responseText);
+            var img = $('<img>');
+            img.attr('src', tmpImagePath + responseText);
+            $("body").append(img);
+            img.append('body')
+        }
 
         var client = new XMLHttpRequest();
 
