@@ -8,6 +8,13 @@
     {{ macro.bootstrapFormInput(form.status) }}
     {{ macro.bootstrapFormInput(form.description) }}
 
+    <div id="images_pool">
+        <div class="uploading_image">
+            <img src="http://velo.local/img/temporary_thumbs/4c5e18e08e220169403f707b72ed6952.png" alt="">
+            <div class="remove_image"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+        </div>
+    </div>
+
     {{ form_widget(form.save) }}
     {{ form_widget(form.publish) }}
     {{ form_rest(form) }}
@@ -40,12 +47,19 @@
             return true;
         }
 
+        function createUploadingImageBlock() {
+
+        }
+
         function onSuccess(responseText, statusText, xhr, $form) {
-            console.log('status: ' + statusText + '\n\nresponseText: \n' + responseText);
-            var img = $('<img>');
-            img.attr('src', tmpImagePath + responseText);
-            $("body").append(img);
-            img.append('body')
+            switch(xhr.status){
+                case 200:
+                    var img = $('<img>');
+                    img.attr('src', tmpImagePath + responseText);
+                    $("#images_pool").append(img);
+                default :
+                    console.log(xhr);
+            }
         }
 
         var client = new XMLHttpRequest();
