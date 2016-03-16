@@ -18,7 +18,7 @@ class TestCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get(C::MODEL_DOCUMENT)->createUploadedImageSizes('50087bffd8f798fb984db6c1ce3edc86.png');
+        $this->getContainer()->get(C::MODEL_DOCUMENT)->createImageSizesFromUploaded('50087bffd8f798fb984db6c1ce3edc86.png');
 //        echo $this->getContainer()->get(C::MODEL_DEFAULT)->getImagesDir();
     }
 }

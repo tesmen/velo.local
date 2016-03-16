@@ -26,7 +26,7 @@ class DocumentModel
 
         $tmpFileName = md5($fileName.microtime(true)).'.'.$fileExtension;
         $file->move($this->defaultModel->getUploadRootDir(), $tmpFileName);
-        $this->createUploadedImageSizes($tmpFileName);
+        $this->createTemporaryUploadedImageThumb($tmpFileName);
 
         return $tmpFileName;
     }
@@ -59,10 +59,9 @@ class DocumentModel
         return file_get_contents($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName);
     }
 
-    public function createUploadedImageSizes($fileName)
+    public function createImageSizesFromUploaded($fileName)
     {
         $filePath = $this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName;
-        $image = new Image($filePath);
 
         $sizes = [
             800,
@@ -73,10 +72,29 @@ class DocumentModel
         ];
 
         foreach ($sizes as $size) {
-            $image
-                ->scaleResize($size, $size)
-                ->save($this->defaultModel->getImagesDir().DIRECTORY_SEPARATOR.$size.DIRECTORY_SEPARATOR.$fileName);
+            $output = $this->defaultModel->getImagesDir().DIRECTORY_SEPARATOR.$size.DIRECTORY_SEPARATOR.$fileName;
+            $this->createResizedImage($size, $size, $filePath, $output);
         }
+
+        return true;
+    }
+
+    public function createTemporaryUploadedImageThumb($fileName)
+    {
+        $filePath = $this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName;
+        $output = $this->defaultModel->getUploadedTemporaryImageThumbsDir().DIRECTORY_SEPARATOR.$fileName;
+        $this->createResizedImage(150, 150, $filePath, $output);
+
+        return true;
+    }
+
+    public function createResizedImage($height, $width, $inFileName, $outFileName)
+    {
+        $image = new Image($inFileName);
+
+        $image
+            ->scaleResize($height, $width)
+            ->save($outFileName);
 
         return true;
     }

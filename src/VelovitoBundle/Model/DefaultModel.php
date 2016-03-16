@@ -23,6 +23,11 @@ class DefaultModel
         return $this->kernel->getRootDir().'/../../'.C::UPLOAD_PATH;
     }
 
+    public function getUploadedTemporaryImageThumbsDir()
+    {
+        return $this->getImagesDir().DIRECTORY_SEPARATOR.C::TEMPORARY_UPLOAD_IMAGE_THUMB_PATH;
+    }
+
     public function getImagesDir()
     {
         return $this->kernel->getRootDir().'/../web/img';

@@ -13,6 +13,7 @@ class C
     const AD_STATUS_DELETED = 3;
 
     const UPLOAD_PATH = 'upload';
+    const TEMPORARY_UPLOAD_IMAGE_THUMB_PATH = 'temporary_thumbs';
 
     const REPO_ADVERTISEMENT = 'VelovitoBundle:Advertisement';
     const REPO_ROLE = 'VelovitoBundle:Role';
