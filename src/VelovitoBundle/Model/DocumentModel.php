@@ -36,10 +36,14 @@ class DocumentModel
         $result = [];
 
         foreach ($fileNames as $name) {
-            try{
+            if (empty($name)) {
+                continue;
+            }
+
+            try {
                 $this->moveUploadedFileTo($name, $this->defaultModel->getImageOriginalsDir($name));
                 $result[] = $name;
-            } catch (\Exception $e ){
+            } catch (\Exception $e) {
 
             }
         }

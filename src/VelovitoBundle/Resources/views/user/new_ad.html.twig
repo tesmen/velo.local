@@ -14,7 +14,7 @@
     <div id="images_pool">
         <div class="uploading_image" id='root_uploading_image' style="display: none;">
             <span id="promo_spin" class="promo__spin"></span>
-            <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]">
+            <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]" disabled="disabled">
             <img src="" alt="">
 
             <div class="remove_image">
@@ -78,6 +78,7 @@
         function createUploadingImageBlock() {
             var element = duplicateElement(_rootUploadingImage);
             element.removeAttr('id');
+            element.removeAttr('disabled');
             element.show('fast');
 
             return element;
