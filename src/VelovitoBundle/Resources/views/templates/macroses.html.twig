@@ -16,9 +16,18 @@
 {% endmacro %}
 
 {% macro advert(advert) %}
+    {% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}
+
     <div class="advert">
         <div class="photo">
-            <img src="" alt="Image" height="100" width="100">
+            {% set c = 0 %}
+            {% for photo in advert.getPhotos() %}
+                {% if c == 0 %}
+                    <img src="{{ originalsDir ~ photo.getFileName() }}" alt="Image" height="100" width="100">
+                {% endif %}
+
+                {% set c = 1 %}
+            {% endfor %}
         </div>
 
         <div class="info">
