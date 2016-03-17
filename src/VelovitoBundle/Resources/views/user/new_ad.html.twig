@@ -44,11 +44,30 @@
         var _rootUploadingImage = $('#root_uploading_image');
 
         _ajaxImageUploadInput.change(ajaxUploadFile);
-        
-        function ajaxUploadFile(form, onSuccess, onError) {
+
+        function ajaxUploadFile() {
             var element = createUploadingImageBlock();
 
-            ajaxPostForm(_ajaxImageUploadForm, onBeforeSubmit, onSuccess);
+            ajaxPostForm(
+                    _ajaxImageUploadForm,
+                    onBeforeSubmit,
+                    function (responseText, statusText, xhr, $form) {
+                        onSuccessUpload(element, responseText, xhr)
+                    }
+            );
+        }
+
+        function onSuccessUpload(element, responseText, xhr) {
+            element.find('.promo__spin').hide();
+
+            switch (xhr.status) {
+                case 200:
+                    element.find('img').attr('src', tmpImagePath + responseText);
+                    break;
+
+                default :
+                    console.log(xhr);
+            }
         }
 
         function duplicateElement(element) {
@@ -72,31 +91,11 @@
             });
         }
 
-        
-
-        _ajaxImageUploadForm.ajaxForm({
-            url: '{{ url('ajax_upload_photo') }}',
-            type: 'post',
-            beforeSubmit: onBeforeSubmit,
-            success: onSuccess
-        });
-
         function onBeforeSubmit(formData, jqForm, options) {
             var queryString = $.param(formData);
             console.log('About to submit: \n\n' + queryString);
 
             return true;
-        }
-
-        function onSuccess(responseText, statusText, xhr, $form) {
-            switch (xhr.status) {
-                case 200:
-                    var img = $('<img>');
-                    img.attr('src', tmpImagePath + responseText);
-                    $("#images_pool").append(img);
-                default :
-                    console.log(xhr);
-            }
         }
 
         var client = new XMLHttpRequest();
