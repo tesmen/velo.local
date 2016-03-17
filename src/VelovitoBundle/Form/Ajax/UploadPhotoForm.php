@@ -20,13 +20,13 @@ class UploadPhotoForm extends AbstractType
             ]
         );
 
-        $builder->add(
-            C::FORM_SUBMIT,
-            SubmitType::class,
-            [
-                'label' => 'Опубликовать',
-            ]
-        );
+//        $builder->add(
+//            C::FORM_SUBMIT,
+//            SubmitType::class,
+//            [
+//                'label' => 'Опубликовать',
+//            ]
+//        );
     }
 
     public function getName()

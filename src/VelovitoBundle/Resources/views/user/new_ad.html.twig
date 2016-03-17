@@ -1,6 +1,9 @@
 {% extends 'VelovitoBundle::base.html.twig' %}
 {% import '@Velovito/templates/macroses.html.twig' as macro %}
 {% block body %}
+    <script src="{{ asset('js/jquery.form.min.js') }}"></script>
+    <script src="{{ asset('js/spinner.js') }}"></script>
+
     {{ form_start(form) }}
     {{ macro.bootstrapFormInput(form.title) }}
     {{ macro.bootstrapFormInput(form.price) }}
@@ -9,9 +12,14 @@
     {{ macro.bootstrapFormInput(form.description) }}
 
     <div id="images_pool">
-        <div class="uploading_image">
-            <img src="http://velo.local/img/temporary_thumbs/4c5e18e08e220169403f707b72ed6952.png" alt="">
-            <div class="remove_image"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+        <div class="uploading_image" id='root_uploading_image' style="display: none;">
+            <span id="promo_spin" class="promo__spin"></span>
+            <input type="hidden" name="new_ad[photos][__name__]">
+            <img src="" alt="">
+
+            <div class="remove_image">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </div>
         </div>
     </div>
 
@@ -24,16 +32,49 @@
 
     {{ form_start(uploadForm, {'attr':{ 'id': 'photo' }}) }}
     {{ form_widget(uploadForm.photo) }}
-    {{ form_widget(uploadForm.submit) }}
     {{ form_end(uploadForm) }}
 
     <br/>
 
-    <script src="{{ asset('js/jquery.form.min.js') }}"></script>
-
     <script>
+        var spinner = new Spinner(dockerSpinnerSettings).spin($('#promo_spin')[0]);
         var tmpImagePath = '{{ app.request.getSchemeAndHttpHost() }}/img/temporary_thumbs/';
-        $("#photo").ajaxForm({
+        var _ajaxImageUploadForm = $("#photo");
+        var _ajaxImageUploadInput = $('#upload_photo_form_photo');
+        var _rootUploadingImage = $('#root_uploading_image');
+
+        _ajaxImageUploadInput.change(ajaxUploadFile);
+        
+        function ajaxUploadFile(form, onSuccess, onError) {
+            var element = createUploadingImageBlock();
+
+            ajaxPostForm(_ajaxImageUploadForm, onBeforeSubmit, onSuccess);
+        }
+
+        function duplicateElement(element) {
+            return element.clone().appendTo(element.parent())
+        }
+
+        function createUploadingImageBlock() {
+            var element = duplicateElement(_rootUploadingImage);
+            element.removeAttr('id');
+            element.show('fast');
+
+            return element;
+        }
+
+        function ajaxPostForm(form, beforeSubmit, success) {
+            form.ajaxSubmit({
+                url: '{{ url('ajax_upload_photo') }}',
+                type: 'post',
+                beforeSubmit: beforeSubmit,
+                success: success
+            });
+        }
+
+        
+
+        _ajaxImageUploadForm.ajaxForm({
             url: '{{ url('ajax_upload_photo') }}',
             type: 'post',
             beforeSubmit: onBeforeSubmit,
@@ -47,12 +88,8 @@
             return true;
         }
 
-        function createUploadingImageBlock() {
-
-        }
-
         function onSuccess(responseText, statusText, xhr, $form) {
-            switch(xhr.status){
+            switch (xhr.status) {
                 case 200:
                     var img = $('<img>');
                     img.attr('src', tmpImagePath + responseText);
