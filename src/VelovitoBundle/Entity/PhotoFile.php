@@ -16,13 +16,14 @@ class PhotoFile
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="filename", type="string", length=64)
+     * @ORM\Column(name="filename", type="string", length=64, nullable=false)
      */
     private $fileName;
 
