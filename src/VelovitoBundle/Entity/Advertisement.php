@@ -287,4 +287,38 @@ class Advertisement
     {
         return $this->viewsCount;
     }
+
+    /**
+     * Add photo
+     *
+     * @param \VelovitoBundle\Entity\PhotoFile $photo
+     *
+     * @return Advertisement
+     */
+    public function addPhoto(\VelovitoBundle\Entity\PhotoFile $photo)
+    {
+        $this->photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \VelovitoBundle\Entity\PhotoFile $photo
+     */
+    public function removePhoto(\VelovitoBundle\Entity\PhotoFile $photo)
+    {
+        $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
 }

@@ -36,4 +36,62 @@ class PhotoFile
      */
     private $advert;
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set fileName
+     *
+     * @param string $fileName
+     *
+     * @return PhotoFile
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    /**
+     * Get fileName
+     *
+     * @return string
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * Set advert
+     *
+     * @param \VelovitoBundle\Entity\Advertisement $advert
+     *
+     * @return PhotoFile
+     */
+    public function setAdvert(\VelovitoBundle\Entity\Advertisement $advert = null)
+    {
+        $this->advert = $advert;
+
+        return $this;
+    }
+
+    /**
+     * Get advert
+     *
+     * @return \VelovitoBundle\Entity\Advertisement
+     */
+    public function getAdvert()
+    {
+        return $this->advert;
+    }
 }
