@@ -14,7 +14,7 @@
     <div id="images_pool">
         <div class="uploading_image" id='root_uploading_image' style="display: none;">
             <span id="promo_spin" class="promo__spin"></span>
-            <input type="hidden" name="new_ad[photos][__name__]">
+            <input type="hidden" name="photoNames[]">
             <img src="" alt="">
 
             <div class="remove_image">
@@ -78,7 +78,6 @@
         function createUploadingImageBlock() {
             var element = duplicateElement(_rootUploadingImage);
             element.removeAttr('id');
-            element.find('input').attr('name','photo[]').attr('value', '');
             element.show('fast');
 
             return element;

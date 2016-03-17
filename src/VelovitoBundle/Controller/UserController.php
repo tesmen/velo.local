@@ -26,10 +26,7 @@ class UserController extends GeneralController
 
         if ($request->isMethod('POST')) {
             $formData = $form->handleRequest($request)->getData();
-            var_dump($formData);
-            var_dump($request->get('photo'));
-            exit;
-            $formData = $form->handleRequest($request)->getData();
+            $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
             $adModel->createNewAd($formData, $this->getUser());
             $this->addFlash('success', 'Объявление добавлено');
 

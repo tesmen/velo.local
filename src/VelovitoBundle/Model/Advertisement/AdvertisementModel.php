@@ -16,8 +16,10 @@ class AdvertisementModel
         $this->em = $em;
     }
 
-    public function createNewAd($formData, User $user)
+    public function createNewAd(array $formData, User $user)
     {
+//        $this->adModel->saveOriginalImages($formData[C::FORM_PHOTO_FILENAMES]);
+
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->create($formData, $user);
     }
 

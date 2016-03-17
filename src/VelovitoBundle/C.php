@@ -60,5 +60,6 @@ class C
     const FORM_REGISTERED_DATE = 'registered_date';
     const FORM_PASSWORD = 'password';
     const FORM_PHOTO = 'photo';
+    const FORM_PHOTO_FILENAMES = 'photoFileNames';
     const FORM_CONFIRM_PASSWORD = 'confirm_password';
 }
