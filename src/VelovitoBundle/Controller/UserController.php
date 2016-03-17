@@ -26,6 +26,10 @@ class UserController extends GeneralController
 
         if ($request->isMethod('POST')) {
             $formData = $form->handleRequest($request)->getData();
+            var_dump($formData);
+            var_dump($request->get('photo'));
+            exit;
+            $formData = $form->handleRequest($request)->getData();
             $adModel->createNewAd($formData, $this->getUser());
             $this->addFlash('success', 'Объявление добавлено');
 
@@ -35,7 +39,7 @@ class UserController extends GeneralController
         return $this->render(
             'VelovitoBundle:user:new_ad.html.twig',
             [
-                'form' => $form->createView(),
+                'form'       => $form->createView(),
                 'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
             ]
         );

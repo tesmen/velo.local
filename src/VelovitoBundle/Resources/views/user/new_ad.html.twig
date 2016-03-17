@@ -67,6 +67,7 @@
             switch (xhr.status) {
                 case 200:
                     element.find('img').attr('src', tmpImagePath + responseText);
+                    element.find('input').attr('value', responseText);
                     break;
 
                 default :
@@ -77,6 +78,7 @@
         function createUploadingImageBlock() {
             var element = duplicateElement(_rootUploadingImage);
             element.removeAttr('id');
+            element.find('input').attr('name','photo[]').attr('value', '');
             element.show('fast');
 
             return element;
