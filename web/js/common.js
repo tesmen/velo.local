@@ -28,6 +28,10 @@ var dockerSpinnerSettings = {
     left: '50%'
 };
 
+function duplicateElement(element) {
+    return element.clone().appendTo(element.parent())
+}
+
 function validateDomain(domain) {
     var reg = /^([a-zA-Z0-9-]{1,32}\.){1,3}[a-zA-Z]{2,}$/;
 

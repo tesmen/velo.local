@@ -74,10 +74,6 @@
             }
         }
 
-        function duplicateElement(element) {
-            return element.clone().appendTo(element.parent())
-        }
-
         function createUploadingImageBlock() {
             var element = duplicateElement(_rootUploadingImage);
             element.removeAttr('id');
@@ -100,25 +96,6 @@
 //            console.log('About to submit: \n\n' + queryString);
 
             return true;
-        }
-
-        var client = new XMLHttpRequest();
-
-        function upload() {
-            var file = document.getElementById("uploadfile");
-
-            var formData = new FormData();
-            formData.append("upload", file.files[0]);
-
-            client.open("post", "{{ url('ajax_upload_photo') }}", true);
-            client.setRequestHeader("Content-Type", "multipart/form-data");
-            client.send(formData);
-        }
-
-        client.onreadystatechange = function () {
-            if (client.readyState == 4 && client.status == 200) {
-                alert(client.statusText);
-            }
         }
     </script>
 {% endblock %}
