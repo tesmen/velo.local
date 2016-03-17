@@ -48,8 +48,8 @@
         function ajaxUploadFile() {
             var element = createUploadingImageBlock();
 
-            $('.glyphicon-remove').on('click', function () {
-                removeUploadedImage($(this))
+            element.find('.glyphicon-remove').on('click', function () {
+                element.remove();
             });
 
             ajaxPostForm(
@@ -59,10 +59,6 @@
                         onSuccessUpload(element, responseText, xhr)
                     }
             );
-        }
-
-        function removeUploadedImage(element) {
-            element.parents().find('.uploading_image').remove();
         }
 
         function onSuccessUpload(element, responseText, xhr) {
