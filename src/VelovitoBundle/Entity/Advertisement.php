@@ -1,5 +1,6 @@
 <?php namespace VelovitoBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Advertisement
 {
+    public function __construct() {
+        $this->photos = new ArrayCollection();
+    }
+
     /**
      * @var integer
      *
@@ -68,6 +73,11 @@ class Advertisement
      * @ORM\JoinColumn(name="currency", referencedColumnName="id")
      */
     private $currency;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PhotoFile", mappedBy="advert")
+     */
+    private $photos;
 
     /**
      * @var string
