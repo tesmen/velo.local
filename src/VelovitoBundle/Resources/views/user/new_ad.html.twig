@@ -48,13 +48,21 @@
         function ajaxUploadFile() {
             var element = createUploadingImageBlock();
 
+            $('.glyphicon-remove').on('click', function () {
+                removeUploadedImage($(this))
+            });
+
             ajaxPostForm(
                     _ajaxImageUploadForm,
                     onBeforeSubmit,
-                    function (responseText, statusText, xhr, $form) {
+                    function (responseText, statusText, xhr) {
                         onSuccessUpload(element, responseText, xhr)
                     }
             );
+        }
+
+        function removeUploadedImage(element) {
+            element.parents().find('.uploading_image').remove();
         }
 
         function onSuccessUpload(element, responseText, xhr) {
@@ -93,7 +101,7 @@
 
         function onBeforeSubmit(formData, jqForm, options) {
             var queryString = $.param(formData);
-            console.log('About to submit: \n\n' + queryString);
+//            console.log('About to submit: \n\n' + queryString);
 
             return true;
         }
