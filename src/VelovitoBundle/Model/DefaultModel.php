@@ -27,28 +27,41 @@ class DefaultModel
         return $this->kernel->getRootDir().'/../../'.C::UPLOAD_PATH.$tail;
     }
 
-    public function getUploadedTemporaryImageThumbsDir()
+    public function getUploadedTemporaryImageThumbsDir($fileName = null)
     {
-        return $this->getImagesDir().DIRECTORY_SEPARATOR.C::TEMPORARY_UPLOAD_IMAGE_THUMB_PATH;
+        $dir = $this->getImagesDir().DIRECTORY_SEPARATOR.C::TEMPORARY_UPLOAD_IMAGE_THUMB_PATH;
+
+        return $this->returnTailedPath($dir, $fileName);
     }
 
-    public function getWebDir()
+    public function getWebDir($fileName = null)
     {
-        return $this->kernel->getRootDir().'/../web';
+        $dir = $this->kernel->getRootDir().'/../web';
+
+        return $this->returnTailedPath($dir, $fileName);
     }
 
-    public function getImagesDir()
+    public function getImagesDir($fileName = null)
     {
-        return $this->getWebDir(). DIRECTORY_SEPARATOR.'img';
+        $dir = $this->getWebDir().DIRECTORY_SEPARATOR.'img';
+
+        return $this->returnTailedPath($dir, $fileName);
     }
 
-    public function getImageOriginalsDir($fileName)
+    public function getImageOriginalsDir($fileName = null)
+    {
+        $dir = $this->getImagesDir().DIRECTORY_SEPARATOR.'originals';
+
+        return $this->returnTailedPath($dir, $fileName);
+    }
+
+    public function returnTailedPath($dir, $fileName)
     {
         $tail = is_null($fileName)
             ? ''
             : DIRECTORY_SEPARATOR.$fileName;
 
-        return $this->getImagesDir(). DIRECTORY_SEPARATOR.'originals'.$tail;
+        return $dir.$tail;
     }
 
     public function getMenu($parentId = null)
