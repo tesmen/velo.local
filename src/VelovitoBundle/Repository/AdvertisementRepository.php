@@ -3,6 +3,7 @@
 namespace VelovitoBundle\Repository;
 
 use VelovitoBundle\Entity\Advertisement;
+use VelovitoBundle\Entity\PhotoFile;
 use VelovitoBundle\Entity\User;
 use VelovitoBundle\C;
 
@@ -33,11 +34,12 @@ class AdvertisementRepository extends GeneralRepository
     public function create($data, User $user)
     {
         $this->_em->beginTransaction();
-        try {
-            $currency = $this->_em->getRepository(C::REPO_CURRENCY)->find(1);
 
-            $ent = new Advertisement();
-            $ent
+        try {
+            $currency = $this->_em->getRepository(C::REPO_CURRENCY)->find(1); // todo CURENCY
+            $advertEnt = new Advertisement();
+
+            $advertEnt
                 ->setTitle($data[C::FORM_TITLE])
                 ->setPrice($data[C::FORM_PRICE])
                 ->setStatus($data[C::FORM_STATUS])
@@ -45,7 +47,16 @@ class AdvertisementRepository extends GeneralRepository
                 ->setDescription($data[C::FORM_DESCRIPTION])
                 ->setUser($user);
 
-            $this->_em->persist($ent);
+            foreach ($data[C::FORM_PHOTO_FILENAMES] as $photoFileName) {
+                $photoEnt = new PhotoFile();
+                $photoEnt
+                    ->setFileName($photoFileName)
+                    ->setAdvert($advertEnt);
+
+                $this->_em->persist($photoEnt);
+            }
+
+            $this->_em->persist($advertEnt);
 
             $this->_em->flush();
             $this->_em->commit();
@@ -54,7 +65,7 @@ class AdvertisementRepository extends GeneralRepository
             throw $e;
         }
 
-        return $ent;
+        return $advertEnt;
     }
 
     public function update(Advertisement $ent, array $data)

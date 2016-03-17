@@ -20,7 +20,8 @@ class AdvertisementModel
 
     public function createNewAd(array $formData, User $user)
     {
-        $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
+        $savedFiles = $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
+        $formData[C::FORM_PHOTO_FILENAMES] = $savedFiles;
 
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->create($formData, $user);
     }

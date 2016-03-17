@@ -31,16 +31,20 @@ class DocumentModel
         return $tmpFileName;
     }
 
-    public function saveOriginalsForUploadedImages(UploadedFile $file = null)
+    public function saveOriginalsForUploadedImages(array $fileNames)
     {
-        $fileName = $file->getClientOriginalName();
-        $fileExtension = CommonFunction::getFileExtension($fileName);
+        $result = [];
 
-        $tmpFileName = md5($fileName.microtime(true)).'.'.$fileExtension;
-        $file->move($this->defaultModel->getUploadRootDir(), $tmpFileName);
-        $this->createTemporaryUploadedImageThumb($tmpFileName);
+        foreach ($fileNames as $name) {
+            try{
+                $this->moveUploadedFileTo($name, $this->defaultModel->getImageOriginalsDir($name));
+                $result[] = $name;
+            } catch (\Exception $e ){
 
-        return $tmpFileName;
+            }
+        }
+
+        return $result;
     }
 
     public function moveUploadedFileTo($fileName, $destination)
