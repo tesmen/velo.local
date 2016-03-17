@@ -17,7 +17,7 @@ services:
 
     model.advertisement:
         class: VelovitoBundle\Model\Advertisement\AdvertisementModel
-        arguments: ["@doctrine.orm.entity_manager", "@kernel"]
+        arguments: ["@doctrine.orm.entity_manager", "@model.document"]
 
     model.user:
         class: VelovitoBundle\Model\User\UserModel

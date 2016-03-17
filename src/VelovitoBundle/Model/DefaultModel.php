@@ -18,9 +18,13 @@ class DefaultModel
         $this->kernel = $kernel;
     }
 
-    public function getUploadRootDir()
+    public function getUploadRootDir($fileName = null)
     {
-        return $this->kernel->getRootDir().'/../../'.C::UPLOAD_PATH;
+        $tail = is_null($fileName)
+            ? ''
+            : DIRECTORY_SEPARATOR.$fileName;
+
+        return $this->kernel->getRootDir().'/../../'.C::UPLOAD_PATH.$tail;
     }
 
     public function getUploadedTemporaryImageThumbsDir()
@@ -28,9 +32,23 @@ class DefaultModel
         return $this->getImagesDir().DIRECTORY_SEPARATOR.C::TEMPORARY_UPLOAD_IMAGE_THUMB_PATH;
     }
 
+    public function getWebDir()
+    {
+        return $this->kernel->getRootDir().'/../web';
+    }
+
     public function getImagesDir()
     {
-        return $this->kernel->getRootDir().'/../web/img';
+        return $this->getWebDir(). DIRECTORY_SEPARATOR.'img';
+    }
+
+    public function getImageOriginalsDir($fileName)
+    {
+        $tail = is_null($fileName)
+            ? ''
+            : DIRECTORY_SEPARATOR.$fileName;
+
+        return $this->getImagesDir(). DIRECTORY_SEPARATOR.'originals'.$tail;
     }
 
     public function getMenu($parentId = null)

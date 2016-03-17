@@ -31,6 +31,25 @@ class DocumentModel
         return $tmpFileName;
     }
 
+    public function saveOriginalsForUploadedImages(UploadedFile $file = null)
+    {
+        $fileName = $file->getClientOriginalName();
+        $fileExtension = CommonFunction::getFileExtension($fileName);
+
+        $tmpFileName = md5($fileName.microtime(true)).'.'.$fileExtension;
+        $file->move($this->defaultModel->getUploadRootDir(), $tmpFileName);
+        $this->createTemporaryUploadedImageThumb($tmpFileName);
+
+        return $tmpFileName;
+    }
+
+    public function moveUploadedFileTo($fileName, $destination)
+    {
+        $filePath = $this->defaultModel->getUploadRootDir($fileName);
+
+        return rename($filePath, $destination);
+    }
+
     public function deleteUploadedFile($tmpFileName)
     {
         return unlink($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$tmpFileName);

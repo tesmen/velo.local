@@ -6,19 +6,21 @@ use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
 use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Entity\User;
+use VelovitoBundle\Model\DocumentModel;
 
 class AdvertisementModel
 {
     private $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, DocumentModel $documentModel)
     {
         $this->em = $em;
+        $this->documentModel = $documentModel;
     }
 
     public function createNewAd(array $formData, User $user)
     {
-//        $this->adModel->saveOriginalImages($formData[C::FORM_PHOTO_FILENAMES]);
+        $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
 
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->create($formData, $user);
     }
