@@ -43,6 +43,7 @@ class C
 
     const SP = 'serializedParams';
 
+    // длины согласосывать с БД
     const GLOBAL_USERNAME_LENGTH = 32;
     const GLOBAL_EMAIL_LENGTH = 32;
     const GLOBAL_PASSWORD_LENGTH = 16;

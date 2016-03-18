@@ -64,6 +64,7 @@ class RegisterForm extends AbstractType
                 'required' => true,
                 'attr'     => [
                     'placeholder' => 'Подтверждение пароля',
+                    'maxlength'   => C::GLOBAL_PASSWORD_LENGTH,
                 ],
             ]
         );
