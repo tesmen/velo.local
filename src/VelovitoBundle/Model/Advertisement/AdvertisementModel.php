@@ -58,7 +58,12 @@ class AdvertisementModel
         ];
     }
 
-    public function getAdById($id)
+    /**
+     * @param $id
+     * @return Advertisement
+     * @throws \VelovitoBundle\Exception\NotFoundException
+     */
+    public function getAdvertById($id)
     {
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findOneOrFail(
             [
@@ -78,7 +83,7 @@ class AdvertisementModel
     public function updateAdvert($advert, array $data)
     {
         if (!($advert instanceof Advertisement)) {
-            $advert = $this->getAdById($advert);
+            $advert = $this->getAdvertById($advert);
         }
 
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->update($advert, $data);
