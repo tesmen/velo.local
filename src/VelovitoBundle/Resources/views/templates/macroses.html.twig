@@ -52,7 +52,7 @@
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 {{ advert.getUser().getUserName() }} &nbsp;
                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                {{ advert.getViewsCount() }}
+                {{ advert.getViewsCount() |number_format }}
 
                 {% if app.user and showMenu %}|
                     <a href="{{ url('ad_edit', {'advertId': advert.getId()}) }}">Редактировать</a>|

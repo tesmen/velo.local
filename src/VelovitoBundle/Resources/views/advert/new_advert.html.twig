@@ -5,28 +5,33 @@
     <script src="{{ asset('js/spinner.js') }}"></script>
 
     {{ form_start(form) }}
-    {{ macro.bootstrapFormInput(form.title) }}
-    {{ macro.bootstrapFormInput(form.price) }}
-    {{ macro.bootstrapFormInput(form.category) }}
-    {{ macro.bootstrapFormInput(form.status) }}
-    {{ macro.bootstrapFormInput(form.description) }}
+    <div class="col-md-4">
+        {{ macro.bootstrapFormInput(form.title) }}
+        {{ macro.bootstrapFormInput(form.price) }}
+        {{ macro.bootstrapFormInput(form.category) }}
+        {{ macro.bootstrapFormInput(form.status) }}
+        {{ macro.bootstrapFormInput(form.description) }}
 
-    <div id="images_pool">
-        <div class="uploading_image" id='root_uploading_image' style="display: none;">
-            <span id="promo_spin" class="promo__spin"></span>
-            <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]" disabled="disabled">
-            <img src="" alt="">
 
-            <div class="remove_image">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+
+        {{ form_widget(form.submit) }}
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+    <div class="col-md-6">
+        <div id="images_pool">
+            <div class="uploading_image" id='root_uploading_image' style="display: none;">
+                <span id="promo_spin" class="promo__spin"></span>
+                <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]"
+                       disabled="disabled">
+                <img src="" alt="">
+
+                <div class="remove_image">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </div>
             </div>
         </div>
     </div>
-
-    {{ form_widget(form.save) }}
-    {{ form_widget(form.publish) }}
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
 
     <br/>
 

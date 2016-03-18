@@ -38,7 +38,7 @@ class NewAdvertForm extends AbstractType
             C::FORM_TITLE,
             TextType::class,
             [
-                'label'    => C::FORM_TITLE,
+                'label'    => "Название",
                 'required' => true,
             ]
         );
@@ -47,7 +47,7 @@ class NewAdvertForm extends AbstractType
             C::FORM_PRICE,
             TextType::class,
             [
-                'label'    => C::FORM_PRICE,
+                'label'    => "Цена",
                 'required' => true,
             ]
         );
@@ -56,24 +56,16 @@ class NewAdvertForm extends AbstractType
             C::FORM_DESCRIPTION,
             TextareaType::class,
             [
-                'label'    => C::FORM_DESCRIPTION,
+                'label'    => "Описание",
                 'required' => true,
             ]
         );
 
         $builder->add(
-            C::FORM_SAVE,
+            C::FORM_SUBMIT,
             SubmitType::class,
             [
-                'label' => 'Cохранить черновик',
-            ]
-        );
-
-        $builder->add(
-            C::FORM_PUBLISH,
-            SubmitType::class,
-            [
-                'label' => 'Опубликовать',
+                'label' => 'Готово',
             ]
         );
     }
