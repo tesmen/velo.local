@@ -37,7 +37,11 @@
             </div>
 
             <div class="description">
-                {{ advert.getDescription | slice(0, 150) ~ '...' }}
+                {% if  (advert.getDescription() | length) > 150 %}
+                    {{ advert.getDescription() | slice(0, 150) ~ '...' }}
+                {% else %}
+                    {{ advert.getDescription() }}
+                {% endif %}
             </div>
 
             <div class="price">
@@ -46,10 +50,13 @@
 
             <div class="menu">
                 <b>{{ advert.getUser().getUserName() }} </b>|
-                {{ advert.getViewsCount() }} просмотров |
-                <a href="{{ url('ad_edit', {'advertId': advert.getId()}) }}">Редактировать</a>|
-                <a href="{{ url('ad_unpublish', {'advertId': advert.getId()}) }}">Снять с публикации</a>|
-                <a href="{{ url('ad_delete', {'advertId': advert.getId()}) }}">Удалить</a> |
+                {{ advert.getViewsCount() }} просмотров
+
+                {% if app.user %}|
+                    <a href="{{ url('ad_edit', {'advertId': advert.getId()}) }}">Редактировать</a>|
+                    <a href="{{ url('ad_unpublish', {'advertId': advert.getId()}) }}">Снять с публикации</a>|
+                    <a href="{{ url('ad_delete', {'advertId': advert.getId()}) }}">Удалить</a>
+                {% endif %}
             </div>
         </div>
     </div>
