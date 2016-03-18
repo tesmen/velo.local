@@ -4,6 +4,7 @@ namespace VelovitoBundle\Model;
 
 use Doctrine\ORM\EntityManager;
 use Gregwar\Image\Image;
+use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use VelovitoBundle\C;
 use VelovitoBundle\Service\CommonFunction;
@@ -13,7 +14,7 @@ class DocumentModel
     private $em;
     private $defaultModel;
 
-    public function __construct(EntityManager $em, DefaultModel $defaultModel)
+    public function __construct(EntityManager $em, DefaultModel $defaultModel, Logger $logger)
     {
         $this->em = $em;
         $this->defaultModel = $defaultModel;
@@ -24,7 +25,7 @@ class DocumentModel
         $fileName = $file->getClientOriginalName();
         $fileExtension = CommonFunction::getFileExtension($fileName);
 
-        $tmpFileName = md5($fileName.microtime(true)).'.'.$fileExtension;
+        $tmpFileName = md5($fileName . microtime(true)) . '.' . $fileExtension;
         $file->move($this->defaultModel->getUploadRootDir(), $tmpFileName);
         $this->createTemporaryUploadedImageThumb($tmpFileName);
 
@@ -60,12 +61,12 @@ class DocumentModel
 
     public function deleteUploadedFile($tmpFileName)
     {
-        return unlink($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$tmpFileName);
+        return unlink($this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $tmpFileName);
     }
 
     public function createCsvLogFile(Array $data, $filename)
     {
-        $fp = fopen($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$filename, 'w');
+        $fp = fopen($this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $filename, 'w');
 
         foreach ($data as $fields) {
             fputcsv($fp, $fields, ';');
@@ -78,17 +79,17 @@ class DocumentModel
 
     public function deleteCsvLogFile($fileName)
     {
-        return unlink($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName);
+        return unlink($this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $fileName);
     }
 
     public function getCsvLogFile($fileName)
     {
-        return file_get_contents($this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName);
+        return file_get_contents($this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $fileName);
     }
 
     public function createImageSizesFromUploaded($fileName)
     {
-        $filePath = $this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName;
+        $filePath = $this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $fileName;
 
         $sizes = [
             800,
@@ -99,7 +100,7 @@ class DocumentModel
         ];
 
         foreach ($sizes as $size) {
-            $output = $this->defaultModel->getImagesDir().DIRECTORY_SEPARATOR.$size.DIRECTORY_SEPARATOR.$fileName;
+            $output = $this->defaultModel->getImagesDir() . DIRECTORY_SEPARATOR . $size . DIRECTORY_SEPARATOR . $fileName;
             $this->createResizedImage($size, $size, $filePath, $output);
         }
 
@@ -108,8 +109,8 @@ class DocumentModel
 
     public function createTemporaryUploadedImageThumb($fileName)
     {
-        $filePath = $this->defaultModel->getUploadRootDir().DIRECTORY_SEPARATOR.$fileName;
-        $output = $this->defaultModel->getUploadedTemporaryImageThumbsDir().DIRECTORY_SEPARATOR.$fileName;
+        $filePath = $this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $fileName;
+        $output = $this->defaultModel->getUploadedTemporaryImageThumbsDir() . DIRECTORY_SEPARATOR . $fileName;
         $this->createResizedImage(150, 150, $filePath, $output);
 
         return true;
@@ -119,12 +120,10 @@ class DocumentModel
     {
         $image = new Image($inFileName);
 
-        $image
+        $res = $image
             ->scaleResize($height, $width)
             ->save($outFileName);
 
-        return true;
+        return $res;
     }
-
-
 }
