@@ -25,4 +25,4 @@ services:
 
     model.document:
         class: VelovitoBundle\Model\DocumentModel
-        arguments: ["@doctrine.orm.entity_manager", "@model.default", "@monolog.logger"]
+        arguments: ["@doctrine.orm.entity_manager", "@model.default"]

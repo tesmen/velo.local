@@ -14,7 +14,7 @@ class DocumentModel
     private $em;
     private $defaultModel;
 
-    public function __construct(EntityManager $em, DefaultModel $defaultModel, Logger $logger)
+    public function __construct(EntityManager $em, DefaultModel $defaultModel)
     {
         $this->em = $em;
         $this->defaultModel = $defaultModel;
