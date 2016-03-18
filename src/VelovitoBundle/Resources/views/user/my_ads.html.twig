@@ -10,7 +10,7 @@
             У вас пока нет объявлений
         {% else %}
             {% for ad in userAds %}
-                {{ macro.advert(ad) }}
+                {{ macro.advert(ad, true) }}
             {% endfor %}
         {% endif %}
 

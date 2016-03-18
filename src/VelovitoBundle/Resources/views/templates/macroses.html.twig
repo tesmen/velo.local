@@ -15,7 +15,7 @@
     </div>
 {% endmacro %}
 
-{% macro advert(advert) %}
+{% macro advert(advert, showMenu = false) %}
     {% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}
 
     <div class="advert">
@@ -52,7 +52,7 @@
                 <b>{{ advert.getUser().getUserName() }} </b>|
                 {{ advert.getViewsCount() }} просмотров
 
-                {% if app.user %}|
+                {% if app.user and showMenu %}|
                     <a href="{{ url('ad_edit', {'advertId': advert.getId()}) }}">Редактировать</a>|
                     <a href="{{ url('ad_unpublish', {'advertId': advert.getId()}) }}">Снять с публикации</a>|
                     <a href="{{ url('ad_delete', {'advertId': advert.getId()}) }}">Удалить</a>
