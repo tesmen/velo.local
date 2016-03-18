@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    Options +FollowSymlinks
+    RewriteBase /
+
+    DirectoryIndex index.php
+
+    RewriteRule ^(.*)$ web/$1 [QSA]
+</IfModule>

@@ -61,7 +61,7 @@ class DocumentModel
 
     public function deleteUploadedFile($tmpFileName)
     {
-        return unlink($this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $tmpFileName);
+        return unlink($this->defaultModel->getUploadRootDir($tmpFileName));
     }
 
     public function createCsvLogFile(Array $data, $filename)
@@ -77,16 +77,16 @@ class DocumentModel
         return $filename;
     }
 
-    public function deleteCsvLogFile($fileName)
-    {
-        return unlink($this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $fileName);
-    }
-
     public function getCsvLogFile($fileName)
     {
         return file_get_contents($this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $fileName);
     }
 
+    /**
+     * @param $fileName
+     * @return bool
+     * @deprecated
+     */
     public function createImageSizesFromUploaded($fileName)
     {
         $filePath = $this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $fileName;
@@ -109,8 +109,8 @@ class DocumentModel
 
     public function createTemporaryUploadedImageThumb($fileName)
     {
-        $filePath = $this->defaultModel->getUploadRootDir() . DIRECTORY_SEPARATOR . $fileName;
-        $output = $this->defaultModel->getUploadedTemporaryImageThumbsDir() . DIRECTORY_SEPARATOR . $fileName;
+        $filePath = $this->defaultModel->getUploadRootDir($fileName);
+        $output = $this->defaultModel->getUploadedTemporaryImageThumbsDir($fileName);
         $this->createResizedImage(150, 150, $filePath, $output);
 
         return true;
