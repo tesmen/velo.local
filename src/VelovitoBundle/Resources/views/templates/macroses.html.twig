@@ -49,8 +49,10 @@
             </div>
 
             <div class="menu">
-                <b>{{ advert.getUser().getUserName() }} </b>|
-                {{ advert.getViewsCount() }} просмотров
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                {{ advert.getUser().getUserName() }} &nbsp;
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                {{ advert.getViewsCount() }}
 
                 {% if app.user and showMenu %}|
                     <a href="{{ url('ad_edit', {'advertId': advert.getId()}) }}">Редактировать</a>|
