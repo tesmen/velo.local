@@ -14,9 +14,9 @@
 
         {{ form_widget(form.submit) }}
         {{ form_rest(form) }}
-        {{ form_end(form) }}
     </div>
-    <div class="col-md-6" >
+
+    <div class="col-md-6">
         <label for="new_advert_form_title" class="required">Фотографии</label>
 
         <div id="images_pool">
@@ -36,7 +36,7 @@
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </label>
     </div>
-
+    {{ form_end(form) }}
     <br/>
 
     {{ form_start(uploadForm, {'attr':{ 'id': 'photo' }}) }}
