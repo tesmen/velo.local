@@ -25,6 +25,7 @@ class RegisterForm extends AbstractType
                 'required' => true,
                 'attr'     => [
                     'placeholder' => 'Имя пользователя',
+                    'maxlength'   => C::GLOBAL_USERNAME_LENGTH,
                 ],
             ]
         );
@@ -37,6 +38,7 @@ class RegisterForm extends AbstractType
                 'required' => true,
                 'attr'     => [
                     'placeholder' => 'Электронная почта',
+                    'maxlength'   => C::GLOBAL_EMAIL_LENGTH,
                 ],
             ]
         );
@@ -49,6 +51,7 @@ class RegisterForm extends AbstractType
                 'required' => true,
                 'attr'     => [
                     'placeholder' => 'Пароль',
+                    'maxlength'   => C::GLOBAL_PASSWORD_LENGTH,
                 ],
             ]
         );
@@ -77,20 +80,61 @@ class RegisterForm extends AbstractType
             FormEvents::POST_SUBMIT,
             function (FormEvent $event) {
                 $form = $event->getForm();
-                $data = $event->getData();
+                $formData = $event->getData();
+                $username = $formData[C::FORM_USERNAME];
 
-                $username = $data[C::FORM_USERNAME];
-                if ($username === '') {
+                if (empty($username)) {
                     $form->get(C::FORM_USERNAME)->addError(new FormError('Обязательное поле'));
-                } elseif (!preg_match('/^([0-9A-Za-z]){2,32}$/', $username)) {
-                    $form->get(C::FORM_USERNAME)->addError(new FormError('Неверно указано имя пользователя'));
                 }
 
-                $email = $data[C::FORM_EMAIL];
-                if ($email === '') {
+                if (strlen($username) > C::GLOBAL_USERNAME_LENGTH) {
+                    $form->get(C::FORM_USERNAME)->addError(
+                        new FormError(
+                            sprintf('Максимальная длина %s символов', C::GLOBAL_USERNAME_LENGTH)
+                        )
+                    );
+                }
+
+                if (!preg_match(sprintf('/^([0-9A-Za-z]){2,%s}$/', C::GLOBAL_USERNAME_LENGTH), $username)) {
+                    $form->get(C::FORM_USERNAME)->addError(new FormError('Неверно символы в имени пользователя'));
+                }
+            }
+        );
+
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+                $formData = $event->getData();
+                $email = $formData[C::FORM_EMAIL];
+
+                if (empty($email)) {
                     $form->get(C::FORM_EMAIL)->addError(new FormError('Обязательное поле'));
-                } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                }
+
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $form->get(C::FORM_EMAIL)->addError(new FormError('Неверно указан email'));
+                }
+
+                if (strlen($email) > C::GLOBAL_EMAIL_LENGTH) {
+                    $form->get(C::FORM_USERNAME)->addError(
+                        new FormError(
+                            sprintf('Максимальная длина %s символов', C::GLOBAL_EMAIL_LENGTH)
+                        )
+                    );
+                }
+            }
+        );
+
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+                $formData = $event->getData();
+                $password = $formData[C::FORM_EMAIL];
+
+                if (!preg_match(sprintf('/^([0-9A-Za-z]){2,%s}$/', C::GLOBAL_PASSWORD_LENGTH), $password)) {
+                    $form->get(C::FORM_PASSWORD)->addError(new FormError('Неверные символы'));
                 }
             }
         );

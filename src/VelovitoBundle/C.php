@@ -43,6 +43,10 @@ class C
 
     const SP = 'serializedParams';
 
+    const GLOBAL_USERNAME_LENGTH = 32;
+    const GLOBAL_EMAIL_LENGTH = 32;
+    const GLOBAL_PASSWORD_LENGTH = 16;
+
     const FORM_SUBJECT = 'subject';
     const FORM_SUBMIT = 'submit';
     const FORM_CURRENCY = 'currency';
