@@ -32,7 +32,7 @@ class DocumentModel
         return $tmpFileName;
     }
 
-    public function saveOriginalsForUploadedImages(array $fileNames)
+    public function saveOriginalsForUploadedImages(array $fileNames = [])
     {
         $result = [];
 
