@@ -31,31 +31,31 @@ class DefaultModel
     {
         $dir = $this->getImagesDir().DIRECTORY_SEPARATOR.C::TEMPORARY_UPLOAD_IMAGE_THUMB_PATH;
 
-        return $this->returnTailedPath($dir, $fileName);
+        return $this->returnFilePath($dir, $fileName);
     }
 
     public function getWebDir($fileName = null)
     {
         $dir = $this->kernel->getRootDir().'/../web';
 
-        return $this->returnTailedPath($dir, $fileName);
+        return $this->returnFilePath($dir, $fileName);
     }
 
     public function getImagesDir($fileName = null)
     {
         $dir = $this->getWebDir().DIRECTORY_SEPARATOR.'img';
 
-        return $this->returnTailedPath($dir, $fileName);
+        return $this->returnFilePath($dir, $fileName);
     }
 
     public function getImageOriginalsDir($fileName = null)
     {
         $dir = $this->getImagesDir().DIRECTORY_SEPARATOR.'originals';
 
-        return $this->returnTailedPath($dir, $fileName);
+        return $this->returnFilePath($dir, $fileName);
     }
 
-    public function returnTailedPath($dir, $fileName)
+    public function returnFilePath($dir, $fileName)
     {
         $tail = is_null($fileName)
             ? ''
