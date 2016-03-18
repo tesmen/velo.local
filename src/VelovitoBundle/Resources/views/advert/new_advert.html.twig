@@ -27,7 +27,7 @@
                 <img src="" alt="">
 
                 <div class="remove_image">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
         function ajaxUploadFile() {
             var element = createUploadingImageBlock();
 
-            element.find('.glyphicon-remove').on('click', function () {
+            element.find('.glyphicon-remove-circle').on('click', function () {
                 element.remove();
             });
 
