@@ -1,10 +1,7 @@
 <div style="float: right;  display: inline-block;">
     {% if app.user %}
-        {{ app.user.getUsername() }}
-        <br>
-        <a href="{{ url('profile') }}">Профиль</a>
-        <a href="{{ url('logout') }}">Выход</a>
-        <br>
+        {{ app.user.getUsername() }} | <a href="{{ url('logout') }}">Выход</a><br>
+        <a href="{{ url('profile') }}">Профиль</a><br>
         <a href="{{ url('ad_new') }}">Добавить объявление</a>
     {% else %}
         <a href="{{ url('login') }}">Вход</a>
