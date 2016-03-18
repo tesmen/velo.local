@@ -6861,3 +6861,20 @@ a:hover {
   height: 100%;
   border: 1px solid #9f9f9f;
 }
+#add_photo_label {
+  margin: 10px;
+  font-size: 75px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid gray;
+  text-align: center;
+  vertical-align: middle;
+  opacity: 0.25;
+}
+#add_photo_label > span {
+  margin-top: 23%;
+}
+#add_photo_label:hover {
+  opacity: 75;
+  cursor: pointer;
+}
