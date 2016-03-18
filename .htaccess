@@ -3,7 +3,7 @@
     Options +FollowSymlinks
     RewriteBase /
 
-    DirectoryIndex index.php
+    #DirectoryIndex index.php
 
     RewriteRule ^(.*)$ web/$1 [QSA]
 </IfModule>
