@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Advertisement
 {
     public function __construct() {
+        $this->creationDate = new \DateTime();
         $this->photos = new ArrayCollection();
     }
 
@@ -49,7 +50,7 @@ class Advertisement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creation_date", type="datetime", nullable=true)
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $creationDate;
 
