@@ -13,7 +13,7 @@ class RemoveUserCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('test');
+        $this->setName('user:remove');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
