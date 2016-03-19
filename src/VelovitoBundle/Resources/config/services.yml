@@ -26,3 +26,33 @@ services:
     model.document:
         class: VelovitoBundle\Model\DocumentModel
         arguments: ["@doctrine.orm.entity_manager", "@model.default"]
+
+    twig.plural:
+        class: VelovitoBundle\Twig\PluralExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.price:
+        class: VelovitoBundle\Twig\PriceExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.tariff_params:
+         class: VelovitoBundle\Twig\TariffParamsExtension
+         tags:
+             - { name: twig.extension }
+
+    twig.yes_no:
+         class: VelovitoBundle\Twig\YesNoExtension
+         tags:
+             - { name: twig.extension }
+
+    twig.days_ago:
+         class: VelovitoBundle\Twig\DaysAgoExtension
+         tags:
+             - { name: twig.extension }
+
+    twig.date_format_ru:
+         class: VelovitoBundle\Twig\DateFormatRuExtension
+         tags:
+             - { name: twig.extension }
