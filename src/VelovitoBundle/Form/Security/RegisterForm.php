@@ -26,6 +26,7 @@ class RegisterForm extends AbstractType
                 'attr'     => [
                     'placeholder' => 'Имя пользователя',
                     'maxlength'   => C::GLOBAL_USERNAME_LENGTH,
+                    'autocomplete' => 'off'
                 ],
             ]
         );
@@ -39,6 +40,7 @@ class RegisterForm extends AbstractType
                 'attr'     => [
                     'placeholder' => 'Электронная почта',
                     'maxlength'   => C::GLOBAL_EMAIL_LENGTH,
+                    'autocomplete' => 'off'
                 ],
             ]
         );
@@ -52,6 +54,7 @@ class RegisterForm extends AbstractType
                 'attr'     => [
                     'placeholder' => 'Пароль',
                     'maxlength'   => C::GLOBAL_PASSWORD_LENGTH,
+                    'autocomplete' => 'off'
                 ],
             ]
         );
@@ -65,6 +68,7 @@ class RegisterForm extends AbstractType
                 'attr'     => [
                     'placeholder' => 'Подтверждение пароля',
                     'maxlength'   => C::GLOBAL_PASSWORD_LENGTH,
+                    'autocomplete' => 'off'
                 ],
             ]
         );
@@ -118,7 +122,7 @@ class RegisterForm extends AbstractType
                 }
 
                 if (strlen($email) > C::GLOBAL_EMAIL_LENGTH) {
-                    $form->get(C::FORM_USERNAME)->addError(
+                    $form->get(C::FORM_EMAIL)->addError(
                         new FormError(
                             sprintf('Максимальная длина %s символов', C::GLOBAL_EMAIL_LENGTH)
                         )
@@ -132,10 +136,14 @@ class RegisterForm extends AbstractType
             function (FormEvent $event) {
                 $form = $event->getForm();
                 $formData = $event->getData();
-                $password = $formData[C::FORM_EMAIL];
+                $password = $formData[C::FORM_PASSWORD];
 
                 if (!preg_match(sprintf('/^([0-9A-Za-z]){2,%s}$/', C::GLOBAL_PASSWORD_LENGTH), $password)) {
                     $form->get(C::FORM_PASSWORD)->addError(new FormError('Неверные символы'));
+                }
+
+                if ($password !== $formData[C::FORM_CONFIRM_PASSWORD]) {
+                    $form->get(C::FORM_CONFIRM_PASSWORD)->addError(new FormError('Пароли не совпадают'));
                 }
             }
         );
