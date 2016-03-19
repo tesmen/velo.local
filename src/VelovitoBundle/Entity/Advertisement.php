@@ -49,9 +49,9 @@ class Advertisement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_date", type="datetime", nullable=true)
+     * @ORM\Column(name="creation_date", type="datetime", nullable=true)
      */
-    private $createdDate;
+    private $creationDate;
 
     /**
      * @var integer
@@ -127,9 +127,9 @@ class Advertisement
      *
      * @return Advertisement
      */
-    public function setCreatedDate($createdDate)
+    public function setCreationDate($createdDate)
     {
-        $this->createdDate = $createdDate;
+        $this->creationDate = $createdDate;
 
         return $this;
     }
@@ -139,9 +139,9 @@ class Advertisement
      *
      * @return \DateTime
      */
-    public function getCreatedDate()
+    public function getCreationDate()
     {
-        return $this->createdDate;
+        return $this->creationDate;
     }
 
     /**
