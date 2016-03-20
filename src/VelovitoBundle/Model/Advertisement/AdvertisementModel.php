@@ -55,9 +55,9 @@ class AdvertisementModel
     public function getAdStatusMap()
     {
         return $adStatusMap = [
-            'Черновик'           => C::AD_STATUS_DRAFT,
-            'Опубликовано'       => C::AD_STATUS_PUBLISHED,
-            'Снято с публикации' => C::AD_STATUS_DELETED,
+            'Черновик'           => C::ADVERT_STATUS_DRAFT,
+            'Опубликовано'       => C::ADVERT_STATUS_PUBLISHED,
+            'Снято с публикации' => C::ADVERT_STATUS_DELETED,
         ];
     }
 

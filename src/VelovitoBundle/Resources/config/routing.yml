@@ -50,21 +50,21 @@ favorites:
     defaults: { _controller: VelovitoBundle:User:favorites }
 
 ad_new:
-    path:     /new_advert
+    path:     /unpublish-new
     defaults: { _controller: VelovitoBundle:Advert:newAdvert }
 
 ad_edit:
-    path:     /edit_advert/{advertId}
+    path:     /edit-advert/{advertId}
     defaults: { _controller: VelovitoBundle:Advert:editAdvert, advertId: null }
 
 ad_unpublish:
-    path:     /edit_advert
-    defaults: { _controller: VelovitoBundle:Advert:editAdvert }
+    path:     /unpublish-advert/{advertId}
+    defaults: { _controller: VelovitoBundle:Advert:unpublishAdvert }
 
 ad_delete:
-    path:     /edit_advert
+    path:     /unpublish-delete
     defaults: { _controller: VelovitoBundle:Advert:editAdvert }
 
 ad_view:
-    path:     /view_advert/{advertId}
+    path:     /view-advert/{advertId}
     defaults: { _controller: VelovitoBundle:Advert:viewAdvert, advertId: null }

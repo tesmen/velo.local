@@ -40,6 +40,18 @@ class AdvertController extends GeneralController
         );
     }
 
+    public function unpublishAdvertAction(Request $request, $advertId)
+    {
+        $advertEnt = $this->get(C::MODEL_ADVERTISEMENT)->getAdvertById($advertId);
+
+        return $this->render(
+            'VelovitoBundle:advert:view_advert.html.twig',
+            [
+                'advert' => $advertEnt,
+            ]
+        );
+    }
+
     public function editAdvertAction(Request $request)
     {
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);

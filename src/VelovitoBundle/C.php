@@ -8,9 +8,14 @@ class C
     const ROLE_MODERATOR = 2;
     const ROLE_ADMIN = 3;
 
-    const AD_STATUS_DRAFT = 1;
-    const AD_STATUS_PUBLISHED = 2;
-    const AD_STATUS_DELETED = 3;
+    const ADVERT_STATUS_DRAFT = 10;
+    const ADVERT_STATUS_PUBLISHED = 20;
+    const ADVERT_STATUS_UNPUBLISHED = 30;
+    const ADVERT_STATUS_DELETED = 40;
+
+    const ADVERT_UNPUBLISH_REASON_SOLD_HERE = 10;
+    const ADVERT_UNPUBLISH_REASON_SOLD_SOMEWHERE = 20;
+    const ADVERT_UNPUBLISH_REASON_SOLD_OTHER = 30;
 
     const UPLOAD_PATH = 'upload';
     const TEMPORARY_UPLOAD_IMAGE_THUMB_PATH = 'temporary_thumbs';
