@@ -68,11 +68,24 @@ class AdvertisementModel
      */
     public function getAdvertById($id)
     {
-        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findOneOrFail(
-            [
-                'id' => $id,
-            ]
-        );
+        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findOneOrFail($id);
+    }
+
+    public function unpublishAdvert($advertId, $reason)
+    {
+        $repo = $this->em->getRepository(C::REPO_ADVERTISEMENT);
+
+        $mapper = [
+            C::FORM_SOLD_AT_VELOVITO => C::ADVERT_UNPUBLISH_REASON_SOLD_HERE,
+            C::FORM_SOLD_SOMEWHERE   => C::ADVERT_UNPUBLISH_REASON_SOLD_SOMEWHERE,
+            C::FORM_OTHER_REASON     => C::ADVERT_UNPUBLISH_REASON_OTHER,
+        ];
+
+        if (!isset($mapper[$reason])) {
+            throw new \Exception(sprintf("undefined unpublish reason %s", $reason));
+        }
+
+        $repo->setStatus($advertId, C::ADVERT_STATUS_UNPUBLISHED);
     }
 
     public function incrementViewed(Advertisement $ent)

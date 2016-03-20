@@ -6,6 +6,7 @@ use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Entity\PhotoFile;
 use VelovitoBundle\Entity\User;
 use VelovitoBundle\C;
+use VelovitoBundle\Exception\NotFoundException;
 
 class AdvertisementRepository extends GeneralRepository
 {
@@ -68,9 +69,27 @@ class AdvertisementRepository extends GeneralRepository
         return $advertEnt;
     }
 
+    public function setStatus($advertid, $status)
+    {
+        $this->_em->beginTransaction();
+
+        try {
+            $ent = $this->findOneOrFail($advertid);
+            $ent->setStatus($status);
+            $this->_em->flush($ent);
+            $this->_em->commit();
+        } catch (\Exception $e) {
+            $this->_em->rollback();
+            throw $e;
+        }
+
+        return $ent;
+    }
+
     public function update(Advertisement $ent, array $data)
     {
         $this->_em->beginTransaction();
+
         try {
             $currency = $this->_em->getRepository(C::REPO_CURRENCY)->find(1);
 

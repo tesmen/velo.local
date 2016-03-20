@@ -2,24 +2,33 @@
 {% import '@Velovito/templates/macroses.html.twig' as macro %}
 {% block body %}
     {% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}
-    <div>
-        <h1>{{ advert.getTitle() }}</h1>
+
+    <h3>Вы собираетесь снять объявление с публикации  "{{ advert.getTitle() | slice(0,30) }}"</h3>
+
+    <div class="col-md-8">
+        <div>
+            <h3>{{ advert.getTitle() }}</h3>
+        </div>
+
+        <div> {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}</div>
+
+        <div>
+            {% for photo in advert.getPhotos() %}
+                <div class="photo_thumb_basic">
+                    <img src="{{ originalsDir ~ photo.getFileName() }}" alt="Image" height="500" width="500">
+                </div>
+            {% endfor %}
+        </div>
+
+        <article>{{ advert.getDescription() }}</article>
     </div>
 
-    <div>
-        {% set c = 0 %}
-        {% for photo in advert.getPhotos() %}
-            {% if c == 0 %}
-                <img src="{{ originalsDir ~ photo.getFileName() }}" alt="Image" height="500" width="500">
-            {% endif %}
-
-            {% set c = 1 %}
-        {% endfor %}
+    <div class="col-md-4">
+        {{ form_start(form) }}
+        {{ macro.bootstrapFormSubmit(form.sold_at_velovito) }}
+        {{ macro.bootstrapFormSubmit(form.sold_somewhere) }}
+        {{ macro.bootstrapFormSubmit(form.other_reason) }}
+        {{ form_end(form) }}
     </div>
 
-    <div> {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}</div>
-
-    <div>{{ advert.getUser().getUserName() }}</div>
-
-    <article>{{ advert.getDescription() }}</article>
 {% endblock %}

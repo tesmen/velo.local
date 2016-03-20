@@ -71,16 +71,21 @@ class GeneralRepository extends EntityRepository
 
     public function findOneOrFail($fields, $order = null)
     {
-        $ent = $this->findOneBy($fields, $order);
+        if (is_array($fields)) {
+            if (!$ent = $this->findOneBy($fields)) {
+                $search = [];
 
-        if (!$ent) {
-            $search = [];
+                foreach ($fields as $k => $v) {
+                    $search[] = "$k => $v";
+                }
 
-            foreach ($fields as $k => $v) {
-                $search[] = "$k => $v";
+                throw new NotFoundException($this->_entityName.' not found with params '.implode(', ', $search));
             }
-
-            throw new NotFoundException($this->_entityName.' not found with '.implode(', ', $search));
+        } else {
+            // quick findById
+            if (!$ent = $this->find($fields)) {
+                throw new NotFoundException($this->_entityName.' not found with id '.$fields);
+            }
         }
 
         return $ent;

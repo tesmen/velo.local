@@ -6878,3 +6878,13 @@ a:hover {
   opacity: 75;
   cursor: pointer;
 }
+.photo_thumb_basic {
+  display: table-cell;
+  border: 1px solid #9f9f9f;
+  padding: 8px;
+}
+.photo_thumb_basic > img {
+  border: 1px solid #9f9f9f;
+  width: 150px;
+  height: 150px;
+}

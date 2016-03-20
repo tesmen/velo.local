@@ -15,7 +15,7 @@ class C
 
     const ADVERT_UNPUBLISH_REASON_SOLD_HERE = 10;
     const ADVERT_UNPUBLISH_REASON_SOLD_SOMEWHERE = 20;
-    const ADVERT_UNPUBLISH_REASON_SOLD_OTHER = 30;
+    const ADVERT_UNPUBLISH_REASON_OTHER = 30;
 
     const UPLOAD_PATH = 'upload';
     const TEMPORARY_UPLOAD_IMAGE_THUMB_PATH = 'temporary_thumbs';
@@ -72,4 +72,8 @@ class C
     const FORM_PHOTO = 'photo';
     const FORM_PHOTO_FILENAMES = 'photoFileNames';
     const FORM_CONFIRM_PASSWORD = 'confirm_password';
+
+    const FORM_SOLD_AT_VELOVITO = 'sold_at_velovito';
+    const FORM_SOLD_SOMEWHERE = 'sold_somewhere';
+    const FORM_OTHER_REASON = 'other_reason';
 }

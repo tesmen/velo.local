@@ -7,6 +7,12 @@
     </div>
 {% endmacro %}
 
+{% macro bootstrapFormSubmit(form) %}
+    <div style="margin: 10px;">
+    {{ form_widget(form, {'attr':{'class' : 'btn-primary form-control' }}) }}
+    </div>
+{% endmacro %}
+
 {% macro bootstrapFormInputNoLabel(form) %}
     <div class="form-group">
         {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}

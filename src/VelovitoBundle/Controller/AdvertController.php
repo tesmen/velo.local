@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\C;
 use VelovitoBundle\Form\Advert\EditAdvertForm;
 use VelovitoBundle\Form\Advert\NewAdvertForm;
+use VelovitoBundle\Form\Advert\UnpublishAdvertForm;
 use VelovitoBundle\Form\Ajax\UploadPhotoForm;
 
 class AdvertController extends GeneralController
@@ -43,11 +44,19 @@ class AdvertController extends GeneralController
     public function unpublishAdvertAction(Request $request, $advertId)
     {
         $advertEnt = $this->get(C::MODEL_ADVERTISEMENT)->getAdvertById($advertId);
+        $form = $this->createForm(UnpublishAdvertForm::class);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            $this->get(C::MODEL_ADVERTISEMENT)->unpublishAdvert($advertId, $form->getClickedButton()->getName());
+        }
 
         return $this->render(
-            'VelovitoBundle:advert:view_advert.html.twig',
+            'VelovitoBundle:advert:unpublish_advert.html.twig',
             [
                 'advert' => $advertEnt,
+                'form'   => $form->createView(),
             ]
         );
     }
