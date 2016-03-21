@@ -39,6 +39,16 @@
         <div class="info">
             <div class="title">
                 <a href="{{ url('ad_view', {'advertId': advert.getId()}) }}">{{ advert.getTitle() }}</a>
+                &nbsp;
+
+            </div>
+
+            <div class="status">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                {{ advert.getStatus().getName() }}
+            </div>
+
+            <div class="price">
                 {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}
             </div>
 
@@ -50,14 +60,7 @@
                 {% endif %}
             </div>
 
-            <div class="price">
-
-            </div>
-
-            <div class="menu">
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                {{ advert.getStatus().getName() }} &nbsp;
-
+            <div class="menu"> &nbsp;
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 {{ advert.getUser().getUserName() }} &nbsp;
 
@@ -68,6 +71,7 @@
                 {{ advert.getCreationDate() | days_ago }}
 
                 {% if app.user and showMenu %}|
+
                     <a href="{{ url('ad_edit', {'advertId': advert.getId()}) }}">Редактировать</a>|
                     <a href="{{ url('ad_unpublish', {'advertId': advert.getId()}) }}">Снять с публикации</a>|
                     {#<a href="{{ url('ad_delete', {'advertId': advert.getId()}) }}">Удалить</a>#}
