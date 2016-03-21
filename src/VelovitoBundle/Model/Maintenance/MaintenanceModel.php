@@ -81,6 +81,16 @@ class MaintenanceModel
                 'name'  => 'Опубликовано',
                 'alias' => 'published',
             ],
+            [
+                'id'    => C::ADVERT_STATUS_UNPUBLISHED,
+                'name'  => 'Снято с публикации',
+                'alias' => 'unpublished',
+            ],
+            [
+                'id'    => C::ADVERT_STATUS_DELETED,
+                'name'  => 'Удалено',
+                'alias' => 'deleted',
+            ],
         ];
 
         $this->em->getRepository(C::REPO_ADVERT_STATUS)->load($records);

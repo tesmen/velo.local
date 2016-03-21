@@ -18,11 +18,6 @@ class TestCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $a = $this->getContainer()->get(C::MODEL_DOCUMENT)->moveUploadedFileTo(
-            '2b04701773d8085f0c09de3a51c2805b.png',
-            $this->getContainer()->get(C::MODEL_DEFAULT)->getImageOriginalsDir('01.jpg')
-            );
-
-        var_dump($a);
+        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadAdvertStatuses();
     }
 }
