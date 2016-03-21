@@ -49,6 +49,8 @@ class AdvertisementRepository extends GeneralRepository
                 ->setDescription($data[C::FORM_DESCRIPTION])
                 ->setUser($user);
 
+            $this->_em->persist($advertEnt);
+
             foreach ($data[C::FORM_PHOTO_FILENAMES] as $photoFileName) {
                 $photoEnt = new PhotoFile();
                 $photoEnt
@@ -57,8 +59,6 @@ class AdvertisementRepository extends GeneralRepository
 
                 $this->_em->persist($photoEnt);
             }
-
-            $this->_em->persist($advertEnt);
 
             $this->_em->flush();
             $this->_em->commit();

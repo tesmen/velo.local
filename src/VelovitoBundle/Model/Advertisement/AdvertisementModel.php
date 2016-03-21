@@ -20,6 +20,7 @@ class AdvertisementModel
 
     public function createNewAd(array $formData, User $user)
     {
+
         $savedFiles = $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
         $formData[C::FORM_PHOTO_FILENAMES] = $savedFiles;
 

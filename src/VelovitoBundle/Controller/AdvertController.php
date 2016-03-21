@@ -41,7 +41,7 @@ class AdvertController extends GeneralController
         );
     }
 
-    public function unpublishAdvertAction(Request $request, $advertId)
+    public function unPublishAdvertAction(Request $request, $advertId)
     {
         $advertEnt = $this->get(C::MODEL_ADVERTISEMENT)->getAdvertById($advertId);
         $form = $this->createForm(UnpublishAdvertForm::class);
