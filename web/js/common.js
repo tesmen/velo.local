@@ -9,6 +9,16 @@ var _discounts = {
     36: 25
 };
 
+
+function getImageHolder(__name__) {
+    __name__ += '[]';
+    return '<div class="uploading_image" id="root_uploading_image" style="display:none;">' +
+        '<span id="promo_spin" class="promo__spin"></span><input type="hidden" name="'
+        + __name__
+        + '" disabled="disabled"><img src="" alt=""><div class="remove_image">' +
+        '<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div></div>';
+}
+
 var dockerSpinnerSettings = {
     lines: 7,
     length: 0,

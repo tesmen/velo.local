@@ -1,5 +1,0 @@
-function ImageHolder() {
-    function getImage(){
-
-    }
-}
