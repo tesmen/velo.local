@@ -38,7 +38,7 @@ class AdvertisementRepository extends GeneralRepository
 
         try {
             $currency = $this->_em->getRepository(C::REPO_CURRENCY)->find(1); // todo CURENCY
-            $status = $this->_em->getRepository(C::REPO_ADVERT_STATUS)->find($data[C::FORM_STATUS]); // todo CURENCY
+            $status = $this->_em->getRepository(C::REPO_ADVERT_STATUS)->find(C::ADVERT_STATUS_PUBLISHED); // todo CURENCY
             $advertEnt = new Advertisement();
 
             $advertEnt
