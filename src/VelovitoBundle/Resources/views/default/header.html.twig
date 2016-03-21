@@ -2,7 +2,7 @@
     {% if app.user %}
         {{ app.user.getUsername() }} | <a href="{{ url('logout') }}">Выход</a><br>
         <a href="{{ url('my_ads') }}">Профиль</a><br>
-        <a href="{{ url('ad_new') }}">Добавить объявление</a>
+        <a href="{{ url('advert_new') }}">Добавить объявление</a>
     {% else %}
         <a href="{{ url('login') }}">Вход</a>
         <a href="{{ url('registration') }}">Регистрация</a>

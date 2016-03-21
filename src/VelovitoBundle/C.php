@@ -36,7 +36,8 @@ class C
     const ROUTE_MY_ADS = 'my_ads';
     const ROUTE_PROFILE = 'profile';
     const ROUTE_FAVORITED_ADS = 'favorites';
-    const ROUTE_NEW_AD = 'new_ad';
+    const ROUTE_ADVERT_NEW = 'advert_new';
+    const ROUTE_ADVERT_EDIT = 'advert_edit';
 
     const MODEL_MAINTENANCE = 'model.maintenance';
     const MODEL_DEFAULT = 'model.default';

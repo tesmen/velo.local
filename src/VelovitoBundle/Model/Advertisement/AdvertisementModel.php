@@ -97,12 +97,17 @@ class AdvertisementModel
         $this->em->flush($ent);
     }
 
-    public function updateAdvert($advert, array $data)
+    public function updateAdvert($advert, array $formData)
     {
         if (!($advert instanceof Advertisement)) {
             $advert = $this->getAdvertById($advert);
         }
 
-        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->update($advert, $data);
+        $entData[C::FORM_CURRENCY] = $this->em->getRepository(C::REPO_CURRENCY)->find(1);
+        $entData[C::FORM_TITLE] = $formData[C::FORM_TITLE];
+        $entData[C::FORM_PRICE] = $formData[C::FORM_PRICE];
+        $entData[C::FORM_DESCRIPTION] = $formData[C::FORM_DESCRIPTION];
+
+        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->update($advert, $entData);
     }
 }

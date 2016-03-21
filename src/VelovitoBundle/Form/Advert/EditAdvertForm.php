@@ -18,7 +18,7 @@ class EditAdvertForm extends AbstractType
         /**
          * @var $ent Advertisement
          */
-        $ent = $options['data']['obj'];
+        $ent = $options['data']['entity'];
 
 //        $builder->add(
 //            C::FORM_CATEGORY,

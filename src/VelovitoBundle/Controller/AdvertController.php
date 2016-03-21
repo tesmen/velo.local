@@ -73,7 +73,7 @@ class AdvertController extends GeneralController
         $advertEnt = $adModel->getAdvertById($advertId);
 
         $formOptions = [
-            'obj'               => $advertEnt,
+            'entity'            => $advertEnt,
             C::FORM_TITLE       => $advertEnt->getTitle(),
             C::FORM_PRICE       => $advertEnt->getPrice(),
             C::FORM_CATEGORY    => '',
@@ -84,7 +84,17 @@ class AdvertController extends GeneralController
         $form = $this->createForm(EditAdvertForm::class, $formOptions);
 
         if ($request->isMethod('POST')) {
-            return $this->redirectToRoute(C::ROUTE_MY_ADS);
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $formData = $form->getData();
+                $adModel->updateAdvert($advertEnt, $formData);
+
+                return $this->redirectToRoute(
+                    C::ROUTE_ADVERT_EDIT,
+                    ['advertId' => $advertId]
+                );
+            }
         }
 
         return $this->render(
