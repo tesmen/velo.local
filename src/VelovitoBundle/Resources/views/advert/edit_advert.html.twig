@@ -29,6 +29,18 @@
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                 </div>
             </div>
+
+            {% for photo in advertPhotos %}
+            <div class="uploading_image">
+                <span id="promo_spin" class="promo__spin"></span>
+                <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]">
+                <img src="{{ app.request.getSchemeAndHttpHost() }}/img/originals/{{ photo.getFilename() }}" alt="">
+
+                <div class="remove_image">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
         <label id="add_photo_label" for="upload_photo_form_photo">
