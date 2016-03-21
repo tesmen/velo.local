@@ -10,6 +10,9 @@
         {{ macro.bootstrapFormInput(form.title) }}
         {{ macro.bootstrapFormInput(form.price) }}
         {{ macro.bootstrapFormInput(form.description) }}
+
+        {{ form_widget(form.submit) }}
+        {{ form_rest(form) }}
     </div>
 
     <div class="col-md-6">
@@ -32,9 +35,6 @@
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </label>
     </div>
-
-    {{ form_widget(form.save) }}
-    {{ form_rest(form) }}
     {{ form_end(form) }}
 
     <br/>

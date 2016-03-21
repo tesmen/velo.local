@@ -63,7 +63,7 @@ class EditAdvertForm extends AbstractType
         );
 
         $builder->add(
-            C::FORM_SAVE,
+            C::FORM_SUBMIT,
             SubmitType::class,
             [
                 'label' => 'Cохранить',
