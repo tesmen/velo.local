@@ -46,7 +46,7 @@ class UserController extends GeneralController
         );
     }
 
-    public function favoritesAction(Request $request)
+    public function favoriteAdvertsAction(Request $request)
     {
         $this->denyUnlessAuthenticatedFully();
 

@@ -46,8 +46,8 @@ my_ads:
 
 
 favorites:
-    path:     /favorites
-    defaults: { _controller: VelovitoBundle:User:favorites }
+    path:     /favorite-adverts
+    defaults: { _controller: VelovitoBundle:User:favoriteAdverts }
 
 advert_new:
     path:     /new-advert
