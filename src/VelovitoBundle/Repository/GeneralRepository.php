@@ -24,26 +24,24 @@ class GeneralRepository extends EntityRepository
         $this->_em->flush();
     }
 
-    public function updateOld($data)
+    public function update($entity, array $data)
     {
-        $entFields = $this->_em->getClassMetadata($this->_entityName)->getFieldNames();
+        $this->_em->beginTransaction();
 
-        $ent = $this->findOneOrFail(
-            ['id' => $data['id']]
-        );
-
-        unset($data['id']);
-
-        foreach ($data as $field => $value) {
-            if (!in_array($field, $entFields)) {
-                continue;
+        try {
+            foreach ($data as $fieldName => $value) {
+                $setMethod = 'set'.$fieldName;
+                $entity->$setMethod($data[$fieldName]);
             }
 
-            $setMethod = 'set'.$field;
-            $ent->$setMethod($value);
+            $this->_em->flush();
+            $this->_em->commit();
+        } catch (\Exception $e) {
+            $this->_em->rollback();
+            throw $e;
         }
 
-        $this->_em->flush();
+        return $entity;
     }
 
     public function getTableName()

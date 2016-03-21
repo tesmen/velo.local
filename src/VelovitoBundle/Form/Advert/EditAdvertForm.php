@@ -37,7 +37,7 @@ class EditAdvertForm extends AbstractType
             TextType::class,
             [
                 'data'     => $ent->getTitle(),
-                'label'    => C::FORM_TITLE,
+                'label'    => 'Название',
                 'required' => true,
             ]
         );
@@ -47,7 +47,7 @@ class EditAdvertForm extends AbstractType
             TextType::class,
             [
                 'data'     => $ent->getPrice(),
-                'label'    => C::FORM_PRICE,
+                'label'    => "Цена",
                 'required' => true,
             ]
         );
@@ -57,7 +57,7 @@ class EditAdvertForm extends AbstractType
             TextareaType::class,
             [
                 'data'     => $ent->getDescription(),
-                'label'    => C::FORM_DESCRIPTION,
+                'label'    => 'Описание',
                 'required' => true,
             ]
         );

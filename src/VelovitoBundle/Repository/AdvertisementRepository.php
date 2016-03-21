@@ -90,24 +90,4 @@ class AdvertisementRepository extends GeneralRepository
 
         return $ent;
     }
-
-    public function update(Advertisement $ent, array $data)
-    {
-        $this->_em->beginTransaction();
-
-        try {
-            foreach ($data as $fieldName => $value) {
-                $setMethod = 'set'.$fieldName;
-                $ent->$setMethod($data[$fieldName]);
-            }
-
-            $this->_em->flush();
-            $this->_em->commit();
-        } catch (\Exception $e) {
-            $this->_em->rollback();
-            throw $e;
-        }
-
-        return $ent;
-    }
 }

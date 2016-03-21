@@ -88,7 +88,12 @@ class AdvertController extends GeneralController
 
             if ($form->isValid()) {
                 $formData = $form->getData();
-                $adModel->updateAdvert($advertEnt, $formData);
+                try{
+                    $adModel->updateAdvert($advertEnt, $formData);
+                    $this->addFlash(C::FLASH_SUCCESS, 'Изменения сохранены');
+                } catch(\Exception $e){
+                    $this->addFlash(C::FLASH_ERROR, 'Что-то пошло не так...');
+                }
 
                 return $this->redirectToRoute(
                     C::ROUTE_ADVERT_EDIT,

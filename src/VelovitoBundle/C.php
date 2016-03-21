@@ -17,6 +17,11 @@ class C
     const ADVERT_UNPUBLISH_REASON_SOLD_SOMEWHERE = 20;
     const ADVERT_UNPUBLISH_REASON_OTHER = 30;
 
+    const FLASH_SUCCESS = 'success';
+    const FLASH_INFO = 'info';
+    const FLASH_WARNING = 'warning';
+    const FLASH_ERROR = 'error';
+
     const UPLOAD_PATH = 'upload';
     const TEMPORARY_UPLOAD_IMAGE_THUMB_PATH = 'temporary_thumbs';
 
