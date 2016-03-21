@@ -38,12 +38,13 @@ class AdvertisementRepository extends GeneralRepository
 
         try {
             $currency = $this->_em->getRepository(C::REPO_CURRENCY)->find(1); // todo CURENCY
+            $status = $this->_em->getRepository(C::REPO_ADVERT_STATUS)->find($data[C::FORM_STATUS]); // todo CURENCY
             $advertEnt = new Advertisement();
 
             $advertEnt
                 ->setTitle($data[C::FORM_TITLE])
                 ->setPrice($data[C::FORM_PRICE])
-                ->setStatus($data[C::FORM_STATUS])
+                ->setStatus($status)
                 ->setCurrency($currency)
                 ->setDescription($data[C::FORM_DESCRIPTION])
                 ->setUser($user);
@@ -69,13 +70,15 @@ class AdvertisementRepository extends GeneralRepository
         return $advertEnt;
     }
 
-    public function setStatus($advertid, $status)
+    public function setStatus($advertid, $statusId)
     {
         $this->_em->beginTransaction();
 
         try {
+            $statusEnt = $this->_em->getRepository(C::REPO_ADVERT_STATUS)->find($statusId); // todo CURENCY
+
             $ent = $this->findOneOrFail($advertid);
-            $ent->setStatus($status);
+            $ent->setStatus($statusEnt);
             $this->_em->flush($ent);
             $this->_em->commit();
         } catch (\Exception $e) {

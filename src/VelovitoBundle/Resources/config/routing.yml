@@ -50,7 +50,7 @@ favorites:
     defaults: { _controller: VelovitoBundle:User:favorites }
 
 ad_new:
-    path:     /unpublish-new
+    path:     /new-advert
     defaults: { _controller: VelovitoBundle:Advert:newAdvert }
 
 ad_edit:

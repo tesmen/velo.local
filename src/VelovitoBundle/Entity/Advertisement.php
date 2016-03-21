@@ -57,7 +57,7 @@ class Advertisement
     /**
      * @var integer
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\AdvertStatus")
-     * @ORM\JoinColumn(name="status", referencedColumnName="id")
+     * @ORM\JoinColumn(name="status", referencedColumnName="id", nullable=false)
      */
     private $status;
 
@@ -71,7 +71,7 @@ class Advertisement
     /**
      * @var string
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Currency")
-     * @ORM\JoinColumn(name="currency", referencedColumnName="id")
+     * @ORM\JoinColumn(name="currency", referencedColumnName="id", nullable=false)
      */
     private $currency;
 
@@ -196,7 +196,7 @@ class Advertisement
     /**
      * Set status
      *
-     * @param integer $status
+     * @param integer AdvertStatus
      *
      * @return Advertisement
      */
@@ -210,7 +210,7 @@ class Advertisement
     /**
      * Get status
      *
-     * @return integer
+     * @return AdvertStatus
      */
     public function getStatus()
     {
