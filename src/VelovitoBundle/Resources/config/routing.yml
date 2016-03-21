@@ -68,3 +68,11 @@ advert_delete:
 advert_view:
     path:     /view-advert/{advertId}
     defaults: { _controller: VelovitoBundle:Advert:viewAdvert, advertId: null }
+
+original_photo:
+    path:     /img/originals/{fileName}
+    defaults: { _controller: VelovitoBundle:Advert:nullController, fileName: null }
+
+temporary_thumb:
+    path:     /img/temporary_thumbs/{fileName}
+    defaults: { _controller: VelovitoBundle:Advert:nullController, fileName: null }
