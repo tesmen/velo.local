@@ -8,9 +8,9 @@
     <div class="col-md-4" style="border-right: 1px solid gray; height: 100%">
         {{ macro.bootstrapFormInput(form.title) }}
         {{ macro.bootstrapFormInput(form.price) }}
-        {{ macro.bootstrapFormInput(form.category) }}
-        {{ macro.bootstrapFormInput(form.status) }}
         {{ macro.bootstrapFormInput(form.description) }}
+        {#{{ macro.bootstrapFormInput(form.category) }}#}
+        {#{{ macro.bootstrapFormInput(form.status) }}#}
 
         {{ form_widget(form.submit) }}
         {{ form_rest(form) }}

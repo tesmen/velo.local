@@ -5,21 +5,32 @@
     <script src="{{ asset('js/jquery.form.min.js') }}"></script>
     <script src="{{ asset('js/spinner.js') }}"></script>
 
-    {{ form_start(form) }}
-    {{ macro.bootstrapFormInput(form.title) }}
-    {{ macro.bootstrapFormInput(form.price) }}
-    {{ macro.bootstrapFormInput(form.description) }}
+    <div class="col-md-4" style="border-right: 1px solid gray; height: 100%">
+        {{ form_start(form) }}
+        {{ macro.bootstrapFormInput(form.title) }}
+        {{ macro.bootstrapFormInput(form.price) }}
+        {{ macro.bootstrapFormInput(form.description) }}
+    </div>
 
-    <div id="images_pool">
-        <div class="uploading_image" id='root_uploading_image' style="display: none;">
-            <span id="promo_spin" class="promo__spin"></span>
-            <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]" disabled="disabled">
-            <img src="" alt="">
+    <div class="col-md-6">
+        <label for="new_advert_form_title" class="required">Фотографии</label>
 
-            <div class="remove_image">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <div id="images_pool">
+            <div class="uploading_image" id='root_uploading_image' style="display: none;">
+                <span id="promo_spin" class="promo__spin"></span>
+                <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]"
+                       disabled="disabled">
+                <img src="" alt="">
+
+                <div class="remove_image">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                </div>
             </div>
         </div>
+
+        <label id="add_photo_label" for="upload_photo_form_photo">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </label>
     </div>
 
     {{ form_widget(form.save) }}
@@ -29,7 +40,7 @@
     <br/>
 
     {{ form_start(uploadForm, {'attr':{ 'id': 'photo' }}) }}
-    {{ form_widget(uploadForm.photo) }}
+    {{ form_widget(uploadForm.photo, {'attr': {'style':'display:none'}}) }}
     {{ form_end(uploadForm) }}
 
     <br/>
