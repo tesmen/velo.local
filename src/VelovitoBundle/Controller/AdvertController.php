@@ -48,8 +48,10 @@ class AdvertController extends GeneralController
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
-
             $this->get(C::MODEL_ADVERTISEMENT)->unpublishAdvert($advertId, $form->getClickedButton()->getName());
+            $this->addFlash('success', 'Объявление снято с публикации');
+
+            return $this->redirectToRoute(C::ROUTE_MY_ADS);
         }
 
         return $this->render(

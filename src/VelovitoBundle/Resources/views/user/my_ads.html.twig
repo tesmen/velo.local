@@ -6,6 +6,8 @@
             Мои объявления
         </div>
 
+        {% include '@Velovito/templates/alert.html.twig' %}
+
         {% if(userAds is empty) %}
             У вас пока нет объявлений
         {% else %}
