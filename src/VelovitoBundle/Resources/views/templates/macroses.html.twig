@@ -53,8 +53,8 @@
             </div>
 
             <div class="description">
-                {% if  (advert.getDescription() | length) > 150 %}
-                    {{ advert.getDescription() | slice(0, 150) ~ '...' }}
+                {% if  (advert.getDescription() | length) > 100 %}
+                    {{ advert.getDescription() | slice(0, 100) ~ '...' }}
                 {% else %}
                     {{ advert.getDescription() }}
                 {% endif %}
