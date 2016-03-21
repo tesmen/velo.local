@@ -40,7 +40,7 @@ class AdvertisementRepository extends GeneralRepository
             $currency = $this->_em->getRepository(C::REPO_CURRENCY)->find(1); // todo CURENCY
             $status = $this->_em->getRepository(C::REPO_ADVERT_STATUS)->find(
                 C::ADVERT_STATUS_PUBLISHED
-            ); // todo CURENCY
+            );
             $advertEnt = new Advertisement();
 
             $advertEnt
@@ -54,12 +54,12 @@ class AdvertisementRepository extends GeneralRepository
             $this->_em->persist($advertEnt);
 
             foreach ($data[C::FORM_PHOTO_FILENAMES] as $photoFileName) {
-                $photoEnt = new PhotoFile();
-                $photoEnt
-                    ->setFileName($photoFileName)
-                    ->setAdvert($advertEnt);
-
-                $this->_em->persist($photoEnt);
+                $this->_em->getRepository(C::REPO_PHOTO_FILE)->create(
+                    [
+                        'advert'   => $advertEnt,
+                        'fileName' => $photoFileName,
+                    ]
+                );
             }
 
             $this->_em->flush();

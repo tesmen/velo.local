@@ -7,13 +7,13 @@
     </div>
 
     <div>
-        {% set c = 0 %}
-        {% for photo in advert.getPhotos() %}
-            {% if c == 0 %}
-                <img src="{{ originalsDir ~ photo.getFileName() }}" alt="Image" height="500" width="500">
-            {% endif %}
+        <div style="margin-bottom: 20px;">
+            {% set first = advert.getPhotos() | first %}
+            <img src="{{ originalsDir ~ first.getFileName() }}" alt="Image" height="500" width="500">
+        </div>
 
-            {% set c = 1 %}
+        {% for photo in advert.getPhotos() %}
+            <img src="{{ originalsDir ~ photo.getFileName() }}" alt="Image" height="150" width="150">
         {% endfor %}
     </div>
 

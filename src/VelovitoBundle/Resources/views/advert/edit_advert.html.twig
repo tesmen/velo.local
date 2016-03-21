@@ -5,14 +5,13 @@
     <script src="{{ asset('js/jquery.form.min.js') }}"></script>
     <script src="{{ asset('js/spinner.js') }}"></script>
 
+    {{ form_start(form) }}
     <div class="col-md-4" style="border-right: 1px solid gray; height: 100%">
-        {{ form_start(form) }}
         {{ macro.bootstrapFormInput(form.title) }}
         {{ macro.bootstrapFormInput(form.price) }}
         {{ macro.bootstrapFormInput(form.description) }}
 
         {{ form_widget(form.submit) }}
-        {{ form_rest(form) }}
     </div>
 
     <div class="col-md-6">
@@ -33,7 +32,8 @@
             {% for photo in advertPhotos %}
             <div class="uploading_image">
                 <span id="promo_spin" class="promo__spin"></span>
-                <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]">
+                <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]"
+                        value="{{ photo.getFilename() }}">
                 <img src="{{ app.request.getSchemeAndHttpHost() }}/img/originals/{{ photo.getFilename() }}" alt="">
 
                 <div class="remove_image">

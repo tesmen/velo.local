@@ -20,11 +20,37 @@ class AdvertisementModel
 
     public function createNewAd(array $formData, User $user)
     {
-
         $savedFiles = $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
         $formData[C::FORM_PHOTO_FILENAMES] = $savedFiles;
 
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->create($formData, $user);
+    }
+
+    public function updateAdvert($advert, array $formData)
+    {
+        if (!($advert instanceof Advertisement)) {
+            $advert = $this->getAdvertById($advert);
+        }
+
+        $entData[C::FORM_CURRENCY] = $this->em->getRepository(C::REPO_CURRENCY)->find(1);
+        $entData[C::FORM_TITLE] = $formData[C::FORM_TITLE];
+        $entData[C::FORM_PRICE] = $formData[C::FORM_PRICE];
+        $entData[C::FORM_DESCRIPTION] = $formData[C::FORM_DESCRIPTION];
+
+        $savedFiles = $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
+//        $entData[C::FORM_PHOTO_FILENAMES] = $savedFiles;
+
+        foreach ($savedFiles as $fileName) {
+            $this->em->getRepository(C::REPO_PHOTO_FILE)->create(
+                [
+                    'advert'   => $advert,
+                    'fileName' => $fileName,
+                ]
+            );
+        }
+
+
+        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->update($advert, $entData);
     }
 
     public function getAdsByUserId($userId)
@@ -95,19 +121,5 @@ class AdvertisementModel
         $views++;
         $ent->setViewsCount($views);
         $this->em->flush($ent);
-    }
-
-    public function updateAdvert($advert, array $formData)
-    {
-        if (!($advert instanceof Advertisement)) {
-            $advert = $this->getAdvertById($advert);
-        }
-
-        $entData[C::FORM_CURRENCY] = $this->em->getRepository(C::REPO_CURRENCY)->find(1);
-        $entData[C::FORM_TITLE] = $formData[C::FORM_TITLE];
-        $entData[C::FORM_PRICE] = $formData[C::FORM_PRICE];
-        $entData[C::FORM_DESCRIPTION] = $formData[C::FORM_DESCRIPTION];
-
-        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->update($advert, $entData);
     }
 }
