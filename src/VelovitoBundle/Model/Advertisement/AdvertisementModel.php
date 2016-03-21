@@ -47,7 +47,7 @@ class AdvertisementModel
     public function getFewLastAds($limit = 15)
     {
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findBy(
-            [],
+            ['status' => C::ADVERT_STATUS_PUBLISHED],
             ['creationDate' => 'DESC']
         );
     }
