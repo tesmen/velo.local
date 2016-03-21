@@ -6790,6 +6790,12 @@ a:hover {
   font-size: 18px;
   font-weight: 500;
 }
+.advert > .info > .status {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 6px;
+}
 .advert > .info > .price {
   font-size: 18px;
   font-weight: 500;
