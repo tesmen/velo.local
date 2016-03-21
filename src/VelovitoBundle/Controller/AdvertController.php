@@ -88,10 +88,10 @@ class AdvertController extends GeneralController
 
             if ($form->isValid()) {
                 $formData = $form->getData();
-                try{
+                try {
                     $adModel->updateAdvert($advertEnt, $formData);
                     $this->addFlash(C::FLASH_SUCCESS, 'Изменения сохранены');
-                } catch(\Exception $e){
+                } catch (\Exception $e) {
                     $this->addFlash(C::FLASH_ERROR, 'Что-то пошло не так...');
                 }
 
@@ -105,8 +105,9 @@ class AdvertController extends GeneralController
         return $this->render(
             'VelovitoBundle:advert:edit_advert.html.twig',
             [
-                'form'       => $form->createView(),
-                'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
+                'form'         => $form->createView(),
+                'advertPhotos' => $advertEnt->getPhotos(),
+                'uploadForm'   => $this->createForm(UploadPhotoForm::class)->createView(),
             ]
         );
     }
