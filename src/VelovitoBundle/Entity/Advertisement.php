@@ -56,8 +56,8 @@ class Advertisement
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\AdvertStatus")
+     * @ORM\JoinColumn(name="status", referencedColumnName="id")
      */
     private $status;
 

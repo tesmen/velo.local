@@ -72,4 +72,17 @@ class MaintenanceModel
             $this->em->getRepository(C::REPO_CURRENCY)->create($item);
         }
     }
+
+    function loadAdvertStatuses()
+    {
+        $records = [
+            [
+                'id'    => C::ADVERT_STATUS_PUBLISHED,
+                'name'  => 'Опубликовано',
+                'alias' => 'published',
+            ],
+        ];
+
+        $this->em->getRepository(C::REPO_ADVERT_STATUS)->load($records);
+    }
 }

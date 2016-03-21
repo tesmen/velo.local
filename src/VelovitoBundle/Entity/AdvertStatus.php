@@ -3,12 +3,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * City
+ * AdvertStatus
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\CityRepository")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\AdvertStatusRepository")
  */
-class City
+class AdvertStatus
 {
     /**
      * @var integer
@@ -26,11 +26,18 @@ class City
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="alias", type="string", length=32)
+     */
+    private $alias;
+
+    /**
      * Set id
      *
      * @param integer $id
      *
-     * @return City
+     * @return AdvertStatus
      */
     public function setId($id)
     {
@@ -54,7 +61,7 @@ class City
      *
      * @param string $name
      *
-     * @return City
+     * @return AdvertStatus
      */
     public function setName($name)
     {
@@ -71,5 +78,29 @@ class City
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set alias
+     *
+     * @param string $alias
+     *
+     * @return AdvertStatus
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
+
+    /**
+     * Get alias
+     *
+     * @return string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
     }
 }
