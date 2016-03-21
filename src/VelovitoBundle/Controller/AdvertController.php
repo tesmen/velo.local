@@ -63,29 +63,32 @@ class AdvertController extends GeneralController
         );
     }
 
-    public function editAdvertAction(Request $request)
+    /*
+     * todo check user rights to edit
+     */
+    public function editAdvertAction(Request $request, $advertId)
     {
-        $adModel = $this->get(C::MODEL_ADVERTISEMENT);
-
         $this->denyUnlessAuthenticatedFully();
+        $adModel = $this->get(C::MODEL_ADVERTISEMENT);
+        $advertEnt = $adModel->getAdvertById($advertId);
+
         $formOptions = [
-            'ad_statuses' => $adModel->getAdStatusMap(),
-            'categories'  => $this->get(C::MODEL_DEFAULT)->getMenu(),
+            'obj'               => $advertEnt,
+            C::FORM_TITLE       => $advertEnt->getTitle(),
+            C::FORM_PRICE       => $advertEnt->getPrice(),
+            C::FORM_CATEGORY    => '',
+            C::FORM_STATUS      => $advertEnt->getStatus(),
+            C::FORM_DESCRIPTION => $advertEnt->getDescription(),
         ];
 
-        $form = $this->createForm(NewAdvertForm::class, $formOptions);
+        $form = $this->createForm(EditAdvertForm::class, $formOptions);
 
         if ($request->isMethod('POST')) {
-            $formData = $form->handleRequest($request)->getData();
-            $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
-            $adModel->createNewAd($formData, $this->getUser());
-            $this->addFlash('success', 'Объявление добавлено');
-
             return $this->redirectToRoute(C::ROUTE_MY_ADS);
         }
 
         return $this->render(
-            'VelovitoBundle:advert:new_advert.html.twig',
+            'VelovitoBundle:advert:edit_advert.html.twig',
             [
                 'form'       => $form->createView(),
                 'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),

@@ -63,7 +63,7 @@ ad_unpublish:
 
 ad_delete:
     path:     /unpublish-delete
-    defaults: { _controller: VelovitoBundle:Advert:editAdvert }
+    defaults: { _controller: VelovitoBundle:Advert:asdAdvert }
 
 ad_view:
     path:     /view-advert/{advertId}

@@ -65,6 +65,7 @@ class C
     const FORM_PRICE = 'price';
     const FORM_DESCRIPTION = 'description';
     const FORM_STATUS = 'status';
+    const FORM_STATUS_LIST = 'status_list';
     const FORM_ATTACH = 'attach';
     const FORM_USERNAME = 'username';
     const FORM_EMAIL = 'email';

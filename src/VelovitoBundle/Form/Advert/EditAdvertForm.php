@@ -20,27 +20,17 @@ class EditAdvertForm extends AbstractType
          */
         $ent = $options['data']['obj'];
 
-        $builder->add(
-            C::FORM_CATEGORY,
-            ChoiceType::class,
-            [
-                'data'     => null,
-                'label'    => 'Категория',
-                'choices'  => $options['data']['categories'],
-                'required' => true,
-            ]
-        );
-
-        $builder->add(
-            C::FORM_STATUS,
-            ChoiceType::class,
-            [
-                'data'     => $ent->getStatus(),
-                'label'    => 'Статус',
-                'choices'  => $options['data']['ad_statuses'],
-                'required' => true,
-            ]
-        );
+//        $builder->add(
+//            C::FORM_CATEGORY,
+//            ChoiceType::class,
+//            [
+//                'data'     => $options[],
+//                'label'    => 'Категория',
+//                'choices'  => $options['data']['categories'],
+//                'required' => true,
+//            ]
+//        );
+//
 
         $builder->add(
             C::FORM_TITLE,
@@ -76,21 +66,13 @@ class EditAdvertForm extends AbstractType
             C::FORM_SAVE,
             SubmitType::class,
             [
-                'label' => 'Cохранить черновик',
-            ]
-        );
-
-        $builder->add(
-            C::FORM_PUBLISH,
-            SubmitType::class,
-            [
-                'label' => 'Опубликовать',
+                'label' => 'Cохранить',
             ]
         );
     }
 
     public function getName()
     {
-        return 'new_ad';
+        return 'form';
     }
 }
