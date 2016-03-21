@@ -14,25 +14,25 @@ class NewAdvertForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(
-            C::FORM_CATEGORY,
-            ChoiceType::class,
-            [
-                'label'    => 'Категория',
-                'choices'  => $options['data']['categories'],
-                'required' => true,
-            ]
-        );
-
-        $builder->add(
-            C::FORM_STATUS,
-            ChoiceType::class,
-            [
-                'label'    => 'Статус',
-                'choices'  => $options['data']['ad_statuses'],
-                'required' => true,
-            ]
-        );
+//        $builder->add(
+//            C::FORM_CATEGORY,
+//            ChoiceType::class,
+//            [
+//                'label'    => 'Категория',
+//                'choices'  => $options['data']['categories'],
+//                'required' => true,
+//            ]
+//        );
+//
+//        $builder->add(
+//            C::FORM_STATUS,
+//            ChoiceType::class,
+//            [
+//                'label'    => 'Статус',
+//                'choices'  => $options['data']['ad_statuses'],
+//                'required' => true,
+//            ]
+//        );
 
         $builder->add(
             C::FORM_TITLE,
