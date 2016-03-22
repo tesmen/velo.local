@@ -41,7 +41,7 @@ profile:
 
 
 my_ads:
-    path:     /my_adverts
+    path:     /my-adverts
     defaults: { _controller: VelovitoBundle:User:myAds }
 
 
