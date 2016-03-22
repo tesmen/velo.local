@@ -28,7 +28,7 @@ class Advertisement
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=64)
+     * @ORM\Column(name="title", type="string", length=128)
      */
     private $title;
 
