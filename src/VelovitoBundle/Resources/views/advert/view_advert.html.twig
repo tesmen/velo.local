@@ -9,16 +9,19 @@
     <div>
         <div style="margin-bottom: 20px;">
             {% set first = advert.getPhotos() | first %}
-            <img src="{{ first.getFileName() | resize(500,500) }}" alt="Image">
+            <img src="{{ first.getFileName() | resize(500,500) }}" class="gray-border" title="{{ advert.getTitle() }}">
         </div>
 
         {% for photo in advert.getPhotos() %}
-            <img src="{{ photo.getFileName() | resize(150,150) }}" alt="Image">
+            <img src="{{ photo.getFileName() | resize(150,150) }}" class="gray-border" title="{{ advert.getTitle() }}">
         {% endfor %}
     </div>
 
-    <div> {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}</div>
+    <div>
+        <h3> {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}</h3>
+    </div>
 
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
     <div>{{ advert.getUser().getUserName() }}</div>
 
     <article>{{ advert.getDescription() }}</article>
