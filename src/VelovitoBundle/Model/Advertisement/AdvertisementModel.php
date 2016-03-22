@@ -57,9 +57,8 @@ class AdvertisementModel
     public function getAdsByUserId($userId)
     {
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findBy(
-            [
-                'user' => $userId,
-            ]
+            ['user' => $userId,],
+            ['creationDate' => 'DESC']
         );
     }
 
