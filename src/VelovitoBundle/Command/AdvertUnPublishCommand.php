@@ -15,17 +15,19 @@ class AdvertUnPublishCommand extends ContainerAwareCommand
     {
         $this
             ->setName('advert:unpublish')
-            ->addArgument(
+            ->addOption(
                 'id',
-                InputArgument::OPTIONAL,
-                'advert id?'
+                null,
+                InputOption::VALUE_REQUIRED,
+                'advert id?',
+                null
             );
 
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $advertId = $input->getArgument('id');
+        $advertId = $input->getOption('id');
 
         if (!$advertId) {
             throw new \Exception('advert id is not entered');
