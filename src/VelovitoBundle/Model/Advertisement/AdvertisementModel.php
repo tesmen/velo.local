@@ -28,6 +28,7 @@ class AdvertisementModel
 
     public function updateAdvert($advert, array $formData)
     {
+        $photoRepo = $this->em->getRepository(C::REPO_PHOTO_FILE);
         if (!($advert instanceof Advertisement)) {
             $advert = $this->getAdvertById($advert);
         }
@@ -38,10 +39,10 @@ class AdvertisementModel
         $entData[C::FORM_DESCRIPTION] = $formData[C::FORM_DESCRIPTION];
 
         $savedFiles = $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
-//        $entData[C::FORM_PHOTO_FILENAMES] = $savedFiles;
+        $photoRepo->removeAllPhotosByAdvertId($advert->getId());
 
         foreach ($savedFiles as $fileName) {
-            $this->em->getRepository(C::REPO_PHOTO_FILE)->create(
+            $photoRepo->create(
                 [
                     'advert'   => $advert,
                     'fileName' => $fileName,

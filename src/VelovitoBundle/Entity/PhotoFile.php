@@ -23,7 +23,7 @@ class PhotoFile
     /**
      * @var string
      *
-     * @ORM\Column(name="filename", type="string", length=64, nullable=false)
+     * @ORM\Column(name="filename", type="string", length=64, nullable=false, unique=true)
      */
     private $fileName;
 

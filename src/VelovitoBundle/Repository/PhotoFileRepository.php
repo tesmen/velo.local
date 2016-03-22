@@ -46,4 +46,13 @@ class PhotoFileRepository extends GeneralRepository
 
         return $ent;
     }
+
+    public function removeAllPhotosByAdvertId($advertId)
+    {
+        foreach ($this->findBy(['advert' => $advertId]) as $ent) {
+            $this->_em->remove($ent);
+        }
+
+        $this->_em->flush();
+    }
 }
