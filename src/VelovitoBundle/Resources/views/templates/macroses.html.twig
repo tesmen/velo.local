@@ -29,7 +29,7 @@
             {% set c = 0 %}
             {% for photo in advert.getPhotos() %}
                 {% if c == 0 %}
-                    <img src="{{ photo.getFileName() | resize(100,100) }}" alt="Image">
+                    <img src="{{ photo.getFileName() | resize(128,128) }}" alt="Image">
                 {% endif %}
 
                 {% set c = 1 %}
