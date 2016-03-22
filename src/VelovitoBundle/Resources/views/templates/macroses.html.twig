@@ -9,7 +9,7 @@
 
 {% macro bootstrapFormSubmit(form) %}
     <div style="margin: 10px;">
-    {{ form_widget(form, {'attr':{'class' : 'btn-primary form-control' }}) }}
+        {{ form_widget(form, {'attr':{'class' : 'btn-primary form-control' }}) }}
     </div>
 {% endmacro %}
 
@@ -29,7 +29,9 @@
             {% set c = 0 %}
             {% for photo in advert.getPhotos() %}
                 {% if c == 0 %}
-                    <img src="{{ photo.getFileName() | resize(128,128) }}" alt="Image">
+                    <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                        <img src="{{ photo.getFileName() | resize(128,128) }}" alt="Image">
+                    </a>
                 {% endif %}
 
                 {% set c = 1 %}
