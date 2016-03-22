@@ -27,6 +27,10 @@ services:
         class: VelovitoBundle\Model\DocumentModel
         arguments: ["@doctrine.orm.entity_manager", "@model.default"]
 
+    image_service:
+        class: VelovitoBundle\Service\GregwarImageService
+        arguments: ["@model.default"]
+
     twig.plural:
         class: VelovitoBundle\Twig\PluralExtension
         tags:
@@ -44,6 +48,7 @@ services:
 
     twig.image_service:
          class: VelovitoBundle\Twig\GregwarImageExtension
+         arguments: ["@image_service", "@router"]
          tags:
              - { name: twig.extension }
 

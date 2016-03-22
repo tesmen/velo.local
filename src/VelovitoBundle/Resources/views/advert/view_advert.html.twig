@@ -9,11 +9,11 @@
     <div>
         <div style="margin-bottom: 20px;">
             {% set first = advert.getPhotos() | first %}
-            <img src="{{ originalsDir ~ first.getFileName() }}" alt="Image" height="500" width="500">
+            <img src="{{ first.getFileName() | resize(500,500) }}" alt="Image">
         </div>
 
         {% for photo in advert.getPhotos() %}
-            <img src="{{ originalsDir ~ photo.getFileName() }}" alt="Image" height="150" width="150">
+            <img src="{{ photo.getFileName() | resize(150,150) }}" alt="Image">
         {% endfor %}
     </div>
 
