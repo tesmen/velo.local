@@ -34,7 +34,7 @@
                 <span id="promo_spin" class="promo__spin"></span>
                 <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]"
                         value="{{ photo.getFilename() }}">
-                <img src="{{ app.request.getSchemeAndHttpHost() }}/img/originals/{{ photo.getFilename() }}" alt="">
+                <img src="{{ photo.getFilename() | resize(100,100) }}" alt="">
 
                 <div class="remove_image">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
