@@ -42,8 +42,8 @@ services:
          tags:
              - { name: twig.extension }
 
-    twig.yes_no:
-         class: VelovitoBundle\Twig\YesNoExtension
+    twig.image_service:
+         class: VelovitoBundle\Twig\GregwarImageExtension
          tags:
              - { name: twig.extension }
 

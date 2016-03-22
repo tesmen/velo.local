@@ -13,7 +13,7 @@ class PhotoDuplicatesCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('photo:remove-dup');
+        $this->setName('photo:dupless');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
