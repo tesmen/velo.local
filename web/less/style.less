@@ -182,6 +182,32 @@ a {
   }
 }
 
-.gray-border{
+.gray-border {
   border: 1px solid @velo-gray;
+}
+
+.sidebar-navigation {
+  & ul.category {
+    display: block;
+    border-top: blue 1px solid;
+    border-bottom: blue 1px solid;
+    position: relative;
+    &:hover {
+      border-right: red 1px solid;
+      & li ul.itemlist {
+        display: block;
+        position: absolute;
+      }
+    }
+    & li ul.itemlist {
+      width: 200px;
+      right: -200px;
+      top: 0;
+      z-index: 999;
+      display: none;
+      background: #eeeeee;
+      border: 1px solid @velo-gray;
+    }
+
+  }
 }

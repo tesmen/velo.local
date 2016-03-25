@@ -21,7 +21,7 @@ class CatalogItem
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="\VelovitoBundle\Entity\CatalogCategory")
+     * @ORM\ManyToOne(targetEntity="\VelovitoBundle\Entity\CatalogCategory", inversedBy="catalogItems")
      * @ORM\JoinColumn(referencedColumnName="id")
      */
     private $category;

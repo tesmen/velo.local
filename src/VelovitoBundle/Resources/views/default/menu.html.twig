@@ -1,17 +1,19 @@
-<div>
+<div class="sidebar-navigation">
     {% for category in menu %}
-    <ul class="navmenu">
-        <li>
-            <a href="{{ url('homepage') }}">{{ category.getName() }}</a>
+        <ul class="category">
+            <li>
+                <a href="{{ url('homepage') }}">{{ category.getName() }}</a>
 
-            {% for item in  category.getCatalogItems() %}
-            <ul>
-                <li>
-                    <a href="{{ url('homepage') }}">{{ item.name }}</a>
-                </li>
-            </ul>
-            {% endfor %}
-        </li>
-    </ul>
+                {% if category.getCatalogItems() is not empty %}
+                    <ul class="itemlist">
+                        {% for item in  category.getCatalogItems() %}
+                            <li>
+                                <a href="{{ url('homepage') }}">{{ item.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        </ul>
     {% endfor %}
 </div>
