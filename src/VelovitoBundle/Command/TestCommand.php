@@ -18,6 +18,6 @@ class TestCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadAdvertStatuses();
+        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCatalogCategories();
     }
 }

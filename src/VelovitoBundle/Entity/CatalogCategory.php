@@ -1,7 +1,7 @@
 <?php namespace VelovitoBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\CatalogCategory\CatalogCategoryInterface;
 
 /**
  * CatalogCategory
@@ -11,6 +11,11 @@ use Symfony\Component\Security\Core\CatalogCategory\CatalogCategoryInterface;
  */
 class CatalogCategory
 {
+    public function __construct()
+    {
+        $this->catalogItems = new ArrayCollection();
+    }
+
     /**
      * @var integer
      *
@@ -22,16 +27,21 @@ class CatalogCategory
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=64)
+     * @ORM\Column(name="name", type="string", nullable=false, length=64)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="alias", type="string", length=64)
+     * @ORM\Column(name="alias", type="string", nullable=false, length=64, unique=true)
      */
     private $alias;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CatalogItem", mappedBy="category")
+     */
+    private $catalogItems;
 
     /**
      * Set id
@@ -103,5 +113,39 @@ class CatalogCategory
     public function getAlias()
     {
         return $this->alias;
+    }
+
+    /**
+     * Add catalogItem
+     *
+     * @param \VelovitoBundle\Entity\CatalogItem $catalogItem
+     *
+     * @return CatalogCategory
+     */
+    public function addCatalogItem(\VelovitoBundle\Entity\CatalogItem $catalogItem)
+    {
+        $this->catalogItems[] = $catalogItem;
+
+        return $this;
+    }
+
+    /**
+     * Remove catalogItem
+     *
+     * @param \VelovitoBundle\Entity\CatalogItem $catalogItem
+     */
+    public function removeCatalogItem(\VelovitoBundle\Entity\CatalogItem $catalogItem)
+    {
+        $this->catalogItems->removeElement($catalogItem);
+    }
+
+    /**
+     * Get catalogItems
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCatalogItems()
+    {
+        return $this->catalogItems;
     }
 }

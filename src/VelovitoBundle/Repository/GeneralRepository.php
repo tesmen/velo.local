@@ -8,22 +8,6 @@ use VelovitoBundle\Exception\NotFoundException;
 
 class GeneralRepository extends EntityRepository
 {
-    public function updateEntity($entity, array $data)
-    {
-        $entFields = $this->_em->getClassMetadata($this->_entityName)->getFieldNames();
-
-        foreach ($data as $field => $value) {
-            if (!in_array($field, $entFields)) {
-                continue;
-            }
-
-            $setMethod = 'set'.$field;
-            $entity->$setMethod($value);
-        }
-
-        $this->_em->flush();
-    }
-
     public function update($entity, array $data)
     {
         $this->_em->beginTransaction();

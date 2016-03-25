@@ -15,7 +15,6 @@ class CatalogItem
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -23,24 +22,37 @@ class CatalogItem
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="\VelovitoBundle\Entity\CatalogCategory")
-     * @ORM\JoinColumn(referencedColumnName="id", unique=true)
-     */
-    private $item;
-
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="\VelovitoBundle\Entity\CatalogCategory")
      * @ORM\JoinColumn(referencedColumnName="id")
      */
-    private $parent;
+    private $category;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true, length=64)
+     * @ORM\Column(type="string", nullable=false, length=64)
      */
-    private $override;
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=false, length=64, unique=true)
+     */
+    private $alias;
+
+    /**
+     * Set id
+     *
+     * @param integer $id
+     *
+     * @return CatalogItem
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id
@@ -53,74 +65,74 @@ class CatalogItem
     }
 
     /**
-     * Set override
+     * Set name
      *
-     * @param string $override
+     * @param string $name
      *
      * @return CatalogItem
      */
-    public function setOverride($override)
+    public function setName($name)
     {
-        $this->override = $override;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get override
+     * Get name
      *
      * @return string
      */
-    public function getOverride()
+    public function getName()
     {
-        return $this->override;
+        return $this->name;
     }
 
     /**
-     * Set item
+     * Set alias
      *
-     * @param \VelovitoBundle\Entity\CatalogCategory $item
+     * @param string $alias
      *
      * @return CatalogItem
      */
-    public function setItem(\VelovitoBundle\Entity\CatalogCategory $item = null)
+    public function setAlias($alias)
     {
-        $this->item = $item;
+        $this->alias = $alias;
 
         return $this;
     }
 
     /**
-     * Get item
+     * Get alias
      *
-     * @return \VelovitoBundle\Entity\CatalogCategory
+     * @return string
      */
-    public function getItem()
+    public function getAlias()
     {
-        return $this->item;
+        return $this->alias;
     }
 
     /**
-     * Set parent
+     * Set category
      *
-     * @param \VelovitoBundle\Entity\CatalogCategory $parent
+     * @param \VelovitoBundle\Entity\CatalogCategory $category
      *
      * @return CatalogItem
      */
-    public function setParent(\VelovitoBundle\Entity\CatalogCategory $parent = null)
+    public function setCategory(\VelovitoBundle\Entity\CatalogCategory $category = null)
     {
-        $this->parent = $parent;
+        $this->category = $category;
 
         return $this;
     }
 
     /**
-     * Get parent
+     * Get category
      *
      * @return \VelovitoBundle\Entity\CatalogCategory
      */
-    public function getParent()
+    public function getCategory()
     {
-        return $this->parent;
+        return $this->category;
     }
 }
