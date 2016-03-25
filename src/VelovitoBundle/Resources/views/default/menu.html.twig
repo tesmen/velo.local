@@ -1,7 +1,7 @@
 <div class="sidebar-navigation">
-    {% for category in menu %}
-        <ul class="category">
-            <li>
+    <ul>
+        {% for category in menu %}
+            <li class="category">
                 <a href="{{ url('homepage') }}">{{ category.getName() }}</a>
 
                 {% if category.getCatalogItems() is not empty %}
@@ -14,6 +14,7 @@
                     </ul>
                 {% endif %}
             </li>
-        </ul>
-    {% endfor %}
+
+        {% endfor %}
+    </ul>
 </div>

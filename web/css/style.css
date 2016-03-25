@@ -6896,25 +6896,32 @@ a:hover {
 .gray-border {
   border: 1px solid #9f9f9f;
 }
-.sidebar-navigation ul.category {
+.sidebar-navigation ul li.category {
+  text-decoration: none;
+  text-indent: 0;
   display: block;
-  border-top: blue 1px solid;
+  line-height: 2em;
   border-bottom: blue 1px solid;
   position: relative;
 }
-.sidebar-navigation ul.category:hover {
+.sidebar-navigation ul li.category:hover {
   border-right: red 1px solid;
 }
-.sidebar-navigation ul.category:hover li ul.itemlist {
+.sidebar-navigation ul li.category:hover ul.itemlist {
   display: block;
   position: absolute;
 }
-.sidebar-navigation ul.category li ul.itemlist {
-  width: 200px;
-  right: -200px;
+.sidebar-navigation ul li.category ul.itemlist {
+  line-height: 2em;
+  width: 250px;
+  right: -250px;
   top: 0;
   z-index: 999;
   display: none;
   background: #eeeeee;
   border: 1px solid #9f9f9f;
+}
+.sidebar-navigation ul li.category ul.itemlist li {
+  list-style: none;
+  text-indent: 0;
 }

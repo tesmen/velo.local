@@ -1,6 +1,6 @@
 <div class="sidebar-navigation">
-    <ul class="category">
-        <li>
+    <ul>
+        <li class="category">
             <a href="http://velo.local/app_dev.php/">Ходовая часть</a>
 
             <ul class="itemlist">
@@ -15,9 +15,8 @@
                 </li>
             </ul>
         </li>
-    </ul>
-    <ul class="category">
-        <li>
+
+        <li class="category">
             <a href="http://velo.local/app_dev.php/">Тормоза</a>
 
             <ul class="itemlist">
@@ -38,5 +37,6 @@
                 </li>
             </ul>
         </li>
+
     </ul>
 </div>
