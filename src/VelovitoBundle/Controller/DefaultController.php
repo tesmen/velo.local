@@ -19,13 +19,11 @@ class DefaultController extends GeneralController
 
     public function menuAction(Request $request, $title = null)
     {
-        $menu = $this->get(C::MODEL_DEFAULT)->getMenu();
-
         return $this->render(
             'VelovitoBundle:default:menu.html.twig',
             [
                 C::PAGE_TITLE => $title,
-                'menu'        => $menu,
+                'menu'        => $this->get(C::MODEL_DEFAULT)->getMenu(),
             ]
         );
     }

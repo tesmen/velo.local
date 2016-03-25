@@ -1,22 +1,17 @@
+<div>
+    {% for category in menu %}
+    <ul class="navmenu">
+        <li>
+            <a href="{{ url('homepage') }}">{{ category.getName() }}</a>
 
-
-
-
-    {% for topItem in menu %}
-        <ul class="navmenu">
-            <li>
-                <a href="{{ url('homepage') }}">{{ topItem.name }}</a>
-
-                {% if not topItem.subCats is null %}
-                    <ul>
-                        {% for subItem in topItem.subCats %}
-                            <li>
-                                <a href="{{ url('homepage') }}">{{ subItem.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </li>
-        </ul>
+            {% for item in  category.getCatalogItems() %}
+            <ul>
+                <li>
+                    <a href="{{ url('homepage') }}">{{ item.name }}</a>
+                </li>
+            </ul>
+            {% endfor %}
+        </li>
+    </ul>
     {% endfor %}
 </div>

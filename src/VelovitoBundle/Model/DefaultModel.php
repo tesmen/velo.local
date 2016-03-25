@@ -66,32 +66,7 @@ class DefaultModel
 
     public function getMenu($parentId = null)
     {
-        $topEnts = $this->em->getRepository(C::REPO_CATALOG_ITEM)->findByOrFail(
-            ['parent' => null]
-        );
-
-        foreach ($topEnts as $ent) {
-            $result[$ent->getItem()->getId()] = [
-                'name'    => $ent->getItem()->getName(),
-                'catId'   => $ent->getItem()->getId(),
-                'subCats' => null,
-            ];
-        }
-
-        $childEnts = $this->em->getRepository(C::REPO_CATALOG_ITEM)->findAll();
-
-        foreach ($childEnts as $ent) {
-            if (empty($ent->getParent())) {
-                continue;
-            }
-
-            $result[$ent->getParent()->getId()]['subCats'][$ent->getItem()->getId()] = [
-                'name'  => $ent->getItem()->getName(),
-                'catId' => $ent->getItem()->getId(),
-            ];
-        }
-
-        return $result;
+        return $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->findAll();
     }
 
     public function loadConfigFromYaml($config)
