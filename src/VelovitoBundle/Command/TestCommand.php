@@ -18,9 +18,11 @@ class TestCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
-        $repo = $em->getRepository(C::REPO_CITY);
-        $repo->update(2, ['name' => 'blizzard']);
+//        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
+//        $repo = $em->getRepository(C::REPO_CITY);
+//        $repo->update(2, ['name' => 'blizzard']);
+
+
 //        $repo->create(
 //            [
 //                'id'   => 2,
@@ -29,6 +31,6 @@ class TestCommand extends ContainerAwareCommand
 //        );
 
 
-//        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCatalogCategories();
+        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCatalogCategories();
     }
 }
