@@ -23,7 +23,8 @@ class AdvertPublishCommand extends ContainerAwareCommand
         $c = 0;
 
         foreach ($ents as $advert) {
-            $advert->setStatus(C::ADVERT_STATUS_PUBLISHED);
+
+            $advert->setIsPublished(true);
             $c++;
         }
         $em->flush();

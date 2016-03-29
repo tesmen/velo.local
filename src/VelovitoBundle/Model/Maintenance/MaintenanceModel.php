@@ -34,16 +34,6 @@ class MaintenanceModel
         $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->load($data);
     }
 
-    /**
-     * @throws \Exception
-     * @deprecated
-     */
-    function loadCatalogItems()
-    {
-        $list = $this->defaultModel->loadConfigFromYaml('catalog_items');
-        $this->em->getRepository(C::REPO_CATALOG_ITEM)->load($list);
-    }
-
     function loadCurrencys()
     {
         $arr = [
