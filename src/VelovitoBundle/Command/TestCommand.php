@@ -18,6 +18,17 @@ class TestCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCatalogCategories();
+        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
+        $repo = $em->getRepository(C::REPO_CITY);
+        $repo->update(2, ['name' => 'blizzard']);
+//        $repo->create(
+//            [
+//                'id'   => 2,
+//                'name' => 'barbaz',
+//            ]
+//        );
+
+
+//        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCatalogCategories();
     }
 }

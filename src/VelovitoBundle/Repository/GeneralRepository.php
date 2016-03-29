@@ -8,24 +8,37 @@ use VelovitoBundle\Exception\NotFoundException;
 
 class GeneralRepository extends EntityRepository
 {
-    public function update($entity, array $data)
+    public function create(array $data)
     {
-        $this->_em->beginTransaction();
+        $ent = $this->getEntity();
+        $this->fillEntity($ent, $data);
+        $this->_em->persist($ent);
+        $this->_em->flush($ent);
+    }
 
-        try {
-            foreach ($data as $fieldName => $value) {
-                $setMethod = 'set'.$fieldName;
-                $entity->$setMethod($data[$fieldName]);
-            }
+    public function getEntity()
+    {
+        // override in repositories
+        return null;
+    }
 
-            $this->_em->flush();
-            $this->_em->commit();
-        } catch (\Exception $e) {
-            $this->_em->rollback();
-            throw $e;
+    public function fillEntity($ent, array  $data)
+    {
+
+        foreach ($data as $key => $value) {
+            $setMethod = 'set'.$key;
+            $ent->$setMethod($value);
         }
+    }
 
-        return $entity;
+    public function update($id, array $data)
+    {
+        $entity = $this->findOneOrFail(
+            ['id' => $id,]
+        );
+
+        $this->fillEntity($entity, $data);
+        $this->_em->flush();
     }
 
     public function getTableName()

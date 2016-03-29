@@ -35,6 +35,8 @@ class C
     const REPO_PARTS_VENDOR = 'VelovitoBundle:PartsVendor';
     const REPO_USER_FAVORITES = 'VelovitoBundle:UserFavoriteAd';
     const REPO_PHOTO_FILE = 'VelovitoBundle:PhotoFile';
+    const REPO_CITY = 'VelovitoBundle:City';
+    const REPO_COUNTRY = 'VelovitoBundle:Country';
 
     const ROUTE_HOMEPAGE = 'homepage';
     const ROUTE_LOGIN = 'login';
