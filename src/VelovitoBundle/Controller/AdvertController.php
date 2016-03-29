@@ -73,12 +73,12 @@ class AdvertController extends GeneralController
         $advertEnt = $adModel->getAdvertById($advertId);
 
         $formOptions = [
-            'entity'            => $advertEnt,
-            C::FORM_TITLE       => $advertEnt->getTitle(),
-            C::FORM_PRICE       => $advertEnt->getPrice(),
-            C::FORM_CATEGORY    => '',
-            C::FORM_STATUS      => $advertEnt->getStatus(),
-            C::FORM_DESCRIPTION => $advertEnt->getDescription(),
+            'entity'             => $advertEnt,
+            C::FORM_TITLE        => $advertEnt->getTitle(),
+            C::FORM_PRICE        => $advertEnt->getPrice(),
+            C::FORM_CATEGORY     => '',
+            C::FORM_IS_PUBLISHED => $advertEnt->getIsPublished(),
+            C::FORM_DESCRIPTION  => $advertEnt->getDescription(),
         ];
 
         $form = $this->createForm(EditAdvertForm::class, $formOptions);

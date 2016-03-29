@@ -3,12 +3,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserFavoriteAd
+ * UserFavoriteAdvert
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\UserFavoriteAdRepository")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\UserFavoriteAdvertRepository")
  */
-class UserFavoriteAd
+class UserFavoriteAdvert
 {
     /**
      * @var integer
@@ -58,7 +58,7 @@ class UserFavoriteAd
      *
      * @param \DateTime $registeredDate
      *
-     * @return UserFavoriteAd
+     * @return UserFavoriteAdvert
      */
     public function setRegisteredDate($registeredDate)
     {
@@ -82,7 +82,7 @@ class UserFavoriteAd
      *
      * @param \VelovitoBundle\Entity\Advertisement $ad
      *
-     * @return UserFavoriteAd
+     * @return UserFavoriteAdvert
      */
     public function setAd(\VelovitoBundle\Entity\Advertisement $ad = null)
     {
@@ -106,7 +106,7 @@ class UserFavoriteAd
      *
      * @param \VelovitoBundle\Entity\User $user
      *
-     * @return UserFavoriteAd
+     * @return UserFavoriteAdvert
      */
     public function setUser(\VelovitoBundle\Entity\User $user = null)
     {

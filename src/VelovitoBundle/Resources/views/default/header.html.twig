@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav">
                 <li class="active">
                     {% if app.user %}
-                        <a href="#">
+                        <a href="{{ url('profile') }}">
                             {{ app.user.getUserName() }}
                         </a>
                     {% endif %}
