@@ -55,11 +55,18 @@ class Advertisement
     private $creationDate;
 
     /**
-     * @var integer
-     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\AdvertStatus")
-     * @ORM\JoinColumn(name="status", referencedColumnName="id", nullable=false)
+     * @var boolean
+     *
+     * @ORM\Column(name="is_published", type="boolean", nullable=false)
      */
-    private $status;
+    private $isPublished;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_deleted", type="boolean", nullable=false)
+     */
+    private $isDeleted;
 
     /**
      * @var integer
@@ -194,30 +201,6 @@ class Advertisement
     }
 
     /**
-     * Set status
-     *
-     * @param integer AdvertStatus
-     *
-     * @return Advertisement
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return AdvertStatus
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Set currency
      *
      * @param Currency $currency
@@ -321,5 +304,53 @@ class Advertisement
     public function getPhotos()
     {
         return $this->photos;
+    }
+
+    /**
+     * Set isPublished
+     *
+     * @param boolean $isPublished
+     *
+     * @return Advertisement
+     */
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    /**
+     * Get isPublished
+     *
+     * @return boolean
+     */
+    public function getIsPublished()
+    {
+        return $this->isPublished;
+    }
+
+    /**
+     * Set isDeleted
+     *
+     * @param boolean $isDeleted
+     *
+     * @return Advertisement
+     */
+    public function setIsDeleted($isDeleted)
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
+     * Get isDeleted
+     *
+     * @return boolean
+     */
+    public function getIsDeleted()
+    {
+        return $this->isDeleted;
     }
 }

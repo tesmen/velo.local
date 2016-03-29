@@ -47,7 +47,7 @@
 
             <div class="status">
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                {{ advert.getStatus().getName() }}
+                {{ advert.getIsPublished() ? 'Опубликовано' : 'Снято с публикации' }}
             </div>
 
             <div class="price">

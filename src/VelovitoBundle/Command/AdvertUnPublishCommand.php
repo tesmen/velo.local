@@ -35,7 +35,7 @@ class AdvertUnPublishCommand extends ContainerAwareCommand
 
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
         $repo = $em->getRepository(C::REPO_ADVERTISEMENT);
-        $repo->setStatus($advertId, C::ADVERT_STATUS_UNPUBLISHED);
+        $repo->unPublish($advertId, C::ADVERT_STATUS_UNPUBLISHED);
         $em->flush();
 
         $output->writeln('unpublished succesfully');

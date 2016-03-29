@@ -74,7 +74,7 @@ class AdvertisementModel
     public function getFewLastAds($limit = 15)
     {
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findBy(
-            ['status' => C::ADVERT_STATUS_PUBLISHED],
+            ['isPublished' => true],
             ['creationDate' => 'DESC']
         );
     }
@@ -112,7 +112,7 @@ class AdvertisementModel
             throw new \Exception(sprintf("undefined unpublish reason %s", $reason));
         }
 
-        $repo->setStatus($advertId, C::ADVERT_STATUS_UNPUBLISHED);
+        $repo->unPublish($advertId);
     }
 
     public function incrementViewed(Advertisement $ent)
