@@ -18,12 +18,12 @@ class AdvertisementModel
         $this->documentModel = $documentModel;
     }
 
-    public function createNewAd(array $formData, User $user)
+    public function createNewAdvert(array $formData, User $user)
     {
         $savedFiles = $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
         $formData[C::FORM_PHOTO_FILENAMES] = $savedFiles;
 
-        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->create($formData, $user);
+        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->createAdvert($formData, $user);
     }
 
     public function updateAdvert($advert, array $formData)
@@ -71,7 +71,7 @@ class AdvertisementModel
         );
     }
 
-    public function getFewLastAds($limit = 15)
+    public function getFewLastAds()
     {
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findBy(
             ['isPublished' => true],

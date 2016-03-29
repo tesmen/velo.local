@@ -37,31 +37,31 @@ class CatalogCategoryRepository extends GeneralRepository
 
     }
 
-    public function create(array $data)
-    {
-        $ent = $this->getNewEntity($data);
-
-        $this->_em->persist($ent);
-        $this->_em->flush($ent);
-    }
-
-    public function getEntity(array $data)
-    {
-        if (!$ent = $this->find($data['id'])) {
-            return $this->getNewEntity($data);
-        }
-
-        return $ent;
-    }
-
-    public function getNewEntity(array $data)
-    {
-        $ent = new CatalogCategory();
-        $ent
-            ->setId($data['id'])
-            ->setName($data['name'])
-            ->setAlias($data['alias']);
-
-        return $ent;
-    }
+//    public function create(array $data)
+//    {
+//        $ent = $this->getNewEntity($data);
+//
+//        $this->_em->persist($ent);
+//        $this->_em->flush($ent);
+//    }
+//
+//    public function getEntity(array $data)
+//    {
+//        if (!$ent = $this->find($data['id'])) {
+//            return $this->getNewEntity($data);
+//        }
+//
+//        return $ent;
+//    }
+//
+//    public function getNewEntity(array $data)
+//    {
+//        $ent = new CatalogCategory();
+//        $ent
+//            ->setId($data['id'])
+//            ->setName($data['name'])
+//            ->setAlias($data['alias']);
+//
+//        return $ent;
+//    }
 }

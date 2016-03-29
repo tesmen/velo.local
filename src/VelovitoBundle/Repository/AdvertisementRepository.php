@@ -32,20 +32,20 @@ class AdvertisementRepository extends GeneralRepository
         }
     }
 
-    public function create($data, User $user)
+    public function createAdvert($data, User $user)
     {
         $this->_em->beginTransaction();
+        $currency = $this->_em->getRepository(C::REPO_CURRENCY)->findOneOrFail(['id' => 1]);
 
         try {
-            $currency = $this->_em->getRepository(C::REPO_CURRENCY)->find(1); // todo CURENCY
             $advertEnt = new Advertisement();
 
             $advertEnt
                 ->setTitle($data[C::FORM_TITLE])
                 ->setPrice($data[C::FORM_PRICE])
-                ->setIsPublished(true)
-                ->setIsDeleted(false)
                 ->setCurrency($currency)
+                ->setIsDeleted(false)
+                ->setIsPublished(true)
                 ->setDescription($data[C::FORM_DESCRIPTION])
                 ->setUser($user);
 
