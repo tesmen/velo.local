@@ -26,6 +26,18 @@ class SecurityController extends GeneralController
         );
     }
 
+    public function vkAuthAction(Request $request)
+    {
+        if ($request->get('error')) {
+            var_dump($request->get('error_description'));
+
+        } else {
+            var_dump($request->get('success!'));
+        }
+
+        exit;
+    }
+
     public function registrationAction(Request $request)
     {
         $form = $this->createForm(RegisterForm::class);
