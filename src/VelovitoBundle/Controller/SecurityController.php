@@ -28,12 +28,14 @@ class SecurityController extends GeneralController
 
     public function vkAuthAction(Request $request)
     {
-        if ($request->get('error')) {
-            var_dump($request->get('error_description'));
+        $params = [
+            'count' => 20,
+            'order' => 'hints',
+        ];
+        $url = 'https://api.vk.com/method/friends.get'.'?'.http_build_query($params);
+        $userInfo = json_decode(file_get_contents($url));
 
-        } else {
-            var_dump($request->get('success!'));
-        }
+        var_dump($userInfo);
 
         exit;
     }
