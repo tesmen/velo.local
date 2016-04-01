@@ -26,7 +26,26 @@ class SecurityController extends GeneralController
         );
     }
 
-    public function vkAuthAction(Request $request)
+    public function vkAuthTokenAction(Request $request)
+    {
+        $secureParams = [
+            'client_id' => 5387412,
+            'client_secret' => 'm8kU9FlWTEwAMJhqL79E',
+            'redirect_uri' => $this->generateUrl('vk_auth_success'),
+            'code' => $request->get('code'),
+            'v' => '5.50',
+        ];
+
+        $url = 'https://oauth.vk.com/access_token'.'?'.http_build_query($secureParams);
+        $info = json_decode(file_get_contents($url));
+
+        var_dump($url);
+        var_dump($info);
+
+        exit;
+    }
+
+    public function vkAuthSuccessAction(Request $request)
     {
         $params = [
             'count' => 20,
@@ -35,7 +54,7 @@ class SecurityController extends GeneralController
             'offset' => $request->get('code'),
             'v' => '5.50',
         ];
-        $url = 'https://api.vk.com/method/friends.get'.'?'.http_build_query($params);
+        $url = 'https://oauth.vk.com/access_token'.'?'.http_build_query($params);
         $userInfo = json_decode(file_get_contents($url));
 
         var_dump($url);

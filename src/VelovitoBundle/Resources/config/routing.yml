@@ -17,10 +17,16 @@ registration:
         _controller: VelovitoBundle:Security:registration
         title: Регистрация
 
-vk_auth:
-    path: /vk_auth
+vk_auth_token:
+    path: /vk-auth-token
     defaults:
-        _controller: VelovitoBundle:Security:vkAuth
+        _controller: VelovitoBundle:Security:vkAuthToken
+        title: Регистрация через ВК
+
+vk_auth_success:
+    path: /vk-auth-success
+    defaults:
+        _controller: VelovitoBundle:Security:vkAuthSuccess
         title: Регистрация через ВК
 
 #--------------------------------------------------------
