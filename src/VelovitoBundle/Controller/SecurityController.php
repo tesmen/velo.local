@@ -2,6 +2,7 @@
 
 namespace VelovitoBundle\Controller;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use VelovitoBundle\Form\Security\RegisterForm;
 use VelovitoBundle\C;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class SecurityController extends GeneralController
         $secureParams = [
             'client_id' => 5387412,
             'client_secret' => 'm8kU9FlWTEwAMJhqL79E',
-            'redirect_uri' => $this->generateUrl('vk_auth_success'),
+            'redirect_uri' => $this->generateUrl('vk_auth_success',[] ,UrlGeneratorInterface::ABSOLUTE_URL),
             'code' => $request->get('code'),
 //            'v' => '5.50',
         ];
