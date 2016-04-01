@@ -30,14 +30,14 @@ class SecurityController extends GeneralController
     public function vkAuthTokenAction(Request $request)
     {
         $secureParams = [
-            'client_id' => 5387412,
+            'client_id'     => 5387412,
             'client_secret' => 'm8kU9FlWTEwAMJhqL79E',
-            'redirect_uri' => $this->generateUrl('vk_auth_success',[] ,UrlGeneratorInterface::ABSOLUTE_URL),
-            'code' => $request->get('code'),
+            'redirect_uri'  => $this->generateUrl('vk_auth_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'code'          => $request->get('code'),
 //            'v' => '5.50',
         ];
 
-        $url = 'https://oauth.vk.com/access_token'.'?'.http_build_query($secureParams);
+        $url = 'https://oauth.vk.com/access_token'.'?'.urldecode(http_build_query($secureParams));
         $info = json_decode(file_get_contents($url));
 
         var_dump($url);
@@ -49,11 +49,11 @@ class SecurityController extends GeneralController
     public function vkAuthSuccessAction(Request $request)
     {
         $params = [
-            'count' => 20,
-            'order' => 'hints',
+            'count'        => 20,
+            'order'        => 'hints',
             'access_token' => $request->get('code'),
-            'offset' => $request->get('code'),
-            'v' => '5.50',
+            'offset'       => $request->get('code'),
+            'v'            => '5.50',
         ];
         $url = 'https://oauth.vk.com/access_token'.'?'.http_build_query($params);
         $userInfo = json_decode(file_get_contents($url));
