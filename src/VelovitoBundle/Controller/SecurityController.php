@@ -33,7 +33,7 @@ class SecurityController extends GeneralController
             'client_secret' => 'm8kU9FlWTEwAMJhqL79E',
             'redirect_uri' => $this->generateUrl('vk_auth_success'),
             'code' => $request->get('code'),
-            'v' => '5.50',
+//            'v' => '5.50',
         ];
 
         $url = 'https://oauth.vk.com/access_token'.'?'.http_build_query($secureParams);
