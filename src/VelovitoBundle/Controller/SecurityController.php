@@ -36,6 +36,7 @@ class SecurityController extends GeneralController
         $url = 'https://api.vk.com/method/friends.get'.'?'.http_build_query($params);
         $userInfo = json_decode(file_get_contents($url));
 
+        var_dump($url);
         var_dump($userInfo);
 
         exit;
