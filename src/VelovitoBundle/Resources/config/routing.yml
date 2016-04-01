@@ -17,6 +17,12 @@ registration:
         _controller: VelovitoBundle:Security:registration
         title: Регистрация
 
+vk_auth:
+    path: /vk_auth
+    defaults:
+        _controller: VelovitoBundle:Security:vkAuth
+        title: Регистрация через ВК
+
 #--------------------------------------------------------
 ajax_upload_photo:
     path:     /ajax-upload-photo
