@@ -32,6 +32,8 @@ class SecurityController extends GeneralController
             'count' => 20,
             'order' => 'hints',
             'access_token' => $request->get('code'),
+            'offset' => $request->get('code'),
+            'v' => '5.50',
         ];
         $url = 'https://api.vk.com/method/friends.get'.'?'.http_build_query($params);
         $userInfo = json_decode(file_get_contents($url));
