@@ -49,6 +49,7 @@ class C
 
     const MODEL_MAINTENANCE = 'model.maintenance';
     const MODEL_DEFAULT = 'model.default';
+    const MODEL_SECURITY = 'model.security';
     const MODEL_ADVERTISEMENT = 'model.advertisement';
     const MODEL_USER = 'model.user';
     const MODEL_DOCUMENT = 'model.document';

@@ -29,38 +29,24 @@ class SecurityController extends GeneralController
 
     public function vkAuthTokenAction(Request $request)
     {
-        $secureParams = [
+        $params = [
             'client_id'     => 5387412,
             'client_secret' => 'm8kU9FlWTEwAMJhqL79E',
-            'redirect_uri'  => $this->generateUrl('vk_auth_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'redirect_uri'  => $this->generateUrl('vk_auth_token', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'code'          => $request->get('code'),
-//            'v' => '5.50',
+            'v'             => '5.50',
         ];
 
-        $url = 'https://oauth.vk.com/access_token'.'?'.urldecode(http_build_query($secureParams));
-        $info = json_decode(file_get_contents($url));
+        $url = 'https://oauth.vk.com/access_token?'.urldecode(http_build_query($params));
+        $info = json_decode(file_get_contents($url), true);
+        $this->get('session')->set('vk_token', $info['access_token']);
 
-        var_dump($url);
-        var_dump($info);
-
-        exit;
+        return $this->redirectToRoute('vk_auth_success');
     }
 
     public function vkAuthSuccessAction(Request $request)
     {
-        $params = [
-            'count'        => 20,
-            'order'        => 'hints',
-            'access_token' => $request->get('code'),
-            'offset'       => $request->get('code'),
-            'v'            => '5.50',
-        ];
-        $url = 'https://oauth.vk.com/access_token'.'?'.http_build_query($params);
-        $userInfo = json_decode(file_get_contents($url));
-
-        var_dump($url);
-        var_dump($userInfo);
-
+        var_dump( $this->get('session')->get('vk_token'));
         exit;
     }
 
@@ -74,7 +60,7 @@ class SecurityController extends GeneralController
             if ($form->isValid()) {
                 $formData = $form->getData();
 
-                $this->get('model.security')->createUser(
+                $this->get(C::MODEL_SECURITY)->createUser(
                     $formData[C::FORM_USERNAME],
                     $formData[C::FORM_PASSWORD],
                     $formData[C::FORM_EMAIL]
