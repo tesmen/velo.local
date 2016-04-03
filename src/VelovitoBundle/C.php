@@ -47,12 +47,16 @@ class C
     const ROUTE_ADVERT_NEW = 'advert_new';
     const ROUTE_ADVERT_EDIT = 'advert_edit';
 
+    const ROUTE_VK_AUTH_TOKEN = 'vk_auth_token';
+    const ROUTE_VK_AUTH_SUCCESS = 'vk_auth_success';
+
     const MODEL_MAINTENANCE = 'model.maintenance';
     const MODEL_DEFAULT = 'model.default';
     const MODEL_SECURITY = 'model.security';
     const MODEL_ADVERTISEMENT = 'model.advertisement';
     const MODEL_USER = 'model.user';
     const MODEL_DOCUMENT = 'model.document';
+    const MODEL_VK_API = 'model.vk_api';
 
     const PAGE_TITLE = 'page_title';
     const STATUS_USER_ACTIVE = 1;
@@ -89,4 +93,7 @@ class C
     const FORM_SOLD_AT_VELOVITO = 'sold_at_velovito';
     const FORM_SOLD_SOMEWHERE = 'sold_somewhere';
     const FORM_OTHER_REASON = 'other_reason';
+
+    const PARAM_VK_TOKEN = 'vk_token';
+    const PARAM_VK_USER_ID = 'user_id';
 }

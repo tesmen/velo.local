@@ -13,7 +13,7 @@ services:
 
     model.security:
         class: VelovitoBundle\Model\SecurityModel
-        arguments: ["@doctrine.orm.entity_manager", "@kernel"]
+        arguments: ["@doctrine.orm.entity_manager", "@session", "@security.token_storage", "@model.vk_api", "@model.user"]
 
     model.advertisement:
         class: VelovitoBundle\Model\Advertisement\AdvertisementModel
@@ -21,14 +21,14 @@ services:
 
     model.user:
         class: VelovitoBundle\Model\User\UserModel
-        arguments: ["@doctrine.orm.entity_manager", "@kernel"]
+        arguments: ["@doctrine.orm.entity_manager", "@session", "@security.token_storage", "@model.vk_api"]
 
     model.document:
         class: VelovitoBundle\Model\DocumentModel
         arguments: ["@doctrine.orm.entity_manager", "@model.default"]
 
-    service.vk_api:
-        class: VelovitoBundle\Service\VkApiService
+    model.vk_api:
+        class: VelovitoBundle\Model\VkApi\VkApiModel
         arguments: [%vk_api_client_id%, %vk_api_client_secret%, %vk_api_version%, "@router", "@session", "@security.token_storage"]
 
     image_service:

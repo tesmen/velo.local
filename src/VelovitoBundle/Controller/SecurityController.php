@@ -3,6 +3,7 @@
 namespace VelovitoBundle\Controller;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use VelovitoBundle\Form\Security\RegisterForm;
 use VelovitoBundle\C;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,16 +30,22 @@ class SecurityController extends GeneralController
 
     public function vkAuthTokenAction(Request $request)
     {
-        $info = $this->get('service.vk_api')->getToken($request->get('code'));
-        $this->get('session')->set('vk_token', $info['access_token']);
+        if (empty($code = $request->get('code'))) {
+            throw new \Exception('empty code');
+        }
 
-        return $this->redirectToRoute('vk_auth_success');
+        $userInfo = $this->get(C::MODEL_VK_API)->getToken($code);
+        $this->get('session')->set(C::PARAM_VK_TOKEN, $userInfo['access_token']);
+        $this->get('session')->set(C::PARAM_VK_USER_ID, $userInfo['user_id']);
+
+        return $this->redirectToRoute(C::ROUTE_VK_AUTH_SUCCESS);
     }
 
     public function vkAuthSuccessAction(Request $request)
     {
-        var_dump($this->get('session')->get('vk_token'));
-        exit;
+        $this->get(C::MODEL_SECURITY)->authenticateByVk();
+
+        return $this->redirectToRoute(C::ROUTE_HOMEPAGE);
     }
 
     public function registrationAction(Request $request)
@@ -69,7 +76,7 @@ class SecurityController extends GeneralController
             'VelovitoBundle:security:registration.html.twig',
             [
                 'form'         => $form->createView(),
-                'vk_auth_link' => $this->get('service.vk_api')->getAuthLink(),
+                'vk_auth_link' => $this->get(C::MODEL_VK_API)->getAuthLink(),
             ]
         );
     }
