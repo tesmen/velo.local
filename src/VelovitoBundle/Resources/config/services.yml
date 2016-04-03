@@ -27,6 +27,10 @@ services:
         class: VelovitoBundle\Model\DocumentModel
         arguments: ["@doctrine.orm.entity_manager", "@model.default"]
 
+    service.vk_api:
+        class: VelovitoBundle\Service\VkApiService
+        arguments: [%vk_api_client_id%, %vk_api_client_secret%, %vk_api_version%, "@router"]
+
     image_service:
         class: VelovitoBundle\Service\GregwarImageService
         arguments: ["@model.default"]

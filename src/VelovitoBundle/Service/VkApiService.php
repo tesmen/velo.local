@@ -7,16 +7,18 @@ class VkApiService
 {
     private $authUrl = 'https://oauth.vk.com/authorize';
     private $tokenUrl = 'https://oauth.vk.com/access_token';
-    private $version = '5.50';
+    private $version;
     private $clientId;
     private $clientSecret;
 
-    public function __construct($clientId, $clientSecret, Router $router)
+    public function __construct($clientId, $clientSecret, $version, Router $router)
     {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
+        $this->version = $version;
         $this->redirectUri = $router->generate('vk_auth_token');
     }
+
 
     public function getAuthLink()
     {

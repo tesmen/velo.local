@@ -46,7 +46,7 @@ class SecurityController extends GeneralController
 
     public function vkAuthSuccessAction(Request $request)
     {
-        var_dump( $this->get('session')->get('vk_token'));
+        var_dump($this->get('session')->get('vk_token'));
         exit;
     }
 
@@ -77,7 +77,8 @@ class SecurityController extends GeneralController
         return $this->render(
             'VelovitoBundle:security:registration.html.twig',
             [
-                'form' => $form->createView(),
+                'form'         => $form->createView(),
+                'vk_auth_link' => $this->get('service.vk_api')->getAuthLink(),
             ]
         );
     }
