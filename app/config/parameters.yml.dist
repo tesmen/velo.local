@@ -17,6 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-    vk_client_id:
-    vk_client_secret:
+    vk_api_client_id:
+    vk_api_client_secret:
     vk_api_version: "5.50"
