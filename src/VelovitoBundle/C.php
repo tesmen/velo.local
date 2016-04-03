@@ -83,6 +83,8 @@ class C
     const FORM_STATUS_LIST = 'status_list';
     const FORM_ATTACH = 'attach';
     const FORM_USERNAME = 'username';
+    const FORM_FIRST_NAME = 'first_name';
+    const FORM_LAST_NAME = 'last_name';
     const FORM_EMAIL = 'email';
     const FORM_REGISTERED_DATE = 'registered_date';
     const FORM_PASSWORD = 'password';

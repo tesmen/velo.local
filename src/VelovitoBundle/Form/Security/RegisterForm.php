@@ -24,9 +24,9 @@ class RegisterForm extends AbstractType
                 'label'    => 'Имя пользователя',
                 'required' => true,
                 'attr'     => [
-                    'placeholder' => 'Имя пользователя',
-                    'maxlength'   => C::GLOBAL_USERNAME_LENGTH,
-                    'autocomplete' => 'off'
+                    'placeholder'  => 'Имя пользователя',
+                    'maxlength'    => C::GLOBAL_USERNAME_LENGTH,
+                    'autocomplete' => 'off',
                 ],
             ]
         );
@@ -38,9 +38,9 @@ class RegisterForm extends AbstractType
                 'label'    => 'Электронная почта',
                 'required' => true,
                 'attr'     => [
-                    'placeholder' => 'Электронная почта',
-                    'maxlength'   => C::GLOBAL_EMAIL_LENGTH,
-                    'autocomplete' => 'off'
+                    'placeholder'  => 'Электронная почта',
+                    'maxlength'    => C::GLOBAL_EMAIL_LENGTH,
+                    'autocomplete' => 'off',
                 ],
             ]
         );
@@ -52,9 +52,9 @@ class RegisterForm extends AbstractType
                 'label'    => 'Пароль',
                 'required' => true,
                 'attr'     => [
-                    'placeholder' => 'Пароль',
-                    'maxlength'   => C::GLOBAL_PASSWORD_LENGTH,
-                    'autocomplete' => 'off'
+                    'placeholder'  => 'Пароль',
+                    'maxlength'    => C::GLOBAL_PASSWORD_LENGTH,
+                    'autocomplete' => 'off',
                 ],
             ]
         );
@@ -66,9 +66,9 @@ class RegisterForm extends AbstractType
                 'label'    => 'Подтверждение пароля',
                 'required' => true,
                 'attr'     => [
-                    'placeholder' => 'Подтверждение пароля',
-                    'maxlength'   => C::GLOBAL_PASSWORD_LENGTH,
-                    'autocomplete' => 'off'
+                    'placeholder'  => 'Подтверждение пароля',
+                    'maxlength'    => C::GLOBAL_PASSWORD_LENGTH,
+                    'autocomplete' => 'off',
                 ],
             ]
         );
