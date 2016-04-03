@@ -29,7 +29,7 @@ services:
 
     service.vk_api:
         class: VelovitoBundle\Service\VkApiService
-        arguments: [%vk_api_client_id%, %vk_api_client_secret%, %vk_api_version%, "@router"]
+        arguments: [%vk_api_client_id%, %vk_api_client_secret%, %vk_api_version%, "@router", "@session", "@security.token_storage"]
 
     image_service:
         class: VelovitoBundle\Service\GregwarImageService

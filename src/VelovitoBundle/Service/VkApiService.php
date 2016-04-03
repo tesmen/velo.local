@@ -2,7 +2,9 @@
 namespace VelovitoBundle\Service;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class VkApiService
 {
@@ -12,12 +14,20 @@ class VkApiService
     private $clientId;
     private $clientSecret;
 
-    public function __construct($clientId, $clientSecret, $version, Router $router)
-    {
+    public function __construct(
+        $clientId,
+        $clientSecret,
+        $version,
+        Router $router,
+        Session $session,
+        TokenStorage $tokenStorage
+    ) {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->version = $version;
         $this->redirectUri = $router->generate('vk_auth_token', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $this->session = $session;
+        $this->tokenStorage = $tokenStorage;
     }
 
 
@@ -49,5 +59,21 @@ class VkApiService
         $tokenLink = $this->tokenUrl.'?'.urldecode(http_build_query($tokenParams));
 
         return json_decode(file_get_contents($tokenLink), true);
+    }
+
+    public function getUserInfo($code)
+    {
+        $params = [
+            'uids'         => $this->tokenStorage->getToken()->getUser(),
+            'fields'       => 'uid,first_name,last_name,screen_name,sex,bdate,photo_big',
+            'access_token' => $this->session->get('vk_token'),
+        ];
+
+        $userInfo = json_decode(
+            file_get_contents('https://api.vk.com/method/users.get'.'?'.urldecode(http_build_query($params))),
+            true
+        );
+
+        return $userInfo;
     }
 }
