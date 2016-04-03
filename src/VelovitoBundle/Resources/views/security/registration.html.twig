@@ -14,7 +14,7 @@
         {{ form_widget(form.submit, {'attr':{'class' : 'btn-primary form-control' }}) }}
         {{ form_end(form) }}
 
-        <a href="https://oauth.vk.com/authorize?client_id=5387412&display=page&redirect_uri={{ url('vk_auth_token') }}&scope=friends&response_type=code&v=5.50">Вход через VK </a>
+        <a href="{{ vk_auth_link }}">Вход через VK </a>
     </div>
     <script>
         $(function () {

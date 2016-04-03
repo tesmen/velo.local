@@ -2,6 +2,7 @@
 namespace VelovitoBundle\Service;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class VkApiService
 {
@@ -16,7 +17,7 @@ class VkApiService
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->version = $version;
-        $this->redirectUri = $router->generate('vk_auth_token');
+        $this->redirectUri = $router->generate('vk_auth_token', [], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
 
@@ -26,6 +27,8 @@ class VkApiService
             'client_id'     => $this->clientId,
             'redirect_uri'  => $this->redirectUri,
             'response_type' => 'code',
+            'scope'         => 'friends',
+            'display'       => 'page',
             'v'             => $this->version,
         ];
 
