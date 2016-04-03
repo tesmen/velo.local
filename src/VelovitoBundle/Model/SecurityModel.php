@@ -7,8 +7,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use VelovitoBundle\C;
 use Doctrine\ORM\EntityManager;
+use VelovitoBundle\Entity\User;
 use VelovitoBundle\Model\User\UserModel;
 use VelovitoBundle\Model\VkApi\VkApiModel;
+use VelovitoBundle\Service\CommonFunction;
 
 class SecurityModel
 {
@@ -30,16 +32,16 @@ class SecurityModel
         $this->userRepo = $em->getRepository(C::REPO_USER);
     }
 
-    public function createUser($username, $password, $email)
+    public function createUser($username, $password, $email = null)
     {
         $params = [
             'username' => $username,
             'email'    => $email,
             'password' => $password,
-            'role'     => $this->em->getRepository('VelovitoBundle:Role')->findOneByName('ROLE_USER'),
+            'role'     => $this->em->getRepository(C::REPO_ROLE)->findOneOrFail(C::ROLE_USER),
         ];
 
-        $this->em->getRepository('VelovitoBundle:User')->create($params);
+        return $this->em->getRepository('VelovitoBundle:User')->create($params);
     }
 
     public function authenticateByVk()
@@ -51,12 +53,30 @@ class SecurityModel
             throw new \Exception('vk session params not found');
         }
 
-//        $userInfo = $this->vkApi->getUserInfo();
-//        var_dump($userInfo);
-//        exit;
+
         if ($user = $this->userModel->getUserByVkAccountId($vkUserId)) {
-            $token = new UsernamePasswordToken($user, $user->getPassword(), "secured_area", $user->getRoles());
-            $this->tokenStorage->setToken($token);
+            $this->forceAuthenticate($user);
         };
+
+        $userInfo = $this->vkApi->getUserInfo();
+
+        $user = $this->createUser(
+            $userInfo['screen_name'],
+            CommonFunction::generatePassword(12),
+            $userInfo['screen_name']
+        );
+
+        $user->setVkAccountId($vkUserId);
+        $this->em->flush();
+
+        $this->forceAuthenticate($user);
+    }
+
+    public function forceAuthenticate(User $user)
+    {
+        $token = new UsernamePasswordToken($user, $user->getPassword(), "secured_area", $user->getRoles());
+        $this->tokenStorage->setToken($token);
+
+        return true;
     }
 }

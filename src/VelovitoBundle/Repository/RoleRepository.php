@@ -28,23 +28,23 @@ class RoleRepository extends GeneralRepository
         }
     }
 
-    public function create($id, $name)
-    {
-        $this->_em->beginTransaction();
-        try {
-            $role = new Role();
-            $role->setName($name);
-            $role->setId($id);
-
-            $this->_em->persist($role);
-
-            $this->_em->flush();
-            $this->_em->commit();
-        } catch (\Exception $e) {
-            $this->_em->rollback();
-            throw $e;
-        }
-
-        return $role;
-    }
+//    public function create($id, $name)
+//    {
+//        $this->_em->beginTransaction();
+//        try {
+//            $role = new Role();
+//            $role->setName($name);
+//            $role->setId($id);
+//
+//            $this->_em->persist($role);
+//
+//            $this->_em->flush();
+//            $this->_em->commit();
+//        } catch (\Exception $e) {
+//            $this->_em->rollback();
+//            throw $e;
+//        }
+//
+//        return $role;
+//    }
 }
