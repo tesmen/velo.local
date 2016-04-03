@@ -15,6 +15,9 @@ use VelovitoBundle\Service\CommonFunction;
 class SecurityModel
 {
     private $em;
+    private $session;
+    private $tokenStorage;
+    private $vkApi;
 
     public function __construct(
         EntityManager $em,

@@ -11,6 +11,9 @@ use VelovitoBundle\Model\VkApi\VkApiModel;
 class UserModel
 {
     private $em;
+    private $session;
+    private $tokenStorage;
+    private $vkApi;
 
     public function __construct(EntityManager $em, Session $session, TokenStorage $tokenStorage, VkApiModel $vkApi)
     {
