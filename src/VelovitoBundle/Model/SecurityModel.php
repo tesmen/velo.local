@@ -56,6 +56,8 @@ class SecurityModel
 
         if ($user = $this->userModel->getUserByVkAccountId($vkUserId)) {
             $this->forceAuthenticate($user);
+
+            return true;
         };
 
         $userInfo = $this->vkApi->getUserInfo();
