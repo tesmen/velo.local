@@ -6,14 +6,13 @@
         <form action="{{ url('login_check') }}" method="POST">
 
             <div class="form-group">
-                <label for="username">Имя пользователя</label>
+                <label for="username">E-mail</label>
                 <input type="text" class="form-control" id="username"
                        name="_username" value="{{ last_username }}"
-                       placeholder="имя пользователя" required="true" style="margin-bottom: 10px"/>
+                       placeholder="Адрес электронной почты" required style="margin-bottom: 10px"/>
                 <label for="password">Пароль</label>
                 <input type="password" class="form-control" id="password"
-                       name="_password" placeholder="пароль"
-                       required="true" style="margin-bottom: 10px"/>
+                       name="_password" placeholder="пароль" required style="margin-bottom: 10px"/>
 
                 {% if error %}
                     <div class="bg-danger" style="margin-bottom: 10px">Неверное имя пользователя или пароль</div>
