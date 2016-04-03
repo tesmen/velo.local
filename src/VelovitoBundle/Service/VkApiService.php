@@ -48,6 +48,6 @@ class VkApiService
 
         $tokenLink = $this->tokenUrl.'?'.urldecode(http_build_query($tokenParams));
 
-        return json_encode(file_get_contents($tokenLink), true);
+        return json_decode(file_get_contents($tokenLink), true);
     }
 }

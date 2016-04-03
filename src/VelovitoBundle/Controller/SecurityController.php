@@ -29,16 +29,7 @@ class SecurityController extends GeneralController
 
     public function vkAuthTokenAction(Request $request)
     {
-        $params = [
-            'client_id'     => 5387412,
-            'client_secret' => 'm8kU9FlWTEwAMJhqL79E',
-            'redirect_uri'  => $this->generateUrl('vk_auth_token', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'code'          => $request->get('code'),
-            'v'             => '5.50',
-        ];
-
-        $url = 'https://oauth.vk.com/access_token?'.urldecode(http_build_query($params));
-        $info = json_decode(file_get_contents($url), true);
+        $info = $this->get('service.vk_api')->getToken($request->get('code'));
         $this->get('session')->set('vk_token', $info['access_token']);
 
         return $this->redirectToRoute('vk_auth_success');
