@@ -100,6 +100,13 @@ class User implements UserInterface, \Serializable
     private $registeredDate;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="vk_account_id", type="integer", nullable=true)
+     */
+    private $vkAccountId;
+
+    /**
      * Get username
      *
      * @return string
@@ -337,5 +344,29 @@ class User implements UserInterface, \Serializable
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set vkAccountId
+     *
+     * @param integer $vkAccountId
+     *
+     * @return User
+     */
+    public function setVkAccountId($vkAccountId)
+    {
+        $this->vkAccountId = $vkAccountId;
+
+        return $this;
+    }
+
+    /**
+     * Get vkAccountId
+     *
+     * @return integer
+     */
+    public function getVkAccountId()
+    {
+        return $this->vkAccountId;
     }
 }

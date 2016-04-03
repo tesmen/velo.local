@@ -61,10 +61,10 @@ class VkApiService
         return json_decode(file_get_contents($tokenLink), true);
     }
 
-    public function getUserInfo($code)
+    public function getUserInfo()
     {
         $params = [
-            'uids'         => $this->tokenStorage->getToken()->getUser(),
+            'uids'         => $this->tokenStorage->getToken()->getUser()->getVkAccountId(),
             'fields'       => 'uid,first_name,last_name,screen_name,sex,bdate,photo_big',
             'access_token' => $this->session->get('vk_token'),
         ];

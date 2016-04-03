@@ -48,6 +48,7 @@ class UserController extends GeneralController
 
     public function favoriteAdvertsAction(Request $request)
     {
+        var_dump($this->get('service.vk_api')->getUserInfo());
         $this->denyUnlessAuthenticatedFully();
 
         return $this->render(
