@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>
+        {% if (page_title is defined) and ('' != page_title) %}
+            {{ page_title ~ ' - ' }}
+        {% endif %}
+        Velovito
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    {% block js %}
+        <script src="{{ asset('js/jquery-2.2.1.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/common.js') }}"></script>
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    <div class="col-md-12" style="border: 1px solid red">
+        {{ render(controller('VelovitoBundle:Default:header')) }}
+    </div>
+
+    <div class="col-md-12" style="border: 1px solid green;">
+        {% block body %}        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

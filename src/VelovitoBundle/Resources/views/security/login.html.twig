@@ -1,8 +1,9 @@
-{% extends "VelovitoBundle::base.html.twig" %}
+{% extends "VelovitoBundle::no_menu.html.twig" %}
 {% block body %}
     {% include 'VelovitoBundle:templates:alert.html.twig' %}
 
-    <div class="col-md-4">
+    <div class="col-md-6 center-block">
+        <h3>ВХОД В ЛИЧНЫЙ КАБИНЕТ</h3>
         <form action="{{ url('login_check') }}" method="POST">
 
             <div class="form-group">
@@ -27,4 +28,7 @@
             </div>
         </form>
     </div>
+    {#<div class="col-md-6">#}
+{##}
+    {#</div>#}
 {% endblock %}
