@@ -102,7 +102,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="vk_account_id", type="integer", nullable=true)
+     * @ORM\Column(name="vk_account_id", type="integer", nullable=true, unique=true)
      */
     private $vkAccountId;
 

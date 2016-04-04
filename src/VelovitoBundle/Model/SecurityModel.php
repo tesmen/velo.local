@@ -19,6 +19,8 @@ class SecurityModel
     private $tokenStorage;
     private $vkApi;
 
+    private $userRepo;
+
     public function __construct(
         EntityManager $em,
         Session $session,
@@ -73,14 +75,25 @@ class SecurityModel
 
         $user->setVkAccountId($vkUserId);
         $this->em->flush();
-
         $this->forceAuthenticate($user);
+
+        return true;
     }
 
     public function forceAuthenticate(User $user)
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), "secured_area", $user->getRoles());
         $this->tokenStorage->setToken($token);
+
+        return true;
+    }
+
+    public function addVkAccountToUser(User $user)
+    {
+        $userInfo = $this->vkApi->getUserInfo();
+
+        $user->setVkAccountId($this->session->get(C::PARAM_VK_USER_ID));
+        $this->em->flush($user);
 
         return true;
     }

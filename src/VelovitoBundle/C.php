@@ -98,4 +98,5 @@ class C
 
     const PARAM_VK_TOKEN = 'vk_token';
     const PARAM_VK_USER_ID = 'user_id';
+    const PARAM_VK_AUTH_LINK = 'vk_auth_link';
 }

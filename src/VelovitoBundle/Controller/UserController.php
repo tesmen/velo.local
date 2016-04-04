@@ -5,9 +5,6 @@ namespace VelovitoBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use VelovitoBundle\C;
-use VelovitoBundle\Form\Ad\EditAdForm;
-use VelovitoBundle\Form\Ad\NewAdForm;
-use VelovitoBundle\Form\Ajax\UploadPhotoForm;
 use VelovitoBundle\Form\User\UserProfileForm;
 
 class UserController extends GeneralController
@@ -15,6 +12,7 @@ class UserController extends GeneralController
     public function profileAction(Request $request)
     {
         $this->denyUnlessAuthenticatedFully();
+        $userInfo = $this->get(C::MODEL_VK_API)->getUserInfo();
 
         $form = $this->createForm(UserProfileForm::class, $this->getUser());
 
@@ -27,9 +25,10 @@ class UserController extends GeneralController
         return $this->render(
             'VelovitoBundle:user:profile.html.twig',
             [
-                'last_username' => $request->getSession()->get(Security::LAST_USERNAME),
-                'error'         => $error,
-                'form'          => $form->createView(),
+                'form'                => $form->createView(),
+                C::PARAM_VK_AUTH_LINK => $this->get(C::MODEL_VK_API)->getAuthLink(),
+                'user'                => $this->getUser(),
+                'vk_info'             => $userInfo,
             ]
         );
     }
@@ -48,7 +47,6 @@ class UserController extends GeneralController
 
     public function favoriteAdvertsAction(Request $request)
     {
-        var_dump($this->get('service.vk_api')->getUserInfo());
         $this->denyUnlessAuthenticatedFully();
 
         return $this->render(

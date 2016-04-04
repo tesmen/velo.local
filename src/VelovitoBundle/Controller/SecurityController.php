@@ -38,6 +38,12 @@ class SecurityController extends GeneralController
         $this->get('session')->set(C::PARAM_VK_TOKEN, $userInfo['access_token']);
         $this->get('session')->set(C::PARAM_VK_USER_ID, $userInfo['user_id']);
 
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $this->get(C::MODEL_SECURITY)->addVkAccountToUser($this->getUser());
+
+            return $this->redirectToRoute(C::ROUTE_PROFILE);
+        }
+
         return $this->redirectToRoute(C::ROUTE_VK_AUTH_SUCCESS);
     }
 
@@ -75,8 +81,8 @@ class SecurityController extends GeneralController
         return $this->render(
             'VelovitoBundle:security:registration.html.twig',
             [
-                'form'         => $form->createView(),
-                'vk_auth_link' => $this->get(C::MODEL_VK_API)->getAuthLink(),
+                'form'                => $form->createView(),
+                C::PARAM_VK_AUTH_LINK => $this->get(C::MODEL_VK_API)->getAuthLink(),
             ]
         );
     }

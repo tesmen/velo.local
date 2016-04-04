@@ -10,5 +10,13 @@
         {{ macro.bootstrapFormInput(form.username) }}
         {{ macro.bootstrapFormInput(form.email) }}
         {{ macro.bootstrapFormInput(form.registered_date) }}
+
+        {% if user.getVkAccountId() is empty or user.getVkAccountId() == 0 %}
+            <a href="{{ vk_auth_link }}">Подключить аккаунт ВК</a>
+        {% else %}
+            Авторизован через ВК! {{ vk_info.first_name }} {{ vk_info.last_name }}
+            <br>
+            <img src="{{ vk_info.photo_big }}" alt="Это вы">
+        {% endif %}
     </div>
 {% endblock %}
