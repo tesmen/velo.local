@@ -24,6 +24,7 @@ class SecurityController extends GeneralController
             [
                 'last_username' => $request->getSession()->get(Security::LAST_USERNAME),
                 'error'         => $error,
+                C::PARAM_VK_AUTH_LINK => $this->get(C::MODEL_VK_API)->getAuthLink(),
             ]
         );
     }
