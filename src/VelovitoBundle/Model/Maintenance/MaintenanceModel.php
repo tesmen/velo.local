@@ -34,7 +34,7 @@ class MaintenanceModel
         $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->load($data);
     }
 
-    function loadCurrencys()
+    function loadCurrencies()
     {
         $arr = [
             [
@@ -47,28 +47,5 @@ class MaintenanceModel
         foreach ($arr as $item) {
             $this->em->getRepository(C::REPO_CURRENCY)->create($item);
         }
-    }
-
-    function loadAdvertStatuses()
-    {
-        $records = [
-            [
-                'id'    => C::ADVERT_STATUS_PUBLISHED,
-                'name'  => 'Опубликовано',
-                'alias' => 'published',
-            ],
-            [
-                'id'    => C::ADVERT_STATUS_UNPUBLISHED,
-                'name'  => 'Снято с публикации',
-                'alias' => 'unpublished',
-            ],
-            [
-                'id'    => C::ADVERT_STATUS_DELETED,
-                'name'  => 'Удалено',
-                'alias' => 'deleted',
-            ],
-        ];
-
-        $this->em->getRepository(C::REPO_ADVERT_STATUS)->load($records);
     }
 }
