@@ -2,14 +2,17 @@
     {% for category in menu %}
         <div class="category">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-            <a href="{{ url('homepage') }}">{{ category.getName() }}</a>
+            {{ category.getName() }}
 
             {% if category.getCatalogItems() is not empty %}
-                <div class="itemlist col-md-2">
+                <div class="itemlist">
+                    <div class="category-holder">
+                        <a href="{{ url('homepage') }}">Перейти в {{ category.getName() }}</a>
+                    </div>
+
                     {% for item in  category.getCatalogItems() %}
-                        <div>
+                        <div class="category-item">
                             <a href="{{ url('homepage') }}">
-                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                 {{ item.name }}
                             </a>
                         </div>

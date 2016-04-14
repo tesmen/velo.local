@@ -6897,6 +6897,7 @@ a:hover {
   border: 1px solid #9f9f9f;
 }
 .sidebar-navigation div.category {
+  padding: 0 10px;
   width: 100%;
   text-decoration: none;
   text-indent: 0;
@@ -6905,7 +6906,7 @@ a:hover {
   position: relative;
 }
 .sidebar-navigation div.category:hover {
-  border-right: red 1px solid;
+  background: #eeeeee;
 }
 .sidebar-navigation div.category:hover div.itemlist {
   display: block;
@@ -6913,15 +6914,25 @@ a:hover {
 }
 .sidebar-navigation div.category div.itemlist {
   line-height: 3em;
-  width: 250px;
-  right: -250px;
+  width: 400px;
+  right: -400px;
   top: 0;
   z-index: 999;
   display: none;
-  background: #eeeeee;
+  background: #fefefe;
   border: 1px solid #9f9f9f;
 }
-.sidebar-navigation div.category div.itemlist div {
-  list-style: none;
-  text-indent: 0;
+.sidebar-navigation div.category div.itemlist .category-holder {
+  border: 1px solid #9f9f9f;
+  display: block;
+  height: 50px;
+}
+.sidebar-navigation div.category div.itemlist .category-holder:hover {
+  background: #eeeeee;
+}
+.sidebar-navigation div.category div.itemlist .category-item {
+  padding: 0 10px;
+}
+.sidebar-navigation div.category div.itemlist .category-item:hover {
+  background: #eeeeee;
 }
