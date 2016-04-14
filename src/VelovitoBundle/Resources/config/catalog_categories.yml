@@ -1,44 +1,50 @@
 -
-    id: 100
+    alias: wheels
+    name: Колеса
+    children:
+        -
+            alias: rims
+            name: Обода
+        -
+            alias: spokes
+            name: Спицы
+        -
+            alias: tyres
+            name: Покрышки
+        -
+            alias: hubs
+            name: Втулки
+
+-
     alias: chassis
     name: Ходовая часть
     children:
         -
-            id: 101
-            alias: rims
-            name: Обода
+            alias: chain
+            name: Цепи
         -
-            id: 102
-            alias: spokes
-            name: Спицы
+            alias: systems
+            name: Системы
         -
-            id: 103
-            alias: tyres
-            name: Покрышки
+            alias: shatunis
+            name: Шатуны
 
 -
-    id: 200
     alias: brakes
     name: Тормоза
     children:
         -
-            id: 201
             alias: disk_brakes
             name: Дисковые тормоза
         -
-            id: 205
-            alias: disk_brakes
+            alias: v_brakes
             name: Ободные тормоза
         -
-            id: 210
             alias: brakes_inventory
             name: Колодки, фиттинги, гидролинии
         -
-            id: 215
             alias: brakes_fluids
             name: Тормозная жидкость, химия
         -
-            id: 220
             alias: adapters
             name: Адаптеры для калипера
-

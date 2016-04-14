@@ -21,6 +21,7 @@ class CatalogCategory
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -39,23 +40,17 @@ class CatalogCategory
     private $alias;
 
     /**
-     * @ORM\OneToMany(targetEntity="CatalogItem", mappedBy="category")
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="\VelovitoBundle\Entity\CatalogCategory", inversedBy="catalogItems")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
-    private $catalogItems;
+    private $parent;
 
     /**
-     * Set id
-     *
-     * @param integer $id
-     *
-     * @return CatalogCategory
+     * @ORM\OneToMany(targetEntity="CatalogCategory", mappedBy="parent")
      */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
+    private $catalogItems;
 
     /**
      * Get id
@@ -147,5 +142,29 @@ class CatalogCategory
     public function getCatalogItems()
     {
         return $this->catalogItems;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \VelovitoBundle\Entity\CatalogCategory $parent
+     *
+     * @return CatalogCategory
+     */
+    public function setParent(\VelovitoBundle\Entity\CatalogCategory $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \VelovitoBundle\Entity\CatalogCategory
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

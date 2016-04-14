@@ -21,6 +21,5 @@ class DeployCommand extends ContainerAwareCommand
         $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadRoles();
         $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCatalogCategories();
         $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCurrencies();
-        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadAdvertStatuses();
     }
 }

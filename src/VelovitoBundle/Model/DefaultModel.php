@@ -22,35 +22,35 @@ class DefaultModel
     {
         $tail = is_null($fileName)
             ? ''
-            : DIRECTORY_SEPARATOR.$fileName;
+            : DIRECTORY_SEPARATOR . $fileName;
 
-        return $this->kernel->getRootDir().'/../../'.C::UPLOAD_PATH.$tail;
+        return $this->kernel->getRootDir() . '/../../' . C::UPLOAD_PATH . $tail;
     }
 
     public function getUploadedTemporaryImageThumbsDir($fileName = null)
     {
-        $dir = $this->getImagesDir().DIRECTORY_SEPARATOR.C::TEMPORARY_UPLOAD_IMAGE_THUMB_PATH;
+        $dir = $this->getImagesDir() . DIRECTORY_SEPARATOR . C::TEMPORARY_UPLOAD_IMAGE_THUMB_PATH;
 
         return $this->returnFilePath($dir, $fileName);
     }
 
     public function getWebDir($fileName = null)
     {
-        $dir = $this->kernel->getRootDir().'/../web';
+        $dir = $this->kernel->getRootDir() . '/../web';
 
         return $this->returnFilePath($dir, $fileName);
     }
 
     public function getImagesDir($fileName = null)
     {
-        $dir = $this->getWebDir().DIRECTORY_SEPARATOR.'img';
+        $dir = $this->getWebDir() . DIRECTORY_SEPARATOR . 'img';
 
         return $this->returnFilePath($dir, $fileName);
     }
 
     public function getImageOriginalsDir($fileName = null)
     {
-        $dir = $this->getImagesDir().DIRECTORY_SEPARATOR.'originals';
+        $dir = $this->getImagesDir() . DIRECTORY_SEPARATOR . 'originals';
 
         return $this->returnFilePath($dir, $fileName);
     }
@@ -59,11 +59,21 @@ class DefaultModel
     {
         $tail = is_null($fileName)
             ? ''
-            : DIRECTORY_SEPARATOR.$fileName;
+            : DIRECTORY_SEPARATOR . $fileName;
 
-        return $dir.$tail;
+        return $dir . $tail;
     }
 
+    /**
+     * @param null $parentId
+     * @return \VelovitoBundle\Entity\CatalogCategory[]
+     */
+    public function getMenuParentCategories($parentId = null)
+    {
+        return $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->findBy([
+            'parent' => null
+        ]);
+    }
     public function getMenu($parentId = null)
     {
         return $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->findAll();
@@ -74,10 +84,10 @@ class DefaultModel
         $yaml = new Parser();
 
         try {
-            $path = $this->kernel->locateResource('@VelovitoBundle/Resources/config/'.$config.'.yml');
+            $path = $this->kernel->locateResource('@VelovitoBundle/Resources/config/' . $config . '.yml');
 
         } catch (ParseException $e) {
-            throw new \Exception($config.'.yml not found');
+            throw new \Exception($config . '.yml not found');
         }
 
         try {

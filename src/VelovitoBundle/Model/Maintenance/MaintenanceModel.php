@@ -4,6 +4,7 @@ namespace VelovitoBundle\Model\Maintenance;
 
 use VelovitoBundle\C;
 use Doctrine\ORM\EntityManager;
+use VelovitoBundle\Entity\CatalogCategory;
 use VelovitoBundle\Model\DefaultModel;
 
 class MaintenanceModel
@@ -31,7 +32,29 @@ class MaintenanceModel
     function loadCatalogCategories()
     {
         $data = $this->defaultModel->loadConfigFromYaml('catalog_categories');
-        $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->load($data);
+
+        foreach ($data as $parentCat) {
+            $parentEnt = new CatalogCategory();
+            $parentEnt
+                ->setAlias($parentCat['alias'])
+                ->setName($parentCat['name'])
+                ->setParent(null);
+
+            $this->em->persist($parentEnt);
+            foreach ($parentCat['children'] as $catalogItem) {
+                $ent = new CatalogCategory();
+                $ent
+                    ->setAlias($catalogItem['alias'])
+                    ->setName($catalogItem['name'])
+                    ->setParent($parentEnt);
+
+                $this->em->persist($ent);
+            }
+        }
+
+        $this->em->flush();
+
+//        $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->load($data);
     }
 
     function loadCurrencies()
