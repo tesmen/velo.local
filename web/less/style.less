@@ -186,23 +186,23 @@ a {
   border: 1px solid @velo-gray;
 }
 
-.sidebar-navigation ul {
-  & li.category {
+.sidebar-navigation {
+  & div.category {
+    width: 100%;
     text-decoration: none;
     text-indent: 0;
     display: block;
-    line-height: 2em;
-    border-bottom: blue 1px solid;
+    line-height: 3em;
     position: relative;
     &:hover {
       border-right: red 1px solid;
-      & ul.itemlist {
+      & div.itemlist {
         display: block;
         position: absolute;
       }
     }
-    & ul.itemlist {
-      line-height: 2em;
+    & div.itemlist {
+      line-height: 3em;
       width: 250px;
       right: -250px;
       top: 0;
@@ -210,7 +210,7 @@ a {
       display: none;
       background: #eeeeee;
       border: 1px solid @velo-gray;
-      & li {
+      & div {
         list-style: none;
         text-indent: 0;
       }

@@ -1,20 +1,22 @@
 <div class="sidebar-navigation">
-    <ul>
-        {% for category in menu %}
-            <li class="category">
-                <a href="{{ url('homepage') }}">{{ category.getName() }}</a>
+    {% for category in menu %}
+        <div class="category">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            <a href="{{ url('homepage') }}">{{ category.getName() }}</a>
 
-                {% if category.getCatalogItems() is not empty %}
-                    <ul class="itemlist">
-                        {% for item in  category.getCatalogItems() %}
-                            <li>
-                                <a href="{{ url('homepage') }}">{{ item.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </li>
+            {% if category.getCatalogItems() is not empty %}
+                <div class="itemlist col-md-2">
+                    {% for item in  category.getCatalogItems() %}
+                        <div>
+                            <a href="{{ url('homepage') }}">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                {{ item.name }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
 
-        {% endfor %}
-    </ul>
+    {% endfor %}
 </div>

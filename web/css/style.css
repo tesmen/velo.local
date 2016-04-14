@@ -6896,23 +6896,23 @@ a:hover {
 .gray-border {
   border: 1px solid #9f9f9f;
 }
-.sidebar-navigation ul li.category {
+.sidebar-navigation div.category {
+  width: 100%;
   text-decoration: none;
   text-indent: 0;
   display: block;
-  line-height: 2em;
-  border-bottom: blue 1px solid;
+  line-height: 3em;
   position: relative;
 }
-.sidebar-navigation ul li.category:hover {
+.sidebar-navigation div.category:hover {
   border-right: red 1px solid;
 }
-.sidebar-navigation ul li.category:hover ul.itemlist {
+.sidebar-navigation div.category:hover div.itemlist {
   display: block;
   position: absolute;
 }
-.sidebar-navigation ul li.category ul.itemlist {
-  line-height: 2em;
+.sidebar-navigation div.category div.itemlist {
+  line-height: 3em;
   width: 250px;
   right: -250px;
   top: 0;
@@ -6921,7 +6921,7 @@ a:hover {
   background: #eeeeee;
   border: 1px solid #9f9f9f;
 }
-.sidebar-navigation ul li.category ul.itemlist li {
+.sidebar-navigation div.category div.itemlist div {
   list-style: none;
   text-indent: 0;
 }
