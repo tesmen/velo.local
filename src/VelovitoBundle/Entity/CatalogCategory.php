@@ -111,40 +111,6 @@ class CatalogCategory
     }
 
     /**
-     * Add catalogItem
-     *
-     * @param \VelovitoBundle\Entity\CatalogItem $catalogItem
-     *
-     * @return CatalogCategory
-     */
-    public function addCatalogItem(\VelovitoBundle\Entity\CatalogItem $catalogItem)
-    {
-        $this->catalogItems[] = $catalogItem;
-
-        return $this;
-    }
-
-    /**
-     * Remove catalogItem
-     *
-     * @param \VelovitoBundle\Entity\CatalogItem $catalogItem
-     */
-    public function removeCatalogItem(\VelovitoBundle\Entity\CatalogItem $catalogItem)
-    {
-        $this->catalogItems->removeElement($catalogItem);
-    }
-
-    /**
-     * Get catalogItems
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCatalogItems()
-    {
-        return $this->catalogItems;
-    }
-
-    /**
      * Set parent
      *
      * @param \VelovitoBundle\Entity\CatalogCategory $parent
@@ -166,5 +132,39 @@ class CatalogCategory
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Add catalogItem
+     *
+     * @param \VelovitoBundle\Entity\CatalogCategory $catalogItem
+     *
+     * @return CatalogCategory
+     */
+    public function addCatalogItem(\VelovitoBundle\Entity\CatalogCategory $catalogItem)
+    {
+        $this->catalogItems[] = $catalogItem;
+
+        return $this;
+    }
+
+    /**
+     * Remove catalogItem
+     *
+     * @param \VelovitoBundle\Entity\CatalogCategory $catalogItem
+     */
+    public function removeCatalogItem(\VelovitoBundle\Entity\CatalogCategory $catalogItem)
+    {
+        $this->catalogItems->removeElement($catalogItem);
+    }
+
+    /**
+     * Get catalogItems
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCatalogItems()
+    {
+        return $this->catalogItems;
     }
 }
