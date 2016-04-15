@@ -4,18 +4,22 @@ namespace VelovitoBundle\Model\Advertisement;
 
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
-use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Entity\User;
 use VelovitoBundle\Model\DocumentModel;
+use VelovitoBundle\Entity\Advertisement;
 
 class AdvertisementModel
 {
     private $em;
+    private $documentModel;
+    private $categoriesRepo;
 
     public function __construct(EntityManager $em, DocumentModel $documentModel)
     {
         $this->em = $em;
         $this->documentModel = $documentModel;
+
+        $this->categoriesRepo = $em->getRepository(C::REPO_CATALOG_CATEGORY);
     }
 
     public function createNewAdvert(array $formData, User $user)
@@ -24,6 +28,25 @@ class AdvertisementModel
         $formData[C::FORM_PHOTO_FILENAMES] = $savedFiles;
 
         return $this->em->getRepository(C::REPO_ADVERTISEMENT)->createAdvert($formData, $user);
+    }
+
+    public function getCategoriesForForm()
+    {
+        $result = [];
+
+        $parentNodes = $this->categoriesRepo->findBy([
+            'parent' => null
+        ]);
+
+        foreach ($parentNodes as $parent) {
+            $result['parents'][$parent->getName()] = $parent->getId();
+
+            foreach ($parent->getCatalogItems() as $item) {
+                $result['children'][$parent->getId()][$item->getName()] = $item->getId();
+            }
+        }
+
+        return $result;
     }
 
     public function updateAdvert($advert, array $formData)

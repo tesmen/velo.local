@@ -28,7 +28,6 @@ class C
     const REPO_ADVERTISEMENT = 'VelovitoBundle:Advertisement';
     const REPO_ROLE = 'VelovitoBundle:Role';
     const REPO_USER = 'VelovitoBundle:User';
-    const REPO_CATALOG_ITEM = 'VelovitoBundle:CatalogItem';
     const REPO_CATALOG_CATEGORY = 'VelovitoBundle:CatalogCategory';
     const REPO_CURRENCY = 'VelovitoBundle:Currency';
     const REPO_ADVERT_STATUS = 'VelovitoBundle:AdvertStatus';
@@ -75,6 +74,7 @@ class C
     const FORM_SAVE = 'save';
     const FORM_TEXT = 'text';
     const FORM_CATEGORY = 'category';
+    const FORM_SUBCATEGORY = 'sub_category';
     const FORM_TITLE = 'title';
     const FORM_PRICE = 'price';
     const FORM_DESCRIPTION = 'description';

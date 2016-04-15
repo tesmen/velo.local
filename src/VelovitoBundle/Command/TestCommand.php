@@ -31,18 +31,16 @@ class TestCommand extends ContainerAwareCommand
 //        );
 
 
-//        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCatalogCategories();
+        $this->getContainer()->get(C::MODEL_MAINTENANCE)->loadCatalogCategories();
 
-        $parents = $this->getContainer()->get(C::MODEL_DEFAULT)->getMenuParentCategories();
-
-        foreach ($parents as $parent) {
-            var_dump($parent->getId());
-
-            foreach ($parent->getCatalogItems() as $item) {
-                var_dump('   --  '.$item->getId());
-            }
-
-        }
-
+//        $parents = $this->getContainer()->get(C::MODEL_DEFAULT)->getMenuParentCategories();
+//
+//        foreach ($parents as $parent) {
+//            var_dump($parent->getId());
+//
+//            foreach ($parent->getCatalogItems() as $item) {
+//                var_dump('   --  '.$item->getId());
+//            }
+//        }
     }
 }

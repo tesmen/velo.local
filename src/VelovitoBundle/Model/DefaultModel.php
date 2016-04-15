@@ -74,6 +74,7 @@ class DefaultModel
             'parent' => null
         ]);
     }
+
     public function getMenu($parentId = null)
     {
         return $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->findAll();

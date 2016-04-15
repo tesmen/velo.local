@@ -17,8 +17,7 @@ class AdvertController extends GeneralController
 
         $this->denyUnlessAuthenticatedFully();
         $formOptions = [
-            'ad_statuses' => $adModel->getAdStatusMap(),
-            'categories'  => $this->get(C::MODEL_DEFAULT)->getMenu(),
+            'categories'  => $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm(),
         ];
 
         $form = $this->createForm(NewAdvertForm::class, $formOptions);
