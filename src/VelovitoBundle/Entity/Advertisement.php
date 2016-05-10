@@ -83,7 +83,7 @@ class Advertisement
     private $currency;
 
     /**
-     * @ORM\OneToMany(targetEntity="PhotoFile", mappedBy="advert")
+     * @ORM\OneToMany(targetEntity="Photo", mappedBy="advert")
      */
     private $photos;
 
@@ -275,11 +275,11 @@ class Advertisement
     /**
      * Add photo
      *
-     * @param \VelovitoBundle\Entity\PhotoFile $photo
+     * @param \VelovitoBundle\Entity\Photo $photo
      *
      * @return Advertisement
      */
-    public function addPhoto(\VelovitoBundle\Entity\PhotoFile $photo)
+    public function addPhoto(\VelovitoBundle\Entity\Photo $photo)
     {
         $this->photos[] = $photo;
 
@@ -289,9 +289,9 @@ class Advertisement
     /**
      * Remove photo
      *
-     * @param \VelovitoBundle\Entity\PhotoFile $photo
+     * @param \VelovitoBundle\Entity\Photo $photo
      */
-    public function removePhoto(\VelovitoBundle\Entity\PhotoFile $photo)
+    public function removePhoto(\VelovitoBundle\Entity\Photo $photo)
     {
         $this->photos->removeElement($photo);
     }

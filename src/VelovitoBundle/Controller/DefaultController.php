@@ -10,10 +10,7 @@ class DefaultController extends GeneralController
     public function velovitoAction(Request $request)
     {
         return $this->render(
-            'VelovitoBundle:default:velovito.html.twig',
-            [
-                'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            ]
+            'VelovitoBundle:default:velovito.html.twig'
         );
     }
 
@@ -30,13 +27,11 @@ class DefaultController extends GeneralController
 
     public function headerAction(Request $request, $title = null)
     {
-        $menu = $this->get(C::MODEL_DEFAULT)->getMenu();
-
         return $this->render(
             'VelovitoBundle:default:header.html.twig',
             [
                 C::PAGE_TITLE => $title,
-                'menu'        => $menu,
+                'menu'        => $this->get(C::MODEL_DEFAULT)->getMenu(),
             ]
         );
     }

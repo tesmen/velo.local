@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\PhotoFileRepository")
  */
-class PhotoFile
+class Photo
 {
     /**
      * @var integer
@@ -36,6 +36,15 @@ class PhotoFile
      */
     private $advert;
 
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="photos")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
+     */
+    private $user;
+
 
     /**
      * Get id
@@ -52,7 +61,7 @@ class PhotoFile
      *
      * @param string $fileName
      *
-     * @return PhotoFile
+     * @return Photo
      */
     public function setFileName($fileName)
     {
@@ -75,8 +84,7 @@ class PhotoFile
      * Set advert
      *
      * @param \VelovitoBundle\Entity\Advertisement $advert
-     *
-     * @return PhotoFile
+     * @return Photo
      */
     public function setAdvert(\VelovitoBundle\Entity\Advertisement $advert = null)
     {
@@ -93,5 +101,29 @@ class PhotoFile
     public function getAdvert()
     {
         return $this->advert;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \VelovitoBundle\Entity\User $user
+     *
+     * @return Photo
+     */
+    public function setUser(\VelovitoBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \VelovitoBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

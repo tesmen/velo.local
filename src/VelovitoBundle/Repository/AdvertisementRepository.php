@@ -3,7 +3,7 @@
 namespace VelovitoBundle\Repository;
 
 use VelovitoBundle\Entity\Advertisement;
-use VelovitoBundle\Entity\PhotoFile;
+use VelovitoBundle\Entity\Photo;
 use VelovitoBundle\Entity\User;
 use VelovitoBundle\C;
 use VelovitoBundle\Exception\NotFoundException;
@@ -35,7 +35,10 @@ class AdvertisementRepository extends GeneralRepository
     public function createAdvert($data, User $user)
     {
         $this->_em->beginTransaction();
-        $currency = $this->_em->getRepository(C::REPO_CURRENCY)->findOneOrFail(['id' => 1]);
+
+        $currency = $this->_em->getRepository(C::REPO_CURRENCY)->findOneOrFail(
+            ['id' => 1]
+        );
 
         try {
             $advertEnt = new Advertisement();

@@ -13,20 +13,24 @@ class AdvertController extends GeneralController
 {
     public function newAdvertAction(Request $request)
     {
+        $this->denyUnlessAuthenticatedFully();
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
 
-        $this->denyUnlessAuthenticatedFully();
         $formOptions = [
-            'categories'  => $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm(),
+            'categories' => $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm(),
         ];
 
         $form = $this->createForm(NewAdvertForm::class, $formOptions);
 
         if ($request->isMethod('POST')) {
-            $formData = $form->handleRequest($request)->getData();
-            $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
-            $adModel->createNewAdvert($formData, $this->getUser());
-            $this->addFlash('success', 'Объявление добавлено');
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $formData = $form->getData();
+                $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
+                $adModel->createNewAdvert($formData, $this->getUser());
+                $this->addFlash('success', 'Объявление добавлено');
+            }
 
             return $this->redirectToRoute(C::ROUTE_MY_ADS);
         }

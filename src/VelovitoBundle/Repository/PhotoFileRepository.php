@@ -2,14 +2,14 @@
 
 namespace VelovitoBundle\Repository;
 
-use VelovitoBundle\Entity\PhotoFile;
+use VelovitoBundle\Entity\Photo;
 
 class PhotoFileRepository extends GeneralRepository
 {
 
     public function getEntity()
     {
-        return new PhotoFile();
+        return new Photo();
     }
 
     public function removeAllPhotosByAdvertId($advertId)
