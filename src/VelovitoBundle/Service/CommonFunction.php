@@ -33,79 +33,6 @@ class CommonFunction
         return $pass;
     }
 
-    public static function transliterate($stmt)
-    {
-        $converter = [
-            'а' => 'a',
-            'б' => 'b',
-            'в' => 'v',
-            'г' => 'g',
-            'д' => 'd',
-            'е' => 'e',
-            'ё' => 'e',
-            'ж' => 'zh',
-            'з' => 'z',
-            'и' => 'i',
-            'й' => 'y',
-            'к' => 'k',
-            'л' => 'l',
-            'м' => 'm',
-            'н' => 'n',
-            'о' => 'o',
-            'п' => 'p',
-            'р' => 'r',
-            'с' => 's',
-            'т' => 't',
-            'у' => 'u',
-            'ф' => 'f',
-            'х' => 'h',
-            'ц' => 'c',
-            'ч' => 'ch',
-            'ш' => 'sh',
-            'щ' => 'sch',
-            'ь' => '',
-            'ы' => 'y',
-            'ъ' => '',
-            'э' => 'e',
-            'ю' => 'yu',
-            'я' => 'ya',
-            'А' => 'A',
-            'Б' => 'B',
-            'В' => 'V',
-            'Г' => 'G',
-            'Д' => 'D',
-            'Е' => 'E',
-            'Ё' => 'E',
-            'Ж' => 'Zh',
-            'З' => 'Z',
-            'И' => 'I',
-            'Й' => 'Y',
-            'К' => 'K',
-            'Л' => 'L',
-            'М' => 'M',
-            'Н' => 'N',
-            'О' => 'O',
-            'П' => 'P',
-            'Р' => 'R',
-            'С' => 'S',
-            'Т' => 'T',
-            'У' => 'U',
-            'Ф' => 'F',
-            'Х' => 'H',
-            'Ц' => 'C',
-            'Ч' => 'Ch',
-            'Ш' => 'Sh',
-            'Щ' => 'Sch',
-            'Ь' => '',
-            'Ы' => 'Y',
-            'Ъ' => '',
-            'Э' => 'E',
-            'Ю' => 'Yu',
-            'Я' => 'Ya',
-        ];
-
-        return strtr($stmt, $converter);
-    }
 
     public static function daysLeftByDateTime(\DateTime $dateTime)
     {
@@ -125,29 +52,6 @@ class CommonFunction
         return $dateTime < new \DateTime('now');
     }
 
-    /**
-     * @deprecated
-     * todo refactor this
-     */
-    public static function daysLeft($expireDay)
-    {
-        if (empty($expireDay) || 'on' === $expireDay) {
-            return null;
-        }
-
-        $today = $date = new \DateTime();
-        list($year, $month, $day) = explode('-', $expireDay);
-        $date = date('Y-m-d', mktime(0, 0, 0, $month, $day, $year));
-        $date = new \DateTime($date);
-        $date->modify('+1 day'); // во избежание недопонимания со стороны клиентов
-
-        if ($date < $today) {
-            return -(Int)date_diff($date, $today, true)->format('%a');
-        }
-
-        return (Int)date_diff($date, $today, true)->format('%a');
-    }
-
     public static function checkDomainName($domain)
     {
         if (!(filter_var('test@'.$domain, FILTER_VALIDATE_EMAIL))) {
@@ -155,61 +59,5 @@ class CommonFunction
         };
 
         return true;
-    }
-
-    public static function testDomainNameRegExp($domain)
-    {
-        $pattern = '/^([a-zA-Z0-9-]{1,32}\.){1,3}[a-zA-Z]{2,}$/';
-        preg_match($pattern, $domain, $matches);
-
-        return !empty($matches);
-    }
-
-    public static function testDomainNameRegExpRf($domain)
-    {
-        $pattern = '/^([а-яА-я-]{1,32}\.){1,3}рф$/u';
-        preg_match($pattern, $domain, $matches);
-
-        return !empty($matches);
-    }
-
-    public static function testDomainName($domain)
-    {
-        $valid = CommonFunction::testDomainNameRegExp($domain)
-            || CommonFunction::testDomainNameRegExpRf($domain);
-
-        return $valid;
-    }
-
-    public static function testDomainNameIntl($domain)
-    {
-        return filter_var('test@'.$domain, FILTER_VALIDATE_EMAIL);
-    }
-
-    public static function nplural($digit, $e1, $e2, $e3, $returnNumber = false)
-    {
-        $txt = $returnNumber ? (String)$digit.' ' : '';
-        $digit = ($digit > 20) ? $digit % 10 : $digit;
-
-        if ($digit >= 5 || $digit == 0) {
-            return $txt.$e3;
-        }
-        if ($digit >= 2) {
-            return $txt.$e2;
-        }
-
-        return $txt.$e1;
-    }
-
-    public static function getFileExtension($fileName)
-    {
-        return CommonFunction::getDomainArea($fileName);
-    }
-
-    public static function getDomainArea($domain)
-    {
-        $pieces = explode('.', $domain);
-
-        return array_pop($pieces);
     }
 }
