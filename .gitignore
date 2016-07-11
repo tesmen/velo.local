@@ -1,5 +1,5 @@
 /.idea
-
+/src/VelovitoBundle/Command/TestCommand.php
 /app/bootstrap.php.cache
 /app/config/parameters.yml
 /app/phpunit.xml

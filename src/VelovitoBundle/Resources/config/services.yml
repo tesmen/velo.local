@@ -31,9 +31,13 @@ services:
         class: VelovitoBundle\Model\VkApi\VkApiModel
         arguments: [%vk_api_client_id%, %vk_api_client_secret%, %vk_api_version%, "@router", "@session", "@security.token_storage"]
 
+    service.file_worker:
+        class: VelovitoBundle\Service\FileWorker
+        arguments: ["@service_container"]
+
     image_service:
         class: VelovitoBundle\Service\GregwarImageService
-        arguments: ["@model.default"]
+        arguments: ["@model.default", "@service.file_worker"]
 
     twig.plural:
         class: VelovitoBundle\Twig\PluralExtension
