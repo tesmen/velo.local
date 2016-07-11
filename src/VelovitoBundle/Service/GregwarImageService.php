@@ -29,4 +29,9 @@ class GregwarImageService
         return $image
             ->scaleResize($width, $height);
     }
+
+    public function createImage($filePath)
+    {
+        return new Image($filePath);
+    }
 }
