@@ -15,7 +15,7 @@ class FileWorker
 
     public function getWebDir()
     {
-        return $this->kernel->getRootDir() . DIRECTORY_SEPARATOR . 'web';
+        return $this->kernel->getRootDir() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'web';
     }
 
     public function getRootDir()
