@@ -63,7 +63,7 @@ favorites:
 
 advert_new:
     path:     /new-advert
-    defaults: { _controller: VelovitoBundle:Advert:newAdvert }
+    defaults: { _controller: VelovitoBundle:Advert:addAdvert }
 
 advert_edit:
     path:     /edit-advert/{advertId}

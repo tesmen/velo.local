@@ -11,7 +11,46 @@ use VelovitoBundle\Form\Ajax\UploadPhotoForm;
 
 class AdvertController extends GeneralController
 {
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @deprecated
+     * @see \VelovitoBundle\Controller\AdvertController::addAdvertAction
+     */
     public function newAdvertAction(Request $request)
+    {
+        $this->denyUnlessAuthenticatedFully();
+        $adModel = $this->get(C::MODEL_ADVERTISEMENT);
+
+        $formOptions = [
+            'categories' => $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm(),
+        ];
+
+        $form = $this->createForm(NewAdvertForm::class, $formOptions);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $formData = $form->getData();
+                $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
+                $adModel->createNewAdvert($formData, $this->getUser());
+                $this->addFlash('success', 'Объявление добавлено');
+            }
+
+            return $this->redirectToRoute(C::ROUTE_MY_ADS);
+        }
+
+        return $this->render(
+            'VelovitoBundle:advert:new_advert.html.twig',
+            [
+                'form'       => $form->createView(),
+                'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
+            ]
+        );
+    }
+
+    public function addAdvertAction(Request $request)
     {
         $this->denyUnlessAuthenticatedFully();
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);

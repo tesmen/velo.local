@@ -4,6 +4,7 @@ namespace VelovitoBundle\Form\Advert;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,16 +21,6 @@ class NewAdvertForm extends AbstractType
             [
                 'label'    => 'Категория',
                 'choices'  => $options['data']['categories']['parents'],
-                'required' => true,
-            ]
-        );
-
-        $builder->add(
-            C::FORM_SUBCATEGORY,
-            ChoiceType::class,
-            [
-                'label'    => 'Подкатегория',
-                'choices'  => $options['data']['categories']['children'],
                 'required' => true,
             ]
         );
@@ -57,7 +48,16 @@ class NewAdvertForm extends AbstractType
             TextareaType::class,
             [
                 'label'    => "Описание",
-                'required' => true,
+                'required' => false,
+            ]
+        );
+
+        $builder->add(
+            C::FORM_FILE,
+            FileType::class,
+            [
+                'label'    => "Описание",
+                'required' => false,
             ]
         );
 
@@ -72,6 +72,6 @@ class NewAdvertForm extends AbstractType
 
     public function getName()
     {
-        return 'new_ad';
+        return 'add_advert';
     }
 }
