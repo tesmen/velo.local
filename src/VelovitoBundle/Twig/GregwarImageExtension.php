@@ -20,6 +20,13 @@ class GregwarImageExtension extends \Twig_Extension
         ];
     }
 
+    /**
+     * @param $imageName
+     * @param $width
+     * @param $heigth
+     * @return string
+     * app_dev.php issue
+     */
     public function resize($imageName, $width, $heigth)
     {
         return 'http://'

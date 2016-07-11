@@ -32,7 +32,7 @@
                 </a>
             {% else %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ asset('bundles/velovito/01.jpg') | resize(128,128) }}" alt="Image" width="150" height="150">
+                    <img src="{{ 'bundles/velovito/01.jpg' | resize(128,128) }}" alt="Image" width="150" height="150">
                 </a>
             {% endif %}
 
