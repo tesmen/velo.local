@@ -43,7 +43,7 @@ class Advertisement
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
      */
     private $user;
 
@@ -90,7 +90,7 @@ class Advertisement
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=4096)
+     * @ORM\Column(name="description", type="string", length=4096, nullable=true)
      */
     private $description;
 

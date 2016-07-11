@@ -20,14 +20,6 @@
         {{ form_widget(form.submit) }}
         {{ form_end(form) }}
     </div>
-    <br/>
-
-    {{ form_start(uploadForm, {'attr':{ 'id': 'photo' }}) }}
-    {{ form_widget(uploadForm.photo, {'attr': {'style':'display:none'}}) }}
-
-    {{ form_end(uploadForm) }}
-
-    <br/>
 
     <script>
         var spinner = new Spinner(dockerSpinnerSettings).spin($('#promo_spin')[0]);

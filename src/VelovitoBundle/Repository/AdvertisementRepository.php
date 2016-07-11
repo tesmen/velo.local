@@ -10,6 +10,11 @@ use VelovitoBundle\Exception\NotFoundException;
 
 class AdvertisementRepository extends GeneralRepository
 {
+    /**
+     * @param array $data
+     * @throws \Exception
+     * @deprecated
+     */
     public function load(array $data)
     {
         $this->_em->beginTransaction();
@@ -32,47 +37,12 @@ class AdvertisementRepository extends GeneralRepository
         }
     }
 
-    public function createAdvert($data, User $user)
-    {
-        $this->_em->beginTransaction();
-
-        $currency = $this->_em->getRepository(C::REPO_CURRENCY)->findOneOrFail(
-            ['id' => 1]
-        );
-
-        try {
-            $advertEnt = new Advertisement();
-
-            $advertEnt
-                ->setTitle($data[C::FORM_TITLE])
-                ->setPrice($data[C::FORM_PRICE])
-                ->setCurrency($currency)
-                ->setIsDeleted(false)
-                ->setIsPublished(true)
-                ->setDescription($data[C::FORM_DESCRIPTION])
-                ->setUser($user);
-
-            $this->_em->persist($advertEnt);
-
-            foreach ($data[C::FORM_PHOTO_FILENAMES] as $photoFileName) {
-                $this->_em->getRepository(C::REPO_PHOTO_FILE)->create(
-                    [
-                        'advert'   => $advertEnt,
-                        'fileName' => $photoFileName,
-                    ]
-                );
-            }
-
-            $this->_em->flush();
-            $this->_em->commit();
-        } catch (\Exception $e) {
-            $this->_em->rollback();
-            throw $e;
-        }
-
-        return $advertEnt;
-    }
-
+    /**
+     * @param $advertid
+     * @return null|object
+     * @throws NotFoundException
+     * @todo DQL!
+     */
     public function unPublish($advertid)
     {
         $ent = $this->findOneOrFail($advertid);

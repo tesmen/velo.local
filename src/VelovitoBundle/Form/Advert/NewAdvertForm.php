@@ -56,7 +56,7 @@ class NewAdvertForm extends AbstractType
             C::FORM_FILE,
             FileType::class,
             [
-                'label'    => "Описание",
+                'label'    => "Фотография",
                 'required' => false,
             ]
         );

@@ -7,27 +7,56 @@ use VelovitoBundle\C;
 use VelovitoBundle\Entity\User;
 use VelovitoBundle\Model\DocumentModel;
 use VelovitoBundle\Entity\Advertisement;
+use VelovitoBundle\Model\SecurityModel;
 
 class AdvertisementModel
 {
     private $em;
     private $documentModel;
+    private $securityModel;
+
     private $categoriesRepo;
 
-    public function __construct(EntityManager $em, DocumentModel $documentModel)
+    public function __construct(EntityManager $em, DocumentModel $documentModel, SecurityModel $securityModel)
     {
         $this->em = $em;
         $this->documentModel = $documentModel;
+        $this->securityModel = $securityModel;
 
         $this->categoriesRepo = $em->getRepository(C::REPO_CATALOG_CATEGORY);
+        $this->currencyRepo = $this->em->getRepository(C::REPO_CURRENCY);
     }
 
-    public function createNewAdvert(array $formData, User $user)
+    public function createNewAdvert(array $formData)
     {
-        $savedFiles = $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
-        $formData[C::FORM_PHOTO_FILENAMES] = $savedFiles;
+        $user = $this->securityModel->getUser();
+        $advert = new Advertisement();
+        try {
+            $this->em->beginTransaction();
 
-        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->createAdvert($formData, $user);
+            $currency = $this->currencyRepo->findOneOrFail(
+                ['id' => 1]
+            );
+
+            $advert->setDescription($formData[C::FORM_DESCRIPTION])
+                ->setUser($user)
+                ->setIsDeleted(false)
+                ->setIsPublished(true)
+                ->setPrice($formData[C::FORM_PRICE])
+                ->setCurrency($currency)
+                ->setTitle($formData[C::FORM_TITLE]);
+
+            $this->em->persist($advert);
+            $this->em->flush($advert);
+            $this->em->commit();
+        } catch (\Exception $e) {
+            $this->em->rollback();
+
+            throw $e;
+        }
+
+
+        return $advert->getId();
     }
 
     public function getCategoriesForForm()
@@ -35,7 +64,7 @@ class AdvertisementModel
         $result = [];
 
         $parentNodes = $this->categoriesRepo->findBy([
-            'parent' => null
+            'parent' => null,
         ]);
 
         foreach ($parentNodes as $parent) {

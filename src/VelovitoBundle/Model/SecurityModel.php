@@ -27,7 +27,8 @@ class SecurityModel
         TokenStorage $tokenStorage,
         VkApiModel $vkApi,
         UserModel $userModel
-    ) {
+    )
+    {
         $this->em = $em;
         $this->session = $session;
         $this->tokenStorage = $tokenStorage;
@@ -96,5 +97,15 @@ class SecurityModel
         $this->em->flush($user);
 
         return true;
+    }
+
+    public function getUser()
+    {
+        return $this->tokenStorage->getToken()->getUser();
+    }
+
+    public function getToken()
+    {
+        return $this->tokenStorage->getToken();
     }
 }

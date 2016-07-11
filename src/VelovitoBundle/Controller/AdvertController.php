@@ -66,8 +66,7 @@ class AdvertController extends GeneralController
 
             if ($form->isValid()) {
                 $formData = $form->getData();
-                $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
-                $adModel->createNewAdvert($formData, $this->getUser());
+                $adModel->createNewAdvert($formData);
                 $this->addFlash('success', 'Объявление добавлено');
             }
 
