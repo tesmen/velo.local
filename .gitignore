@@ -1,4 +1,5 @@
 /.idea
+
 /app/bootstrap.php.cache
 /app/config/parameters.yml
 /app/phpunit.xml
@@ -7,4 +8,5 @@
 /var/sessions/*
 /vendor/
 /web/bundles/
+/web/img/
 composer.phar

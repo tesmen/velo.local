@@ -13,7 +13,7 @@ class Advertisement
 {
     public function __construct() {
         $this->creationDate = new \DateTime();
-        $this->photos = new ArrayCollection();
+        $this->photo = new ArrayCollection();
     }
 
     /**
@@ -83,9 +83,11 @@ class Advertisement
     private $currency;
 
     /**
-     * @ORM\OneToMany(targetEntity="Photo", mappedBy="advert")
+     * @var string
+     * @ORM\OneToOne(targetEntity="VelovitoBundle\Entity\Photo")
+     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=true)
      */
-    private $photos;
+    private $photo;
 
     /**
      * @var string
@@ -281,7 +283,7 @@ class Advertisement
      */
     public function addPhoto(\VelovitoBundle\Entity\Photo $photo)
     {
-        $this->photos[] = $photo;
+        $this->photo[] = $photo;
 
         return $this;
     }
@@ -293,7 +295,7 @@ class Advertisement
      */
     public function removePhoto(\VelovitoBundle\Entity\Photo $photo)
     {
-        $this->photos->removeElement($photo);
+        $this->photo->removeElement($photo);
     }
 
     /**
@@ -301,9 +303,9 @@ class Advertisement
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPhotos()
+    public function getPhoto()
     {
-        return $this->photos;
+        return $this->photo;
     }
 
     /**

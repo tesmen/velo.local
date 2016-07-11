@@ -7,23 +7,26 @@ use VelovitoBundle\Model\DefaultModel;
 
 class GregwarImageService
 {
-    public function __construct(DefaultModel $defaultModel)
+    private $fileWorker;
+
+    public function __construct(DefaultModel $defaultModel, FileWorker $fileWorker)
     {
         $this->defaultModel = $defaultModel;
+        $this->fileWorker = $fileWorker;
     }
 
     public function getImage($filename)
     {
-        $filePath = $this->defaultModel->getImageOriginalsDir($filename);
+        $filePath = $this->fileWorker->getWebDir() . DIRECTORY_SEPARATOR . $filename;
 
         return new Image($filePath);
     }
 
-    public function resize($fileName, $witdh, $height)
+    public function resize($fileName, $width, $height)
     {
         $image = $this->getImage($fileName);
 
         return $image
-            ->scaleResize($witdh, $height);
+            ->scaleResize($width, $height);
     }
 }

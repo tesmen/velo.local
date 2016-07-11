@@ -149,7 +149,7 @@ class AdvertController extends GeneralController
             'VelovitoBundle:advert:edit_advert.html.twig',
             [
                 'form'         => $form->createView(),
-                'advertPhotos' => $advertEnt->getPhotos(),
+                'advertPhotos' => $advertEnt->getPhoto(),
                 'uploadForm'   => $this->createForm(UploadPhotoForm::class)->createView(),
             ]
         );

@@ -26,16 +26,26 @@
 
     <div class="advert">
         <div class="photo">
-            {% set c = 0 %}
-            {% for photo in advert.getPhotos() %}
-                {% if c == 0 %}
-                    <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                        <img src="{{ photo.getFileName() | resize(128,128) }}" alt="Image">
-                    </a>
-                {% endif %}
+            {% if advert.getPhoto is not null %}
+                <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                    <img src="{{ advert.getPhoto.getFileName() | resize(128,128) }}" alt="Image">
+                </a>
+            {% else %}
+                <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                    <img src="{{ asset('bundles/velovito/no_photo.png') }}" alt="Image" width="150" height="150">
+                </a>
+            {% endif %}
 
-                {% set c = 1 %}
-            {% endfor %}
+            {#{% set c = 0 %}#}
+            {#{% for photo in advert.getPhotoBag() %}#}
+            {#{% if c == 0 %}#}
+            {#<a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">#}
+            {#<img src="{{ photo.getFileName() | resize(128,128) }}" alt="Image">#}
+            {#</a>#}
+            {#{% endif %}#}
+
+            {#{% set c = 1 %}#}
+            {#{% endfor %}#}
         </div>
 
         <div class="info">

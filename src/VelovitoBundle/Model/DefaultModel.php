@@ -8,6 +8,11 @@ use VelovitoBundle\C;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Exception\ParseException;
 
+/**
+ * Class DefaultModel
+ * @package VelovitoBundle\Model
+ * @deprecated
+ */
 class DefaultModel
 {
     private $em;

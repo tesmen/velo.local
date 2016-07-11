@@ -30,7 +30,7 @@ class Photo
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Advertisement", inversedBy="photos")
+     * @ORM\ManyToOne(targetEntity="Advertisement", inversedBy="photo")
      * @ORM\JoinColumn(name="advert", referencedColumnName="id")
      *
      */
