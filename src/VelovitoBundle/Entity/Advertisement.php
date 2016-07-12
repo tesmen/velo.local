@@ -16,7 +16,7 @@ class Advertisement
     const CURRENCY_USD = 3;
     const CURRENCY_EUR = 4;
 
-    public static function getCurrencyList($invert=false)
+    public static function getCurrencyList($invert = false)
     {
         $list = [
             self::CURRENCY_RUB => 'руб.',
@@ -30,6 +30,15 @@ class Advertisement
         }
 
         return $list;
+    }
+
+    public function getCurrencyName($id = null)
+    {
+        if (empty($id)) {
+            return self::getCurrencyList()[$this->currency];
+        }
+
+        return self::getCurrencyList()[$id];
     }
 
     public function __construct()
