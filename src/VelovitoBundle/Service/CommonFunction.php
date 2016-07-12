@@ -125,28 +125,6 @@ class CommonFunction
         return $dateTime < new \DateTime('now');
     }
 
-    /**
-     * @deprecated
-     * todo refactor this
-     */
-    public static function daysLeft($expireDay)
-    {
-        if (empty($expireDay) || 'on' === $expireDay) {
-            return null;
-        }
-
-        $today = $date = new \DateTime();
-        list($year, $month, $day) = explode('-', $expireDay);
-        $date = date('Y-m-d', mktime(0, 0, 0, $month, $day, $year));
-        $date = new \DateTime($date);
-        $date->modify('+1 day'); // во избежание недопонимания со стороны клиентов
-
-        if ($date < $today) {
-            return -(Int)date_diff($date, $today, true)->format('%a');
-        }
-
-        return (Int)date_diff($date, $today, true)->format('%a');
-    }
 
     public static function checkDomainName($domain)
     {
