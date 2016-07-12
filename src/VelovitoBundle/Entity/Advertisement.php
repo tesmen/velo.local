@@ -84,7 +84,7 @@ class Advertisement
     /**
      * @var string
      * @ORM\OneToOne(targetEntity="VelovitoBundle\Entity\UserPhoto")
-     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="user_photo_id", referencedColumnName="id", nullable=true)
      */
     private $photo;
 

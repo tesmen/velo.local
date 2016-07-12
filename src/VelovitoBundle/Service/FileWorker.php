@@ -4,6 +4,8 @@ namespace VelovitoBundle\Service;
 
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use VelovitoBundle\C;
 
 class FileWorker
 {
@@ -19,13 +21,20 @@ class FileWorker
         return $this->kernel->getRootDir() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'web';
     }
 
+    public function getUserPhotoDir()
+    {
+        return $this->getWebDir() . DIRECTORY_SEPARATOR . C::UPLOAD_PATH;
+    }
+
     public function getAppDir()
     {
         return $this->kernel->getRootDir();
     }
 
-    public function saveUserUploadedPhoto(File $file )
+    public function saveUserUploadedPhoto(UploadedFile $file)
     {
-        return $file->move('/home/tesmen')->getFilename();
+        $file->move($this->getUserPhotoDir(), $file->getClientOriginalName());
+
+        return $file->getFilename();
     }
 }
