@@ -34,7 +34,7 @@ class Advertisement
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="integer")
+     * @ORM\Column(name="price", type="integer", options={"unsigned"=true})
      */
     private $price;
 
@@ -75,9 +75,8 @@ class Advertisement
     private $viewsCount;
 
     /**
-     * @var string
-     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Currency")
-     * @ORM\JoinColumn(name="currency", referencedColumnName="id", nullable=false)
+     * @var integer
+     * @ORM\Column(name="currency", type="smallint", nullable=false, options={"unsigned"=true})
      */
     private $currency;
 
@@ -91,7 +90,7 @@ class Advertisement
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=4096, nullable=true)
+     * @ORM\Column(name="description", type="string", length=8096, nullable=true)
      */
     private $description;
 
