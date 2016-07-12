@@ -203,7 +203,7 @@ class Advertisement
     /**
      * Set currency
      *
-     * @param Currency $currency
+     * @param integer $currency
      *
      * @return Advertisement
      */

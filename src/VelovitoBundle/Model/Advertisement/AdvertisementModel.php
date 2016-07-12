@@ -27,7 +27,6 @@ class AdvertisementModel
         $this->fileWorker = $fileWorker;
 
         $this->categoriesRepo = $em->getRepository(C::REPO_CATALOG_CATEGORY);
-        $this->currencyRepo = $this->em->getRepository(C::REPO_CURRENCY);
         $this->userPhotorepo = $this->em->getRepository(C::REPO_USER_PHOTO);
     }
 
