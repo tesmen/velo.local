@@ -30,7 +30,7 @@
 
             {% if advert.getPhoto is not null %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ basePath~ ('upload/'~advert.getPhoto.getFileName()) | resize(128,128) }}" alt="Image">
+                    <img src="{{ basePath ~ (advert.getPhoto.getFileName() | getUserPhoto(128,128)) }}" alt="Image">
                 </a>
             {% else %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">

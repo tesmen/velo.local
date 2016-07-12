@@ -15,22 +15,17 @@ class GregwarImageService
         $this->fileWorker = $fileWorker;
     }
 
-    public function getImage($filename)
-    {
-        $filePath = $this->fileWorker->getWebDir() . DIRECTORY_SEPARATOR . $filename;
 
-        return new Image($filePath);
-    }
-
-    public function resize($fileName, $width, $height)
+    /**
+     * @param $filePath /home/user/var/www/site/upload/img.png
+     * @param $width
+     * @param $height
+     * @return mixed
+     */
+    public function scaleResize($filePath, $width, $height)
     {
-        $image = $this->getImage($fileName);
+        $image = new Image($filePath);
 
         return $image->scaleResize($width, $height);
-    }
-
-    public function createImage($filePath)
-    {
-        return new Image($filePath);
     }
 }

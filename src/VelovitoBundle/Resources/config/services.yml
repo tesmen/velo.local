@@ -56,7 +56,7 @@ services:
 
     twig.image_service:
          class: VelovitoBundle\Twig\GregwarImageExtension
-         arguments: ["@image_service", "@router"]
+         arguments: ["@image_service", "@service.file_worker", "@router"]
          tags:
              - { name: twig.extension }
 
