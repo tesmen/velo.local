@@ -16,12 +16,12 @@ class Advertisement
     const CURRENCY_USD = 3;
     const CURRENCY_EUR = 4;
 
-    public static function getCurrencyList($invert=true)
+    public static function getCurrencyList($invert=false)
     {
         $list = [
-            self::CURRENCY_RUB => 'рубли',
-            self::CURRENCY_GRN => 'гривны',
-            self::CURRENCY_USD => 'доллары',
+            self::CURRENCY_RUB => 'руб.',
+            self::CURRENCY_GRN => 'грн.',
+            self::CURRENCY_USD => 'долл.',
             self::CURRENCY_EUR => 'евро',
         ];
 

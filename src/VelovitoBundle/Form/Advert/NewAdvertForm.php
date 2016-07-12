@@ -30,8 +30,8 @@ class NewAdvertForm extends AbstractType
             C::FORM_CURRENCY,
             ChoiceType::class,
             [
-                'label'    => 'Категория',
-                'choices'  => Advertisement::getCurrencyList(),
+                'label'    => 'Валюта',
+                'choices'  => Advertisement::getCurrencyList(true),
                 'required' => true,
             ]
         );

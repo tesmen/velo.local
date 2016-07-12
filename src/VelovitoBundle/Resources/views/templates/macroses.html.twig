@@ -52,7 +52,7 @@
             </div>
 
             <div class="price">
-                {{ advert.getPrice() }} {{ advert.getCurrency().getShortName() }}
+                {{ advert.getPrice() }} {{ advert.getCurrencyList[advert.getCurrency()] }}
             </div>
 
             <div class="description">
