@@ -24,8 +24,8 @@ class FileWorker
         return $this->kernel->getRootDir();
     }
 
-    public function saveUserUploadedFile(File $file )
+    public function saveUserUploadedPhoto(File $file )
     {
-        return $file->move('/home/tesmen');
+        return $file->move('/home/tesmen')->getFilename();
     }
 }

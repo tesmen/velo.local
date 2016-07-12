@@ -19,7 +19,7 @@ class PhotoDuplicatesCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
-        $repo = $em->getRepository(C::REPO_PHOTO_FILE);
+        $repo = $em->getRepository(C::REPO_USER_PHOTO);
         $ents = $repo->findAll();
         $c = 0;
 

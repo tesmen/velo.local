@@ -28,30 +28,29 @@ class AdvertisementModel
 
         $this->categoriesRepo = $em->getRepository(C::REPO_CATALOG_CATEGORY);
         $this->currencyRepo = $this->em->getRepository(C::REPO_CURRENCY);
+        $this->userPhotorepo = $this->em->getRepository(C::REPO_USER_PHOTO);
     }
 
     public function createNewAdvert(array $formData)
     {
         $user = $this->securityModel->getUser();
         $advert = new Advertisement();
+        $this->em->beginTransaction();
+
         try {
-            $this->em->beginTransaction();
-
-            $currency = $this->currencyRepo->findOneOrFail(
-                ['id' => 1]
-            );
-
-            if (!empty($formData[C::FORM_PHOTO])) {
-                $this->fileWorker->saveUserUploadedFile($formData[C::FORM_PHOTO]);
-            }
-
             $advert->setDescription($formData[C::FORM_DESCRIPTION])
                 ->setUser($user)
                 ->setIsDeleted(false)
                 ->setIsPublished(true)
                 ->setPrice($formData[C::FORM_PRICE])
-                ->setCurrency($currency)
+                ->setCurrency($this->currencyRepo->getDefault())
                 ->setTitle($formData[C::FORM_TITLE]);
+
+            if (!empty($formData[C::FORM_PHOTO])) {
+                $photoFileName = $this->fileWorker->saveUserUploadedPhoto($formData[C::FORM_PHOTO]);
+                $userPhoto = $this->userPhotorepo->create($user, $photoFileName);
+                $advert->setPhoto($userPhoto);
+            }
 
             $this->em->persist($advert);
             $this->em->flush($advert);
@@ -61,7 +60,6 @@ class AdvertisementModel
 
             throw $e;
         }
-
 
         return $advert->getId();
     }
@@ -85,9 +83,10 @@ class AdvertisementModel
         return $result;
     }
 
+
     public function updateAdvert($advert, array $formData)
     {
-        $photoRepo = $this->em->getRepository(C::REPO_PHOTO_FILE);
+        $photoRepo = $this->em->getRepository(C::REPO_USER_PHOTO);
         if (!($advert instanceof Advertisement)) {
             $advert = $this->getAdvertById($advert);
         }

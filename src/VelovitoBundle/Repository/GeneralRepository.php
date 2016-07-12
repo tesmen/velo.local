@@ -8,20 +8,6 @@ use VelovitoBundle\Exception\NotFoundException;
 
 class GeneralRepository extends EntityRepository
 {
-    public function create(array $data)
-    {
-        $ent = $this->getEntity();
-        $this->fillEntity($ent, $data);
-        $this->_em->persist($ent);
-        $this->_em->flush($ent);
-    }
-
-    public function getEntity()
-    {
-        // override in repositories
-        return null;
-    }
-
     public function fillEntity($ent, array  $data)
     {
 

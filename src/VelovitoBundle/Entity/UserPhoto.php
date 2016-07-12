@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping\ManyToOne;
  * PhotoFile
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\PhotoFileRepository")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\UserPhotoRepository")
  */
-class Photo
+class UserPhoto
 {
     /**
      * @var integer
@@ -30,21 +30,11 @@ class Photo
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Advertisement", inversedBy="photo")
-     * @ORM\JoinColumn(name="advert", referencedColumnName="id")
-     *
-     */
-    private $advert;
-
-    /**
-     * @var integer
-     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="photos")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
      */
     private $user;
-
 
     /**
      * Get id
@@ -61,7 +51,7 @@ class Photo
      *
      * @param string $fileName
      *
-     * @return Photo
+     * @return UserPhoto
      */
     public function setFileName($fileName)
     {
@@ -81,34 +71,11 @@ class Photo
     }
 
     /**
-     * Set advert
-     *
-     * @param \VelovitoBundle\Entity\Advertisement $advert
-     * @return Photo
-     */
-    public function setAdvert(\VelovitoBundle\Entity\Advertisement $advert = null)
-    {
-        $this->advert = $advert;
-
-        return $this;
-    }
-
-    /**
-     * Get advert
-     *
-     * @return \VelovitoBundle\Entity\Advertisement
-     */
-    public function getAdvert()
-    {
-        return $this->advert;
-    }
-
-    /**
      * Set user
      *
      * @param \VelovitoBundle\Entity\User $user
      *
-     * @return Photo
+     * @return UserPhoto
      */
     public function setUser(\VelovitoBundle\Entity\User $user = null)
     {

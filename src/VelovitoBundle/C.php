@@ -33,7 +33,7 @@ class C
     const REPO_ADVERT_STATUS = 'VelovitoBundle:AdvertStatus';
     const REPO_PARTS_VENDOR = 'VelovitoBundle:PartsVendor';
     const REPO_USER_FAVORITES = 'VelovitoBundle:UserFavoriteAdvert';
-    const REPO_PHOTO_FILE = 'VelovitoBundle:Photo';
+    const REPO_USER_PHOTO = 'VelovitoBundle:UserPhoto';
     const REPO_CITY = 'VelovitoBundle:City';
     const REPO_COUNTRY = 'VelovitoBundle:Country';
 
@@ -92,10 +92,12 @@ class C
     const FORM_PHOTO = 'photo';
     const FORM_PHOTO_FILENAMES = 'photoFileNames';
     const FORM_CONFIRM_PASSWORD = 'confirm_password';
-
     const FORM_SOLD_AT_VELOVITO = 'sold_at_velovito';
     const FORM_SOLD_SOMEWHERE = 'sold_somewhere';
     const FORM_OTHER_REASON = 'other_reason';
+
+    const FLASH_BAG_ERROR = 'error';
+    const FLASH_BAG_SUCCESS = 'success';
 
     const PARAM_VK_TOKEN = 'vk_token';
     const PARAM_VK_USER_ID = 'user_id';

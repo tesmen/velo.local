@@ -3,7 +3,7 @@
 namespace VelovitoBundle\Repository;
 
 use VelovitoBundle\Entity\Advertisement;
-use VelovitoBundle\Entity\Photo;
+use VelovitoBundle\Entity\UserPhoto;
 use VelovitoBundle\Entity\User;
 use VelovitoBundle\C;
 use VelovitoBundle\Exception\NotFoundException;

@@ -13,7 +13,6 @@ class Advertisement
 {
     public function __construct() {
         $this->creationDate = new \DateTime();
-        $this->photo = new ArrayCollection();
     }
 
     /**
@@ -84,7 +83,7 @@ class Advertisement
 
     /**
      * @var string
-     * @ORM\OneToOne(targetEntity="VelovitoBundle\Entity\Photo")
+     * @ORM\OneToOne(targetEntity="VelovitoBundle\Entity\UserPhoto")
      * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=true)
      */
     private $photo;
@@ -161,7 +160,7 @@ class Advertisement
      *
      * @return Advertisement
      */
-    public function setUser(\VelovitoBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -275,40 +274,6 @@ class Advertisement
     }
 
     /**
-     * Add photo
-     *
-     * @param \VelovitoBundle\Entity\Photo $photo
-     *
-     * @return Advertisement
-     */
-    public function addPhoto(\VelovitoBundle\Entity\Photo $photo)
-    {
-        $this->photo[] = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Remove photo
-     *
-     * @param \VelovitoBundle\Entity\Photo $photo
-     */
-    public function removePhoto(\VelovitoBundle\Entity\Photo $photo)
-    {
-        $this->photo->removeElement($photo);
-    }
-
-    /**
-     * Get photos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
-
-    /**
      * Set isPublished
      *
      * @param boolean $isPublished
@@ -354,5 +319,29 @@ class Advertisement
     public function getIsDeleted()
     {
         return $this->isDeleted;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param \VelovitoBundle\Entity\UserPhoto $photo
+     *
+     * @return Advertisement
+     */
+    public function setPhoto(UserPhoto $photo = null)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return \VelovitoBundle\Entity\UserPhoto
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 }
