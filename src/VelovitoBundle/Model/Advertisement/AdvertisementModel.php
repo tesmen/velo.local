@@ -41,8 +41,9 @@ class AdvertisementModel
                 ->setUser($user)
                 ->setIsDeleted(false)
                 ->setIsPublished(true)
+                ->setCurrency($formData[C::FORM_CURRENCY])
                 ->setPrice($formData[C::FORM_PRICE])
-                ->setCurrency($this->currencyRepo->getDefault())
+                ->setCurrency(Advertisement::CURRENCY_RUB)
                 ->setTitle($formData[C::FORM_TITLE]);
 
             if (!empty($formData[C::FORM_PHOTO])) {

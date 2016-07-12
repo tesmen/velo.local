@@ -11,7 +11,29 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Advertisement
 {
-    public function __construct() {
+    const CURRENCY_RUB = 1;
+    const CURRENCY_GRN = 2;
+    const CURRENCY_USD = 3;
+    const CURRENCY_EUR = 4;
+
+    public static function getCurrencyList($invert=true)
+    {
+        $list = [
+            self::CURRENCY_RUB => 'рубли',
+            self::CURRENCY_GRN => 'гривны',
+            self::CURRENCY_USD => 'доллары',
+            self::CURRENCY_EUR => 'евро',
+        ];
+
+        if ($invert) {
+            return array_flip($list);
+        }
+
+        return $list;
+    }
+
+    public function __construct()
+    {
         $this->creationDate = new \DateTime();
     }
 

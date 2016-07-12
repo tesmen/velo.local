@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use VelovitoBundle\C;
+use VelovitoBundle\Entity\Advertisement;
 
 class NewAdvertForm extends AbstractType
 {
@@ -21,6 +22,16 @@ class NewAdvertForm extends AbstractType
             [
                 'label'    => 'Категория',
                 'choices'  => $options['data']['categories']['parents'],
+                'required' => true,
+            ]
+        );
+
+        $builder->add(
+            C::FORM_CURRENCY,
+            ChoiceType::class,
+            [
+                'label'    => 'Категория',
+                'choices'  => Advertisement::getCurrencyList(),
                 'required' => true,
             ]
         );
