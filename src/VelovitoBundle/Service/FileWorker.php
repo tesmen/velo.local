@@ -26,6 +26,11 @@ class FileWorker
         return $this->getWebDir() . DIRECTORY_SEPARATOR . C::UPLOAD_PATH;
     }
 
+    public function getAssetImgDir()
+    {
+        return $this->getWebDir() . DIRECTORY_SEPARATOR . 'bundles' . DIRECTORY_SEPARATOR . 'velovito' . DIRECTORY_SEPARATOR . 'img';
+    }
+
     public function getAppDir()
     {
         return $this->kernel->getRootDir();

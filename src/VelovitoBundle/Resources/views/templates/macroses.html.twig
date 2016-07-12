@@ -23,19 +23,19 @@
 
 {% macro advert(advert, showMenu = false) %}
     {% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}
-    {% set basePath = url('homepage') | replace({'app_dev.php/':''})  %}
 
     <div class="advert">
         <div class="photo">
 
-            {% if advert.getPhoto is not null %}
+            {% if advert.getPhoto is null %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ basePath ~ (advert.getPhoto.getFileName() | getUserPhoto(128,128)) }}" alt="Image">
+                    <img src="{{ 0|noPhoto(128,128) }}" alt="Image" width="150" height="150">
                 </a>
             {% else %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ 'upload/velovito/no_photo.png' | resize(128,128) }}" alt="Image" width="150" height="150">
+                    <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(128,128) }}" alt="Image">
                 </a>
+
             {% endif %}
         </div>
 

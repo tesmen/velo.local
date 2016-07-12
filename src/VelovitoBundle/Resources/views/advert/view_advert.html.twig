@@ -9,7 +9,12 @@
 
     <div>
         <div style="margin-bottom: 20px;">
-            <img src="{{ basePath~ ('upload/'~ advert.getPhoto.getFileName()) | resize(500,500) }}" class="gray-border" title="{{ advert.getTitle() }}">
+            {% if advert.getPhoto is null %}
+                <img src="{{ 0|noPhoto(500,500) }}" class="gray-border" title="{{ advert.getTitle() }}">
+            {% else %}
+                <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(500,500) }}" class="gray-border" title="{{ advert.getTitle() }}">
+            {% endif %}
+
         </div>
 
         {#{% for photo in advert.getPhotos() %}#}
