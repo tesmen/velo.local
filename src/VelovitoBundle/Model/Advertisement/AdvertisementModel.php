@@ -8,20 +8,23 @@ use VelovitoBundle\Entity\User;
 use VelovitoBundle\Model\DocumentModel;
 use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Model\SecurityModel;
+use VelovitoBundle\Service\FileWorker;
 
 class AdvertisementModel
 {
     private $em;
     private $documentModel;
     private $securityModel;
+    private $fileWorker;
 
     private $categoriesRepo;
 
-    public function __construct(EntityManager $em, DocumentModel $documentModel, SecurityModel $securityModel)
+    public function __construct(EntityManager $em, DocumentModel $documentModel, SecurityModel $securityModel, FileWorker $fileWorker)
     {
         $this->em = $em;
         $this->documentModel = $documentModel;
         $this->securityModel = $securityModel;
+        $this->fileWorker = $fileWorker;
 
         $this->categoriesRepo = $em->getRepository(C::REPO_CATALOG_CATEGORY);
         $this->currencyRepo = $this->em->getRepository(C::REPO_CURRENCY);
@@ -37,6 +40,10 @@ class AdvertisementModel
             $currency = $this->currencyRepo->findOneOrFail(
                 ['id' => 1]
             );
+
+            if (!empty($formData[C::FORM_PHOTO])) {
+                $this->fileWorker->saveUserUploadedFile($formData[C::FORM_PHOTO]);
+            }
 
             $advert->setDescription($formData[C::FORM_DESCRIPTION])
                 ->setUser($user)

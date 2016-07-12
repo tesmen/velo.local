@@ -3,6 +3,7 @@
 namespace VelovitoBundle\Service;
 
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpFoundation\File\File;
 
 class FileWorker
 {
@@ -21,5 +22,10 @@ class FileWorker
     public function getAppDir()
     {
         return $this->kernel->getRootDir();
+    }
+
+    public function saveUserUploadedFile(File $file )
+    {
+        return $file->move('/home/tesmen');
     }
 }

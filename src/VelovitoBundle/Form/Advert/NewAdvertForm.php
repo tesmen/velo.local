@@ -53,7 +53,7 @@ class NewAdvertForm extends AbstractType
         );
 
         $builder->add(
-            C::FORM_FILE,
+            C::FORM_PHOTO,
             FileType::class,
             [
                 'label'    => "Фотография",

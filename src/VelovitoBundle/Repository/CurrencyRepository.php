@@ -2,7 +2,6 @@
 
 namespace VelovitoBundle\Repository;
 
-
 use VelovitoBundle\Entity\Currency;
 
 class CurrencyRepository extends GeneralRepository
@@ -17,6 +16,16 @@ class CurrencyRepository extends GeneralRepository
 
         $this->_em->persist($ent);
         $this->_em->flush($ent);
+    }
+
+    /**
+     * @return Currency
+     */
+    public function getDefault()
+    {
+       return $this->findOneBy(
+           []
+       );
     }
 }
 
