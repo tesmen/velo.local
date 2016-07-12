@@ -2,18 +2,18 @@
 
 namespace VelovitoBundle\Service;
 
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpKernel\Kernel;
 use VelovitoBundle\C;
 
 class FileWorker
 {
-//    private $kernel;
+    private $kernel;
 
-    public function __construct(Container $container)
+    public function __construct(Kernel $kernel)
     {
-        $this->kernel = $container->get('kernel');
+        $this->kernel = $kernel;
     }
 
     public function getWebDir()
@@ -33,8 +33,11 @@ class FileWorker
 
     public function saveUserUploadedPhoto(UploadedFile $file)
     {
-        $file->move($this->getUserPhotoDir(), $file->getClientOriginalName());
+        $extension = CommonFunction::getFileExtension($file->getClientOriginalName());
 
-        return $file->getFilename();
+        $fileName = md5(microtime(true)) . '.' . $extension;
+        $file->move($this->getUserPhotoDir(), $fileName);
+
+        return $fileName;
     }
 }

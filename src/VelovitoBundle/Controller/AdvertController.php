@@ -71,7 +71,6 @@ class AdvertController extends GeneralController
                     $this->addFlash(C::FLASH_BAG_SUCCESS, 'Объявление добавлено');
                 } catch (\Exception $e) {
                     $this->addFlash(C::FLASH_BAG_ERROR, $e->getMessage());
-                    throw $e;
                 }
             } else {
                 $this->addFlash(C::FLASH_BAG_ERROR, 'Форма не валидна');

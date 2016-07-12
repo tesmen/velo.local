@@ -29,10 +29,7 @@ class GregwarImageExtension extends \Twig_Extension
      */
     public function resize($imageName, $width, $heigth)
     {
-        return 'http://'
-            .$this->router->getContext()->getHost()
-            .'/'
-            .$this->imageService->resize($imageName, $width, $heigth);
+        return $this->imageService->resize($imageName, $width, $heigth);
     }
 
     public function getName()

@@ -26,8 +26,7 @@ class GregwarImageService
     {
         $image = $this->getImage($fileName);
 
-        return $image
-            ->scaleResize($width, $height);
+        return $image->scaleResize($width, $height);
     }
 
     public function createImage($filePath)

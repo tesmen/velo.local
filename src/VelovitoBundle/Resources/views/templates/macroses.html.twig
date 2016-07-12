@@ -23,29 +23,20 @@
 
 {% macro advert(advert, showMenu = false) %}
     {% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}
+    {% set basePath = url('homepage') | replace({'app_dev.php/':''})  %}
 
     <div class="advert">
         <div class="photo">
+
             {% if advert.getPhoto is not null %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ advert.getPhoto.getFileName() | resize(128,128) }}" alt="Image">
+                    <img src="{{ basePath~ ('upload/'~advert.getPhoto.getFileName()) | resize(128,128) }}" alt="Image">
                 </a>
             {% else %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ 'bundles/velovito/01.jpg' | resize(128,128) }}" alt="Image" width="150" height="150">
+                    <img src="{{ 'upload/velovito/no_photo.png' | resize(128,128) }}" alt="Image" width="150" height="150">
                 </a>
             {% endif %}
-
-            {#{% set c = 0 %}#}
-            {#{% for photo in advert.getPhotoBag() %}#}
-            {#{% if c == 0 %}#}
-            {#<a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">#}
-            {#<img src="{{ photo.getFileName() | resize(128,128) }}" alt="Image">#}
-            {#</a>#}
-            {#{% endif %}#}
-
-            {#{% set c = 1 %}#}
-            {#{% endfor %}#}
         </div>
 
         <div class="info">

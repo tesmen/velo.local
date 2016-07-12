@@ -33,7 +33,7 @@ services:
 
     service.file_worker:
         class: VelovitoBundle\Service\FileWorker
-        arguments: ["@service_container"]
+        arguments: ["@kernel"]
 
     image_service:
         class: VelovitoBundle\Service\GregwarImageService
