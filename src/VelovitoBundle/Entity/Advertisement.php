@@ -25,11 +25,9 @@ class Advertisement
             self::CURRENCY_EUR => 'евро',
         ];
 
-        if ($invert) {
-            return array_flip($list);
-        }
-
-        return $list;
+        return $invert
+            ? array_flip($list)
+            : $list;
     }
 
     public function getCurrencyName($id = null)

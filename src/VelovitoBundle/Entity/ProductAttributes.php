@@ -5,15 +5,29 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * UserFavoriteAdvert
  *
- * @ORM\Table(name="products")
- * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\ProductsRepository")
+ * @ORM\Table(name="product_attributes")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\ProductAttributesRepository")
  */
-class ProductsAttributes
+class ProductAttributes
 {
     const ATTRIBUTE_TYPE_STRING = 1;
     const ATTRIBUTE_TYPE_NUMBER = 2;
-    const ATTRIBUTE_TYPE_SELECT = 3;
+    const ATTRIBUTE_TYPE_VARIANT = 3;
     const ATTRIBUTE_TYPE_BOOL = 4;
+
+    public static function getTypesList($invert = false)
+    {
+        $list = [
+            self::ATTRIBUTE_TYPE_STRING  => 'строка',
+            self::ATTRIBUTE_TYPE_NUMBER  => 'число',
+            self::ATTRIBUTE_TYPE_VARIANT => 'варианты',
+            self::ATTRIBUTE_TYPE_BOOL    => 'чекбокс',
+        ];
+
+        return $invert
+            ? array_flip($list)
+            : $list;
+    }
 
     /**
      * @var integer
@@ -26,19 +40,19 @@ class ProductsAttributes
 
     /**
      * @var string
-     * @ORM\Column(name="name", type="string", length=64)
+     * @ORM\Column(name="name", type="string", length=64, nullable=true)
      */
     private $name;
 
     /**
      * @var integer
-     * @ORM\Column(name="type", type="smallint", options={"unsigned"=true})
+     * @ORM\Column(name="type", type="smallint", options={"unsigned"=true}, nullable=false)
      */
     private $type;
 
     /**
      * @var string
-     * @ORM\Column(name="comment", type="string", length=64)
+     * @ORM\Column(name="comment", type="string", length=64, nullable=true)
      */
     private $comment;
 }
