@@ -4,7 +4,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Advertisement
+ * AdvertisementAttribute
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")

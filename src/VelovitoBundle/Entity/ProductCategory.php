@@ -3,7 +3,7 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserFavoriteAdvert
+ * ProductCategory
  *
  * @ORM\Table(name="product_categories")
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
