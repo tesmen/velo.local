@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProductsAttributes
 {
+    const ATTRIBUTE_TYPE_STRING = 1;
+    const ATTRIBUTE_TYPE_NUMBER = 2;
+    const ATTRIBUTE_TYPE_SELECT = 3;
+    const ATTRIBUTE_TYPE_BOOL = 4;
+
     /**
      * @var integer
      *
