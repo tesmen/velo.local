@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
  * UserFavoriteAdvert
  *
  * @ORM\Table(name="product_attributes")
- * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\ProductAttributesRepository")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
  */
-class ProductAttributes
+class ProductAttribute
 {
     const ATTRIBUTE_TYPE_STRING = 1;
     const ATTRIBUTE_TYPE_NUMBER = 2;
@@ -55,4 +55,86 @@ class ProductAttributes
      * @ORM\Column(name="comment", type="string", length=64, nullable=true)
      */
     private $comment;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return ProductAttribute
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     *
+     * @return ProductAttribute
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return ProductAttribute
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
 }
