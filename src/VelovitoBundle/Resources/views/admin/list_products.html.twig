@@ -8,7 +8,9 @@
 
     <div>
         <article>txt</article>
-        <a href="{{ url('admin_list_products') }}">Товары</a>
+        {% for product in products %}
+            <a href="{{ url('admin_edit_product', {productId: product.id}) }}">{{ product.id }} {{ product.category }} {{ product.id }} </a>
+        {% endfor %}
     </div>
 
 

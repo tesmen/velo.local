@@ -17,10 +17,10 @@ class AdminController extends GeneralController
     }
 
 
-    public function editProducts(Request $request)
+    public function listProductsAction(Request $request)
     {
-
-
-        return $this->render('@Velovito/admin/dashboard.html.twig');
+        return $this->render('@Velovito/admin/list_products.html.twig', [
+            'products' => $this->get('model.admin')->getAllProducts(),
+        ]);
     }
 }

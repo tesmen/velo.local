@@ -1,6 +1,6 @@
 <?php
 
-namespace VelovitoBundle\Model;
+namespace VelovitoBundle\Model\Admin;
 
 use Doctrine\ORM\EntityManager;
 
@@ -17,7 +17,7 @@ class AdminModel
 
     public function getAllProducts()
     {
-        $this->productsRepo->findAll();
+        return $this->productsRepo->findAll();
     }
 
 }

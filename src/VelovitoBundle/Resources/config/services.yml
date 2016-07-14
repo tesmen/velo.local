@@ -16,7 +16,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager", "@session", "@security.token_storage", "@model.vk_api", "@model.user"]
 
     model.admin:
-        class: VelovitoBundle\Model\AdminModel
+        class: VelovitoBundle\Model\Admin\AdminModel
         arguments: ["@doctrine.orm.entity_manager"]
 
     model.advertisement:
