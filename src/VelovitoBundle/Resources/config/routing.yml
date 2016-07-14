@@ -30,9 +30,29 @@ vk_auth_success:
         title: Регистрация через ВК
 
 #--------------------------------------------------------
+
+admin_dashBoard:
+    path:     /admin
+    defaults: { _controller: VelovitoBundle:Admin:dashBoard }
+
+admin_edit_products:
+    path:     /admin
+    defaults: { _controller: VelovitoBundle:Admin:editProducts }
+
+admin_product_attributes:
+    path:     /admin
+    defaults: { _controller: VelovitoBundle:Admin:dashBoard }
+
+admin_product_moderate_adverts:
+    path:     /admin
+    defaults: { _controller: VelovitoBundle:Admin:dashBoard }
+#--------------------------------------------------------
+
 ajax_upload_photo:
     path:     /ajax-upload-photo
     defaults: { _controller: VelovitoBundle:Ajax:uploadPhoto }
+
+#--------------------------------------------------------
 
 velovito:
     path:     /velovito
@@ -80,11 +100,3 @@ advert_delete:
 advert_view:
     path:     /view-advert/{advertId}
     defaults: { _controller: VelovitoBundle:Advert:viewAdvert, advertId: null }
-
-original_photo:
-    path:     /img/originals/{fileName}
-    defaults: { _controller: VelovitoBundle:Advert:nullController, fileName: null }
-
-temporary_thumb:
-    path:     /img/temporary_thumbs/{fileName}
-    defaults: { _controller: VelovitoBundle:Advert:nullController, fileName: null }

@@ -15,6 +15,10 @@ services:
         class: VelovitoBundle\Model\SecurityModel
         arguments: ["@doctrine.orm.entity_manager", "@session", "@security.token_storage", "@model.vk_api", "@model.user"]
 
+    model.admin:
+        class: VelovitoBundle\Model\AdminModel
+        arguments: ["@doctrine.orm.entity_manager"]
+
     model.advertisement:
         class: VelovitoBundle\Model\Advertisement\AdvertisementModel
         arguments: ["@doctrine.orm.entity_manager", "@model.document", "@model.security", "@service.file_worker"]
