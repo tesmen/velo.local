@@ -20,4 +20,18 @@ class AdminModel
         return $this->productsRepo->findAll();
     }
 
+    public function getProductById($id)
+    {
+        return $this->productsRepo->findOneOrFail(['id' => $id]);
+    }
+
+    public function createProduct($name)
+    {
+        if (empty($name)) {
+            throw new \Exception('empty name');
+        }
+
+        $this->productsRepo->create($name);
+    }
+
 }

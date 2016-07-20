@@ -40,8 +40,8 @@ admin_list_products:
     defaults: { _controller: VelovitoBundle:Admin:listProducts }
 
 admin_edit_product:
-    path:     /admin/list-products
-    defaults: { _controller: VelovitoBundle:Admin:dashBoard }
+    path:     /admin/edit-product/{id}
+    defaults: { _controller: VelovitoBundle:Admin:editProduct }
 
 admin_product_moderate_adverts:
     path:     /admin

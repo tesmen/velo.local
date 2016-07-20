@@ -17,4 +17,14 @@ class GeneralController extends Controller
             throw $this->createAccessDeniedException();
         }
     }
+
+    public function getCurrentRoute()
+    {
+        return $this->get('request')->get('_route');
+    }
+
+    public function redirectToThis()
+    {
+        return $this->redirectToRoute($this->getCurrentRoute());
+    }
 }

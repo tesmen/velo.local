@@ -4,6 +4,7 @@ namespace VelovitoBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use VelovitoBundle\Form\Admin\ProductForm;
 use VelovitoBundle\Form\Ajax\UploadPhotoForm;
 use VelovitoBundle\C;
 
@@ -17,10 +18,35 @@ class AdminController extends GeneralController
     }
 
 
-    public function listProductsAction(Request $request)
+    public function editProductAction(Request $request, $id)
     {
+        $product = $this->get('model.admin')->getProductById($id);
+
         return $this->render('@Velovito/admin/list_products.html.twig', [
             'products' => $this->get('model.admin')->getAllProducts(),
+        ]);
+    }
+
+
+    public function listProductsAction(Request $request)
+    {
+        $form = $this->createForm(ProductForm::class);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            $formData = $form->getData();
+
+            try {
+                $this->get('model.admin')->createProduct($formData[C::FORM_TITLE]);
+                $this->addFlash(C::FLASH_SUCCESS, 'ok!');
+            } catch (\Exception $e) {
+                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+            }
+        }
+
+        return $this->render('@Velovito/admin/list_products.html.twig', [
+            'products' => $this->get('model.admin')->getAllProducts(),
+            'form'     => $form->createView(),
         ]);
     }
 }

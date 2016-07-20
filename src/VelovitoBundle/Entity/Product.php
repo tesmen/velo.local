@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
  * UserFavoriteAdvert
  *
  * @ORM\Table(name="products")
- * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\ProductRepository")
  */
 class Product
 {
@@ -32,6 +32,12 @@ class Product
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
      */
     private $category;
+
+    /**
+     * @var string
+     * @ORM\Column(name="is_deleted", type="boolean", nullable=false)
+     */
+    private $isDeleted;
 
     /**
      * Get id
@@ -89,5 +95,29 @@ class Product
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set isDeleted
+     *
+     * @param boolean $isDeleted
+     *
+     * @return Product
+     */
+    public function setIsDeleted($isDeleted)
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
+     * Get isDeleted
+     *
+     * @return boolean
+     */
+    public function getIsDeleted()
+    {
+        return $this->isDeleted;
     }
 }
