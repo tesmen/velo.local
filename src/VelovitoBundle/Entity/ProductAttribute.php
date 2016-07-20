@@ -51,6 +51,12 @@ class ProductAttribute
     private $type;
 
     /**
+     * @var integer
+     * @ORM\Column(name="product_id", type="integer", options={"unsigned"=true}, nullable=false)
+     */
+    private $productId;
+
+    /**
      * @var string
      * @ORM\Column(name="comment", type="string", length=64, nullable=true)
      */
@@ -136,5 +142,29 @@ class ProductAttribute
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set productId
+     *
+     * @param integer $productId
+     *
+     * @return ProductAttribute
+     */
+    public function setProductId($productId)
+    {
+        $this->productId = $productId;
+
+        return $this;
+    }
+
+    /**
+     * Get productId
+     *
+     * @return integer
+     */
+    public function getProductId()
+    {
+        return $this->productId;
     }
 }
