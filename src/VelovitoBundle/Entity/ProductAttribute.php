@@ -40,7 +40,7 @@ class ProductAttribute
 
     /**
      * @var string
-     * @ORM\Column(name="name", type="string", length=64, nullable=true)
+     * @ORM\Column(name="name", type="string", length=64, nullable=false)
      */
     private $name;
 
@@ -52,9 +52,9 @@ class ProductAttribute
 
     /**
      * @var integer
-     * @ORM\Column(name="product_id", type="integer", options={"unsigned"=true}, nullable=false)
+     * @ORM\Column(name="active", type="boolean", nullable=false)
      */
-    private $productId;
+    private $active;
 
     /**
      * @var string
@@ -145,26 +145,26 @@ class ProductAttribute
     }
 
     /**
-     * Set productId
+     * Set active
      *
-     * @param integer $productId
+     * @param boolean $active
      *
      * @return ProductAttribute
      */
-    public function setProductId($productId)
+    public function setActive($active)
     {
-        $this->productId = $productId;
+        $this->active = $active;
 
         return $this;
     }
 
     /**
-     * Get productId
+     * Get active
      *
-     * @return integer
+     * @return boolean
      */
-    public function getProductId()
+    public function getActive()
     {
-        return $this->productId;
+        return $this->active;
     }
 }

@@ -22,7 +22,7 @@ class C
     const FLASH_WARNING = 'warning';
     const FLASH_ERROR = 'error';
 
-    const UPLOAD_PATH = 'upload';
+    const UPLOAD_PATH = 'user_photos';
     const TEMPORARY_UPLOAD_IMAGE_THUMB_PATH = 'temporary_thumbs';
 
     const REPO_ADVERTISEMENT = 'VelovitoBundle:Advertisement';

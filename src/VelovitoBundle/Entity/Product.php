@@ -35,9 +35,9 @@ class Product
 
     /**
      * @var string
-     * @ORM\Column(name="is_deleted", type="boolean", nullable=false)
+     * @ORM\Column(name="active", type="boolean", nullable=false)
      */
-    private $isDeleted;
+    private $active;
 
     /**
      * Get id
@@ -98,26 +98,26 @@ class Product
     }
 
     /**
-     * Set isDeleted
+     * Set active
      *
-     * @param boolean $isDeleted
+     * @param boolean $active
      *
      * @return Product
      */
-    public function setIsDeleted($isDeleted)
+    public function setActive($active)
     {
-        $this->isDeleted = $isDeleted;
+        $this->active = $active;
 
         return $this;
     }
 
     /**
-     * Get isDeleted
+     * Get active
      *
      * @return boolean
      */
-    public function getIsDeleted()
+    public function getActive()
     {
-        return $this->isDeleted;
+        return $this->active;
     }
 }
