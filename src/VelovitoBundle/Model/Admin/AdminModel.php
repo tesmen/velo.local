@@ -103,9 +103,11 @@ class AdminModel
     {
         $ent = $this->getCategoryById($id);
 
+        $cat = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $formData[C::FORM_CATEGORY]);
+
         $ent
             ->setName($formData[C::FORM_TITLE])
-            ->setCategory($formData[C::FORM_CATEGORY])
+            ->setCategory($cat)
             ->setActive($formData[C::FORM_IS_ACTIVE]);
 
         $this->em->flush($ent);

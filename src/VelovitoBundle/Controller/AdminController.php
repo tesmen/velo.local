@@ -23,25 +23,21 @@ class AdminController extends GeneralController
     {
         $model = $this->get(C::MODEL_ADMIN);
         $product = $model->getProductById($id);
-        $options[C::FORM_CATEGORY_LIST] = $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm();
-        $form = $this->createForm(EditProductForm::class, $options);
+        $options = [
+            C::FORM_CATEGORY_LIST => $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm(),
+            C::FORM_TITLE     => $product->getName(),
+            C::FORM_IS_ACTIVE => $product->getActive(),
+            C::FORM_CATEGORY  => $product->getCategory()->getId(),
+        ];
 
-        $form->setData(
-            [
-                C::FORM_TITLE     => $product->getName(),
-                C::FORM_IS_ACTIVE => $product->getActive(),
-                C::FORM_CATEGORY  => $product->getCategory()->getId(),
-            ]
-        );
-        var_dump($product->getName());
-        var_dump($product->getCategory()->getId());
+        $form = $this->createForm(EditProductForm::class, $options);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             $formData = $form->getData();
 
             try {
-                $model->updateCategory($id, $formData);
+                $model->updateProduct($id, $formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
                 return $this->redirectToThis(

@@ -5,7 +5,6 @@ namespace VelovitoBundle\Form\Admin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,10 +36,12 @@ class EditProductForm extends AbstractType
 
         $builder->add(
             C::FORM_IS_ACTIVE,
-            CheckboxType::class, [
-            'label'    => 'active',
-            'required' => false,
-        ]);
+            CheckboxType::class,
+            [
+                'label'    => 'active',
+                'required' => false,
+            ]
+        );
 
         $builder->add(
             C::FORM_SUBMIT,
