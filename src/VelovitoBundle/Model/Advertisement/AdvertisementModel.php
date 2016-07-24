@@ -67,7 +67,6 @@ class AdvertisementModel
     public function getCategoriesForForm()
     {
         return $this->categoriesRepo->getCategoriesWithProductsForForm();
-
     }
 
 

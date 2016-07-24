@@ -4,6 +4,7 @@ namespace VelovitoBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\C;
+use VelovitoBundle\Form\Admin\EditProductForm;
 use VelovitoBundle\Form\Advert\EditAdvertForm;
 use VelovitoBundle\Form\Advert\NewAdvertForm;
 use VelovitoBundle\Form\Advert\UnpublishAdvertForm;

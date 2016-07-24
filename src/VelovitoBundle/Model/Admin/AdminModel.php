@@ -99,6 +99,20 @@ class AdminModel
         return $ent;
     }
 
+    public function updateProduct($id, $formData)
+    {
+        $ent = $this->getCategoryById($id);
+
+        $ent
+            ->setName($formData[C::FORM_TITLE])
+            ->setCategory($formData[C::FORM_CATEGORY])
+            ->setActive($formData[C::FORM_IS_ACTIVE]);
+
+        $this->em->flush($ent);
+
+        return $ent;
+    }
+
     public function getCategoriesWithProductsForForm()
     {
         return $this->productCatRepo->getCategoriesWithProductsForForm();

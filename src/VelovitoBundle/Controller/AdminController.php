@@ -5,6 +5,7 @@ namespace VelovitoBundle\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\Form\Admin\EditCategoryForm;
+use VelovitoBundle\Form\Admin\EditProductForm;
 use VelovitoBundle\Form\Admin\NewCategoryForm;
 use VelovitoBundle\Form\Admin\ProductForm;
 use VelovitoBundle\Form\Ajax\UploadPhotoForm;
@@ -20,31 +21,39 @@ class AdminController extends GeneralController
 
     public function editProductAction(Request $request, $id)
     {
-        $product = $this->get('model.admin')->getProductById($id);
-        $form = $this->createForm(ProductForm::class);
+        $model = $this->get(C::MODEL_ADMIN);
+        $product = $model->getProductById($id);
+        $options[C::FORM_CATEGORY_LIST] = $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm();
+        $form = $this->createForm(EditProductForm::class, $options);
 
         $form->setData(
-            [C::FORM_TITLE => $product->getName()]
+            [
+                C::FORM_TITLE     => $product->getName(),
+                C::FORM_IS_ACTIVE => $product->getActive(),
+                C::FORM_CATEGORY  => $product->getCategory()->getId(),
+            ]
         );
+        var_dump($product->getName());
+        var_dump($product->getCategory()->getId());
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             $formData = $form->getData();
 
             try {
-                $this->get('model.admin')->createProduct($formData[C::FORM_TITLE]);
+                $model->updateCategory($id, $formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
-                return $this->redirectToThis();
+                return $this->redirectToThis(
+                    ['id' => $id]
+                );
             } catch (\Exception $e) {
                 $this->addFlash(C::FLASH_ERROR, $e->getMessage());
             }
         }
 
-        return $this->render('@Velovito/admin/edit_product.html.twig', [
-            'attributes' => $this->get('model.admin')->getProductAttributesByProductId($product->getId()),
-            'form'       => $form->createView(),
-
+        return $this->render('@Velovito/admin/edit_category.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
