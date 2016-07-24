@@ -20,11 +20,11 @@ class GeneralController extends Controller
 
     public function getCurrentRoute()
     {
-        return $this->get('request')->get('_route');
+        return $this->get('request_stack')->getCurrentRequest()->get('_route');
     }
 
-    public function redirectToThis()
+    public function redirectToThis($attr = [])
     {
-        return $this->redirectToRoute($this->getCurrentRoute());
+        return $this->redirectToRoute($this->getCurrentRoute(), $attr);
     }
 }

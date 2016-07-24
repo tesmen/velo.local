@@ -52,7 +52,7 @@ class AdminController extends GeneralController
     public function editCategoryAction(Request $request, $id)
     {
         $model = $this->get(C::MODEL_ADMIN);
-        $category = $model->getProductById($id);
+        $category = $model->getCategoryById($id);
         $form = $this->createForm(EditCategoryForm::class);
 
         $form->setData(
@@ -66,14 +66,16 @@ class AdminController extends GeneralController
             $form->handleRequest($request);
             $formData = $form->getData();
 
-//            try {
+            try {
                 $model->updateCategory($id, $formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
-                return $this->redirectToThis();
-//            } catch (\Exception $e) {
-//                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
-//            }
+                return $this->redirectToThis(
+                    ['id' => $id]
+                );
+            } catch (\Exception $e) {
+                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+            }
         }
 
         return $this->render('@Velovito/admin/edit_category.html.twig', [

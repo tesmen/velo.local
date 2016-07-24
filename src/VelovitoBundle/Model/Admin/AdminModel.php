@@ -96,7 +96,7 @@ class AdminModel
 
         $this->em->flush($ent);
 
-        return true;
+        return $ent;
     }
 
     public function getCategoriesWithProductsForForm()
