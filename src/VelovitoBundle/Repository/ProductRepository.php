@@ -3,7 +3,6 @@
 namespace VelovitoBundle\Repository;
 
 use VelovitoBundle\C;
-use VelovitoBundle\Entity\City;
 use VelovitoBundle\Entity\Product;
 
 class ProductRepository extends GeneralRepository
