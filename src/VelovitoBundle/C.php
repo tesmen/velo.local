@@ -50,6 +50,7 @@ class C
     const ROUTE_VK_AUTH_TOKEN = 'vk_auth_token';
     const ROUTE_VK_AUTH_SUCCESS = 'vk_auth_success';
 
+    const MODEL_ADMIN = 'model.admin';
     const MODEL_MAINTENANCE = 'model.maintenance';
     const MODEL_DEFAULT = 'model.default';
     const MODEL_SECURITY = 'model.security';

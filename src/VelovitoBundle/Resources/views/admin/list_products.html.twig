@@ -22,7 +22,7 @@
                 <tr>
                     <td><a href="{{ url }}">{{ product.id }}</a></td>
                     <td><a href="{{ url }}">{{ product.name }} </a></td>
-                    <td><a href="{{ url }}">{{ product.category }}</a></td>
+                    <td><a href="{{ url }}">{{ product.category.getName() }}</a></td>
                 </tr>
 
             {% endfor %}

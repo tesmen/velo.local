@@ -14,6 +14,8 @@ class ProductForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $data = $options['data'];
+
         $builder->add(
             C::FORM_TITLE,
             TextType::class,
@@ -22,13 +24,15 @@ class ProductForm extends AbstractType
             ]
         );
 
-//        $builder->add(
-//            C::FORM_CATEGORY,
-//            ChoiceType::class,
-//            [
-//                'required' => true,
-//            ]
-//        );
+        $builder->add(
+            C::FORM_CATEGORY,
+            ChoiceType::class,
+            [
+                'label'    => 'Категория',
+                'choices'  => $data[C::FORM_CATEGORY],
+                'required' => true,
+            ]
+        );
 
         $builder->add(
             C::FORM_SUBMIT,

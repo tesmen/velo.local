@@ -12,7 +12,7 @@ class ProductRepository extends GeneralRepository
         $ent = new Product();
 
         $ent
-            ->setIsDeleted(false)
+            ->setActive(true)
             ->setName($name);
 
         $this->_em->persist($ent);

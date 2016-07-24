@@ -54,12 +54,9 @@ class AdvertController extends GeneralController
     {
         $this->denyUnlessAuthenticatedFully();
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
+        $options[123] = $adModel->getCategoriesForForm();
 
-        $formOptions = [
-            'em' => $this->get('doctrine.orm.default_entity_manager'),
-        ];
-
-        $form = $this->createForm(NewAdvertForm::class, $formOptions);
+        $form = $this->createForm(NewAdvertForm::class, $options);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);

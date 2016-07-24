@@ -23,7 +23,7 @@ class DefaultController extends GeneralController
             'VelovitoBundle:default:menu.html.twig',
             [
                 C::PAGE_TITLE => $title,
-                'menu'        => $repo->getActiveCategoriesForMenu(),
+                'menu'        => $repo->getActiveCatsWithProductsForMenu(),
             ]
         );
     }

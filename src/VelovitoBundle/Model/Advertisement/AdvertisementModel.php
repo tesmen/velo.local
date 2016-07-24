@@ -66,21 +66,8 @@ class AdvertisementModel
 
     public function getCategoriesForForm()
     {
-        $result = [];
+        return $this->categoriesRepo->getCategoriesWithProductsForForm();
 
-        $parentNodes = $this->categoriesRepo->findBy([
-            'parent' => null,
-        ]);
-
-        foreach ($parentNodes as $parent) {
-            $result['parents'][$parent->getName()] = $parent->getId();
-
-            foreach ($parent->getCatalogItems() as $item) {
-                $result['children'][$parent->getId()][$item->getName()] = $item->getId();
-            }
-        }
-
-        return $result;
     }
 
 

@@ -17,9 +17,23 @@ class ProductCategoryRepository extends GeneralRepository
         return $q->getArrayResult();
     }
 
-    public function getActiveCategoriesForForm()
+    public function getActiveCategoriesList($flip = false)
     {
         $result = [];
+
+        foreach ($this->getActiveCategories() as $row) {
+            $result[$row['name']] = $row['id'];
+        }
+
+        return $flip
+            ? array_flip($result)
+            : $result;
+    }
+
+    public function getCategoriesWithProductsForForm()
+    {
+        $result = [];
+
         $q = $this->_em->getConnection()->prepare(
             'SELECT p.id, p.name, pc.name as category_name
 FROM `products` p
@@ -30,14 +44,16 @@ where p.active = 1'
 
         $q->execute();
 
-        foreach ($q->fetchAll() as $row) {
+        foreach ($fetch = $q->fetchAll() as $row) {
             $result[$row['category_name']][$row['name']] = $row['id'];
         }
 
+//        var_dump($fetch);
+//        var_dump($result);
         return $result;
     }
 
-    public function getActiveCategoriesForMenu()
+    public function getActiveCatsWithProductsForMenu()
     {
         $result = [];
         $q = $this->_em->getConnection()->prepare(
