@@ -28,6 +28,7 @@ class C
     const REPO_ADVERTISEMENT = 'VelovitoBundle:Advertisement';
     const REPO_ROLE = 'VelovitoBundle:Role';
     const REPO_USER = 'VelovitoBundle:User';
+    const REPO_CACHE = 'VelovitoBundle:Cache';
     const REPO_CATALOG_CATEGORY = 'VelovitoBundle:CatalogCategory';
     const REPO_CURRENCY = 'VelovitoBundle:Currency';
     const REPO_ADVERT_STATUS = 'VelovitoBundle:AdvertStatus';

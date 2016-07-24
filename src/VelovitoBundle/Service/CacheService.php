@@ -3,9 +3,6 @@
 namespace VelovitoBundle\Service;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpKernel\Kernel;
 use VelovitoBundle\C;
 
 class CacheService
@@ -16,7 +13,7 @@ class CacheService
     {
         $this->em = $em;
 
-        $this->cacheRepo = $em->getRepository()
+        $this->cacheRepo = $em->getRepository(C::REPO_CACHE);
     }
 
 

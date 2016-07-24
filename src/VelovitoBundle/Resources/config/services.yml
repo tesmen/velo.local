@@ -39,6 +39,10 @@ services:
         class: VelovitoBundle\Service\FileWorker
         arguments: ["@kernel"]
 
+    service.cache:
+        class: VelovitoBundle\Service\CacheService
+        arguments: ["@doctrine.orm.default_entity_manager"]
+
     image_service:
         class: VelovitoBundle\Service\GregwarImageService
         arguments: ["@model.default", "@service.file_worker"]
