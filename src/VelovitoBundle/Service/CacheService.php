@@ -18,6 +18,6 @@ class CacheService
 
     public static function getProductCategories()
     {
-        $this->em->getRepository(C::REPO_PRODUCT_CATEGORY)->
+
     }
 }
