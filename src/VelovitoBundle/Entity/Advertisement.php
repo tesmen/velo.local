@@ -105,6 +105,20 @@ class Advertisement
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="product_id", type="integer", nullable=false)
+     */
+    private $productId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="product_category_id", type="integer", nullable=false)
+     */
+    private $productCategoryId;
+
+    /**
+     * @var integer
      * @ORM\Column(name="currency", type="smallint", nullable=false, options={"unsigned"=true})
      */
     private $currency;
@@ -371,5 +385,53 @@ class Advertisement
     public function getPhoto()
     {
         return $this->photo;
+    }
+
+    /**
+     * Set productId
+     *
+     * @param integer $productId
+     *
+     * @return Advertisement
+     */
+    public function setProductId($productId)
+    {
+        $this->productId = $productId;
+
+        return $this;
+    }
+
+    /**
+     * Get productId
+     *
+     * @return integer
+     */
+    public function getProductId()
+    {
+        return $this->productId;
+    }
+
+    /**
+     * Set productCategoryId
+     *
+     * @param integer $productCategoryId
+     *
+     * @return Advertisement
+     */
+    public function setProductCategoryId($productCategoryId)
+    {
+        $this->productCategoryId = $productCategoryId;
+
+        return $this;
+    }
+
+    /**
+     * Get productCategoryId
+     *
+     * @return integer
+     */
+    public function getProductCategoryId()
+    {
+        return $this->productCategoryId;
     }
 }

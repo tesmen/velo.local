@@ -16,11 +16,14 @@ class DefaultController extends GeneralController
 
     public function menuAction(Request $request, $title = null)
     {
+        $repo = $this->get('doctrine.orm.default_entity_manager')->getRepository(C::REPO_PRODUCT_CATEGORY);
+
+
         return $this->render(
             'VelovitoBundle:default:menu.html.twig',
             [
                 C::PAGE_TITLE => $title,
-                'menu'        => [],
+                'menu'        => $repo->getActiveCategoriesForMenu(),
             ]
         );
     }

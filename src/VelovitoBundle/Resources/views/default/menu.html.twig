@@ -1,25 +1,24 @@
 <div class="sidebar-navigation">
-    {% for category in menu %}
+    {% for cat_id, cat_content in menu %}
         <div class="category">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-            {{ category.getName() }}
+            {{ cat_content.name }}
 
-            {% if category.getCatalogItems() is not empty %}
+            {% if cat_content.products is not empty %}
                 <div class="itemlist">
                     <div class="category-holder">
-                        <a href="{{ url('homepage') }}">Перейти в {{ category.getName() }}</a>
+                        <a href="{{ url('homepage') }}">Перейти в {{ cat_content.name }}</a>
                     </div>
 
-                    {% for item in  category.getCatalogItems() %}
+                    {% for product_id, product_name in cat_content.products %}
                         <div class="category-item">
                             <a href="{{ url('homepage') }}">
-                                {{ item.name }}
+                                {{ product_name }}
                             </a>
                         </div>
                     {% endfor %}
                 </div>
             {% endif %}
         </div>
-
     {% endfor %}
 </div>
