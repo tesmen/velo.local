@@ -29,6 +29,14 @@ class AdminModel
     }
 
     /**
+     * @return Product[]
+     */
+    public function getAllCategories()
+    {
+        return $this->productCatRepo->findAll();
+    }
+
+    /**
      * @param $id
      * @return ProductAttribute[]
      */
@@ -56,6 +64,15 @@ class AdminModel
         }
 
         $this->productsRepo->create($name);
+    }
+
+    public function createCategory($name)
+    {
+        if (empty($name)) {
+            throw new \Exception('empty name');
+        }
+
+        $this->productCatRepo->create($name);
     }
 
     public function getCategoriesWithProductsForForm()

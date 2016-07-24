@@ -39,9 +39,17 @@ admin_list_products:
     path:     /admin/list-products
     defaults: { _controller: VelovitoBundle:Admin:listProducts }
 
+admin_list_categories:
+    path:     /admin/list-categories
+    defaults: { _controller: VelovitoBundle:Admin:listCategories }
+
 admin_edit_product:
     path:     /admin/edit-product/{id}
     defaults: { _controller: VelovitoBundle:Admin:editProduct }
+
+admin_edit_category:
+    path:     /admin/edit-category/{id}
+    defaults: { _controller: VelovitoBundle:Admin:editCategory }
 
 admin_product_moderate_adverts:
     path:     /admin

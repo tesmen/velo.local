@@ -2,8 +2,8 @@
 
 namespace VelovitoBundle\Repository;
 
-use VelovitoBundle\Entity\CatalogCategory;
 use VelovitoBundle\C;
+use VelovitoBundle\Entity\ProductCategory;
 
 class ProductCategoryRepository extends GeneralRepository
 {
@@ -15,6 +15,18 @@ class ProductCategoryRepository extends GeneralRepository
         $q->setParameter('active', true);
 
         return $q->getArrayResult();
+    }
+
+    public function create($name)
+    {
+        $ent = new ProductCategory();
+
+        $ent
+            ->setActive(true)
+            ->setName($name);
+
+        $this->_em->persist($ent);
+        $this->_em->flush($ent);
     }
 
     public function getActiveCategoriesList($flip = false)

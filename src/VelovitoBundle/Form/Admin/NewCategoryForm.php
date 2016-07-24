@@ -10,26 +10,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use VelovitoBundle\C;
 
-class ProductForm extends AbstractType
+class NewCategoryForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $data = $options['data'];
-
         $builder->add(
             C::FORM_TITLE,
             TextType::class,
             [
-                'required' => true,
-            ]
-        );
-
-        $builder->add(
-            C::FORM_CATEGORY,
-            ChoiceType::class,
-            [
-                'label'    => 'Категория',
-                'choices'  => $data[C::FORM_CATEGORY_LIST],
                 'required' => true,
             ]
         );
@@ -48,5 +36,3 @@ class ProductForm extends AbstractType
         return 'form';
     }
 }
-
-
