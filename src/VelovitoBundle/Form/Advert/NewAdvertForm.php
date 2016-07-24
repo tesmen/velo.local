@@ -2,6 +2,7 @@
 
 namespace VelovitoBundle\Form\Advert;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -16,12 +17,17 @@ class NewAdvertForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /**
+         * @var $em EntityManager
+         */
+        $em = $options['data']['em'];
+
         $builder->add(
             C::FORM_CATEGORY,
             ChoiceType::class,
             [
                 'label'    => 'Категория',
-                'choices'  => $options['data']['categories']['parents'],
+                'choices'  => $em->getRepository(C::REPO_PRODUCT_CATEGORY)->getActiveCategoriesForForm(),
                 'required' => true,
             ]
         );

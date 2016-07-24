@@ -26,6 +26,12 @@ class ProductCategory
     private $name;
 
     /**
+     * @var integer
+     * @ORM\Column(name="active", type="boolean", nullable=false)
+     */
+    private $active;
+
+    /**
      * Get id
      *
      * @return integer
@@ -57,5 +63,29 @@ class ProductCategory
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return ProductCategory
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }

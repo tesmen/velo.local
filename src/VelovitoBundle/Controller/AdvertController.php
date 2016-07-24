@@ -56,7 +56,7 @@ class AdvertController extends GeneralController
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
 
         $formOptions = [
-            'categories' => $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm(),
+            'em' => $this->get('doctrine.orm.default_entity_manager'),
         ];
 
         $form = $this->createForm(NewAdvertForm::class, $formOptions);
