@@ -60,7 +60,7 @@ class AdminModel
 
     /**
      * @param $id
-     * @return Product
+     * @return ProductCategory
      * @throws \VelovitoBundle\Exception\NotFoundException
      */
     public function getCategoryById($id)
@@ -101,7 +101,7 @@ class AdminModel
 
     public function updateProduct($id, $formData)
     {
-        $ent = $this->getCategoryById($id);
+        $ent = $this->getProductById($id);
 
         $cat = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $formData[C::FORM_CATEGORY]);
 

@@ -23,8 +23,9 @@ class AdminController extends GeneralController
     {
         $model = $this->get(C::MODEL_ADMIN);
         $product = $model->getProductById($id);
+
         $options = [
-            C::FORM_CATEGORY_LIST => $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm(),
+            C::FORM_CATEGORY_LIST => $model->getCategoriesForForm(),
             C::FORM_TITLE     => $product->getName(),
             C::FORM_IS_ACTIVE => $product->getActive(),
             C::FORM_CATEGORY  => $product->getCategory()->getId(),
