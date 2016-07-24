@@ -58,8 +58,13 @@ class AdminModel
         $this->productsRepo->create($name);
     }
 
-    public function getCategoriesForForm()
+    public function getCategoriesWithProductsForForm()
     {
         return $this->productCatRepo->getCategoriesWithProductsForForm();
+    }
+
+    public function getCategoriesForForm()
+    {
+        return $this->productCatRepo->getActiveCategoriesList();
     }
 }

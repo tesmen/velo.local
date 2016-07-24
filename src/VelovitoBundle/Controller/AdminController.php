@@ -59,7 +59,7 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $this->get('model.admin')->createProduct($formData[C::FORM_TITLE]);
+                $this->get('model.admin')->createProduct($formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
             } catch (\Exception $e) {
                 $this->addFlash(C::FLASH_ERROR, $e->getMessage());
