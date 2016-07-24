@@ -69,6 +69,7 @@ class C
     const GLOBAL_EMAIL_LENGTH = 32;
     const GLOBAL_PASSWORD_LENGTH = 16;
 
+    const FORM_IS_ACTIVE = 'active';
     const FORM_FILE = 'file';
     const FORM_SUBJECT = 'subject';
     const FORM_SUBMIT = 'submit';

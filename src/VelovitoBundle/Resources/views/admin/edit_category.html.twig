@@ -13,23 +13,23 @@
         <article>Товары</article>
         {{ form_start(form) }}
         {{ form_end(form) }}
-        <table width="100%">
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>category</th>
-            </tr>
+        {#<table width="100%">#}
+            {#<tr>#}
+                {#<th>id</th>#}
+                {#<th>name</th>#}
+                {#<th>category</th>#}
+            {#</tr>#}
 
-            {% for attribute in attributes %}
-                {% set url = url('admin_edit_product', {'id': product.id}) %}
-                <tr>
-                    <td><a href="{{ url }}">{{ product.id }}</a></td>
-                    <td><a href="{{ url }}">{{ product.name }} </a></td>
-                    <td><a href="{{ url }}">{{ product.category }}</a></td>
-                </tr>
+            {#{% for attribute in attributes %}#}
+                {#{% set url = url('admin_edit_product', {'id': product.id}) %}#}
+                {#<tr>#}
+                    {#<td><a href="{{ url }}">{{ product.id }}</a></td>#}
+                    {#<td><a href="{{ url }}">{{ product.name }} </a></td>#}
+                    {#<td><a href="{{ url }}">{{ product.category }}</a></td>#}
+                {#</tr>#}
 
-            {% endfor %}
-        </table>
+            {#{% endfor %}#}
+        {#</table>#}
     </div>
 
 

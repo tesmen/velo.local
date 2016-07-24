@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
 use VelovitoBundle\Entity\Product;
 use VelovitoBundle\Entity\ProductAttribute;
+use VelovitoBundle\Entity\ProductCategory;
 
 class AdminModel
 {
@@ -29,7 +30,7 @@ class AdminModel
     }
 
     /**
-     * @return Product[]
+     * @return ProductCategory[]
      */
     public function getAllCategories()
     {
@@ -57,6 +58,16 @@ class AdminModel
         return $this->productsRepo->findOneOrFail(['id' => $id]);
     }
 
+    /**
+     * @param $id
+     * @return Product
+     * @throws \VelovitoBundle\Exception\NotFoundException
+     */
+    public function getCategoryById($id)
+    {
+        return $this->productCatRepo->findOneOrFail(['id' => $id]);
+    }
+
     public function createProduct($name)
     {
         if (empty($name)) {
@@ -73,6 +84,19 @@ class AdminModel
         }
 
         $this->productCatRepo->create($name);
+    }
+
+    public function updateCategory($id, $formData)
+    {
+        $ent = $this->getCategoryById($id);
+
+        $ent
+            ->setName($formData[C::FORM_TITLE])
+            ->setActive($formData[C::FORM_IS_ACTIVE]);
+
+        $this->em->flush($ent);
+
+        return true;
     }
 
     public function getCategoriesWithProductsForForm()
