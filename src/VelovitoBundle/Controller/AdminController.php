@@ -50,7 +50,7 @@ class AdminController extends GeneralController
     public function listProductsAction(Request $request)
     {
         $model = $this->get(C::MODEL_ADMIN);
-        $options[C::FORM_CATEGORY] = $model->getCategoriesForForm();
+        $options[C::FORM_CATEGORY_LIST] = $model->getCategoriesForForm();
 
         $form = $this->createForm(ProductForm::class, $options);
 

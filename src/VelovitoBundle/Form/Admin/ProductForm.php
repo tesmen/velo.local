@@ -29,7 +29,7 @@ class ProductForm extends AbstractType
             ChoiceType::class,
             [
                 'label'    => 'Категория',
-                'choices'  => $data[C::FORM_CATEGORY],
+                'choices'  => $data[C::FORM_CATEGORY_LIST],
                 'required' => true,
             ]
         );

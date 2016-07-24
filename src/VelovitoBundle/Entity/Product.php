@@ -29,7 +29,7 @@ class Product
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\ProductCategory")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      */
     private $category;
 
