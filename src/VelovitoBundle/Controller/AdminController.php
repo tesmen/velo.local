@@ -50,7 +50,8 @@ class AdminController extends GeneralController
 
     public function editCategoryAction(Request $request, $id)
     {
-        $product = $this->get('model.admin')->getProductById($id);
+        $model = $this->get(C::MODEL_ADMIN);
+        $product = $model->getProductById($id);
         $form = $this->createForm(ProductForm::class);
 
         $form->setData(
@@ -62,7 +63,7 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $this->get('model.admin')->createProduct($formData[C::FORM_TITLE]);
+                $model->createProduct($formData[C::FORM_TITLE]);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
                 return $this->redirectToThis();
@@ -71,7 +72,7 @@ class AdminController extends GeneralController
             }
         }
 
-        return $this->render('@Velovito/admin/edit_category.html.twig.html.twig', [
+        return $this->render('@Velovito/admin/edit_category.html.twig', [
             'attributes' => $this->get('model.admin')->getProductAttributesByProductId($product->getId()),
             'form'       => $form->createView(),
 
@@ -83,7 +84,6 @@ class AdminController extends GeneralController
     {
         $model = $this->get(C::MODEL_ADMIN);
         $options[C::FORM_CATEGORY_LIST] = $model->getCategoriesForForm();
-
         $form = $this->createForm(ProductForm::class, $options);
 
         if ($request->isMethod('POST')) {
