@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ProductCategory
  *
  * @ORM\Table(name="product_categories")
- * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\ProductCategoryRepository")
  */
 class ProductCategory
 {

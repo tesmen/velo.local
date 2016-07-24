@@ -16,5 +16,8 @@ class CacheService
         $this->cacheRepo = $em->getRepository(C::REPO_CACHE);
     }
 
-
+    public static function getProductCategories()
+    {
+        $this->em->getRepository(C::REPO_PRODUCT_CATEGORY)->
+    }
 }

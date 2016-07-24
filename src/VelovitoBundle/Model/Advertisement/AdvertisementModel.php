@@ -26,7 +26,7 @@ class AdvertisementModel
         $this->securityModel = $securityModel;
         $this->fileWorker = $fileWorker;
 
-        $this->categoriesRepo = $em->getRepository(C::REPO_CATALOG_CATEGORY);
+        $this->categoriesRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
         $this->userPhotorepo = $this->em->getRepository(C::REPO_USER_PHOTO);
     }
 
