@@ -64,13 +64,13 @@ class AdvertController extends GeneralController
 
             if ($form->isValid()) {
                 $formData = $form->getData();
-                try {
+//                try {
                     $advertId = $adModel->createNewAdvert($formData);
                     $this->addFlash(C::FLASH_SUCCESS, 'Объявление добавлено');
                     return $this->redirectToThis();
-                } catch (\Exception $e) {
-                    $this->addFlash(C::FLASH_ERROR, $e->getMessage());
-                }
+//                } catch (\Exception $e) {
+//                    $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+//                }
             } else {
                 $this->addFlash(C::FLASH_ERROR, 'Форма не валидна');
             }

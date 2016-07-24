@@ -4,6 +4,7 @@ namespace VelovitoBundle\Model\Advertisement;
 
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
+use VelovitoBundle\Entity\Product;
 use VelovitoBundle\Entity\User;
 use VelovitoBundle\Model\DocumentModel;
 use VelovitoBundle\Entity\Advertisement;
@@ -27,7 +28,29 @@ class AdvertisementModel
         $this->fileWorker = $fileWorker;
 
         $this->categoriesRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
-        $this->userPhotorepo = $this->em->getRepository(C::REPO_USER_PHOTO);
+        $this->userPhotoRepo = $this->em->getRepository(C::REPO_USER_PHOTO);
+        $this->productRepo = $this->em->getRepository(C::REPO_PRODUCT);
+    }
+
+    /**
+     * @param $productId
+     * @return Product
+     * @throws \VelovitoBundle\Exception\NotFoundException
+     */
+    public function getProductById($productId)
+    {
+        return $this->productRepo->findOneOrFail(
+            [
+                'id' => $productId,
+            ]
+        );
+    }
+
+    public function getCategoryByProductId($productId)
+    {
+        $product = $this->getProductById($productId);
+
+        return $product->getCategory();
     }
 
     public function createNewAdvert(array $formData)
@@ -35,6 +58,7 @@ class AdvertisementModel
         $user = $this->securityModel->getUser();
         $advert = new Advertisement();
         $this->em->beginTransaction();
+        $category = $this->getCategoryByProductId($formData[C::FORM_CATEGORY]);
 
         try {
             $advert->setDescription($formData[C::FORM_DESCRIPTION])
@@ -44,11 +68,13 @@ class AdvertisementModel
                 ->setCurrency($formData[C::FORM_CURRENCY])
                 ->setPrice($formData[C::FORM_PRICE])
                 ->setCurrency(Advertisement::CURRENCY_RUB)
+                ->setProductId($formData[C::FORM_CATEGORY])
+                ->setProductCategoryId($category->getId())
                 ->setTitle($formData[C::FORM_TITLE]);
 
             if (!empty($formData[C::FORM_PHOTO])) {
                 $photoFileName = $this->fileWorker->saveUserUploadedPhoto($formData[C::FORM_PHOTO]);
-                $userPhoto = $this->userPhotorepo->create($user, $photoFileName);
+                $userPhoto = $this->userPhotoRepo->create($user, $photoFileName);
                 $advert->setPhoto($userPhoto);
             }
 
