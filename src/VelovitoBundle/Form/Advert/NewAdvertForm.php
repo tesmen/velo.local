@@ -23,7 +23,7 @@ class NewAdvertForm extends AbstractType
             ChoiceType::class,
             [
                 'label'    => 'Категория',
-                'choices'  => $data[123],
+                'choices'  => $data[C::FORM_CATEGORY_LIST],
                 'required' => true,
             ]
         );

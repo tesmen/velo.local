@@ -77,6 +77,7 @@ class C
     const FORM_SAVE = 'save';
     const FORM_TEXT = 'text';
     const FORM_CATEGORY = 'category';
+    const FORM_CATEGORY_LIST = 'category_list';
     const FORM_SUBCATEGORY = 'sub_category';
     const FORM_TITLE = 'title';
     const FORM_PRICE = 'price';
