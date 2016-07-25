@@ -30,8 +30,8 @@ class UserPhoto
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="photos")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      *
      */
     private $user;
