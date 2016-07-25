@@ -44,7 +44,7 @@ class DefaultController extends GeneralController
         return $this->render(
             'VelovitoBundle:default:index.html.twig',
             [
-                'ads' => $this->get(C::MODEL_ADVERTISEMENT)->getFewLastAds(),
+                'ads' => $this->get(C::MODEL_ADVERTISEMENT)->getLastAdverts(),
             ]
         );
     }

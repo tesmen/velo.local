@@ -115,4 +115,4 @@ adverts_search:
 
 view_category:
     path:     /view-category/
-    defaults: { _controller: VelovitoBundle:Advert:searchAdvert, advertId: null }
+    defaults: { _controller: VelovitoBundle:Advert:viewCategory}

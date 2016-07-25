@@ -70,7 +70,7 @@
 
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 {{ advert.getUser().getUserName() }} &nbsp;
-                <a href="{{ url('adverts_search',{id: advert.Product.id }) }}">
+                <a href="{{ url('view_category', {id: advert.ProductCategory.id }) }}">
                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                     {{ advert.Product.Name }}
                 </a>

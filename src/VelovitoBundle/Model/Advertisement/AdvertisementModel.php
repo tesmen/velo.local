@@ -153,10 +153,23 @@ class AdvertisementModel
         );
     }
 
-    public function getFewLastAds()
+    public function getLastAdverts()
     {
         return $this->advertRepo->findBy(
             ['isPublished' => true],
+            ['creationDate' => 'DESC']
+        );
+    }
+
+    public function getLastAdvertsFromCategory($id)
+    {
+        $category = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $id);
+
+        return $this->advertRepo->findBy(
+            [
+                'productCategory' => $category,
+                'isPublished'     => true
+            ],
             ['creationDate' => 'DESC']
         );
     }
