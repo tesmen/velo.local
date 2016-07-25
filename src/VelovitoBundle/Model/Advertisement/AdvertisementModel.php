@@ -69,8 +69,8 @@ class AdvertisementModel
                 ->setCurrency($formData[C::FORM_CURRENCY])
                 ->setPrice($formData[C::FORM_PRICE])
                 ->setCurrency(Advertisement::CURRENCY_RUB)
-                ->setProductId($formData[C::FORM_PRODUCT])
-                ->setProductCategoryId($category->getId())
+                ->setProduct($formData[C::FORM_PRODUCT])
+                ->setProductCategory($category->getId())
                 ->setTitle($formData[C::FORM_TITLE]);
 
             if (!empty($formData[C::FORM_PHOTO])) {

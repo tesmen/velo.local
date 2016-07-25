@@ -105,17 +105,17 @@ class Advertisement
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="product_id", type="integer", nullable=false)
+     * @ORM\OneToOne(targetEntity="VelovitoBundle\Entity\Product")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=true)
      */
-    private $productId;
+    private $product;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="product_category_id", type="integer", nullable=false)
+     * @ORM\OneToOne(targetEntity="VelovitoBundle\Entity\Product")
+     * @ORM\JoinColumn(name="product_category_id", referencedColumnName="id", nullable=true)
      */
-    private $productCategoryId;
+    private $productCategory;
 
     /**
      * @var integer
@@ -390,13 +390,13 @@ class Advertisement
     /**
      * Set productId
      *
-     * @param integer $productId
+     * @param integer $product
      *
      * @return Advertisement
      */
-    public function setProductId($productId)
+    public function setProduct($product)
     {
-        $this->productId = $productId;
+        $this->product = $product;
 
         return $this;
     }
@@ -406,21 +406,21 @@ class Advertisement
      *
      * @return integer
      */
-    public function getProductId()
+    public function getProduct()
     {
-        return $this->productId;
+        return $this->product;
     }
 
     /**
      * Set productCategoryId
      *
-     * @param integer $productCategoryId
+     * @param integer $productCategory
      *
      * @return Advertisement
      */
-    public function setProductCategoryId($productCategoryId)
+    public function setProductCategory($productCategory)
     {
-        $this->productCategoryId = $productCategoryId;
+        $this->productCategory = $productCategory;
 
         return $this;
     }
@@ -430,8 +430,8 @@ class Advertisement
      *
      * @return integer
      */
-    public function getProductCategoryId()
+    public function getProductCategory()
     {
-        return $this->productCategoryId;
+        return $this->productCategory;
     }
 }
