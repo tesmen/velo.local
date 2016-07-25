@@ -95,9 +95,16 @@ class AdvertisementModel
         return $advert->getId();
     }
 
-    public function getCategoriesForForm()
+    public function getProductListWithCategoriesForForm()
     {
-        return $this->categoriesRepo->getCategoriesWithProductsForForm();
+        $result = [];
+        $select = $this->categoriesRepo->getProductsWithCategories();
+
+        foreach ($select as $row) {
+            $result[$row['category_name']][$row['name']] = $row['id'];
+        }
+
+        return $result;
     }
 
 

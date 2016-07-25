@@ -117,7 +117,7 @@ class AdminModel
 
     public function getCategoriesWithProductsForForm()
     {
-        return $this->productCatRepo->getCategoriesWithProductsForForm();
+        return $this->productCatRepo->getProductsWithCategories();
     }
 
     public function getCategoriesForForm()

@@ -24,7 +24,7 @@ class AdvertController extends GeneralController
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
 
         $formOptions = [
-            'categories' => $this->get(C::MODEL_ADVERTISEMENT)->getCategoriesForForm(),
+            'categories' => $this->get(C::MODEL_ADVERTISEMENT)->getProductListWithCategoriesForForm(),
         ];
 
         $form = $this->createForm(NewAdvertForm::class, $formOptions);
@@ -55,7 +55,7 @@ class AdvertController extends GeneralController
     {
         $this->denyUnlessAuthenticatedFully();
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
-        $options[C::FORM_PRODUCT_LIST] = $adModel->getCategoriesForForm();
+        $options[C::FORM_PRODUCT_LIST] = $adModel->getProductListWithCategoriesForForm();
 
         $form = $this->createForm(NewAdvertForm::class, $options);
 
@@ -123,12 +123,13 @@ class AdvertController extends GeneralController
             'entity'             => $advertEnt,
             C::FORM_TITLE        => $advertEnt->getTitle(),
             C::FORM_PRICE        => $advertEnt->getPrice(),
-            C::FORM_CATEGORY     => '',
+            C::FORM_PRODUCT      => '',
+            C::FORM_PRODUCT_LIST => $adModel->getProductListWithCategoriesForForm(),
             C::FORM_IS_PUBLISHED => $advertEnt->getIsPublished(),
             C::FORM_DESCRIPTION  => $advertEnt->getDescription(),
         ];
 
-        $form = $this->createForm(EditAdvertForm::class, $formOptions);
+        $form = $this->createForm(NewAdvertForm::class, $formOptions);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
