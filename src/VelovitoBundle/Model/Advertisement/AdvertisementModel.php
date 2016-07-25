@@ -161,6 +161,7 @@ class AdvertisementModel
         );
     }
 
+
     public function getLastAdvertsFromCategory($id)
     {
         $category = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $id);
@@ -168,11 +169,40 @@ class AdvertisementModel
         return $this->advertRepo->findBy(
             [
                 'productCategory' => $category,
-                'isPublished'     => true
+                'isPublished'     => true,
             ],
             ['creationDate' => 'DESC']
         );
     }
+
+
+    public function getLastAdvertsOfProduct($id)
+    {
+        $product = $this->em->getReference(C::REPO_PRODUCT, $id);
+
+        return $this->advertRepo->findBy(
+            [
+                'product'     => $product,
+                'isPublished' => true,
+            ],
+            ['creationDate' => 'DESC']
+        );
+    }
+
+
+    public function searchAdverts($params)
+    {
+        $category = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $id);
+
+        return $this->advertRepo->findBy(
+            [
+                'productCategory' => $category,
+                'isPublished'     => true,
+            ],
+            ['creationDate' => 'DESC']
+        );
+    }
+
 
     public function getAdStatusMap()
     {

@@ -12,7 +12,7 @@
 
                     {% for product_id, product_name in cat_content.products %}
                         <div class="category-item">
-                            <a href="{{ url('homepage') }}">
+                            <a href="{{ url('adverts_search', {id: product_id}) }}">
                                 {{ product_name }}
                             </a>
                         </div>

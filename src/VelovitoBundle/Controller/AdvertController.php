@@ -202,4 +202,21 @@ class AdvertController extends GeneralController
             ]
         );
     }
+
+
+    public function searchAdvertAction(Request $request)
+    {
+        $id = (int)$request->get('id');
+
+        if (empty($id)) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render(
+            'VelovitoBundle:default:index.html.twig',
+            [
+                'ads' => $this->get(C::MODEL_ADVERTISEMENT)->getLastAdvertsOfProduct($id),
+            ]
+        );
+    }
 }
