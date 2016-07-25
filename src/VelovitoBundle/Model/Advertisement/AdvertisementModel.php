@@ -41,12 +41,15 @@ class AdvertisementModel
     public function getProductById($productId)
     {
         return $this->productRepo->findOneOrFail(
-            [
-                'id' => $productId,
-            ]
+            ['id' => $productId,]
         );
     }
 
+
+    /**
+     * @param $productId
+     * @return \VelovitoBundle\Entity\ProductCategory
+     */
     public function getCategoryByProductId($productId)
     {
         $product = $this->getProductById($productId);

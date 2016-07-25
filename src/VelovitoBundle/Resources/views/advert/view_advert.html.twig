@@ -2,9 +2,10 @@
 {% import '@Velovito/templates/macroses.html.twig' as macro %}
 
 {% block body %}
-    {% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}
     <div>
         <h1>{{ advert.getTitle() }}</h1>
+        <a href="{{ url('view_category',{id: advert.ProductCategory.id}) }}">{{ advert.ProductCategory.Name }}</a> ->
+        <a href="{{ url('adverts_search',{id: advert.Product.id }) }}">{{ advert.Product.Name }}</a>
     </div>
 
     <div>

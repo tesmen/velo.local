@@ -105,14 +105,14 @@ class Advertisement
 
     /**
      * @var integer
-     * @ORM\OneToOne(targetEntity="VelovitoBundle\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Product")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=true)
      */
     private $product;
 
     /**
      * @var integer
-     * @ORM\OneToOne(targetEntity="VelovitoBundle\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\ProductCategory")
      * @ORM\JoinColumn(name="product_category_id", referencedColumnName="id", nullable=true)
      */
     private $productCategory;
@@ -125,7 +125,7 @@ class Advertisement
 
     /**
      * @var string
-     * @ORM\OneToOne(targetEntity="VelovitoBundle\Entity\UserPhoto")
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\UserPhoto")
      * @ORM\JoinColumn(name="user_photo_id", referencedColumnName="id", nullable=true)
      */
     private $photo;

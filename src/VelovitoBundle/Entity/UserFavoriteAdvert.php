@@ -23,7 +23,7 @@ class UserFavoriteAdvert
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Advertisement")
-     * @ORM\JoinColumn(name="ad_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="ad_id", referencedColumnName="id", nullable=true)
      */
     private $ad;
 
@@ -31,7 +31,7 @@ class UserFavoriteAdvert
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true)
      */
     private $user;
 

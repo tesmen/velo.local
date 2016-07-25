@@ -108,3 +108,11 @@ advert_delete:
 advert_view:
     path:     /view-advert/{advertId}
     defaults: { _controller: VelovitoBundle:Advert:viewAdvert, advertId: null }
+
+adverts_search:
+    path:     /search-adverts/
+    defaults: { _controller: VelovitoBundle:Advert:searchAdvert, advertId: null }
+
+view_category:
+    path:     /view-category/
+    defaults: { _controller: VelovitoBundle:Advert:searchAdvert, advertId: null }
