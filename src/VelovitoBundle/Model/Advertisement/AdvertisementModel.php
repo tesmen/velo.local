@@ -27,6 +27,7 @@ class AdvertisementModel
         $this->securityModel = $securityModel;
         $this->fileWorker = $fileWorker;
 
+        $this->advertRepo = $this->em->getRepository(C::REPO_ADVERTISEMENT);
         $this->categoriesRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
         $this->userPhotoRepo = $this->em->getRepository(C::REPO_USER_PHOTO);
         $this->productRepo = $this->em->getRepository(C::REPO_PRODUCT);
@@ -121,12 +122,12 @@ class AdvertisementModel
         }
 
 
-        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->update($advert, $entData);
+        return $this->advertRepo->update($advert, $entData);
     }
 
     public function getAdsByUserId($userId)
     {
-        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findBy(
+        return $this->advertRepo->findBy(
             ['user' => $userId,],
             ['creationDate' => 'DESC']
         );
@@ -143,7 +144,7 @@ class AdvertisementModel
 
     public function getFewLastAds()
     {
-        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findBy(
+        return $this->advertRepo->findBy(
             ['isPublished' => true],
             ['creationDate' => 'DESC']
         );
@@ -165,12 +166,22 @@ class AdvertisementModel
      */
     public function getAdvertById($id)
     {
-        return $this->em->getRepository(C::REPO_ADVERTISEMENT)->findOneOrFail($id);
+        return $this->advertRepo->findOneOrFail($id);
+    }
+
+    /**
+     * @param $id
+     * @return Advertisement
+     * @throws \VelovitoBundle\Exception\NotFoundException
+     */
+    public function getAdvertArrayById($id)
+    {
+        return $this->advertRepo->findOneOrFail($id);
     }
 
     public function unpublishAdvert($advertId, $reason)
     {
-        $repo = $this->em->getRepository(C::REPO_ADVERTISEMENT);
+        $repo = $this->advertRepo;
 
         $mapper = [
             C::FORM_SOLD_AT_VELOVITO => C::ADVERT_UNPUBLISH_REASON_SOLD_HERE,
