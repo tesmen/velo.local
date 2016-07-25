@@ -123,7 +123,7 @@ class AdvertController extends GeneralController
             'entity'             => $advertEnt,
             C::FORM_TITLE        => $advertEnt->getTitle(),
             C::FORM_PRICE        => $advertEnt->getPrice(),
-            C::FORM_PRODUCT      => '',
+            C::FORM_PRODUCT      => $advertEnt->getProduct()->getId(),
             C::FORM_PRODUCT_LIST => $adModel->getProductListWithCategoriesForForm(),
             C::FORM_IS_PUBLISHED => $advertEnt->getIsPublished(),
             C::FORM_DESCRIPTION  => $advertEnt->getDescription(),
@@ -139,10 +139,14 @@ class AdvertController extends GeneralController
                 $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
 
                 try {
-                    $adModel->updateAdvert($advertEnt, $formData);
+                    $adModel->createNewAdvert($formData, $advertEnt);
                     $this->addFlash(C::FLASH_SUCCESS, 'Изменения сохранены');
+
+                    return $this->redirectToThis(
+                        ['advertId' => $advertId]
+                    );
                 } catch (\Exception $e) {
-                    $this->addFlash(C::FLASH_ERROR, 'Что-то пошло не так...');
+                    $this->addFlash(C::FLASH_ERROR, $e->getMessage());
                 }
 
                 return $this->redirectToRoute(
@@ -155,9 +159,9 @@ class AdvertController extends GeneralController
         return $this->render(
             'VelovitoBundle:advert:edit_advert.html.twig',
             [
-                'form'         => $form->createView(),
-                'advertPhotos' => $advertEnt->getPhoto(),
-                'uploadForm'   => $this->createForm(UploadPhotoForm::class)->createView(),
+                'form'       => $form->createView(),
+                'advert'     => $advertEnt,
+                'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
             ]
         );
     }

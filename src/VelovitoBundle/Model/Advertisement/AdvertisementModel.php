@@ -57,10 +57,10 @@ class AdvertisementModel
         return $product->getCategory();
     }
 
-    public function createNewAdvert(array $formData)
+    public function createNewAdvert(array $formData, Advertisement $oldAdvert = null)
     {
         $user = $this->securityModel->getUser();
-        $advert = new Advertisement();
+        $advert = $oldAdvert ? $oldAdvert : new Advertisement();
         $this->em->beginTransaction();
         $category = $this->getCategoryByProductId($formData[C::FORM_PRODUCT]);
         $product = $this->getProductById($formData[C::FORM_PRODUCT]);

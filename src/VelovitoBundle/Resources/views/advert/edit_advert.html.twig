@@ -2,60 +2,35 @@
 {% import '@Velovito/templates/macroses.html.twig' as macro %}
 {% block body %}
     {% include '@Velovito/templates/alert.html.twig' %}
-    <script src="{{ asset('js/jquery.form.min.js') }}"></script>
-    <script src="{{ asset('js/spinner.js') }}"></script>
+    {#<script src="{{ asset('js/jquery.form.min.js') }}"></script>#}
+    {#<script src="{{ asset('js/spinner.js') }}"></script>#}
 
-    {{ form_start(form) }}
-    <div class="col-md-4" style="border-right: 1px solid gray; height: 100%">
-        {{ macro.bootstrapFormInput(form.title) }}
-        {{ macro.bootstrapFormInput(form.price) }}
-        {{ macro.bootstrapFormInput(form.description) }}
-
-        {{ form_widget(form.submit) }}
-    </div>
-
-    <div class="col-md-6">
-        <label for="new_advert_form_title" class="required">Фотографии</label>
-
-        <div id="images_pool">
-            <div class="uploading_image" id='root_uploading_image' style="display: none;">
-                <span id="promo_spin" class="promo__spin"></span>
-                <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]"
-                       disabled="disabled">
-                <img src="" alt="">
-
-                <div class="remove_image">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                </div>
-            </div>
-
-            {% for photo in advertPhotos %}
-            <div class="uploading_image">
-                <span id="promo_spin" class="promo__spin"></span>
-                <input type="hidden" name="{{ constant('VelovitoBundle\\C::FORM_PHOTO_FILENAMES') }}[]"
-                        value="{{ photo.getFilename() }}">
-                <img src="{{ photo.getFilename() | resize(128,128) }}"  class="gray-border">
-
-                <div class="remove_image">
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                </div>
-            </div>
-            {% endfor %}
+    <div>
+        {{ form_start(form) }}
+        <div class="col-md-4">
+            {{ macro.bootstrapFormInput(form.title) }}
+            {{ macro.bootstrapFormInput(form.product) }}
+            {{ macro.bootstrapFormInput(form.price) }}
+            {{ macro.bootstrapFormInput(form.currency) }}
+            {{ macro.bootstrapFormInput(form.photo) }}
         </div>
 
-        <label id="add_photo_label" for="upload_photo_form_photo">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        </label>
+        <div class="col-md-6">
+            <div style="margin-bottom: 20px;">
+                {% if advert.getPhoto is null %}
+                    <img src="{{ 0|noPhoto(500,500) }}" class="gray-border" title="{{ advert.getTitle() }}">
+                {% else %}
+                    <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(500,500) }}" class="gray-border" title="{{ advert.getTitle() }}">
+                {% endif %}
+            </div>
+
+            {{ macro.bootstrapFormInput(form.description) }}
+            {{ form_rest(form) }}
+        </div>
+
+        {{ form_widget(form.submit) }}
+        {{ form_end(form) }}
     </div>
-    {{ form_end(form) }}
-
-    <br/>
-
-    {{ form_start(uploadForm, {'attr':{ 'id': 'photo' }}) }}
-    {{ form_widget(uploadForm.photo, {'attr': {'style':'display:none'}}) }}
-    {{ form_end(uploadForm) }}
-
-    <br/>
 
     <script>
         var spinner = new Spinner(dockerSpinnerSettings).spin($('#promo_spin')[0]);
