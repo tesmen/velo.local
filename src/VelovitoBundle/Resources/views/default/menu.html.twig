@@ -7,7 +7,7 @@
             {% if cat_content.products is not empty %}
                 <div class="itemlist">
                     <div class="category-holder">
-                        <a href="{{ url('homepage') }}">Перейти в {{ cat_content.name }}</a>
+                        <a href="{{ url('view_category', {id: cat_id}) }}">Перейти в {{ cat_content.name }}</a>
                     </div>
 
                     {% for product_id, product_name in cat_content.products %}
