@@ -60,6 +60,7 @@ class AdvertisementModel
         $advert = new Advertisement();
         $this->em->beginTransaction();
         $category = $this->getCategoryByProductId($formData[C::FORM_PRODUCT]);
+        $product = $this->getProductById($formData[C::FORM_PRODUCT]);
 
         try {
             $advert->setDescription($formData[C::FORM_DESCRIPTION])
@@ -68,9 +69,9 @@ class AdvertisementModel
                 ->setIsPublished(true)
                 ->setCurrency($formData[C::FORM_CURRENCY])
                 ->setPrice($formData[C::FORM_PRICE])
-                ->setCurrency(Advertisement::CURRENCY_RUB)
-                ->setProduct($formData[C::FORM_PRODUCT])
-                ->setProductCategory($category->getId())
+                ->setCurrency($formData[C::FORM_CURRENCY])
+                ->setProduct($product)
+                ->setProductCategory($category)
                 ->setTitle($formData[C::FORM_TITLE]);
 
             if (!empty($formData[C::FORM_PHOTO])) {

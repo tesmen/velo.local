@@ -390,7 +390,7 @@ class Advertisement
     /**
      * Set productId
      *
-     * @param integer $product
+     * @param Product $product
      *
      * @return Advertisement
      */
@@ -404,7 +404,7 @@ class Advertisement
     /**
      * Get productId
      *
-     * @return integer
+     * @return Product
      */
     public function getProduct()
     {
@@ -414,7 +414,7 @@ class Advertisement
     /**
      * Set productCategoryId
      *
-     * @param integer $productCategory
+     * @param ProductCategory $productCategory
      *
      * @return Advertisement
      */
@@ -428,7 +428,7 @@ class Advertisement
     /**
      * Get productCategoryId
      *
-     * @return integer
+     * @return ProductCategory
      */
     public function getProductCategory()
     {
