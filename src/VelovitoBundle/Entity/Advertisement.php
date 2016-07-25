@@ -71,7 +71,7 @@ class Advertisement
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true)
      */
     private $user;
 
