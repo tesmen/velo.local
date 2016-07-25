@@ -59,7 +59,7 @@ class AdvertisementModel
         $user = $this->securityModel->getUser();
         $advert = new Advertisement();
         $this->em->beginTransaction();
-        $category = $this->getCategoryByProductId($formData[C::FORM_CATEGORY]);
+        $category = $this->getCategoryByProductId($formData[C::FORM_PRODUCT]);
 
         try {
             $advert->setDescription($formData[C::FORM_DESCRIPTION])
@@ -69,7 +69,7 @@ class AdvertisementModel
                 ->setCurrency($formData[C::FORM_CURRENCY])
                 ->setPrice($formData[C::FORM_PRICE])
                 ->setCurrency(Advertisement::CURRENCY_RUB)
-                ->setProductId($formData[C::FORM_CATEGORY])
+                ->setProductId($formData[C::FORM_PRODUCT])
                 ->setProductCategoryId($category->getId())
                 ->setTitle($formData[C::FORM_TITLE]);
 

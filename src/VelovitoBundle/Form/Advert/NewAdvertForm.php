@@ -19,11 +19,11 @@ class NewAdvertForm extends AbstractType
         $data = $options['data'];
 
         $builder->add(
-            C::FORM_CATEGORY,
+            C::FORM_PRODUCT,
             ChoiceType::class,
             [
-                'label'    => 'Категория',
-                'choices'  => $data[C::FORM_CATEGORY_LIST],
+                'label'    => 'Что продаем?',
+                'choices'  => $data[C::FORM_PRODUCT_LIST],
                 'required' => true,
             ]
         );

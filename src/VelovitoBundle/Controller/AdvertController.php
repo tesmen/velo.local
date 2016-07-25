@@ -55,7 +55,7 @@ class AdvertController extends GeneralController
     {
         $this->denyUnlessAuthenticatedFully();
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
-        $options[C::FORM_CATEGORY_LIST] = $adModel->getCategoriesForForm();
+        $options[C::FORM_PRODUCT_LIST] = $adModel->getCategoriesForForm();
 
         $form = $this->createForm(NewAdvertForm::class, $options);
 
