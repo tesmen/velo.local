@@ -64,14 +64,19 @@
             </div>
 
             <div class="menu"> &nbsp;
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                {{ advert.getUser().getUserName() }} &nbsp;
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                {{ advert.getCreationDate() | days_ago }}  &nbsp;
 
                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 {{ advert.getViewsCount() |number_format }} &nbsp;
 
-                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                {{ advert.getCreationDate() | days_ago }}
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                {{ advert.getUser().getUserName() }} &nbsp;
+
+                <a href="{{ url('view_category',{id: advert.ProductCategory.id}) }}">{{ advert.ProductCategory.Name }}</a>
+                >
+
+                <a href="{{ url('adverts_search',{id: advert.Product.id }) }}">{{ advert.Product.Name }}</a>
 
                 {% if app.user and showMenu %}|
 
