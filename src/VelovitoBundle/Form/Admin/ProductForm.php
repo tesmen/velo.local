@@ -20,6 +20,7 @@ class ProductForm extends AbstractType
             C::FORM_TITLE,
             TextType::class,
             [
+                'label'    => 'Новый товар',
                 'required' => true,
             ]
         );

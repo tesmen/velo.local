@@ -18,6 +18,7 @@ class NewCategoryForm extends AbstractType
             C::FORM_TITLE,
             TextType::class,
             [
+                'label' => 'Новая категория',
                 'required' => true,
             ]
         );
