@@ -18,6 +18,7 @@ class AdminModel
 
         $this->productsRepo = $em->getRepository('VelovitoBundle:Product');
         $this->productsAttrRepo = $em->getRepository('VelovitoBundle:ProductAttribute');
+        $this->productsAttrVariantsRepo = $em->getRepository('VelovitoBundle:ProductAttributeVariant');
         $this->productCatRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
     }
 
@@ -35,6 +36,27 @@ class AdminModel
     public function getAllCategories()
     {
         return $this->productCatRepo->findAll();
+    }
+
+    /**
+     * @return ProductAttribute[]
+     */
+    public function getAllAttributes()
+    {
+        return $this->productsAttrRepo->findAll();
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllAttributeVariants()
+    {
+        $q = $this->em->getConnection()->prepare(
+            'SELECT * FROM product_attribute_variants'
+        );
+        $q->execute();
+
+        return $q->fetchAll();
     }
 
     /**
@@ -84,6 +106,20 @@ class AdminModel
         }
 
         $this->productCatRepo->create($name);
+    }
+
+    public function createProductAttribute($formData)
+    {
+        $ent = new ProductAttribute();
+
+        $ent
+            ->setName($formData[C::FORM_TITLE])
+            ->setComment($formData[C::FORM_COMMENT])
+            ->setActive(true)
+            ->setType($formData[C::FORM_ATTRIBUTE_TYPE]);
+
+        $this->em->persist($ent);
+        $this->em->flush($ent);
     }
 
     public function updateCategory($id, $formData)

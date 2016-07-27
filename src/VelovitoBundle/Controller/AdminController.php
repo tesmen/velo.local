@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\Form\Admin\EditCategoryForm;
 use VelovitoBundle\Form\Admin\EditProductForm;
+use VelovitoBundle\Form\Admin\NewAttributeForm;
 use VelovitoBundle\Form\Admin\NewCategoryForm;
 use VelovitoBundle\Form\Admin\ProductForm;
 use VelovitoBundle\Form\Ajax\UploadPhotoForm;
@@ -26,9 +27,9 @@ class AdminController extends GeneralController
 
         $options = [
             C::FORM_CATEGORY_LIST => $model->getCategoriesForForm(),
-            C::FORM_TITLE     => $product->getName(),
-            C::FORM_IS_ACTIVE => $product->getActive(),
-            C::FORM_CATEGORY  => $product->getCategory()->getId(),
+            C::FORM_TITLE         => $product->getName(),
+            C::FORM_IS_ACTIVE     => $product->getActive(),
+            C::FORM_CATEGORY      => $product->getCategory()->getId(),
         ];
 
         $form = $this->createForm(EditProductForm::class, $options);
@@ -139,6 +140,35 @@ class AdminController extends GeneralController
 
         return $this->render('@Velovito/admin/list_categories.html.twig', [
             'categories' => $model->getAllCategories(),
+            'form'       => $form->createView(),
+        ]);
+    }
+
+
+    public function listAttributesAction(Request $request)
+    {
+        $model = $this->get(C::MODEL_ADMIN);
+        $options[C::FORM_ATTRIBUTE_TYPE_LIST] = $model->getAllAttributeVariants();
+
+        $form = $this->createForm(NewAttributeForm::class, $options);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            $formData = $form->getData();
+
+            try {
+                $model->createProductAttribute($formData);
+                $this->addFlash(C::FLASH_SUCCESS, 'ok!');
+
+                return $this->redirectToThis();
+            } catch (\Exception $e) {
+                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+                throw $e;
+            }
+        }
+
+        return $this->render('@Velovito/admin/list_categories.html.twig', [
+            'categories' => $model->getAllAttributes(),
             'form'       => $form->createView(),
         ]);
     }

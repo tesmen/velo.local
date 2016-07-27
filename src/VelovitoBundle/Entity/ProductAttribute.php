@@ -20,7 +20,7 @@ class ProductAttribute
         $list = [
             self::ATTRIBUTE_TYPE_STRING  => 'строка',
             self::ATTRIBUTE_TYPE_NUMBER  => 'число',
-            self::ATTRIBUTE_TYPE_VARIANT => 'варианты',
+            self::ATTRIBUTE_TYPE_VARIANT => 'список на выбор',
             self::ATTRIBUTE_TYPE_BOOL    => 'чекбокс',
         ];
 

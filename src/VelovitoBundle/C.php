@@ -75,9 +75,12 @@ class C
     const FORM_SUBJECT = 'subject';
     const FORM_SUBMIT = 'submit';
     const FORM_CURRENCY = 'currency';
+    const FORM_COMMENT = 'comment';
     const FORM_PUBLISH = 'publish';
     const FORM_SAVE = 'save';
     const FORM_TEXT = 'text';
+    const FORM_ATTRIBUTE_TYPE = 'attribute_type';
+    const FORM_ATTRIBUTE_TYPE_LIST = 'attribute_type_list';
     const FORM_CATEGORY = 'category';
     const FORM_PRODUCT = 'product';
     const FORM_PRODUCT_LIST = 'category_list';
