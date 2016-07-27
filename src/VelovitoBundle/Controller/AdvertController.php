@@ -119,6 +119,12 @@ class AdvertController extends GeneralController
         $adModel = $this->get(C::MODEL_ADVERTISEMENT);
         $advertEnt = $adModel->getAdvertById($advertId);
 
+        if (!$adModel->userCanEditAdvert($advertEnt)) {
+            $this->addFlash(C::FLASH_ERROR, 'Что-то пошло не так...');
+
+            return $this->redirectToRoute('my_ads');
+        }
+
         $formOptions = [
             'entity'             => $advertEnt,
             C::FORM_TITLE        => $advertEnt->getTitle(),

@@ -99,6 +99,9 @@ class SecurityModel
         return true;
     }
 
+    /**
+     * @return User
+     */
     public function getUser()
     {
         return $this->tokenStorage->getToken()->getUser();

@@ -257,4 +257,15 @@ class AdvertisementModel
         $ent->setViewsCount($views);
         $this->em->flush($ent);
     }
+
+    public function userCanEditAdvert(Advertisement $ent)
+    {
+        $currentUser = $this->securityModel->getUser();
+
+        if ($currentUser->getRole() === C::ROLE_ADMIN) {
+            return true;
+        }
+
+        return $currentUser->getId() === $ent->getUser()->getId();
+    }
 }
