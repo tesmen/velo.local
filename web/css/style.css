@@ -6902,18 +6902,19 @@ a:hover {
   text-decoration: none;
   text-indent: 0;
   display: block;
-  line-height: 3em;
+  line-height: 1.5em;
   position: relative;
 }
 .sidebar-navigation div.category:hover {
   background: #eeeeee;
+  border-top: 1px solid #9f9f9f;
 }
 .sidebar-navigation div.category:hover div.itemlist {
   display: block;
   position: absolute;
 }
 .sidebar-navigation div.category div.itemlist {
-  line-height: 3em;
+  line-height: 2em;
   width: 400px;
   right: -400px;
   top: 0;

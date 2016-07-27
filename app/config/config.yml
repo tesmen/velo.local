@@ -21,7 +21,7 @@ framework:
     validation:      { enable_annotations: true }
     #serializer:      { enable_annotations: true }
     assets:
-        version: v7
+        version: v8
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
