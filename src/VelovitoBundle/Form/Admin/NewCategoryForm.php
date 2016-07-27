@@ -26,7 +26,7 @@ class NewCategoryForm extends AbstractType
             C::FORM_SUBMIT,
             SubmitType::class,
             [
-                'label' => 'Ok',
+                'label' => 'Добавить',
             ]
         );
     }

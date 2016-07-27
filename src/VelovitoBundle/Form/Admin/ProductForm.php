@@ -38,7 +38,7 @@ class ProductForm extends AbstractType
             C::FORM_SUBMIT,
             SubmitType::class,
             [
-                'label' => 'Ok',
+                'label' => 'Добавить',
             ]
         );
     }
