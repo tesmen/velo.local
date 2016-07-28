@@ -172,4 +172,33 @@ class AdminController extends GeneralController
             'form'       => $form->createView(),
         ]);
     }
+
+
+    public function listVariantListsAction(Request $request)
+    {
+        $model = $this->get(C::MODEL_ADMIN);
+        $options[C::FORM_ATTRIBUTE_TYPE_LIST] = $model->getAllAttributeVariants();
+
+        $form = $this->createForm(NewAttributeForm::class, $options);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            $formData = $form->getData();
+
+            try {
+                $model->createProductAttribute($formData);
+                $this->addFlash(C::FLASH_SUCCESS, 'ok!');
+
+                return $this->redirectToThis();
+            } catch (\Exception $e) {
+                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+                throw $e;
+            }
+        }
+
+        return $this->render('@Velovito/admin/list_categories.html.twig', [
+            'categories' => $model->getAllAttributes(),
+            'form'       => $form->createView(),
+        ]);
+    }
 }
