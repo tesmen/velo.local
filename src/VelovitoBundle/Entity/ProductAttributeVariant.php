@@ -21,7 +21,7 @@ class ProductAttributeVariant
 
     /**
      * @var integer
-     * @ORM\Column(name="product_attribute_id", type="integer", nullable=false)
+     * @ORM\Column(name="variant_list_id", type="integer", nullable=false)
      */
     private $productAttribute;
 
