@@ -94,8 +94,8 @@
 
     <table width="100%">
         <tr>
-            {% for key, value in firstItem if firstItem is not empty %}
-                <th>key</th>
+            {% for key, value in firstItem %}
+                <th>{{ key }} {{ value }}</th>
             {% endfor %}
         </tr>
 
