@@ -9,6 +9,7 @@ use VelovitoBundle\Form\Admin\EditCategoryForm;
 use VelovitoBundle\Form\Admin\EditProductForm;
 use VelovitoBundle\Form\Admin\NewAttributeForm;
 use VelovitoBundle\Form\Admin\NewCategoryForm;
+use VelovitoBundle\Form\Admin\NewVariantListForm;
 use VelovitoBundle\Form\Admin\ProductForm;
 use VelovitoBundle\Form\Ajax\UploadPhotoForm;
 use VelovitoBundle\C;
@@ -179,9 +180,7 @@ class AdminController extends GeneralController
     public function listVariantListsAction(Request $request)
     {
         $model = $this->get(C::MODEL_ADMIN);
-        $options[C::FORM_ATTRIBUTE_TYPE_LIST] = $model->getAllAttributeVariants();
-
-        $form = $this->createForm(NewAttributeForm::class, $options);
+        $form = $this->createForm(NewVariantListForm::class);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -198,9 +197,44 @@ class AdminController extends GeneralController
             }
         }
 
-        return $this->render('@Velovito/admin/list_categories.html.twig', [
-            'categories' => $model->getAllAttributes(),
+        return $this->render('@Velovito/admin/list_attribute_variant_lists.html.twig', [
+            'items' => $model->getAllAttributeVariantLists(),
             'form'       => $form->createView(),
+        ]);
+    }
+
+
+    public function editVariantListAction(Request $request, $id)
+    {
+        $model = $this->get(C::MODEL_ADMIN);
+        $category = $model->getCategoryById($id);
+        $form = $this->createForm(EditCategoryForm::class);
+
+        $form->setData(
+            [
+                C::FORM_TITLE     => $category->getName(),
+                C::FORM_IS_ACTIVE => $category->getActive(),
+            ]
+        );
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            $formData = $form->getData();
+
+            try {
+                $model->updateCategory($id, $formData);
+                $this->addFlash(C::FLASH_SUCCESS, 'ok!');
+
+                return $this->redirectToThis(
+                    ['id' => $id]
+                );
+            } catch (\Exception $e) {
+                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+            }
+        }
+
+        return $this->render('@Velovito/admin/edit_category.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

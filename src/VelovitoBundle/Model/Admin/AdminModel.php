@@ -48,6 +48,7 @@ class AdminModel
 
     /**
      * @return array
+     * @deprecated
      */
     public function getAllAttributeVariants()
     {
@@ -57,6 +58,14 @@ class AdminModel
         $q->execute();
 
         return $q->fetchAll();
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllAttributeVariantLists()
+    {
+        return $this->em->getRepository('VelovitoBundle:AttributeVariantList')->findAll();
     }
 
     /**
@@ -81,6 +90,7 @@ class AdminModel
     }
 
     /**
+     *
      * @param $id
      * @return ProductCategory
      * @throws \VelovitoBundle\Exception\NotFoundException

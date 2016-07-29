@@ -47,6 +47,10 @@ admin_list_attibutes:
     path:     /admin/list-attriburtes
     defaults: { _controller: VelovitoBundle:Admin:listAttributes }
 
+admin_list_variants:
+    path:     /admin/list-attriburte-variant-lists
+    defaults: { _controller: VelovitoBundle:Admin:listVariantLists }
+
 admin_edit_product:
     path:     /admin/edit-product/{id}
     defaults: { _controller: VelovitoBundle:Admin:editProduct }
@@ -55,9 +59,9 @@ admin_edit_category:
     path:     /admin/edit-category/{id}
     defaults: { _controller: VelovitoBundle:Admin:editCategory }
 
-admin_product_moderate_adverts:
+admin_edit_variant_list:
     path:     /admin
-    defaults: { _controller: VelovitoBundle:Admin:dashBoard }
+    defaults: { _controller: VelovitoBundle:Admin:editVariantList }
 #--------------------------------------------------------
 
 ajax_upload_photo:
