@@ -63,7 +63,7 @@
 
             <div class="menu">
                 <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                {{ advert.getCreationDate() | days_ago }}  &nbsp;
+                {{ advert.getCreationDate() | days_ago }} &nbsp;
 
                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 {{ advert.getViewsCount() |number_format }} &nbsp;
@@ -87,3 +87,25 @@
 {% endmacro %}
 
 
+{% macro renderArray(array, route) %}
+    {% if array is not empty %}
+        {% set firstItem = array | first %}
+    {% endif %}
+
+    <table width="100%">
+        <tr>
+            {% for key, value in firstItem if firstItem is not empty %}
+                <th>key</th>
+            {% endfor %}
+        </tr>
+
+        {% for item in array %}
+            {% set url = url(route, {'id': item.id}) %}
+            <tr>
+                {% for key, value in item %}
+                    <td><a href="{{ url }}">{{ value }}</a></td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endmacro %}
