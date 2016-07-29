@@ -4,6 +4,7 @@ namespace VelovitoBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use VelovitoBundle\Entity\ProductAttribute;
 use VelovitoBundle\Form\Admin\EditCategoryForm;
 use VelovitoBundle\Form\Admin\EditProductForm;
 use VelovitoBundle\Form\Admin\NewAttributeForm;
@@ -167,9 +168,10 @@ class AdminController extends GeneralController
             }
         }
 
-        return $this->render('@Velovito/admin/list_categories.html.twig', [
-            'categories' => $model->getAllAttributes(),
-            'form'       => $form->createView(),
+        return $this->render('@Velovito/admin/list_attributes.html.twig', [
+            'attributeTypes' => ProductAttribute::getTypesList(),
+            'items'          => $model->getAllAttributes(),
+            'form'           => $form->createView(),
         ]);
     }
 
