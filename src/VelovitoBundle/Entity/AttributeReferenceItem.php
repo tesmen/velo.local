@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="attribute_variant_list")
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
  */
-class AttributeVariantList
+class AttributeReferenceItem
 {
     /**
      * @var integer
@@ -26,6 +26,12 @@ class AttributeVariantList
     private $name;
 
     /**
+     * @var string
+     * @ORM\Column(name="reference_id", type="integer")
+     */
+    private $referenceId;
+
+    /**
      * Get id
      *
      * @return integer
@@ -40,7 +46,7 @@ class AttributeVariantList
      *
      * @param string $name
      *
-     * @return AttributeVariantList
+     * @return AttributeReferenceItem
      */
     public function setName($name)
     {
@@ -57,5 +63,29 @@ class AttributeVariantList
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set referenceId
+     *
+     * @param integer $referenceId
+     *
+     * @return AttributeReferenceItem
+     */
+    public function setReferenceId($referenceId)
+    {
+        $this->referenceId = $referenceId;
+
+        return $this;
+    }
+
+    /**
+     * Get referenceId
+     *
+     * @return integer
+     */
+    public function getReferenceId()
+    {
+        return $this->referenceId;
     }
 }
