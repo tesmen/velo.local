@@ -177,7 +177,7 @@ class AdminController extends GeneralController
     }
 
 
-    public function listVariantListsAction(Request $request)
+    public function listReferencesAction(Request $request)
     {
         $model = $this->get(C::MODEL_ADMIN);
         $form = $this->createForm(NewVariantListForm::class);
@@ -204,7 +204,7 @@ class AdminController extends GeneralController
     }
 
 
-    public function editVariantListAction(Request $request, $id)
+    public function editReferenceAction(Request $request, $id)
     {
         $model = $this->get(C::MODEL_ADMIN);
         $category = $model->getCategoryById($id);

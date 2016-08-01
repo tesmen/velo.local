@@ -12,7 +12,7 @@ class ProductAttribute
 {
     const ATTRIBUTE_TYPE_STRING = 1;
     const ATTRIBUTE_TYPE_NUMBER = 2;
-    const ATTRIBUTE_TYPE_VARIANT = 3;
+    const ATTRIBUTE_TYPE_REFERENCE = 3;
     const ATTRIBUTE_TYPE_BOOL = 4;
 
     public static function getTypesList($invert = false)
@@ -20,7 +20,7 @@ class ProductAttribute
         $list = [
             self::ATTRIBUTE_TYPE_STRING  => 'строка',
             self::ATTRIBUTE_TYPE_NUMBER  => 'число',
-            self::ATTRIBUTE_TYPE_VARIANT => 'список на выбор',
+            self::ATTRIBUTE_TYPE_REFERENCE => 'список на выбор',
             self::ATTRIBUTE_TYPE_BOOL    => 'чекбокс',
         ];
 
