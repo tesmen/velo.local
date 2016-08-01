@@ -68,7 +68,7 @@ class AdminModel
 
     /**
      * @param $id
-     * @return AttributeReference
+     * @return AttributeReferenceItem
      * @throws \VelovitoBundle\Exception\NotFoundException
      */
     public function getAttributeReferenceItemById($id)
@@ -86,6 +86,25 @@ class AdminModel
             ['referenceId' => $id],
             ['isActive' => 'ASC']
         );
+    }
+
+    /**
+     * @param $id
+     * @param $action 1|0
+     * @return array|\VelovitoBundle\Entity\AttributeReferenceItem[]
+     */
+    public function toggleReferenceItemStatus($id, $action)
+    {
+        $ent = $this->getAttributeReferenceItemById($id);
+
+        if ($action) {
+            $ent->setIsActive(true);
+        } else {
+            $ent->setIsActive(false);
+        }
+
+        $this->em->flush($ent);
+
     }
 
     /**

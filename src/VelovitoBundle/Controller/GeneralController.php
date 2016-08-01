@@ -3,6 +3,7 @@
 namespace VelovitoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class GeneralController extends Controller
 {
@@ -26,5 +27,14 @@ class GeneralController extends Controller
     public function redirectToThis($attr = [])
     {
         return $this->redirectToRoute($this->getCurrentRoute(), $attr);
+    }
+
+    public function returnJsonResponse($status, $data = null, $message = null)
+    {
+        return new JsonResponse([
+            'status'  => $status,
+            'data'    => $data,
+            'message' => $message,
+        ]);
     }
 }

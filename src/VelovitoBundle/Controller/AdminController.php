@@ -250,4 +250,20 @@ class AdminController extends GeneralController
             'form'  => $form->createView(),
         ]);
     }
+
+
+    public function toggleReferenceItemStatusAction(Request $request)
+    {
+        $action = $request->get('action');
+        $id = $request->get('id');
+        $model = $this->get(C::MODEL_ADMIN);
+
+        try {
+            $model->toggleReferenceItemStatus($id, (int)$action);
+
+            return $this->returnJsonResponse(true);
+        } catch (\Exception $e) {
+            return $this->returnJsonResponse(false, null, $e->getMessage());
+        }
+    }
 }

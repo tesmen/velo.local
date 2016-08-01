@@ -55,6 +55,10 @@ admin_edit_reference:
     path:     /admin/edit-reference/{id}
     defaults: { _controller: VelovitoBundle:Admin:editReference }
 
+admin_toggle_reference_item:
+    path:     /admin/toggle-reference-item
+    defaults: { _controller: VelovitoBundle:Admin:toggleReferenceItemStatus }
+
 admin_edit_product:
     path:     /admin/edit-product/{id}
     defaults: { _controller: VelovitoBundle:Admin:editProduct }

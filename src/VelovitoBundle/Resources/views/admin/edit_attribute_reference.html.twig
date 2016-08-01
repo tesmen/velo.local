@@ -30,15 +30,30 @@
                 <th>id</th>
                 <th>name</th>
                 <th>reference_id</th>
+                <th>toggle</th>
             </tr>
 
             {% for item in items %}
-            {% set url = url('homepage', {'id': item.id}) %}
-            <tr>
-            <td><a href="{{ url }}">{{ item.id }}</a></td>
-            <td><a href="{{ url }}">{{ item.name }} </a></td>
-            <td><a href="{{ url }}">{{ item.isActive }} </a></td>
-            </tr>
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }} </td>
+                    <td>{{ item.referenceId }} </td>
+
+                    <td>
+                        {% if item.isActive %}
+                            <a class="glyphicon glyphicon-minus"
+                               href="{{ url('admin_toggle_reference_item', {'id': item.id, 'action': 0}) }}">
+
+                            </a>
+                        {% else %}
+                            <a class="glyphicon glyphicon-plus"
+                               href="{{ url('admin_toggle_reference_item', {'id': item.id, 'action': 1}) }}">
+
+                            </a>
+                        {% endif %}
+                    </td>
+
+                </tr>
             {% endfor %}
         </table>
     </div>
