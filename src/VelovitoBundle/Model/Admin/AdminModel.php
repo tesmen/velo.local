@@ -41,7 +41,7 @@ class AdminModel
     /**
      * @return ProductAttribute[]
      */
-    public function getAllAttributes()
+    public function getAlLProductAttributes()
     {
         return $this->productsAttrRepo->findAll();
     }

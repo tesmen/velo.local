@@ -170,7 +170,7 @@ class AdminController extends GeneralController
 
         return $this->render('@Velovito/admin/list_attributes.html.twig', [
             'attributeTypes' => ProductAttribute::getTypesList(),
-            'items'          => $model->getAllAttributes(),
+            'items'          => $model->getAlLProductAttributes(),
             'form'           => $form->createView(),
         ]);
     }
