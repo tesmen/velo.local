@@ -4,6 +4,7 @@ namespace VelovitoBundle\Model\Admin;
 
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
+use VelovitoBundle\Entity\AttributeReference;
 use VelovitoBundle\Entity\Product;
 use VelovitoBundle\Entity\ProductAttribute;
 use VelovitoBundle\Entity\ProductCategory;
@@ -113,6 +114,19 @@ class AdminModel
             ->setComment($formData[C::FORM_COMMENT])
             ->setActive(true)
             ->setType($formData[C::FORM_ATTRIBUTE_TYPE]);
+
+        $this->em->persist($ent);
+        $this->em->flush($ent);
+    }
+
+    public function createReference($formData)
+    {
+        $ent = new AttributeReference();
+
+        $ent
+            ->setName($formData[C::FORM_TITLE])
+            ->setComment($formData[C::FORM_COMMENT])
+            ->setActive(true);
 
         $this->em->persist($ent);
         $this->em->flush($ent);

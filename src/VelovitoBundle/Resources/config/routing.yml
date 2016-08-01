@@ -47,8 +47,12 @@ admin_list_attibutes:
     path:     /admin/list-attriburtes
     defaults: { _controller: VelovitoBundle:Admin:listAttributes }
 
-admin_list_variants:
-    path:     /admin/list-attriburte-variant-lists
+admin_list_references:
+    path:     /admin/list-references
+    defaults: { _controller: VelovitoBundle:Admin:listReferences }
+
+admin_edit_reference:
+    path:     /admin/edit-references
     defaults: { _controller: VelovitoBundle:Admin:listReferences }
 
 admin_edit_product:

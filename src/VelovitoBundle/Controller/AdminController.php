@@ -149,9 +149,7 @@ class AdminController extends GeneralController
     public function listAttributesAction(Request $request)
     {
         $model = $this->get(C::MODEL_ADMIN);
-        $options[C::FORM_ATTRIBUTE_TYPE_LIST] = $model->getAllAttributeVariants();
-
-        $form = $this->createForm(NewAttributeForm::class, $options);
+        $form = $this->createForm(NewAttributeForm::class);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -186,7 +184,7 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $model->createProductAttribute($formData);
+                $model->createReference($formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
                 return $this->redirectToThis();
@@ -196,9 +194,9 @@ class AdminController extends GeneralController
             }
         }
 
-        return $this->render('@Velovito/admin/list_attribute_variant_lists.html.twig', [
+        return $this->render('@Velovito/admin/list_attribute_references.html.twig', [
             'items' => $model->getAllAttributeReferences(),
-            'form'       => $form->createView(),
+            'form'  => $form->createView(),
         ]);
     }
 
@@ -232,7 +230,7 @@ class AdminController extends GeneralController
             }
         }
 
-        return $this->render('@Velovito/admin/edit_category.html.twig', [
+        return $this->render('@Velovito/admin/edit_attribute_reference.html.twig', [
             'form' => $form->createView(),
         ]);
     }

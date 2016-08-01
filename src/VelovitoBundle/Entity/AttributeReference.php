@@ -26,6 +26,18 @@ class AttributeReference
     private $name;
 
     /**
+     * @var string
+     * @ORM\Column(name="active", type="boolean", nullable=false)
+     */
+    private $active;
+
+    /**
+     * @var string
+     * @ORM\Column(name="comment", type="string", length=64, nullable=true)
+     */
+    private $comment;
+
+    /**
      * Get id
      *
      * @return integer
@@ -57,5 +69,55 @@ class AttributeReference
     public function getName()
     {
         return $this->name;
+    }
+
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return Product
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return ProductAttribute
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

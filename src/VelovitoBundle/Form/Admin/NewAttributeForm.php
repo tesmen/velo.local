@@ -15,8 +15,6 @@ class NewAttributeForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $data = $options['data'];
-
         $builder->add(
             C::FORM_TITLE,
             TextType::class,

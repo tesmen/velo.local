@@ -1,0 +1,34 @@
+{% extends 'VelovitoBundle::no_menu.html.twig' %}
+{% import '@Velovito/templates/macroses.html.twig' as macro %}
+
+{% block body %}
+    {% include '@Velovito/templates/alert.html.twig' %}
+    <div>
+        <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Ave, Admin!</h1>
+    </div>
+
+    <div>
+        <div><a href="{{ url('admin_dashBoard') }}">Home</a></div>
+
+        <article>Списки</article>
+        {{ form_start(form) }}
+        {{ form_end(form) }}
+        <table width="100%">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+            </tr>
+
+            {% for item in items %}
+                {% set url = url('admin_edit_variant_list', {'id': item.id}) %}
+                <tr>
+                    <td><a href="{{ url }}">{{ item.id }}</a></td>
+                    <td><a href="{{ url }}">{{ item.name }} </a></td>
+                    <td><a href="{{ url }}">{{ item.comment }} </a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}
