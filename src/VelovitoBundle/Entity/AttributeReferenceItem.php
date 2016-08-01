@@ -32,6 +32,12 @@ class AttributeReferenceItem
     private $referenceId;
 
     /**
+     * @var string
+     * @ORM\Column(name="is_active", type="boolean", nullable=false)
+     */
+    private $isActive;
+
+    /**
      * Get id
      *
      * @return integer
@@ -87,5 +93,30 @@ class AttributeReferenceItem
     public function getReferenceId()
     {
         return $this->referenceId;
+    }
+
+
+    /**
+     * Set active
+     *
+     * @param boolean $isActive
+     *
+     * @return Product
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }

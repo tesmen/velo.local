@@ -5,6 +5,7 @@ namespace VelovitoBundle\Model\Admin;
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
 use VelovitoBundle\Entity\AttributeReference;
+use VelovitoBundle\Entity\AttributeReferenceItem;
 use VelovitoBundle\Entity\Product;
 use VelovitoBundle\Entity\ProductAttribute;
 use VelovitoBundle\Entity\ProductCategory;
@@ -63,6 +64,18 @@ class AdminModel
     public function getAttributeReferenceById($id)
     {
         return $this->em->getRepository(C::REPO_ATTRIBUTE_REFERENCE)->findOneOrFail(['id' => $id]);
+    }
+
+    /**
+     * @param $id
+     * @return AttributeReferenceItem[]
+     */
+    public function getAllReferenceItems($id)
+    {
+        return $this->em->getRepository(C::REPO_ATTRIBUTE_REFERENCE_ITEM)->findBy(
+            ['referenceId' => $id],
+            ['isActive' => 'ASC']
+        );
     }
 
     /**
@@ -129,16 +142,21 @@ class AdminModel
         $this->em->flush($ent);
     }
 
-    public function createReference($formData)
+    public function createOrUpdateReference($formData, AttributeReference $attributeReference = null)
     {
-        $ent = new AttributeReference();
+        $ent = is_null($attributeReference)
+            ? new AttributeReference()
+            : $attributeReference;
 
         $ent
             ->setName($formData[C::FORM_TITLE])
             ->setComment($formData[C::FORM_COMMENT])
             ->setActive(true);
 
-        $this->em->persist($ent);
+        if (is_null($attributeReference)) {
+            $this->em->persist($ent);
+        }
+
         $this->em->flush($ent);
     }
 

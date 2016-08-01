@@ -44,7 +44,7 @@ class EditReferenceForm extends AbstractType
             C::FORM_SUBMIT,
             SubmitType::class,
             [
-                'label' => 'Добавить',
+                'label' => 'Сохранить',
             ]
         );
     }

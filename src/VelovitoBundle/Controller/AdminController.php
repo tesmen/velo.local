@@ -185,7 +185,7 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $model->createReference($formData);
+                $model->createOrUpdateReference($formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
                 return $this->redirectToThis();
@@ -221,10 +221,10 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $model->createReference($formData);
+                $model->createOrUpdateReference($formData, $ent);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
-                return $this->redirectToThis();
+                return $this->redirectToThis(['id' => $id]);
             } catch (\Exception $e) {
                 $this->addFlash(C::FLASH_ERROR, $e->getMessage());
                 throw $e;
@@ -232,7 +232,7 @@ class AdminController extends GeneralController
         }
 
         return $this->render('@Velovito/admin/edit_attribute_reference.html.twig', [
-            'items' => $model->getAllAttributeReferences(),
+            'items' => $model->getAllReferenceItems($id),
             'form'  => $form->createView(),
         ]);
     }
