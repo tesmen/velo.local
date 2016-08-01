@@ -20,7 +20,7 @@
             </tr>
 
             {% for item in items %}
-                {% set url = url('admin_edit_variant_list', {'id': item.id}) %}
+                {% set url = url('admin_edit_reference', {'id': item.id}) %}
                 <tr>
                     <td><a href="{{ url }}">{{ item.id }}</a></td>
                     <td><a href="{{ url }}">{{ item.name }} </a></td>

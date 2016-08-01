@@ -106,7 +106,11 @@ class AdvertisementModel
         return $result;
     }
 
-
+    /**
+     * @param $advert
+     * @param array $formData
+     * @depreceated
+     */
     public function updateAdvert($advert, array $formData)
     {
         $photoRepo = $this->em->getRepository(C::REPO_USER_PHOTO);

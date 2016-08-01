@@ -204,13 +204,14 @@ class AdminController extends GeneralController
     public function editReferenceAction(Request $request, $id)
     {
         $model = $this->get(C::MODEL_ADMIN);
-        $category = $model->getCategoryById($id);
-        $form = $this->createForm(EditCategoryForm::class);
+        $ent = $model->getAttributeReferenceById($id);
+        $form = $this->createForm(NewReferenceForm::class);
 
         $form->setData(
             [
-                C::FORM_TITLE     => $category->getName(),
-                C::FORM_IS_ACTIVE => $category->getActive(),
+                C::FORM_TITLE     => $ent->getName(),
+                C::FORM_COMMENT   => $ent->getComment(),
+                C::FORM_IS_ACTIVE => $ent->getActive(),
             ]
         );
 
@@ -219,19 +220,19 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $model->updateCategory($id, $formData);
+                $model->createReference($formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
-                return $this->redirectToThis(
-                    ['id' => $id]
-                );
+                return $this->redirectToThis();
             } catch (\Exception $e) {
                 $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+                throw $e;
             }
         }
 
         return $this->render('@Velovito/admin/edit_attribute_reference.html.twig', [
-            'form' => $form->createView(),
+            'items' => $model->getAllAttributeReferences(),
+            'form'  => $form->createView(),
         ]);
     }
 }

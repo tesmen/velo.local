@@ -57,6 +57,16 @@ class AdminModel
 
     /**
      * @param $id
+     * @return AttributeReference
+     * @throws \VelovitoBundle\Exception\NotFoundException
+     */
+    public function getAttributeReferenceById($id)
+    {
+        return $this->em->getRepository(C::REPO_ATTRIBUTE_REFERENCE)->findOneOrFail(['id' => $id]);
+    }
+
+    /**
+     * @param $id
      * @return ProductAttribute[]
      */
     public function getProductAttributesByProductId($id)
