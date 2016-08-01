@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\Entity\ProductAttribute;
 use VelovitoBundle\Form\Admin\EditCategoryForm;
 use VelovitoBundle\Form\Admin\EditProductForm;
+use VelovitoBundle\Form\Admin\EditReferenceForm;
 use VelovitoBundle\Form\Admin\NewAttributeForm;
 use VelovitoBundle\Form\Admin\NewCategoryForm;
 use VelovitoBundle\Form\Admin\NewReferenceForm;
@@ -205,7 +206,7 @@ class AdminController extends GeneralController
     {
         $model = $this->get(C::MODEL_ADMIN);
         $ent = $model->getAttributeReferenceById($id);
-        $form = $this->createForm(NewReferenceForm::class);
+        $form = $this->createForm(EditReferenceForm::class);
 
         $form->setData(
             [
