@@ -30,6 +30,7 @@
                 <th>id</th>
                 <th>name</th>
                 <th>reference_id</th>
+                <th>status</th>
                 <th>toggle</th>
             </tr>
 
@@ -41,12 +42,21 @@
 
                     <td>
                         {% if item.isActive %}
-                            <a class="glyphicon glyphicon-minus"
+                            Active
+                        {% else %}
+                            Off
+                        {% endif %}
+                    </td>
+
+
+                    <td>
+                        {% if item.isActive %}
+                            <a class="glyphicon glyphicon-remove ajax_link"
                                href="{{ url('admin_toggle_reference_item', {'id': item.id, 'action': 0}) }}">
 
                             </a>
                         {% else %}
-                            <a class="glyphicon glyphicon-plus"
+                            <a class="glyphicon glyphicon-play ajax_link"
                                href="{{ url('admin_toggle_reference_item', {'id': item.id, 'action': 1}) }}">
 
                             </a>
@@ -58,5 +68,9 @@
         </table>
     </div>
 
+    <script type="text/javascript">
+        var $links = $('a.ajax_link') ;
 
+
+    </script>
 {% endblock %}

@@ -261,7 +261,10 @@ class AdminController extends GeneralController
         try {
             $model->toggleReferenceItemStatus($id, (int)$action);
 
-            return $this->returnJsonResponse(true);
+            return $this->redirectToRoute('admin_edit_reference',[
+                'id' => $model->getReferenceIdByItemId($id)
+            ]);
+//            return $this->returnJsonResponse(true);
         } catch (\Exception $e) {
             return $this->returnJsonResponse(false, null, $e->getMessage());
         }

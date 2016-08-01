@@ -107,6 +107,14 @@ class AdminModel
 
     }
 
+    public function getReferenceIdByItemId($id)
+    {
+        $ent = $this->getAttributeReferenceItemById($id);
+
+        return $ent->getReferenceId();
+
+    }
+
     /**
      * @param $id
      * @return ProductAttribute[]
