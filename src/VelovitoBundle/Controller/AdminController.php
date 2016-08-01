@@ -197,7 +197,7 @@ class AdminController extends GeneralController
         }
 
         return $this->render('@Velovito/admin/list_attribute_variant_lists.html.twig', [
-            'items' => $model->getAllAttributeVariantLists(),
+            'items' => $model->getAllAttributeReferences(),
             'form'       => $form->createView(),
         ]);
     }

@@ -16,9 +16,9 @@ class AdminModel
     {
         $this->em = $em;
 
-        $this->productsRepo = $em->getRepository('VelovitoBundle:Product');
-        $this->productsAttrRepo = $em->getRepository('VelovitoBundle:ProductAttribute');
-        $this->productsAttrVariantsRepo = $em->getRepository('VelovitoBundle:ProductAttributeVariant');
+        $this->productsRepo = $em->getRepository(C::REPO_PRODUCT);
+        $this->productsAttrRepo = $em->getRepository(C::REPO_PRODUCT_ATTRIBUTE);
+        $this->productsAttrReferenceRepo = $em->getRepository(C::REPO_ATTRIBUTE_REFERENCE);
         $this->productCatRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
     }
 
@@ -48,24 +48,10 @@ class AdminModel
 
     /**
      * @return array
-     * @deprecated
      */
-    public function getAllAttributeVariants()
+    public function getAllAttributeReferences()
     {
-        $q = $this->em->getConnection()->prepare(
-            'SELECT * FROM product_attribute_variants'
-        );
-        $q->execute();
-
-        return $q->fetchAll();
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllAttributeVariantLists()
-    {
-        return $this->em->getRepository('VelovitoBundle:AttributeVariantList')->findAll();
+        return $this->em->getRepository(C::REPO_ATTRIBUTE_REFERENCE)->findAll();
     }
 
     /**
