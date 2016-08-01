@@ -23,6 +23,15 @@ class EditReferenceForm extends AbstractType
         );
 
         $builder->add(
+            'item_name',
+            TextType::class,
+            [
+                'label'    => 'Новый элемент',
+                'required' => false,
+            ]
+        );
+
+        $builder->add(
             C::FORM_COMMENT,
             TextType::class,
             [
@@ -41,10 +50,18 @@ class EditReferenceForm extends AbstractType
         );
 
         $builder->add(
-            C::FORM_SUBMIT,
+            C::FORM_SAVE,
             SubmitType::class,
             [
                 'label' => 'Сохранить',
+            ]
+        );
+
+        $builder->add(
+            C::FORM_ADD,
+            SubmitType::class,
+            [
+                'label' => 'Добавить',
             ]
         );
     }

@@ -68,6 +68,16 @@ class AdminModel
 
     /**
      * @param $id
+     * @return AttributeReference
+     * @throws \VelovitoBundle\Exception\NotFoundException
+     */
+    public function getAttributeReferenceItemById($id)
+    {
+        return $this->em->getRepository(C::REPO_ATTRIBUTE_REFERENCE_ITEM)->findOneOrFail(['id' => $id]);
+    }
+
+    /**
+     * @param $id
      * @return AttributeReferenceItem[]
      */
     public function getAllReferenceItems($id)
@@ -157,6 +167,26 @@ class AdminModel
             $this->em->persist($ent);
         }
 
+        $this->em->flush($ent);
+    }
+
+    public function createOrUpdateReferenceItem($formData, $id = null)
+    {
+        $ent = is_null($id)
+            ? new AttributeReferenceItem()
+            : $this->getAttributeReferenceItemById($id);
+
+
+        $isActive = isset($formData[C::FORM_IS_ACTIVE])
+            ? $formData[C::FORM_IS_ACTIVE]
+            : true;
+
+        $ent
+            ->setName($formData['item_name'])
+            ->setReferenceId($formData[C::FORM_REFERENCE])
+            ->setIsActive($isActive);
+
+        $this->em->persist($ent);
         $this->em->flush($ent);
     }
 

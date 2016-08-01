@@ -27,7 +27,7 @@ class AttributeReferenceItem
 
     /**
      * @var string
-     * @ORM\Column(name="reference_id", type="integer")
+     * @ORM\Column(name="reference_id", type="integer", nullable=false)
      */
     private $referenceId;
 

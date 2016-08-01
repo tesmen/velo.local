@@ -76,6 +76,7 @@ class C
     const FORM_FILE = 'file';
     const FORM_SUBJECT = 'subject';
     const FORM_SUBMIT = 'submit';
+    const FORM_ADD = 'add';
     const FORM_CURRENCY = 'currency';
     const FORM_COMMENT = 'comment';
     const FORM_PUBLISH = 'publish';
@@ -100,6 +101,7 @@ class C
     const FORM_LAST_NAME = 'last_name';
     const FORM_EMAIL = 'email';
     const FORM_REGISTERED_DATE = 'registered_date';
+    const FORM_REFERENCE = 'reference';
     const FORM_PASSWORD = 'password';
     const FORM_PHOTO = 'photo';
     const FORM_PHOTO_FILENAMES = 'photoFileNames';

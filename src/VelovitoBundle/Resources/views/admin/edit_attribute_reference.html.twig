@@ -12,21 +12,34 @@
 
         <article>Списки</article>
         {{ form_start(form) }}
+        <div>
+            {{ form_widget(form.title) }}
+            {{ form_widget(form.comment) }}
+            {{ form_widget(form.active) }}
+            {{ form_widget(form.save) }}
+        </div>
+
+        <div>
+            {{ form_widget(form.item_name) }}
+            {{ form_widget(form.add) }}
+        </div>
         {{ form_end(form) }}
+
         <table width="100%">
             <tr>
                 <th>id</th>
                 <th>name</th>
+                <th>reference_id</th>
             </tr>
 
-            {#{% for item in items %}#}
-                {#{% set url = url('admin_edit_variant_list', {'id': item.id}) %}#}
-                {#<tr>#}
-                    {#<td><a href="{{ url }}">{{ item.id }}</a></td>#}
-                    {#<td><a href="{{ url }}">{{ item.name }} </a></td>#}
-                    {#<td><a href="{{ url }}">{{ item.comment }} </a></td>#}
-                {#</tr>#}
-            {#{% endfor %}#}
+            {% for item in items %}
+            {% set url = url('homepage', {'id': item.id}) %}
+            <tr>
+            <td><a href="{{ url }}">{{ item.id }}</a></td>
+            <td><a href="{{ url }}">{{ item.name }} </a></td>
+            <td><a href="{{ url }}">{{ item.isActive }} </a></td>
+            </tr>
+            {% endfor %}
         </table>
     </div>
 

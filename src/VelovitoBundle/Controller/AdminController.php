@@ -220,15 +220,29 @@ class AdminController extends GeneralController
             $form->handleRequest($request);
             $formData = $form->getData();
 
-            try {
-                $model->createOrUpdateReference($formData, $ent);
-                $this->addFlash(C::FLASH_SUCCESS, 'ok!');
+            if ($form->getClickedButton()->getName() === C::FORM_ADD) {
+                try {
+                    $formData[C::FORM_REFERENCE] = $id;
+                    $model->createOrUpdateReferenceItem($formData);
+                    $this->addFlash(C::FLASH_SUCCESS, 'item ok!');
 
-                return $this->redirectToThis(['id' => $id]);
-            } catch (\Exception $e) {
-                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
-                throw $e;
+                    return $this->redirectToThis(['id' => $id]);
+                } catch (\Exception $e) {
+                    $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+                    throw $e;
+                }
+            } else {
+                try {
+                    $model->createOrUpdateReference($formData, $ent);
+                    $this->addFlash(C::FLASH_SUCCESS, 'ok!');
+
+                    return $this->redirectToThis(['id' => $id]);
+                } catch (\Exception $e) {
+                    $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+                    throw $e;
+                }
             }
+
         }
 
         return $this->render('@Velovito/admin/edit_attribute_reference.html.twig', [
