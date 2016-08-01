@@ -9,8 +9,8 @@ use VelovitoBundle\Form\Admin\EditCategoryForm;
 use VelovitoBundle\Form\Admin\EditProductForm;
 use VelovitoBundle\Form\Admin\NewAttributeForm;
 use VelovitoBundle\Form\Admin\NewCategoryForm;
-use VelovitoBundle\Form\Admin\NewVariantListForm;
-use VelovitoBundle\Form\Admin\ProductForm;
+use VelovitoBundle\Form\Admin\NewReferenceForm;
+use VelovitoBundle\Form\Admin\NewProductForm;
 use VelovitoBundle\Form\Ajax\UploadPhotoForm;
 use VelovitoBundle\C;
 
@@ -97,7 +97,7 @@ class AdminController extends GeneralController
     {
         $model = $this->get(C::MODEL_ADMIN);
         $options[C::FORM_CATEGORY_LIST] = $model->getCategoriesForForm();
-        $form = $this->createForm(ProductForm::class, $options);
+        $form = $this->createForm(NewProductForm::class, $options);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -180,7 +180,7 @@ class AdminController extends GeneralController
     public function listReferencesAction(Request $request)
     {
         $model = $this->get(C::MODEL_ADMIN);
-        $form = $this->createForm(NewVariantListForm::class);
+        $form = $this->createForm(NewReferenceForm::class);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
