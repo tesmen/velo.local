@@ -11,7 +11,6 @@ use VelovitoBundle\Form\Admin\NewAttributeForm;
 use VelovitoBundle\Form\Admin\NewCategoryForm;
 use VelovitoBundle\Form\Admin\NewReferenceForm;
 use VelovitoBundle\Form\Admin\NewProductForm;
-use VelovitoBundle\Form\Ajax\UploadPhotoForm;
 use VelovitoBundle\C;
 
 class AdminController extends GeneralController

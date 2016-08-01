@@ -5,7 +5,6 @@ namespace VelovitoBundle\Model\Advertisement;
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
 use VelovitoBundle\Entity\Product;
-use VelovitoBundle\Entity\User;
 use VelovitoBundle\Model\DocumentModel;
 use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Model\SecurityModel;
