@@ -102,6 +102,7 @@ class C
     const FORM_EMAIL = 'email';
     const FORM_REGISTERED_DATE = 'registered_date';
     const FORM_REFERENCE = 'reference';
+    const FORM_REFERENCE_LIST = 'reference_list';
     const FORM_PASSWORD = 'password';
     const FORM_PHOTO = 'photo';
     const FORM_PHOTO_FILENAMES = 'photoFileNames';

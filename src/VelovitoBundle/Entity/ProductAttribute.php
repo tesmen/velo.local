@@ -51,6 +51,12 @@ class ProductAttribute
     private $type;
 
     /**
+     * @var string
+     * @ORM\Column(name="reference_id", type="integer", nullable=true)
+     */
+    private $referenceId;
+
+    /**
      * @var integer
      * @ORM\Column(name="active", type="boolean", nullable=false)
      */
@@ -166,5 +172,29 @@ class ProductAttribute
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Set referenceId
+     *
+     * @param integer $referenceId
+     *
+     * @return AttributeReferenceItem
+     */
+    public function setReferenceId($referenceId)
+    {
+        $this->referenceId = $referenceId;
+
+        return $this;
+    }
+
+    /**
+     * Get referenceId
+     *
+     * @return integer
+     */
+    public function getReferenceId()
+    {
+        return $this->referenceId;
     }
 }

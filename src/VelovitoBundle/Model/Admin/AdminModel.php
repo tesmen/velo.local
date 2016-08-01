@@ -49,11 +49,38 @@ class AdminModel
     }
 
     /**
-     * @return array
+     * @return AttributeReference[]
      */
     public function getAllAttributeReferences()
     {
         return $this->em->getRepository(C::REPO_ATTRIBUTE_REFERENCE)->findAll();
+    }
+
+    /**
+     * @return AttributeReference[]
+     */
+    public function getEnabledAttrReferences()
+    {
+        return $this->em->getRepository(C::REPO_ATTRIBUTE_REFERENCE)->findBy([
+            'active' => true
+        ]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttrReferencesForForm()
+    {
+        $result = [];
+
+        foreach ($this->getEnabledAttrReferences() as $ref) {
+            $name = sprintf('%s - %s', $ref->getName(), $ref->getComment());
+            $result[$name] = $ref->getId()  ;
+        };
+
+        ksort($result);
+
+        return $result;
     }
 
     /**
@@ -173,7 +200,13 @@ class AdminModel
             ->setName($formData[C::FORM_TITLE])
             ->setComment($formData[C::FORM_COMMENT])
             ->setActive(true)
+
             ->setType($formData[C::FORM_ATTRIBUTE_TYPE]);
+
+        if(ProductAttribute::ATTRIBUTE_TYPE_REFERENCE === $formData[C::FORM_ATTRIBUTE_TYPE]){
+            $ent->setReferenceId($formData[C::FORM_REFERENCE]);
+        }
+
 
         $this->em->persist($ent);
         $this->em->flush($ent);

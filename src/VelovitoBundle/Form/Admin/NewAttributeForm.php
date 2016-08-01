@@ -15,6 +15,8 @@ class NewAttributeForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $data = $options['data'];
+
         $builder->add(
             C::FORM_TITLE,
             TextType::class,
@@ -39,6 +41,16 @@ class NewAttributeForm extends AbstractType
             [
                 'label'    => 'Тип',
                 'choices'  => ProductAttribute::getTypesList(true),
+                'required' => true,
+            ]
+        );
+
+        $builder->add(
+            C::FORM_REFERENCE,
+            ChoiceType::class,
+            [
+                'label'    => 'Список',
+                'choices'  => $data[C::FORM_REFERENCE_LIST],
                 'required' => true,
             ]
         );

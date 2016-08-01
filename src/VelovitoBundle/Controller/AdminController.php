@@ -150,7 +150,12 @@ class AdminController extends GeneralController
     public function listAttributesAction(Request $request)
     {
         $model = $this->get(C::MODEL_ADMIN);
-        $form = $this->createForm(NewAttributeForm::class);
+
+        $options= [
+            C::FORM_REFERENCE_LIST => $model->getAttrReferencesForForm()
+        ];
+
+        $form = $this->createForm(NewAttributeForm::class, $options);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
