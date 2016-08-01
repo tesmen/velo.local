@@ -22,7 +22,7 @@
             </tr>
 
             {% for item in items %}
-                {% set url = url('admin_edit_product', {'id': item.id}) %}
+                {% set url = url('admin_edit_attribute', {'id': item.id}) %}
                 <tr>
                     <td><a href="{{ url }}">{{ item.id }}</a></td>
                     <td><a href="{{ url }}">{{ item.name }} </a></td>

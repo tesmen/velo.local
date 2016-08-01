@@ -144,12 +144,12 @@ class AdminModel
 
     /**
      * @param $id
-     * @return ProductAttribute[]
+     * @return ProductAttribute
      */
-    public function getProductAttributesByProductId($id)
+    public function getProductAttributeById($id)
     {
-        return $this->productsAttrRepo->findby(
-            ['productId' => $id]
+        return $this->productsAttrRepo->findOneOrFail(
+            ['id' => $id]
         );
     }
 

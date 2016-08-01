@@ -5,6 +5,7 @@ namespace VelovitoBundle\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\Entity\ProductAttribute;
+use VelovitoBundle\Form\Admin\EditAttributeForm;
 use VelovitoBundle\Form\Admin\EditCategoryForm;
 use VelovitoBundle\Form\Admin\EditProductForm;
 use VelovitoBundle\Form\Admin\EditReferenceForm;
@@ -151,11 +152,9 @@ class AdminController extends GeneralController
     {
         $model = $this->get(C::MODEL_ADMIN);
 
-        $options= [
+        $form = $this->createForm(NewAttributeForm::class, [
             C::FORM_REFERENCE_LIST => $model->getAttrReferencesForForm()
-        ];
-
-        $form = $this->createForm(NewAttributeForm::class, $options);
+        ]);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -175,6 +174,39 @@ class AdminController extends GeneralController
         return $this->render('@Velovito/admin/list_attributes.html.twig', [
             'attributeTypes' => ProductAttribute::getTypesList(),
             'items'          => $model->getAlLProductAttributes(),
+            'form'           => $form->createView(),
+        ]);
+    }
+
+
+    public function editAttributeAction(Request $request, $id)
+    {
+        $model = $this->get(C::MODEL_ADMIN);
+        $ent = $model->getProductAttributeById($id);
+        $form = $this->createForm(EditAttributeForm::class, [
+            C::FORM_TITLE => $ent->getName(),
+            C::FORM_COMMENT => $ent->getComment(),
+            C::FORM_REFERENCE_LIST => $model->getAttrReferencesForForm(),
+        ]);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            $formData = $form->getData();
+
+            try {
+                $model->createProductAttribute($formData);
+                $this->addFlash(C::FLASH_SUCCESS, 'ok!');
+
+                return $this->redirectToThis();
+            } catch (\Exception $e) {
+                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+                throw $e;
+            }
+        }
+
+        return $this->render('@Velovito/admin/edit_attribute.html.twig', [
+//            'attributeTypes' => ProductAttribute::getTypesList(),
+//            'items'          => $model->getAlLProductAttributes(),
             'form'           => $form->createView(),
         ]);
     }

@@ -44,8 +44,12 @@ admin_list_categories:
     defaults: { _controller: VelovitoBundle:Admin:listCategories }
 
 admin_list_attibutes:
-    path:     /admin/list-attriburtes
+    path:     /admin/list-attributes
     defaults: { _controller: VelovitoBundle:Admin:listAttributes }
+
+admin_edit_attribute:
+    path:     /admin/edit-attribute/{id}
+    defaults: { _controller: VelovitoBundle:Admin:editAttribute }
 
 admin_list_references:
     path:     /admin/list-references
