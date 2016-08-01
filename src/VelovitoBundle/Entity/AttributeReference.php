@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ProductCategory
  *
- * @ORM\Table(name="attribute_variant_list")
+ * @ORM\Table(name="attribute_references")
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
  */
 class AttributeReference
