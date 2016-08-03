@@ -23,42 +23,6 @@ class AdminController extends GeneralController
     }
 
 
-    public function editProductAction(Request $request, $id)
-    {
-        $model = $this->get(C::MODEL_ADMIN);
-        $product = $model->getProductById($id);
-
-        $options = [
-            C::FORM_CATEGORY_LIST => $model->getCategoriesForForm(),
-            C::FORM_TITLE         => $product->getName(),
-            C::FORM_IS_ACTIVE     => $product->getActive(),
-            C::FORM_CATEGORY      => $product->getCategory()->getId(),
-        ];
-
-        $form = $this->createForm(EditProductForm::class, $options);
-
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-            $formData = $form->getData();
-
-            try {
-                $model->updateProduct($id, $formData);
-                $this->addFlash(C::FLASH_SUCCESS, 'ok!');
-
-                return $this->redirectToThis(
-                    ['id' => $id]
-                );
-            } catch (\Exception $e) {
-                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
-            }
-        }
-
-        return $this->render('@Velovito/admin/edit_category.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-
     public function editCategoryAction(Request $request, $id)
     {
         $model = $this->get(C::MODEL_ADMIN);
@@ -117,6 +81,42 @@ class AdminController extends GeneralController
         return $this->render('@Velovito/admin/list_products.html.twig', [
             'products' => $model->getAllProducts(),
             'form'     => $form->createView(),
+        ]);
+    }
+
+
+    public function editProductAction(Request $request, $id)
+    {
+        $model = $this->get(C::MODEL_ADMIN);
+        $product = $model->getProductById($id);
+
+        $options = [
+            C::FORM_CATEGORY_LIST => $model->getCategoriesForForm(),
+            C::FORM_TITLE         => $product->getName(),
+            C::FORM_IS_ACTIVE     => $product->getActive(),
+            C::FORM_CATEGORY      => $product->getCategory()->getId(),
+        ];
+
+        $form = $this->createForm(EditProductForm::class, $options);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            $formData = $form->getData();
+
+            try {
+                $model->updateProduct($id, $formData);
+                $this->addFlash(C::FLASH_SUCCESS, 'ok!');
+
+                return $this->redirectToThis(
+                    ['id' => $id]
+                );
+            } catch (\Exception $e) {
+                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+            }
+        }
+
+        return $this->render('@Velovito/admin/edit_category.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
@@ -205,8 +205,6 @@ class AdminController extends GeneralController
         }
 
         return $this->render('@Velovito/admin/edit_attribute.html.twig', [
-//            'attributeTypes' => ProductAttribute::getTypesList(),
-//            'items'          => $model->getAlLProductAttributes(),
             'form'           => $form->createView(),
         ]);
     }
@@ -298,6 +296,7 @@ class AdminController extends GeneralController
         try {
             $model->toggleReferenceItemStatus($id, (int)$action);
 
+            //todo AJAX
             return $this->redirectToRoute('admin_edit_reference',[
                 'id' => $model->getReferenceIdByItemId($id)
             ]);
