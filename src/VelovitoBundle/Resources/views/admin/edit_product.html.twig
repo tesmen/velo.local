@@ -11,9 +11,8 @@
         <div><a href="{{ url('admin_dashBoard') }}">Home</a></div>
 
         <article>Товар EDIT</article>
-        {{ form_row(form.active) }}
-
         {{ form_start(form) }}
+        {{ form_row(form.active) }}
         {{ form_widget(form.title) }}
         {{ form_widget(form.category) }}
         {{ form_widget(form.save) }}

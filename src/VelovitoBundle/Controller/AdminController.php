@@ -91,11 +91,11 @@ class AdminController extends GeneralController
         $product = $model->getProductById($id);
 
         $options = [
-            C::FORM_CATEGORY_LIST => $model->getCategoriesForForm(),
-            C::FORM_ATTRIBUTE_LIST => $model->getAttrReferencesForForm(),
-            C::FORM_TITLE         => $product->getName(),
-            C::FORM_IS_ACTIVE     => $product->getActive(),
-            C::FORM_CATEGORY      => $product->getCategory()->getId(),
+            C::FORM_CATEGORY_LIST  => $model->getCategoriesForForm(),
+            C::FORM_ATTRIBUTE_LIST => $model->getEnabledAttributesForForm(),
+            C::FORM_TITLE          => $product->getName(),
+            C::FORM_IS_ACTIVE      => $product->getActive(),
+            C::FORM_CATEGORY       => $product->getCategory()->getId(),
         ];
 
         $form = $this->createForm(EditProductForm::class, $options);
@@ -105,8 +105,8 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                if (C::FORM_ADD === $form->getClickedButton()) {
-                    $model->addAttributeMapToProduct($product, $formData);
+                if (C::FORM_ADD === $form->getClickedButton()->getName()) {
+                    $model->addAttributeMapToProduct($product, $formData[C::FORM_ATTRIBUTE]);
                 } else {
                     $model->updateProduct($id, $formData);
                     $this->addFlash(C::FLASH_SUCCESS, 'ok!');
@@ -121,7 +121,7 @@ class AdminController extends GeneralController
         }
 
         return $this->render('@Velovito/admin/edit_product.html.twig', [
-            'form' => $form->createView(),
+            'form'  => $form->createView(),
             'items' => $model->getAttributesMapByProductId($id),
         ]);
     }
@@ -159,7 +159,7 @@ class AdminController extends GeneralController
         $model = $this->get(C::MODEL_ADMIN);
 
         $form = $this->createForm(NewAttributeForm::class, [
-            C::FORM_REFERENCE_LIST => $model->getAttrReferencesForForm()
+            C::FORM_REFERENCE_LIST => $model->getAttrReferencesForForm(),
         ]);
 
         if ($request->isMethod('POST')) {
@@ -190,8 +190,8 @@ class AdminController extends GeneralController
         $model = $this->get(C::MODEL_ADMIN);
         $ent = $model->getProductAttributeById($id);
         $form = $this->createForm(EditAttributeForm::class, [
-            C::FORM_TITLE => $ent->getName(),
-            C::FORM_COMMENT => $ent->getComment(),
+            C::FORM_TITLE          => $ent->getName(),
+            C::FORM_COMMENT        => $ent->getComment(),
             C::FORM_REFERENCE_LIST => $model->getAttrReferencesForForm(),
         ]);
 
@@ -211,7 +211,7 @@ class AdminController extends GeneralController
         }
 
         return $this->render('@Velovito/admin/edit_attribute.html.twig', [
-            'form'           => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -303,8 +303,8 @@ class AdminController extends GeneralController
             $model->toggleReferenceItemStatus($id, (int)$action);
 
             //todo AJAX
-            return $this->redirectToRoute('admin_edit_reference',[
-                'id' => $model->getReferenceIdByItemId($id)
+            return $this->redirectToRoute('admin_edit_reference', [
+                'id' => $model->getReferenceIdByItemId($id),
             ]);
 //            return $this->returnJsonResponse(true);
         } catch (\Exception $e) {

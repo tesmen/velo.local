@@ -78,6 +78,16 @@ class AdminModel
     }
 
     /**
+     * @return AttributeReference[]
+     */
+    public function getEnabledProductAttributes()
+    {
+        return $this->em->getRepository(C::REPO_PRODUCT_ATTRIBUTE)->findBy([
+            'active' => true
+        ]);
+    }
+
+    /**
      * @return array
      */
     public function getAttrReferencesForForm()
@@ -98,11 +108,11 @@ class AdminModel
      * @return array
      * TODO
      */
-    public function getAllAttributesForForm()
+    public function getEnabledAttributesForForm()
     {
         $result = [];
 
-        foreach ($this->getEnabledAttrReferences() as $ref) {
+        foreach ($this->getEnabledProductAttributes() as $ref) {
             $name = sprintf('%s - %s', $ref->getName(), $ref->getComment());
             $result[$name] = $ref->getId()  ;
         };
@@ -308,7 +318,6 @@ class AdminModel
     public function updateProduct($id, $formData)
     {
         $ent = $this->getProductById($id);
-
         $cat = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $formData[C::FORM_CATEGORY]);
 
         $ent
