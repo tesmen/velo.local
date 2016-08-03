@@ -35,6 +35,16 @@ class EditProductForm extends AbstractType
         );
 
         $builder->add(
+            C::FORM_ATTRIBUTE,
+            ChoiceType::class,
+            [
+                'label'    => 'Добавить аттрибут',
+                'choices'  => $data[C::FORM_ATTRIBUTE_TYPE_LIST],
+                'required' => true,
+            ]
+        );
+
+        $builder->add(
             C::FORM_IS_ACTIVE,
             CheckboxType::class,
             [
@@ -48,6 +58,14 @@ class EditProductForm extends AbstractType
             SubmitType::class,
             [
                 'label' => 'Ok',
+            ]
+        );
+
+        $builder->add(
+            C::FORM_ADD,
+            SubmitType::class,
+            [
+                'label' => 'Добавить',
             ]
         );
     }

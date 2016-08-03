@@ -92,6 +92,7 @@ class AdminController extends GeneralController
 
         $options = [
             C::FORM_CATEGORY_LIST => $model->getCategoriesForForm(),
+            C::FORM_ATTRIBUTE_LIST => $model->getAttrReferencesForForm(),
             C::FORM_TITLE         => $product->getName(),
             C::FORM_IS_ACTIVE     => $product->getActive(),
             C::FORM_CATEGORY      => $product->getCategory()->getId(),
@@ -104,12 +105,16 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $model->updateProduct($id, $formData);
-                $this->addFlash(C::FLASH_SUCCESS, 'ok!');
+                if (C::FORM_ADD === $form->getClickedButton()) {
+                    $model->addAttributeMapToProduct($product, $formData);
+                } else {
+                    $model->updateProduct($id, $formData);
+                    $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
-                return $this->redirectToThis(
-                    ['id' => $id]
-                );
+                    return $this->redirectToThis(
+                        ['id' => $id]
+                    );
+                }
             } catch (\Exception $e) {
                 $this->addFlash(C::FLASH_ERROR, $e->getMessage());
             }

@@ -8,6 +8,7 @@ use VelovitoBundle\Entity\AttributeReference;
 use VelovitoBundle\Entity\AttributeReferenceItem;
 use VelovitoBundle\Entity\Product;
 use VelovitoBundle\Entity\ProductAttribute;
+use VelovitoBundle\Entity\ProductAttributeMap;
 use VelovitoBundle\Entity\ProductCategory;
 
 class AdminModel
@@ -80,6 +81,24 @@ class AdminModel
      * @return array
      */
     public function getAttrReferencesForForm()
+    {
+        $result = [];
+
+        foreach ($this->getEnabledAttrReferences() as $ref) {
+            $name = sprintf('%s - %s', $ref->getName(), $ref->getComment());
+            $result[$name] = $ref->getId()  ;
+        };
+
+        ksort($result);
+
+        return $result;
+    }
+
+    /**
+     * @return array
+     * TODO
+     */
+    public function getAllAttributesForForm()
     {
         $result = [];
 
@@ -300,6 +319,29 @@ class AdminModel
         $this->em->flush($ent);
 
         return $ent;
+    }
+
+    public function addAttributeMapToProduct(Product $product, $attributeId)
+    {
+        $ent = new ProductAttributeMap();
+        $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTRIBUTE, $attributeId);
+
+        $ent
+            ->setProductId($product->getId())
+            ->setAttribute($attribute);
+
+        $this->em->persist($ent);
+        $this->em->flush($ent);
+
+        return $ent;
+    }
+
+    public function deleteAttributeMap($id)
+    {
+        $this->productsAttrMapRepo->findOneOrFail(['id' => $id])->remove();
+        $this->em->flush();
+
+        return true;
     }
 
     public function getCategoriesWithProductsForForm()
