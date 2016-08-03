@@ -3,76 +3,78 @@
 namespace VelovitoBundle\Form\Advert;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use VelovitoBundle\C;
-use VelovitoBundle\Entity\Advertisement;
+use VelovitoBundle\Entity\ProductAttribute;
 
-class NewAdvertForm extends AbstractType
+class FillAdvertForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /**
+         * @var $attributes ProductAttribute[]
+         */
         $data = $options['data'];
+        $attributes = $data[C::FORM_ATTRIBUTE_LIST];
 
-        $builder->add(
-            C::FORM_PRODUCT,
-            ChoiceType::class,
-            [
-                'label'    => 'Что продаем?',
-                'choices'  => $data[C::FORM_PRODUCT_LIST],
-                'required' => true,
-            ]
-        );
+        foreach ($attributes as $attribute) {
+            switch ($attribute->getType()) {
+                case ProductAttribute::ATTRIBUTE_TYPE_NUMBER:
+                    $builder->add('field' . $attribute->getId(),
+                        TextType::class,
+                        [
+                            'label'    => $attribute->getName(),
+                            'required' => false,
+                            'attr'     => [
+                                'class' => 'generated_number_type',
+                            ],
+                        ]
+                    );
 
-        $builder->add(
-            C::FORM_CURRENCY,
-            ChoiceType::class,
-            [
-                'label'    => 'Валюта',
-                'choices'  => Advertisement::getCurrencyList(true),
-                'required' => true,
-            ]
-        );
+                    break;
 
-        $builder->add(
-            C::FORM_TITLE,
-            TextType::class,
-            [
-                'label'    => "Название",
-                'required' => true,
-            ]
-        );
+                case ProductAttribute::ATTRIBUTE_TYPE_STRING:
+                    $builder->add('field' . $attribute->getId(),
+                        TextType::class,
+                        [
+                            'label'    => $attribute->getName(),
+                            'required' => false,
+                            'attr'     => [
+                                'class' => 'generated_string_type',
+                            ],
+                        ]
+                    );
 
-        $builder->add(
-            C::FORM_PRICE,
-            TextType::class,
-            [
-                'label'    => "Цена",
-                'required' => true,
-            ]
-        );
+                    break;
+                    break;
+                case ProductAttribute::ATTRIBUTE_TYPE_BOOL:
+                    $builder->add(
+                        C::FORM_IS_ACTIVE,
+                        CheckboxType::class,
+                        [
+                            'label'    => $attribute->getName(),
+                            'required' => false,
+                        ]
+                    );
+                    break;
+                case ProductAttribute::ATTRIBUTE_TYPE_REFERENCE:
+                    $builder->add(
+                        C::FORM_CATEGORY,
+                        ChoiceType::class,
+                        [
+                            'label'    => 'Категория',
+                            'choices'  => [],
+                            'required' => true,
+                        ]
+                    );
+                    break;
+            }
+        }
 
-        $builder->add(
-            C::FORM_DESCRIPTION,
-            TextareaType::class,
-            [
-                'label'    => "Описание",
-                'required' => false,
-            ]
-        );
-
-        $builder->add(
-            C::FORM_PHOTO,
-            FileType::class,
-            [
-                'label'    => "Фотография",
-                'required' => false,
-            ]
-        );
 
         $builder->add(
             C::FORM_SUBMIT,

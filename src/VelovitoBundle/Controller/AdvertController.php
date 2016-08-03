@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\C;
 use VelovitoBundle\Form\Admin\EditProductForm;
 use VelovitoBundle\Form\Advert\EditAdvertForm;
+use VelovitoBundle\Form\Advert\FillAdvertForm;
 use VelovitoBundle\Form\Advert\NewAdvertForm;
 use VelovitoBundle\Form\Advert\UnpublishAdvertForm;
 use VelovitoBundle\Form\Ajax\UploadPhotoForm;
@@ -62,9 +63,9 @@ class AdvertController extends GeneralController
             return $this->redirectToRoute('my_ads');
         }
 
-        $options[C::FORM_PRODUCT_LIST] = $adModel->getProductListWithCategoriesForForm();
+        $options[C::FORM_ATTRIBUTE_LIST] = $this->get('model.admin')->getEnabledProductAttributes();
 
-        $form = $this->createForm(NewAdvertForm::class, $options);
+        $form = $this->createForm(FillAdvertForm::class, $options);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);

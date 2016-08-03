@@ -78,7 +78,7 @@ class AdminModel
     }
 
     /**
-     * @return AttributeReference[]
+     * @return ProductAttribute[]
      */
     public function getEnabledProductAttributes()
     {
