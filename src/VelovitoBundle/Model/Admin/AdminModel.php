@@ -127,7 +127,7 @@ class AdminModel
     /**
      * @param $id
      * @param $action 1|0
-     * @return array|\VelovitoBundle\Entity\AttributeReferenceItem[]
+     * @return boolean
      */
     public function toggleReferenceItemStatus($id, $action)
     {
@@ -141,6 +141,7 @@ class AdminModel
 
         $this->em->flush($ent);
 
+        return true;
     }
 
     public function getReferenceIdByItemId($id)

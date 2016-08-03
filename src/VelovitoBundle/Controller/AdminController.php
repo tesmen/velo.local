@@ -117,6 +117,7 @@ class AdminController extends GeneralController
 
         return $this->render('@Velovito/admin/edit_category.html.twig', [
             'form' => $form->createView(),
+//            'items' => $model->get
         ]);
     }
 
