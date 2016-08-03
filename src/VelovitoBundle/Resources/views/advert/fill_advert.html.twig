@@ -1,0 +1,89 @@
+{% extends 'VelovitoBundle::base.html.twig' %}
+{% import '@Velovito/templates/macroses.html.twig' as macro %}
+
+{% block body %}
+    {#<script src="{{ asset('js/jquery.form.min.js') }}"></script>#}
+    <div>
+        {{ form_start(form) }}
+        <div class="col-md-4">
+            {{ macro.bootstrapFormInput(form.title) }}
+            {{ macro.bootstrapFormInput(form.product) }}
+            {{ macro.bootstrapFormInput(form.price) }}
+            {{ macro.bootstrapFormInput(form.currency) }}
+            {{ macro.bootstrapFormInput(form.photo) }}
+        </div>
+
+        <div class="col-md-6">
+            {{ macro.bootstrapFormInput(form.description) }}
+            {{ form_rest(form) }}
+        </div>
+
+        {{ form_widget(form.submit) }}
+        {{ form_end(form) }}
+    </div>
+
+    <script>
+        var spinner = new Spinner(dockerSpinnerSettings).spin($('#promo_spin')[0]);
+        var tmpImagePath = '{{ app.request.getSchemeAndHttpHost() }}/img/temporary_thumbs/';
+        var _ajaxImageUploadForm = $("#photo");
+        var _ajaxImageUploadInput = $('#upload_photo_form_photo');
+        var _rootUploadingImage = $('#root_uploading_image');
+
+        _ajaxImageUploadInput.change(ajaxUploadFile);
+
+        function ajaxUploadFile() {
+            var element = createUploadingImageBlock();
+
+            element.find('.glyphicon-remove-circle').on('click', function () {
+                element.remove();
+            });
+
+            ajaxPostForm(
+                    _ajaxImageUploadForm,
+                    onBeforeSubmit,
+                    function (responseText, statusText, xhr) {
+                        onSuccessUpload(element, responseText, xhr)
+                    }
+            );
+        }
+
+        function onSuccessUpload(element, responseText, xhr) {
+            element.find('.promo__spin').hide();
+
+            switch (xhr.status) {
+                case 200:
+                    element.find('img').attr('src', tmpImagePath + responseText);
+                    element.find('input').attr('value', responseText);
+                    break;
+
+                default :
+                    console.log(xhr);
+            }
+        }
+
+        function createUploadingImageBlock() {
+            var element = duplicateElement(_rootUploadingImage);
+            element.removeAttr('id');
+            element.find('input').removeAttr('disabled');
+            element.show('fast');
+
+            return element;
+        }
+
+        function ajaxPostForm(form, beforeSubmit, success) {
+            form.ajaxSubmit({
+                url: '{{ url('ajax_upload_photo') }}',
+                type: 'post',
+                beforeSubmit: beforeSubmit,
+                success: success
+            });
+        }
+
+        function onBeforeSubmit(formData, jqForm, options) {
+            var queryString = $.param(formData);
+//            console.log('About to submit: \n\n' + queryString);
+
+            return true;
+        }
+    </script>
+{% endblock %}

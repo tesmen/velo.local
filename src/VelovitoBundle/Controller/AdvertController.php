@@ -13,45 +13,6 @@ use VelovitoBundle\Model\Advertisement\AdvertisementModel;
 
 class AdvertController extends GeneralController
 {
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @deprecated
-     * @see \VelovitoBundle\Controller\AdvertController::addAdvertAction
-     */
-    public function newAdvertAction(Request $request)
-    {
-        $this->denyUnlessAuthenticatedFully();
-        $adModel = $this->getModel();
-
-        $formOptions = [
-            'categories' => $this->getModel()->getProductListWithCategoriesForForm(),
-        ];
-
-        $form = $this->createForm(NewAdvertForm::class, $formOptions);
-
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $formData = $form->getData();
-                $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
-                $adModel->createNewAdvert($formData, $this->getUser());
-                $this->addFlash('success', 'Объявление добавлено');
-            }
-
-            return $this->redirectToRoute(C::ROUTE_MY_ADS);
-        }
-
-        return $this->render(
-            'VelovitoBundle:advert:new_advert.html.twig',
-            [
-                'form'       => $form->createView(),
-                'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
-            ]
-        );
-    }
-
     public function addAdvertAction(Request $request)
     {
         $this->denyUnlessAuthenticatedFully();
@@ -65,6 +26,7 @@ class AdvertController extends GeneralController
 
             if ($form->isValid()) {
                 $formData = $form->getData();
+
                 try {
                     $advertId = $adModel->createNewAdvert($formData);
                     $this->addFlash(C::FLASH_SUCCESS, 'Объявление добавлено');
@@ -84,6 +46,51 @@ class AdvertController extends GeneralController
             'VelovitoBundle:advert:new_advert.html.twig',
             [
                 'form'       => $form->createView(),
+                'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
+            ]
+        );
+    }
+
+    public function fillAdvertAction(Request $request, $id)
+    {
+        $adModel = $this->getModel();
+        $advert = $adModel->getAdvertById($id);
+
+        if (!$adModel->userCanEditAdvert($advert)) {
+            $this->addFlash(C::FLASH_ERROR, 'Что-то пошло не так...');
+
+            return $this->redirectToRoute('my_ads');
+        }
+
+        $options[C::FORM_PRODUCT_LIST] = $adModel->getProductListWithCategoriesForForm();
+
+        $form = $this->createForm(NewAdvertForm::class, $options);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $formData = $form->getData();
+
+                try {
+                    $advertId = $adModel->createNewAdvert($formData);
+                    $this->addFlash(C::FLASH_SUCCESS, 'Объявление добавлено');
+
+                    return $this->redirectToRoute('my_ads');
+                } catch (\Exception $e) {
+                    $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+                }
+            } else {
+                $this->addFlash(C::FLASH_ERROR, 'Форма не валидна');
+            }
+
+            return $this->redirectToRoute(C::ROUTE_MY_ADS);
+        }
+
+        return $this->render(
+            'VelovitoBundle:advert:fill_advert.html.twig', [
+                'form'       => $form->createView(),
+                'advert'     => $advert,
                 'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
             ]
         );

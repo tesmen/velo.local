@@ -110,6 +110,10 @@ advert_new:
     path:     /new-advert
     defaults: { _controller: VelovitoBundle:Advert:addAdvert }
 
+advert_fill:
+    path:     /fill-advert/{id}
+    defaults: { _controller: VelovitoBundle:Advert:fillAdvert }
+
 advert_edit:
     path:     /edit-advert/{advertId}
     defaults: { _controller: VelovitoBundle:Advert:editAdvert}
@@ -120,7 +124,7 @@ advert_unpublish:
 
 advert_delete:
     path:     /unpublish-delete
-    defaults: { _controller: VelovitoBundle:Advert:asdAdvert }
+    defaults: { _controller: VelovitoBundle:Advert:unPublishAdvert }
 
 advert_view:
     path:     /view-advert/{advertId}
