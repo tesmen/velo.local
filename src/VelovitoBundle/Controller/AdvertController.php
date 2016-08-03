@@ -9,6 +9,7 @@ use VelovitoBundle\Form\Advert\EditAdvertForm;
 use VelovitoBundle\Form\Advert\NewAdvertForm;
 use VelovitoBundle\Form\Advert\UnpublishAdvertForm;
 use VelovitoBundle\Form\Ajax\UploadPhotoForm;
+use VelovitoBundle\Model\Advertisement\AdvertisementModel;
 
 class AdvertController extends GeneralController
 {
@@ -21,10 +22,10 @@ class AdvertController extends GeneralController
     public function newAdvertAction(Request $request)
     {
         $this->denyUnlessAuthenticatedFully();
-        $adModel = $this->get(C::MODEL_ADVERTISEMENT);
+        $adModel = $this->getModel();
 
         $formOptions = [
-            'categories' => $this->get(C::MODEL_ADVERTISEMENT)->getProductListWithCategoriesForForm(),
+            'categories' => $this->getModel()->getProductListWithCategoriesForForm(),
         ];
 
         $form = $this->createForm(NewAdvertForm::class, $formOptions);
@@ -54,7 +55,7 @@ class AdvertController extends GeneralController
     public function addAdvertAction(Request $request)
     {
         $this->denyUnlessAuthenticatedFully();
-        $adModel = $this->get(C::MODEL_ADVERTISEMENT);
+        $adModel = $this->getModel();
         $options[C::FORM_PRODUCT_LIST] = $adModel->getProductListWithCategoriesForForm();
 
         $form = $this->createForm(NewAdvertForm::class, $options);
@@ -90,12 +91,12 @@ class AdvertController extends GeneralController
 
     public function unPublishAdvertAction(Request $request, $advertId)
     {
-        $advertEnt = $this->get(C::MODEL_ADVERTISEMENT)->getAdvertById($advertId);
+        $advertEnt = $this->getModel()->getAdvertById($advertId);
         $form = $this->createForm(UnpublishAdvertForm::class);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
-            $this->get(C::MODEL_ADVERTISEMENT)->unpublishAdvert($advertId, $form->getClickedButton()->getName());
+            $this->getModel()->unpublishAdvert($advertId, $form->getClickedButton()->getName());
             $this->addFlash('success', 'Объявление снято с публикации');
 
             return $this->redirectToRoute(C::ROUTE_MY_ADS);
@@ -116,7 +117,7 @@ class AdvertController extends GeneralController
     public function editAdvertAction(Request $request, $advertId)
     {
         $this->denyUnlessAuthenticatedFully();
-        $adModel = $this->get(C::MODEL_ADVERTISEMENT);
+        $adModel = $this->getModel();
         $advertEnt = $adModel->getAdvertById($advertId);
 
         if (!$adModel->userCanEditAdvert($advertEnt)) {
@@ -174,11 +175,11 @@ class AdvertController extends GeneralController
 
     public function viewAdvertAction(Request $request, $advertId)
     {
-        $adModel = $this->get(C::MODEL_ADVERTISEMENT);
+        $adModel = $this->getModel();
 
         //$form = $this->createForm(EditAdForm::class, $formOptions);
-        $advertEnt = $this->get(C::MODEL_ADVERTISEMENT)->getAdvertById($advertId);
-        $this->get(C::MODEL_ADVERTISEMENT)->incrementViewed($advertEnt);
+        $advertEnt = $adModel->getAdvertById($advertId);
+        $this->getModel()->incrementViewed($advertEnt);
 
         if ($request->isMethod('POST')) {
 
@@ -204,7 +205,7 @@ class AdvertController extends GeneralController
         return $this->render(
             'VelovitoBundle:default:index.html.twig',
             [
-                'ads' => $this->get(C::MODEL_ADVERTISEMENT)->getLastAdvertsFromCategory($id),
+                'ads' => $this->getModel()->getLastAdvertsFromCategory($id),
             ]
         );
     }
@@ -221,8 +222,17 @@ class AdvertController extends GeneralController
         return $this->render(
             'VelovitoBundle:default:index.html.twig',
             [
-                'ads' => $this->get(C::MODEL_ADVERTISEMENT)->getLastAdvertsOfProduct($id),
+                'ads' => $this->getModel()->getLastAdvertsOfProduct($id),
             ]
         );
+    }
+
+
+    /**
+     * @return AdvertisementModel
+     */
+    private function getModel()
+    {
+        return $this->get(C::MODEL_ADVERTISEMENT);
     }
 }
