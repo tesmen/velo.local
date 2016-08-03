@@ -36,7 +36,7 @@ class EditReferenceForm extends AbstractType
             TextType::class,
             [
                 'label'    => 'Комментарий',
-                'required' => true,
+                'required' => false,
             ]
         );
 

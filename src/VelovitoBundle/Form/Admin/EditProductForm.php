@@ -39,7 +39,7 @@ class EditProductForm extends AbstractType
             ChoiceType::class,
             [
                 'label'    => 'Добавить аттрибут',
-                'choices'  => $data[C::FORM_ATTRIBUTE_TYPE_LIST],
+                'choices'  => $data[C::FORM_ATTRIBUTE_LIST],
                 'required' => true,
             ]
         );
@@ -54,10 +54,10 @@ class EditProductForm extends AbstractType
         );
 
         $builder->add(
-            C::FORM_SUBMIT,
+            C::FORM_SAVE,
             SubmitType::class,
             [
-                'label' => 'Ok',
+                'label' => 'Сохранить',
             ]
         );
 

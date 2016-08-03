@@ -10,15 +10,26 @@
     <div>
         <div><a href="{{ url('admin_dashBoard') }}">Home</a></div>
 
-        <article>Товары</article>
+        <article>Товар EDIT</article>
+        {{ form_row(form.active) }}
+
         {{ form_start(form) }}
+        {{ form_widget(form.title) }}
+        {{ form_widget(form.category) }}
+        {{ form_widget(form.save) }}
+<br>
+<br>
+        {{ form_widget(form.attribute) }}
+        {{ form_widget(form.add) }}
         {{ form_end(form) }}
+
         <table width="100%">
             <tr>
                 <th>id</th>
                 <th>name</th>
                 <th>category</th>
             </tr>
+
             {% for item in items %}
                 <tr>
                     <td><a href="#">{{ item.id }}</a></td>
