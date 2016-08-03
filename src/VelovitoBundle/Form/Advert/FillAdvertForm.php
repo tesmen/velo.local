@@ -24,7 +24,8 @@ class FillAdvertForm extends AbstractType
         foreach ($attributes as $attribute) {
             switch ($attribute->getType()) {
                 case ProductAttribute::ATTRIBUTE_TYPE_NUMBER:
-                    $builder->add('field' . $attribute->getId(),
+                    $builder->add(
+                        'field' . $attribute->getId(),
                         TextType::class,
                         [
                             'label'    => $attribute->getName(),
@@ -38,7 +39,8 @@ class FillAdvertForm extends AbstractType
                     break;
 
                 case ProductAttribute::ATTRIBUTE_TYPE_STRING:
-                    $builder->add('field' . $attribute->getId(),
+                    $builder->add(
+                        'field' . $attribute->getId(),
                         TextType::class,
                         [
                             'label'    => $attribute->getName(),
@@ -53,7 +55,7 @@ class FillAdvertForm extends AbstractType
                     break;
                 case ProductAttribute::ATTRIBUTE_TYPE_BOOL:
                     $builder->add(
-                        C::FORM_IS_ACTIVE,
+                        'field' . $attribute->getId(),
                         CheckboxType::class,
                         [
                             'label'    => $attribute->getName(),
@@ -63,10 +65,10 @@ class FillAdvertForm extends AbstractType
                     break;
                 case ProductAttribute::ATTRIBUTE_TYPE_REFERENCE:
                     $builder->add(
-                        C::FORM_CATEGORY,
+                        'field' . $attribute->getId(),
                         ChoiceType::class,
                         [
-                            'label'    => 'Категория',
+                            'label'    => $attribute->getName(),
                             'choices'  => [],
                             'required' => true,
                         ]

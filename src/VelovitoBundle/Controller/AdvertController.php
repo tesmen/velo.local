@@ -77,7 +77,9 @@ class AdvertController extends GeneralController
                     $advertId = $adModel->createNewAdvert($formData);
                     $this->addFlash(C::FLASH_SUCCESS, 'Объявление добавлено');
 
-                    return $this->redirectToRoute('my_ads');
+                    return $this->redirectToRoute('advert_fill', [
+                        'id' => $advertId,
+                    ]);
                 } catch (\Exception $e) {
                     $this->addFlash(C::FLASH_ERROR, $e->getMessage());
                 }
