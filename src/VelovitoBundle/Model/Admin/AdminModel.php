@@ -7,7 +7,7 @@ use VelovitoBundle\C;
 use VelovitoBundle\Entity\AttributeReference;
 use VelovitoBundle\Entity\AttributeReferenceItem;
 use VelovitoBundle\Entity\Product;
-use VelovitoBundle\Entity\Attribute;
+use VelovitoBundle\Entity\ProductAttribute;
 use VelovitoBundle\Entity\ProductCategory;
 
 class AdminModel
@@ -41,14 +41,14 @@ class AdminModel
     }
 
     /**
-     * @return Attribute[]
+     * @return ProductAttribute[]
      */
     public function getAlLProductAttributes()
     {
         return $this->productsAttrRepo->findAll();
     }
     /**
-     * @return Attribute[]
+     * @return ProductAttribute[]
      */
     public function getAttributesByProductId($id)
     {
@@ -153,7 +153,7 @@ class AdminModel
 
     /**
      * @param $id
-     * @return Attribute
+     * @return ProductAttribute
      */
     public function getProductAttributeById($id)
     {
@@ -203,7 +203,7 @@ class AdminModel
 
     public function createProductAttribute($formData)
     {
-        $ent = new Attribute();
+        $ent = new ProductAttribute();
 
         $ent
             ->setName($formData[C::FORM_TITLE])
@@ -212,7 +212,7 @@ class AdminModel
 
             ->setType($formData[C::FORM_ATTRIBUTE_TYPE]);
 
-        if(Attribute::ATTRIBUTE_TYPE_REFERENCE === $formData[C::FORM_ATTRIBUTE_TYPE]){
+        if(ProductAttribute::ATTRIBUTE_TYPE_REFERENCE === $formData[C::FORM_ATTRIBUTE_TYPE]){
             $ent->setReferenceId($formData[C::FORM_REFERENCE]);
         }
 
