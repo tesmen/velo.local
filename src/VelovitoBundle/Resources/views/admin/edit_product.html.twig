@@ -19,14 +19,11 @@
                 <th>name</th>
                 <th>category</th>
             </tr>
-            {% for attribute in attributes %}
-                {% set url = url('admin_edit_product', {'id': product.id}) %}
+            {% for item in items %}
                 <tr>
-                    <td><a href="{{ url }}">{{ product.id }}</a></td>
-                    <td><a href="{{ url }}">{{ product.name }} </a></td>
-                    <td><a href="{{ url }}">{{ product.category }}</a></td>
+                    <td><a href="#">{{ item.id }}</a></td>
+                    <td><a href="#">{{ item.getAttribute.name }} </a></td>
                 </tr>
-
             {% endfor %}
         </table>
     </div>

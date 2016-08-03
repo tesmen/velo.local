@@ -20,6 +20,7 @@ class AdminModel
 
         $this->productsRepo = $em->getRepository(C::REPO_PRODUCT);
         $this->productsAttrRepo = $em->getRepository(C::REPO_PRODUCT_ATTRIBUTE);
+        $this->productsAttrMapRepo = $em->getRepository(C::REPO_PRODUCT_ATTRIBUTE_MAP);
         $this->productsAttrReferenceRepo = $em->getRepository(C::REPO_ATTRIBUTE_REFERENCE);
         $this->productCatRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
     }
@@ -171,6 +172,18 @@ class AdminModel
     public function getProductById($id)
     {
         return $this->productsRepo->findOneOrFail(['id' => $id]);
+    }
+
+    /**
+     * @param $id
+     * @return Product
+     * @throws \VelovitoBundle\Exception\NotFoundException
+     */
+    public function getAttributesMapByProductId($id)
+    {
+        return $this->productsAttrMapRepo->findby([
+            'productId' => $id
+        ]);
     }
 
     /**
