@@ -244,21 +244,21 @@ class AdminModel
         $this->productCatRepo->create($name);
     }
 
-    public function createProductAttribute($formData)
+    public function createOrUpdateProductAttribute($formData, ProductAttribute $productAttribute = null)
     {
-        $ent = new ProductAttribute();
+        $ent = is_null($productAttribute)
+            ? new ProductAttribute()
+            : $productAttribute;
 
         $ent
             ->setName($formData[C::FORM_TITLE])
             ->setComment($formData[C::FORM_COMMENT])
             ->setActive(true)
-
             ->setType($formData[C::FORM_ATTRIBUTE_TYPE]);
 
-        if(ProductAttribute::ATTRIBUTE_TYPE_REFERENCE === $formData[C::FORM_ATTRIBUTE_TYPE]){
+        if (ProductAttribute::ATTRIBUTE_TYPE_REFERENCE === $formData[C::FORM_ATTRIBUTE_TYPE]) {
             $ent->setReferenceId($formData[C::FORM_REFERENCE]);
         }
-
 
         $this->em->persist($ent);
         $this->em->flush($ent);

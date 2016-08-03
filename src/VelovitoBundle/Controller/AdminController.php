@@ -167,7 +167,7 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $model->createProductAttribute($formData);
+                $model->createOrUpdateProductAttribute($formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
                 return $this->redirectToThis();
@@ -189,6 +189,7 @@ class AdminController extends GeneralController
     {
         $model = $this->get(C::MODEL_ADMIN);
         $ent = $model->getProductAttributeById($id);
+
         $form = $this->createForm(EditAttributeForm::class, [
             C::FORM_TITLE          => $ent->getName(),
             C::FORM_COMMENT        => $ent->getComment(),
@@ -200,13 +201,14 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $model->createProductAttribute($formData);
+                $model->createOrUpdateProductAttribute($formData,$ent);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
-                return $this->redirectToThis();
+                return $this->redirectToThis([
+                    'id' => $id,
+                ]);
             } catch (\Exception $e) {
                 $this->addFlash(C::FLASH_ERROR, $e->getMessage());
-                throw $e;
             }
         }
 
