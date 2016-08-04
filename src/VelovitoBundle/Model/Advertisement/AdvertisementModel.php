@@ -5,6 +5,7 @@ namespace VelovitoBundle\Model\Advertisement;
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
 use VelovitoBundle\Entity\Product;
+use VelovitoBundle\Entity\ProductAttribute;
 use VelovitoBundle\Model\DocumentModel;
 use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Model\SecurityModel;
@@ -30,6 +31,8 @@ class AdvertisementModel
         $this->categoriesRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
         $this->userPhotoRepo = $this->em->getRepository(C::REPO_USER_PHOTO);
         $this->productRepo = $this->em->getRepository(C::REPO_PRODUCT);
+        $this->productAttrRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTRIBUTE);
+        $this->productAttrMapRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTRIBUTE_MAP);
     }
 
     /**
@@ -42,6 +45,29 @@ class AdvertisementModel
         return $this->productRepo->findOneOrFail(
             ['id' => $productId,]
         );
+    }
+
+
+    /**
+     * @param $productId
+     * @return ProductAttribute[]
+     * todo refactor for performance issues
+     */
+    public function getAttributesByProductId($productId)
+    {
+        $mappings = $this->productAttrMapRepo->findBy([
+            'productId' => $productId,
+        ]);
+
+        $result = [];
+
+        foreach ($mappings as $map) {
+            $this->productAttrRepo->findOneOrFail([
+                'id' => $map->getAttribute()->getId(),
+            ]);
+        }
+
+        return $result;
     }
 
 
@@ -106,38 +132,6 @@ class AdvertisementModel
         return $result;
     }
 
-    /**
-     * @param $advert
-     * @param array $formData
-     * @depreceated
-     */
-    public function updateAdvert($advert, array $formData)
-    {
-        $photoRepo = $this->em->getRepository(C::REPO_USER_PHOTO);
-        if (!($advert instanceof Advertisement)) {
-            $advert = $this->getAdvertById($advert);
-        }
-
-        $entData[C::FORM_CURRENCY] = $this->em->getRepository(C::REPO_CURRENCY)->find(1);
-        $entData[C::FORM_TITLE] = $formData[C::FORM_TITLE];
-        $entData[C::FORM_PRICE] = $formData[C::FORM_PRICE];
-        $entData[C::FORM_DESCRIPTION] = $formData[C::FORM_DESCRIPTION];
-
-        $savedFiles = $this->documentModel->saveOriginalsForUploadedImages($formData[C::FORM_PHOTO_FILENAMES]);
-        $photoRepo->removeAllPhotosByAdvertId($advert->getId());
-
-        foreach ($savedFiles as $fileName) {
-            $photoRepo->create(
-                [
-                    'advert'   => $advert,
-                    'fileName' => $fileName,
-                ]
-            );
-        }
-
-
-        return $this->advertRepo->update($advert, $entData);
-    }
 
     public function getAdsByUserId($userId)
     {
@@ -147,7 +141,7 @@ class AdvertisementModel
         );
     }
 
-    public function getFavoritedAdsByUserId($userId)
+    public function getFavoriteAdsByUserId($userId)
     {
         return $this->em->getRepository(C::REPO_USER_FAVORITES)->findBy(
             [
@@ -192,7 +186,12 @@ class AdvertisementModel
         );
     }
 
-
+    /**
+     * @param $params
+     * @return array|\VelovitoBundle\Entity\Advertisement[]
+     * @throws \Doctrine\ORM\ORMException
+     * TODO unfinished
+     */
     public function searchAdverts($params)
     {
         $category = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $id);

@@ -52,7 +52,7 @@ class UserController extends GeneralController
         return $this->render(
             'VelovitoBundle:user:favorited_ads.html.twig',
             [
-                'favoritesAds' => $this->get(C::MODEL_ADVERTISEMENT)->getFavoritedAdsByUserId(
+                'favoritesAds' => $this->get(C::MODEL_ADVERTISEMENT)->getFavoriteAdsByUserId(
                     $this->getUser()->getId()
                 ),
             ]

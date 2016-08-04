@@ -69,7 +69,7 @@ class ProductAttributeMap
     /**
      * Set referenceId
      *
-     * @param integer $attribute
+     * @param ProductAttribute $attribute
      *
      * @return ProductAttributeMap
      */
@@ -83,7 +83,7 @@ class ProductAttributeMap
     /**
      * Get referenceId
      *
-     * @return integer
+     * @return ProductAttribute
      */
     public function getAttribute()
     {
