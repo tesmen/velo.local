@@ -63,7 +63,7 @@ class AdvertController extends GeneralController
             return $this->redirectToRoute('my_ads');
         }
 
-        $options[C::FORM_ATTRIBUTE_LIST] = $adModel->getEnabledProductAttributes();
+        $options[C::FORM_ATTRIBUTE_LIST] = $adModel->getAttributesByProductId($advert->getProduct()->getId());
 
         $form = $this->createForm(FillAdvertForm::class, $options);
 
