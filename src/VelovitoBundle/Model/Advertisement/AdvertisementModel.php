@@ -62,7 +62,7 @@ class AdvertisementModel
         $result = [];
 
         foreach ($mappings as $map) {
-            $this->productAttrRepo->findOneOrFail([
+            $result[] = $this->productAttrRepo->findOneOrFail([
                 'id' => $map->getAttribute()->getId(),
             ]);
         }
