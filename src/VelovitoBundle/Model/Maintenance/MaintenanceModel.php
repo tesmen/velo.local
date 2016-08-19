@@ -56,19 +56,4 @@ class MaintenanceModel
 
 //        $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->load($data);
     }
-
-    function loadCurrencies()
-    {
-        $arr = [
-            [
-                'name'      => 'Рубль',
-                'shortName' => 'руб.',
-                'htmlSign'  => '&#8381;',
-            ],
-        ];
-
-        foreach ($arr as $item) {
-            $this->em->getRepository(C::REPO_CURRENCY)->create($item);
-        }
-    }
 }
