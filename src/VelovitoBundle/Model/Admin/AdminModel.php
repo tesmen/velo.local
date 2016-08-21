@@ -149,7 +149,7 @@ class AdminModel
     public function getAllReferenceItems($id)
     {
         return $this->em->getRepository(C::REPO_ATTRIBUTE_REFERENCE_ITEM)->findBy(
-            ['referenceId' => $id],
+            ['reference' => $id],
             ['isActive' => 'ASC']
         );
     }
@@ -178,7 +178,7 @@ class AdminModel
     {
         $ent = $this->getAttributeReferenceItemById($id);
 
-        return $ent->getReferenceId();
+        return $ent->getReference();
 
     }
 
@@ -295,7 +295,7 @@ class AdminModel
 
         $ent
             ->setName($formData['item_name'])
-            ->setReferenceId($formData[C::FORM_REFERENCE])
+            ->setReference($formData[C::FORM_REFERENCE])
             ->setIsActive($isActive);
 
         $this->em->persist($ent);

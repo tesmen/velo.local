@@ -26,10 +26,10 @@ class AttributeReferenceItem
     private $name;
 
     /**
-     * @var string
-     * @ORM\Column(name="reference_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AttributeReference", inversedBy="items")
+     * @ORM\JoinColumn(name="reference_id", referencedColumnName="id")
      */
-    private $referenceId;
+    private $reference;
 
     /**
      * @var string
@@ -74,13 +74,13 @@ class AttributeReferenceItem
     /**
      * Set referenceId
      *
-     * @param integer $referenceId
+     * @param integer $reference
      *
      * @return AttributeReferenceItem
      */
-    public function setReferenceId($referenceId)
+    public function setReference($reference)
     {
-        $this->referenceId = $referenceId;
+        $this->reference = $reference;
 
         return $this;
     }
@@ -90,9 +90,9 @@ class AttributeReferenceItem
      *
      * @return integer
      */
-    public function getReferenceId()
+    public function getReference()
     {
-        return $this->referenceId;
+        return $this->reference;
     }
 
 
