@@ -1,5 +1,6 @@
 <?php namespace VelovitoBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,10 +27,21 @@ class ProductCategory
     private $name;
 
     /**
+     * @var string
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     */
+    private $products;
+
+    /**
      * @var integer
      * @ORM\Column(name="active", type="boolean", nullable=false)
      */
     private $active;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -87,5 +99,39 @@ class ProductCategory
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Add product
+     *
+     * @param \VelovitoBundle\Entity\Product $product
+     *
+     * @return ProductCategory
+     */
+    public function addProduct(\VelovitoBundle\Entity\Product $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \VelovitoBundle\Entity\Product $product
+     */
+    public function removeProduct(\VelovitoBundle\Entity\Product $product)
+    {
+        $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

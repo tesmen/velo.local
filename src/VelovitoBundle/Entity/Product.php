@@ -26,10 +26,8 @@ class Product
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\ProductCategory")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="ProductCategory", inversedBy="products")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
 
