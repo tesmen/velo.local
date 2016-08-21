@@ -27,6 +27,8 @@ class ProductCategoryRepository extends GeneralRepository
 
         $this->_em->persist($ent);
         $this->_em->flush($ent);
+
+        return $ent;
     }
 
     public function getActiveCategoriesList($flip = false)

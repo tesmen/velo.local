@@ -16,6 +16,9 @@ class MaintenanceModel
     {
         $this->em = $em;
         $this->defaultModel = $defaultModel;
+
+        $this->productCatRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
+        $this->productsRepo = $em->getRepository(C::REPO_PRODUCT);
     }
 
     function loadRoles()
@@ -29,31 +32,14 @@ class MaintenanceModel
         $this->em->getRepository(C::REPO_ROLE)->load($roles);
     }
 
-    function loadCatalogCategories()
+    function loadCategories()
     {
-        $data = $this->defaultModel->loadConfigFromYaml('catalog_categories');
+        $category = $this->productCatRepo->create('Велосипеды');
 
-        foreach ($data as $parentCat) {
-            $parentEnt = new CatalogCategory();
-            $parentEnt
-                ->setAlias($parentCat['alias'])
-                ->setName($parentCat['name'])
-                ->setParent(null);
+        $this->productsRepo->create([
+            C::FORM_TITLE=> 'Горные',
+            C::FORM_CATEGORY=> $category->getId(),
 
-            $this->em->persist($parentEnt);
-            foreach ($parentCat['children'] as $catalogItem) {
-                $ent = new CatalogCategory();
-                $ent
-                    ->setAlias($catalogItem['alias'])
-                    ->setName($catalogItem['name'])
-                    ->setParent($parentEnt);
-
-                $this->em->persist($ent);
-            }
-        }
-
-        $this->em->flush();
-
-//        $this->em->getRepository(C::REPO_CATALOG_CATEGORY)->load($data);
+        ]);
     }
 }
