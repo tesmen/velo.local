@@ -257,7 +257,7 @@ class AdminModel
             ->setType($formData[C::FORM_ATTRIBUTE_TYPE]);
 
         if (ProductAttribute::ATTRIBUTE_TYPE_REFERENCE === $formData[C::FORM_ATTRIBUTE_TYPE]) {
-            $ent->setReferenceId($formData[C::FORM_REFERENCE]);
+            $ent->setReference($formData[C::FORM_REFERENCE]);
         }
 
         $this->em->persist($ent);

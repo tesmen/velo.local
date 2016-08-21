@@ -51,10 +51,10 @@ class ProductAttribute
     private $type;
 
     /**
-     * @var string
-     * @ORM\Column(name="reference_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AttributeReference")
+     * @ORM\JoinColumn(name="reference_id", referencedColumnName="id", nullable=true)
      */
-    private $referenceId;
+    private $reference;
 
     /**
      * @var integer
@@ -177,13 +177,13 @@ class ProductAttribute
     /**
      * Set referenceId
      *
-     * @param integer $referenceId
+     * @param integer $reference
      *
      * @return AttributeReferenceItem
      */
-    public function setReferenceId($referenceId)
+    public function setReference($reference)
     {
-        $this->referenceId = $referenceId;
+        $this->reference = $reference;
 
         return $this;
     }
@@ -193,8 +193,8 @@ class ProductAttribute
      *
      * @return integer
      */
-    public function getReferenceId()
+    public function getReference()
     {
-        return $this->referenceId;
+        return $this->reference;
     }
 }
