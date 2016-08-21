@@ -1,5 +1,6 @@
 <?php namespace VelovitoBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +32,16 @@ class Region
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
     private $country;
+
+    /**
+     * @ORM\OneToMany(targetEntity="City", mappedBy="region")
+     */
+    private $cities;
+
+    public function __construct()
+    {
+        $this->cities = new ArrayCollection();
+    }
 
     /**
      * Set id
@@ -102,5 +113,39 @@ class Region
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Add city
+     *
+     * @param \VelovitoBundle\Entity\City $city
+     *
+     * @return Region
+     */
+    public function addCity(\VelovitoBundle\Entity\City $city)
+    {
+        $this->cities[] = $city;
+
+        return $this;
+    }
+
+    /**
+     * Remove city
+     *
+     * @param \VelovitoBundle\Entity\City $city
+     */
+    public function removeCity(\VelovitoBundle\Entity\City $city)
+    {
+        $this->cities->removeElement($city);
+    }
+
+    /**
+     * Get cities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCities()
+    {
+        return $this->cities;
     }
 }
