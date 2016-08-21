@@ -289,7 +289,7 @@ class AdminController extends GeneralController
         }
 
         return $this->render('@Velovito/admin/edit_attribute_reference.html.twig', [
-            'items' => $model->getAllReferenceItems($id),
+            'items' => $ent->getItems(),
             'form'  => $form->createView(),
         ]);
     }

@@ -145,6 +145,7 @@ class AdminModel
     /**
      * @param $id
      * @return AttributeReferenceItem[]
+     * @deprecated
      */
     public function getAllReferenceItems($id)
     {
@@ -293,9 +294,11 @@ class AdminModel
             ? $formData[C::FORM_IS_ACTIVE]
             : true;
 
+        $reference = $this->em->getReference(AttributeReference::class, $formData[C::FORM_REFERENCE]);
+
         $ent
             ->setName($formData['item_name'])
-            ->setReference($formData[C::FORM_REFERENCE])
+            ->setReference($reference)
             ->setIsActive($isActive);
 
         $this->em->persist($ent);

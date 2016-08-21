@@ -74,7 +74,7 @@ class AttributeReferenceItem
     /**
      * Set referenceId
      *
-     * @param integer $reference
+     * @param AttributeReference $reference
      *
      * @return AttributeReferenceItem
      */
@@ -88,7 +88,7 @@ class AttributeReferenceItem
     /**
      * Get referenceId
      *
-     * @return integer
+     * @return AttributeReference
      */
     public function getReference()
     {
