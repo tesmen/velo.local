@@ -1,17 +1,15 @@
 <?php namespace VelovitoBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Country
+ * City
  *
- * @ORM\Table(name="countries")
+ * @ORM\Table(name="regions")
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
  */
-class Country
+class Region
 {
-
     /**
      * @var integer
      *
@@ -29,25 +27,17 @@ class Country
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Region", mappedBy="country")
+     * @ORM\ManyToOne(targetEntity="Country", inversedBy="regions")
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
-    private $regions;
-
-    /**
-     * Country constructor.
-     */
-    public function __construct()
-    {
-        $this->regions = new ArrayCollection();
-    }
-
+    private $country;
 
     /**
      * Set id
      *
      * @param integer $id
      *
-     * @return Country
+     * @return City
      */
     public function setId($id)
     {
@@ -71,7 +61,7 @@ class Country
      *
      * @param string $name
      *
-     * @return Country
+     * @return City
      */
     public function setName($name)
     {
@@ -91,36 +81,26 @@ class Country
     }
 
     /**
-     * Add city
+     * Set country
      *
-     * @param \VelovitoBundle\Entity\City $city
+     * @param \VelovitoBundle\Entity\Country $country
      *
-     * @return Country
+     * @return City
      */
-    public function addCity(\VelovitoBundle\Entity\City $city)
+    public function setCountry(\VelovitoBundle\Entity\Country $country = null)
     {
-        $this->regions[] = $city;
+        $this->country = $country;
 
         return $this;
     }
 
     /**
-     * Remove city
+     * Get country
      *
-     * @param \VelovitoBundle\Entity\City $city
+     * @return \VelovitoBundle\Entity\Country
      */
-    public function removeCity(\VelovitoBundle\Entity\City $city)
+    public function getCountry()
     {
-        $this->regions->removeElement($city);
-    }
-
-    /**
-     * Get cities
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRegions()
-    {
-        return $this->regions;
+        return $this->country;
     }
 }

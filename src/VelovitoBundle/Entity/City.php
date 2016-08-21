@@ -5,8 +5,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * City
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\CityRepository")
+ * @ORM\Table(name="cities")
+ * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
  */
 class City
 {
@@ -15,6 +15,7 @@ class City
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -24,6 +25,12 @@ class City
      * @ORM\Column(name="name", type="string", length=32)
      */
     private $name;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Region", inversedBy="cities")
+     * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
+     */
+    private $region;
 
     /**
      * Set id
@@ -71,5 +78,29 @@ class City
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \VelovitoBundle\Entity\Country $region
+     *
+     * @return City
+     */
+    public function setRegion(\VelovitoBundle\Entity\Country $region = null)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \VelovitoBundle\Entity\Country
+     */
+    public function getRegion()
+    {
+        return $this->region;
     }
 }

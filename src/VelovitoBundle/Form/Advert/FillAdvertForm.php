@@ -69,7 +69,7 @@ class FillAdvertForm extends AbstractType
                         ChoiceType::class,
                         [
                             'label'    => $attribute->getName(),
-                            'choices'  => [],
+                            'choices'  => $attribute['choices'],
                             'required' => true,
                         ]
                     );

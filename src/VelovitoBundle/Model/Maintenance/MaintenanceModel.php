@@ -10,12 +10,10 @@ use VelovitoBundle\Model\DefaultModel;
 class MaintenanceModel
 {
     private $em;
-    private $defaultModel;
 
-    public function  __construct(EntityManager $em, DefaultModel $defaultModel)
+    public function  __construct(EntityManager $em)
     {
         $this->em = $em;
-        $this->defaultModel = $defaultModel;
 
         $this->productCatRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
         $this->productsRepo = $em->getRepository(C::REPO_PRODUCT);
