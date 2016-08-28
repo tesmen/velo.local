@@ -340,7 +340,7 @@ class AdminModel
         $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTRIBUTE, $attributeId);
 
         $ent
-            ->setProductId($product->getId())
+            ->setProduct($product->getId())
             ->setAttribute($attribute);
 
         $this->em->persist($ent);

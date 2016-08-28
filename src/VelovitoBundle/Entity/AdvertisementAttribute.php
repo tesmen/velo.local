@@ -22,19 +22,21 @@ class AdvertisementAttribute
 
     /**
      * @var string
-     * @ORM\Column(name="advertisement_id", type="integer", options={"unsigned"=true})
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Advertisement")
+     * @ORM\JoinColumn(name="advertisement_id", referencedColumnName="id", nullable=false)
      */
     private $advertisement;
 
     /**
      * @var string
-     * @ORM\Column(name="attribute_id", type="integer", options={"unsigned"=true})
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\ProductAttribute")
+     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=false)
      */
     private $attribute;
 
     /**
      * @var string
-     * @ORM\Column(name="$value", type="integer", options={"unsigned"=true})
+     * @ORM\Column(name="value", type="string", length=127)
      */
     private $value;
 
@@ -49,57 +51,9 @@ class AdvertisementAttribute
     }
 
     /**
-     * Set advertisment
-     *
-     * @param integer $advertisment
-     *
-     * @return AdvertisementAttribute
-     */
-    public function setAdvertisement($advertisment)
-    {
-        $this->advertisement = $advertisment;
-
-        return $this;
-    }
-
-    /**
-     * Get advertisment
-     *
-     * @return integer
-     */
-    public function getAdvertisement()
-    {
-        return $this->advertisement;
-    }
-
-    /**
-     * Set attribute
-     *
-     * @param integer $attribute
-     *
-     * @return AdvertisementAttribute
-     */
-    public function setAttribute($attribute)
-    {
-        $this->attribute = $attribute;
-
-        return $this;
-    }
-
-    /**
-     * Get attribute
-     *
-     * @return integer
-     */
-    public function getAttribute()
-    {
-        return $this->attribute;
-    }
-
-    /**
      * Set value
      *
-     * @param integer $value
+     * @param string $value
      *
      * @return AdvertisementAttribute
      */
@@ -113,10 +67,58 @@ class AdvertisementAttribute
     /**
      * Get value
      *
-     * @return integer
+     * @return string
      */
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Set advertisement
+     *
+     * @param \VelovitoBundle\Entity\Advertisement $advertisement
+     *
+     * @return AdvertisementAttribute
+     */
+    public function setAdvertisement(\VelovitoBundle\Entity\Advertisement $advertisement)
+    {
+        $this->advertisement = $advertisement;
+
+        return $this;
+    }
+
+    /**
+     * Get advertisement
+     *
+     * @return \VelovitoBundle\Entity\Advertisement
+     */
+    public function getAdvertisement()
+    {
+        return $this->advertisement;
+    }
+
+    /**
+     * Set attribute
+     *
+     * @param \VelovitoBundle\Entity\ProductAttribute $attribute
+     *
+     * @return AdvertisementAttribute
+     */
+    public function setAttribute(\VelovitoBundle\Entity\ProductAttribute $attribute)
+    {
+        $this->attribute = $attribute;
+
+        return $this;
+    }
+
+    /**
+     * Get attribute
+     *
+     * @return \VelovitoBundle\Entity\ProductAttribute
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
     }
 }

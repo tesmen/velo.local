@@ -4,6 +4,7 @@ namespace VelovitoBundle\Model\Advertisement;
 
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
+use VelovitoBundle\Entity\AdvertisementAttribute;
 use VelovitoBundle\Entity\Product;
 use VelovitoBundle\Entity\ProductAttribute;
 use VelovitoBundle\Entity\ProductAttributeMap;
@@ -272,27 +273,36 @@ class AdvertisementModel
         return $currentUser->getId() === $ent->getUser()->getId();
     }
 
-    public function createAdvertAttributeMap(array $data)
+    public function createAdvertAttributeMap(Advertisement $advertisement, array $data)
     {
         $this->em->beginTransaction();
+
         try {
+            $matches = [];
+
             foreach ($data as $formFieldName => $value) {
                 if (!preg_match('/^' . ProductAttribute::FORM_PREFIX . '([0-9]+)/', $formFieldName, $matches)) {
                     continue;
                 }
+
+                $map = new AdvertisementAttribute();
+                $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTRIBUTE, $matches[1]);
+
+                $map->setAdvertisement($advertisement)
+                    ->setAttribute($attribute)
+                    ->setValue($value);
+
+                $this->em->persist($map);
             }
-            $map = new ProductAttributeMap();
-            $map->setProductId()
-                ->setAttribute();
 
-
-            $this->em->persist($map);
-            $this->em->flush($map);
+            $this->em->flush();
             $this->em->commit();
         } catch (\Exception $e) {
             $this->em->rollback();
 
             throw $e;
         }
+
+        return true;
     }
 }

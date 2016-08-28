@@ -76,7 +76,7 @@ class AdvertController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $adModel->createAdvertAttributeMap($formData);
+                $adModel->createAdvertAttributeMap($advert, $formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'Объявление обновлено!');
 
                 return $this->redirectToRoute(C::ROUTE_MY_ADS);
