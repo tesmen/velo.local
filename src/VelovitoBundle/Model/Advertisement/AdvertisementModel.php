@@ -237,6 +237,7 @@ class AdvertisementModel
         return $this->advertRepo->findOneOrFail($id);
     }
 
+
     public function unpublishAdvert($advertId, $reason)
     {
         $repo = $this->advertRepo;
@@ -254,6 +255,7 @@ class AdvertisementModel
         $repo->unPublish($advertId);
     }
 
+
     public function incrementViewed(Advertisement $ent)
     {
         $views = $ent->getViewsCount();
@@ -261,6 +263,7 @@ class AdvertisementModel
         $ent->setViewsCount($views);
         $this->em->flush($ent);
     }
+
 
     public function userCanEditAdvert(Advertisement $ent)
     {
@@ -273,6 +276,13 @@ class AdvertisementModel
         return $currentUser->getId() === $ent->getUser()->getId();
     }
 
+    /**
+     * @param Advertisement $advertisement
+     * @param array $data
+     * @return bool
+     * @throws \Exception
+     * todo check old advert attributes before writing
+     */
     public function createAdvertAttributeMap(Advertisement $advertisement, array $data)
     {
         $this->em->beginTransaction();
