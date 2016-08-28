@@ -21,7 +21,7 @@ class Cache
     /**
      * @var string
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="key", type="string", length=32)
      */
     private $key;
 

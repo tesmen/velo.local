@@ -54,6 +54,7 @@ class AdvertController extends GeneralController
         );
     }
 
+
     public function fillAdvertAction(Request $request, $id)
     {
         $adModel = $this->getModel();
@@ -101,6 +102,7 @@ class AdvertController extends GeneralController
         );
     }
 
+
     public function unPublishAdvertAction(Request $request, $advertId)
     {
         $advertEnt = $this->getModel()->getAdvertById($advertId);
@@ -123,9 +125,7 @@ class AdvertController extends GeneralController
         );
     }
 
-    /*
-     * todo check user rights to edit
-     */
+
     public function editAdvertAction(Request $request, $advertId)
     {
         $this->denyUnlessAuthenticatedFully();
@@ -184,6 +184,7 @@ class AdvertController extends GeneralController
             ]
         );
     }
+
 
     public function viewAdvertAction(Request $request, $advertId)
     {

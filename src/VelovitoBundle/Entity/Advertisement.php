@@ -133,7 +133,7 @@ class Advertisement
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=8096, nullable=true)
+     * @ORM\Column(name="description", type="string", length=16384, nullable=true)
      */
     private $description;
 
