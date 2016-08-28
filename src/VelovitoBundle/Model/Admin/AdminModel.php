@@ -250,6 +250,7 @@ class AdminModel
         $ent = is_null($productAttribute)
             ? new ProductAttribute()
             : $productAttribute;
+        $reference = $this->em->getReference(C::REPO_ATTRIBUTE_REFERENCE,$formData[C::FORM_REFERENCE]);
 
         $ent
             ->setName($formData[C::FORM_TITLE])
@@ -258,7 +259,7 @@ class AdminModel
             ->setType($formData[C::FORM_ATTRIBUTE_TYPE]);
 
         if (ProductAttribute::ATTRIBUTE_TYPE_REFERENCE === $formData[C::FORM_ATTRIBUTE_TYPE]) {
-            $ent->setReference($formData[C::FORM_REFERENCE]);
+            $ent->setReference($reference);
         }
 
         $this->em->persist($ent);

@@ -167,4 +167,18 @@ class AttributeReference
     {
         return $this->items;
     }
+
+    public function getItemsForForm()
+    {
+        $result = [];
+        /**
+         * @var $item AttributeReferenceItem
+         */
+
+        foreach ($this->items as $item) {
+            $result[$item->getName()] = $item->getId();
+        };
+
+        return $result;
+    }
 }

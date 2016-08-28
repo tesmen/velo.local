@@ -177,7 +177,7 @@ class ProductAttribute
     /**
      * Set referenceId
      *
-     * @param integer $reference
+     * @param AttributeReference $reference
      *
      * @return AttributeReferenceItem
      */
@@ -191,7 +191,7 @@ class ProductAttribute
     /**
      * Get referenceId
      *
-     * @return integer
+     * @return AttributeReference
      */
     public function getReference()
     {

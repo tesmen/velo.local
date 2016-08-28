@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * City
  *
- * @ORM\Table(name="regions")
+ * @ORM\Table(name="geo_regions")
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
  */
 class Region
