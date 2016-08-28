@@ -63,7 +63,7 @@ class AdvertController extends GeneralController
         if (!$adModel->userCanEditAdvert($advert)) {
             $this->addFlash(C::FLASH_ERROR, 'Что-то пошло не так...');
 
-            return $this->redirectToRoute('my_ads');
+            return $this->redirectToRoute(C::ROUTE_MY_ADS);
         }
 
         $options[C::FORM_ATTRIBUTE_LIST] = $adModel->getAttributesByProductId($advert->getProduct()->getId());
@@ -73,21 +73,15 @@ class AdvertController extends GeneralController
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                $formData = $form->getData();
+            $formData = $form->getData();
 
-                try {
-                    $advertId = $adModel->createNewAdvert($formData);
-                    $this->addFlash(C::FLASH_SUCCESS, 'Объявление добавлено');
+            try {
+                $adModel->createAdvertAttributeMap($formData);
+                $this->addFlash(C::FLASH_SUCCESS, 'Объявление обновлено!');
 
-                    return $this->redirectToRoute('advert_fill', [
-                        'id' => $advertId,
-                    ]);
-                } catch (\Exception $e) {
-                    $this->addFlash(C::FLASH_ERROR, $e->getMessage());
-                }
-            } else {
-                $this->addFlash(C::FLASH_ERROR, 'Форма не валидна');
+                return $this->redirectToRoute(C::ROUTE_MY_ADS);
+            } catch (\Exception $e) {
+                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
             }
 
             return $this->redirectToRoute(C::ROUTE_MY_ADS);
@@ -95,7 +89,7 @@ class AdvertController extends GeneralController
 
         return $this->render(
             'VelovitoBundle:advert:fill_advert.html.twig', [
-                'form'       => $form->createView(),
+                'form' => $form->createView(),
                 'advert'     => $advert,
                 'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
             ]

@@ -10,18 +10,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProductAttribute
 {
-    const ATTRIBUTE_TYPE_STRING = 1;
-    const ATTRIBUTE_TYPE_NUMBER = 2;
+    const FORM_PREFIX = 'attribute_';
+
+    const ATTRIBUTE_TYPE_STRING    = 1;
+    const ATTRIBUTE_TYPE_NUMBER    = 2;
     const ATTRIBUTE_TYPE_REFERENCE = 3;
-    const ATTRIBUTE_TYPE_BOOL = 4;
+    const ATTRIBUTE_TYPE_BOOL      = 4;
 
     public static function getTypesList($invert = false)
     {
         $list = [
-            self::ATTRIBUTE_TYPE_STRING  => 'строка',
-            self::ATTRIBUTE_TYPE_NUMBER  => 'число',
+            self::ATTRIBUTE_TYPE_STRING    => 'строка',
+            self::ATTRIBUTE_TYPE_NUMBER    => 'число',
             self::ATTRIBUTE_TYPE_REFERENCE => 'список на выбор',
-            self::ATTRIBUTE_TYPE_BOOL    => 'чекбокс',
+            self::ATTRIBUTE_TYPE_BOOL      => 'чекбокс',
         ];
 
         return $invert
@@ -196,5 +198,10 @@ class ProductAttribute
     public function getReference()
     {
         return $this->reference;
+    }
+
+    public function getFormId()
+    {
+        return self::FORM_PREFIX . $this->id;
     }
 }

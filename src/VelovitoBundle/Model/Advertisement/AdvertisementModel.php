@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use VelovitoBundle\C;
 use VelovitoBundle\Entity\Product;
 use VelovitoBundle\Entity\ProductAttribute;
+use VelovitoBundle\Entity\ProductAttributeMap;
 use VelovitoBundle\Model\DocumentModel;
 use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Model\SecurityModel;
@@ -269,5 +270,29 @@ class AdvertisementModel
         }
 
         return $currentUser->getId() === $ent->getUser()->getId();
+    }
+
+    public function createAdvertAttributeMap(array $data)
+    {
+        $this->em->beginTransaction();
+        try {
+            foreach ($data as $formFieldName => $value) {
+                if (!preg_match('/^' . ProductAttribute::FORM_PREFIX . '([0-9]+)/', $formFieldName, $matches)) {
+                    continue;
+                }
+            }
+            $map = new ProductAttributeMap();
+            $map->setProductId()
+                ->setAttribute();
+
+
+            $this->em->persist($map);
+            $this->em->flush($map);
+            $this->em->commit();
+        } catch (\Exception $e) {
+            $this->em->rollback();
+
+            throw $e;
+        }
     }
 }

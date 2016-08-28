@@ -1,10 +1,42 @@
-{% extends 'VelovitoBundle::base.html.twig' %}
+{% extends 'VelovitoBundle::no_menu.html.twig' %}
 {% import '@Velovito/templates/macroses.html.twig' as macro %}
 
 {% block body %}
     {#<script src="{{ asset('js/jquery.form.min.js') }}"></script>#}
-    <div>
-        {{ form_start(form) }}
-        {{ form_end(form) }}
+    <div class="row">
+        <div class="col-md-4">
+            <h2>{{ advert.getTitle() }}</h2>
+
+            <div>
+                <div style="margin-bottom: 20px;">
+                    {% if advert.getPhoto is null %}
+                        <img src="{{ 0 | noPhoto(200,200) }}" class="gray-border" title="{{ advert.getTitle() }}">
+                    {% else %}
+                        <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(200,200) }}" class="gray-border"
+                             title="{{ advert.getTitle() }}">
+                    {% endif %}
+                </div>
+            </div>
+
+            <div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <h3> {{ advert.getPrice() }} {{ advert.getCurrencyName() }}</h3>
+            {{ advert.description }}
+        </div>
+    </div>
+
+    <div class="alert-wrap alert alert-info">
+        Объявление опубликовано! Пожалуйста, заполните детали объявления, чтобы другим участникам было
+        проще его найти.
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}
