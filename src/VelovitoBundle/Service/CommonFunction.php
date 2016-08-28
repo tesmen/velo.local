@@ -1,10 +1,25 @@
 <?php
 namespace VelovitoBundle\Service;
 
-use VelovitoBundle\C;
+use VelovitoBundle\Entity\AttributeReferenceItem;
 
 class CommonFunction
 {
+    public static function entitiesToFormView($items, $field = 'Name')
+    {
+        $result = [];
+        $getter = 'get'.$field;
+
+        foreach ($items as $item) {
+            /**
+             * @var $item AttributeReferenceItem
+             */
+            $result[$item->$getter()] = $item->getId();
+        };
+
+        return $result;
+    }
+
     /* 1,l,0,O удалены из набора */
     public static function generateRawPassword($length = 8)
     {

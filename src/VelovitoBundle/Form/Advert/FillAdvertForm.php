@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use VelovitoBundle\C;
 use VelovitoBundle\Entity\ProductAttribute;
+use VelovitoBundle\Service\CommonFunction;
 
 class FillAdvertForm extends AbstractType
 {
@@ -69,7 +70,7 @@ class FillAdvertForm extends AbstractType
                         ChoiceType::class,
                         [
                             'label'    => $attribute->getName(),
-                            'choices'  => $attribute->getReference()->getItemsForForm(),
+                            'choices'  => CommonFunction::entitiesToFormView($attribute->getReference()->getItems()),
                             'required' => true,
                         ]
                     );
