@@ -26,18 +26,24 @@
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ advert.getUser().getUserName() }}
     <br><br>
     <div class="row">
-        <div class="col-md-3">
-            {% for key, val in attributes %}
-                <div class="span2">{{ key }}</div>
-            {% endfor %}
+        <div class="col-md-6">
+            <div><h4>Характеристики</h4> </div>
+            <div class="col-md-6">
+                {% for key, val in attributes %}
+                    <div class="span2">{{ key }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-6">
+                {% for key, val in attributes %}
+                    <div class="span2">{{ val }}</div>
+                {% endfor %}
+            </div>
         </div>
 
-        <div class="col-md-3">
-            {% for key, val in attributes %}
-                <div class="span2">{{ val }}</div>
-            {% endfor %}
+        <div class="col-md-6">
+            <div><h4>Описание</h4></div>
+            {{ advert.getDescription() }}
         </div>
-
-        <div class="col-md-6">{{ advert.getDescription() }}</div>
     </div>
 {% endblock %}
