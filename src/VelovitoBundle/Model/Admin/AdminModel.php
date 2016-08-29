@@ -90,13 +90,17 @@ class AdminModel
     /**
      * @return array
      */
-    public function getAttrReferencesForForm()
+    public function getAttrReferencesForForm($appendNotSelected = true)
     {
         $result = [];
 
+        if ($appendNotSelected) {
+            $result['-Not selected-'] = 0;
+        }
+
         foreach ($this->getEnabledAttrReferences() as $ref) {
             $name = sprintf('%s - %s', $ref->getName(), $ref->getComment());
-            $result[$name] = $ref->getId()  ;
+            $result[$name] = $ref->getId();
         };
 
         ksort($result);
@@ -104,13 +108,14 @@ class AdminModel
         return $result;
     }
 
-    /**
-     * @return array
-     * TODO
-     */
-    public function getEnabledAttributesForForm()
+
+    public function getEnabledAttributesForForm($appendNotSelected = true)
     {
         $result = [];
+
+        if ($appendNotSelected) {
+            $result['-Not selected-'] = 0;
+        }
 
         foreach ($this->getEnabledProductAttributes() as $ref) {
             $name = sprintf('%s - %s', $ref->getName(), $ref->getComment());

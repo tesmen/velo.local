@@ -195,7 +195,7 @@ class AdminController extends GeneralController
             C::FORM_TITLE          => $ent->getName(),
             C::FORM_COMMENT        => $ent->getComment(),
             C::FORM_ATTRIBUTE_TYPE => $ent->getType(),
-            C::FORM_REFERENCE      => $ent->getReference(),
+            C::FORM_REFERENCE      => $ent->getReference() ? $ent->getReference()->getId() : null,
             C::FORM_REFERENCE_LIST => $model->getAttrReferencesForForm(),
         ]);
 
