@@ -21,14 +21,15 @@ class ProductAttributeMap
 
     /**
      * @var string
-     * @ORM\Column(name="product_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Product")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
      */
-    private $productId;
+    private $product;
 
     /**
      * @var string
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\ProductAttribute")
-     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", nullable=false)
      */
     private $attribute;
 
@@ -45,13 +46,13 @@ class ProductAttributeMap
     /**
      * Set productId
      *
-     * @param integer $productId
+     * @param Product $product
      *
      * @return ProductAttributeMap
      */
-    public function setProductId($productId)
+    public function setProduct($product)
     {
-        $this->productId = $productId;
+        $this->product = $product;
 
         return $this;
     }
@@ -59,11 +60,11 @@ class ProductAttributeMap
     /**
      * Get productId
      *
-     * @return integer
+     * @return Product
      */
-    public function getProductId()
+    public function getProduct()
     {
-        return $this->productId;
+        return $this->product;
     }
 
     /**
@@ -81,7 +82,8 @@ class ProductAttributeMap
     }
 
     /**
-     * Get referenceId
+     * Get referenceId'djk.wbjybheq
+     *
      *
      * @return ProductAttribute
      */

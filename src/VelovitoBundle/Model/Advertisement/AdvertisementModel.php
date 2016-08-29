@@ -58,7 +58,7 @@ class AdvertisementModel
     public function getAttributesByProductId($productId)
     {
         $mappings = $this->productAttrMapRepo->findBy([
-            'productId' => $productId,
+            'product' => $productId,
         ]);
 
         $result = [];

@@ -212,7 +212,7 @@ class AdminModel
     public function getAttributesMapByProductId($id)
     {
         return $this->productsAttrMapRepo->findby([
-            'productId' => $id
+            'product' => $id
         ]);
     }
 
@@ -334,13 +334,18 @@ class AdminModel
         return $ent;
     }
 
-    public function addAttributeMapToProduct(Product $product, $attributeId)
+    public function createAttributeMap(Product $product, $attributeId)
     {
+        $this->productsAttrMapRepo->failOnExists([
+            'product'   => $product->getId(),
+            'attribute' => $attributeId,
+        ]);
+
         $ent = new ProductAttributeMap();
         $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTRIBUTE, $attributeId);
 
         $ent
-            ->setProduct($product->getId())
+            ->setProduct($product)
             ->setAttribute($attribute);
 
         $this->em->persist($ent);
