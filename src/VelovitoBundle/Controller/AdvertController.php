@@ -66,6 +66,7 @@ class AdvertController extends GeneralController
             return $this->redirectToRoute(C::ROUTE_MY_ADS);
         }
 
+        // todo if empty redirect to my ads
         $options[C::FORM_ATTRIBUTE_LIST] = $adModel->getAttributesByProductId($advert->getProduct()->getId());
 
         $form = $this->createForm(FillAdvertForm::class, $options);

@@ -53,7 +53,7 @@ class AdvertisementModel
     /**
      * @param $productId
      * @return ProductAttribute[]
-     * todo refactor for performance issues
+     * todo refactor to ~ $product->getAttributes()
      */
     public function getAttributesByProductId($productId)
     {
