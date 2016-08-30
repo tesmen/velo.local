@@ -7,7 +7,6 @@ use VelovitoBundle\C;
 use VelovitoBundle\Entity\AdvertisementAttribute;
 use VelovitoBundle\Entity\Product;
 use VelovitoBundle\Entity\ProductAttribute;
-use VelovitoBundle\Entity\ProductAttributeMap;
 use VelovitoBundle\Model\DocumentModel;
 use VelovitoBundle\Entity\Advertisement;
 use VelovitoBundle\Model\SecurityModel;
@@ -35,6 +34,8 @@ class AdvertisementModel
         $this->productRepo = $this->em->getRepository(C::REPO_PRODUCT);
         $this->productAttrRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTRIBUTE);
         $this->productAttrMapRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTRIBUTE_MAP);
+        $this->referenceItemsRepo = $em->getRepository(C::REPO_ATTRIBUTE_REFERENCE_ITEM);
+
     }
 
     /**
@@ -58,7 +59,7 @@ class AdvertisementModel
     public function getAttributesByProductId($productId)
     {
         $mappings = $this->productAttrMapRepo->findBy([
-            'productId' => $productId,
+            'product' => $productId,
         ]);
 
         $result = [];
@@ -314,5 +315,28 @@ class AdvertisementModel
         }
 
         return true;
+    }
+
+
+    public function getAdvertAttributesArray(Advertisement $advertisement)
+    {
+        $result = [];
+
+        foreach ($advertisement->getAttributes() as $advertAttribute) {
+            $attrName = $advertAttribute->getAttribute()->getName();
+
+            if ($advertAttribute->getAttribute()->getType() === ProductAttribute::ATTRIBUTE_TYPE_REFERENCE) {
+                $result[$attrName] = $this->getReferenceItem($advertAttribute->getValue())->getName();
+            } else {
+                $result[$attrName] = $advertAttribute->getValue();
+            }
+        }
+
+        return $result;
+    }
+
+    private function getReferenceItem($itemId)
+    {
+        return $this->referenceItemsRepo->find($itemId);
     }
 }

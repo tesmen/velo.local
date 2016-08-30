@@ -11,23 +11,39 @@
     <div>
         <div style="margin-bottom: 20px;">
             {% if advert.getPhoto is null %}
-                <img src="{{ 0 | noPhoto(500,500) }}" class="gray-border" title="{{ advert.getTitle() }}">
+                <img src="{{ 0 | noPhoto(400,400) }}" class="gray-border" title="{{ advert.getTitle() }}">
             {% else %}
-                <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(500,500) }}" class="gray-border" title="{{ advert.getTitle() }}">
+                <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(400,400) }}" class="gray-border"
+                     title="{{ advert.getTitle() }}">
             {% endif %}
         </div>
-
-        {#{% for photo in advert.getPhotos() %}#}
-            {#<img src="{{ photo.getFileName() | resize(150,150) }}" class="gray-border" title="{{ advert.getTitle() }}">#}
-        {#{% endfor %}#}
     </div>
 
     <div>
         <h3> {{ advert.getPrice() }} {{ advert.getCurrencyName() }}</h3>
     </div>
 
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-    <div>{{ advert.getUser().getUserName() }}</div>
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ advert.getUser().getUserName() }}
+    <br><br>
+    <div class="row">
+        <div class="col-md-6">
+            <div><h4>Характеристики</h4> </div>
+            <div class="col-md-6">
+                {% for key, val in attributes %}
+                    <div class="span2">{{ key }}</div>
+                {% endfor %}
+            </div>
 
-    <article>{{ advert.getDescription() }}</article>
+            <div class="col-md-6">
+                {% for key, val in attributes %}
+                    <div class="span2">{{ val }}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div><h4>Описание</h4></div>
+            {{ advert.getDescription() }}
+        </div>
+    </div>
 {% endblock %}

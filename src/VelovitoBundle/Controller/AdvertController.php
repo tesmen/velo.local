@@ -197,6 +197,7 @@ class AdvertController extends GeneralController
             'VelovitoBundle:advert:view_advert.html.twig',
             [
                 'advert' => $advertEnt,
+                'attributes' =>$adModel->getAdvertAttributesArray($advertEnt)
             ]
         );
     }

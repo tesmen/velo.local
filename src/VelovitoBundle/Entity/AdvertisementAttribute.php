@@ -22,8 +22,8 @@ class AdvertisementAttribute
 
     /**
      * @var string
-     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Advertisement")
-     * @ORM\JoinColumn(name="advertisement_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\Advertisement", inversedBy="attributes")
+     * @ORM\JoinColumn(name="advert_id", referencedColumnName="id", nullable=false)
      */
     private $advertisement;
 

@@ -8,6 +8,22 @@ use VelovitoBundle\Exception\NotFoundException;
 
 class GeneralRepository extends EntityRepository
 {
+    public function isExists($criteria)
+    {
+        return !empty($this->findOneBy($criteria));
+    }
+
+    public function failOnExists($criteria)
+    {
+        if($this->isExists($criteria)) {
+            throw new \Exception(
+                sprintf('%s already exists with %s',
+                    $this->getClassName(),
+                    json_encode($criteria)
+            ));
+        };
+    }
+
     public function fillEntity($ent, array  $data)
     {
 

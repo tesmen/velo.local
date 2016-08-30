@@ -106,15 +106,16 @@ class AdminController extends GeneralController
 
             try {
                 if (C::FORM_ADD === $form->getClickedButton()->getName()) {
-                    $model->addAttributeMapToProduct($product, $formData[C::FORM_ATTRIBUTE]);
+                    $ent = $model->createAttributeMap($product, $formData[C::FORM_ATTRIBUTE]);
+                    $this->addFlash(C::FLASH_SUCCESS, 'added!');
                 } else {
                     $model->updateProduct($id, $formData);
-                    $this->addFlash(C::FLASH_SUCCESS, 'ok!');
-
-                    return $this->redirectToThis(
-                        ['id' => $id]
-                    );
+                    $this->addFlash(C::FLASH_SUCCESS, 'updated!');
                 }
+
+                return $this->redirectToThis(
+                    ['id' => $id]
+                );
             } catch (\Exception $e) {
                 $this->addFlash(C::FLASH_ERROR, $e->getMessage());
             }
@@ -193,6 +194,8 @@ class AdminController extends GeneralController
         $form = $this->createForm(EditAttributeForm::class, [
             C::FORM_TITLE          => $ent->getName(),
             C::FORM_COMMENT        => $ent->getComment(),
+            C::FORM_ATTRIBUTE_TYPE => $ent->getType(),
+            C::FORM_REFERENCE      => $ent->getReference() ? $ent->getReference()->getId() : null,
             C::FORM_REFERENCE_LIST => $model->getAttrReferencesForForm(),
         ]);
 

@@ -67,12 +67,14 @@ class FillAdvertForm extends AbstractType
                     );
                     break;
                 case ProductAttribute::ATTRIBUTE_TYPE_REFERENCE:
+                    $reference = $attribute->getReference();
+
                     $builder->add(
                         $formId,
                         ChoiceType::class,
                         [
                             'label'    => $attribute->getName(),
-                            'choices'  => CommonFunction::entitiesToFormView($attribute->getReference()->getItems()),
+                            'choices' => CommonFunction::entitiesToFormView($reference->getItems() ?: []),
                             'required' => true,
                         ]
                     );

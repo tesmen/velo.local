@@ -42,6 +42,7 @@ class Advertisement
     public function __construct()
     {
         $this->creationDate = new \DateTime();
+        $this->attributes = new ArrayCollection();
     }
 
     /**
@@ -136,6 +137,11 @@ class Advertisement
      * @ORM\Column(name="description", type="string", length=16384, nullable=true)
      */
     private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AdvertisementAttribute", mappedBy="advertisement")
+     */
+    private $attributes;
 
     /**
      * Get id
@@ -433,5 +439,39 @@ class Advertisement
     public function getProductCategory()
     {
         return $this->productCategory;
+    }
+
+    /**
+     * Add attribute
+     *
+     * @param \VelovitoBundle\Entity\AdvertisementAttribute $attribute
+     *
+     * @return Advertisement
+     */
+    public function addAttribute(\VelovitoBundle\Entity\AdvertisementAttribute $attribute)
+    {
+        $this->attributes[] = $attribute;
+
+        return $this;
+    }
+
+    /**
+     * Remove attribute
+     *
+     * @param \VelovitoBundle\Entity\AdvertisementAttribute $attribute
+     */
+    public function removeAttribute(\VelovitoBundle\Entity\AdvertisementAttribute $attribute)
+    {
+        $this->attributes->removeElement($attribute);
+    }
+
+    /**
+     * Get attributes
+     *
+     * @return AdvertisementAttribute[]
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 }

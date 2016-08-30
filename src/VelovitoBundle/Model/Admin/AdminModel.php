@@ -90,13 +90,17 @@ class AdminModel
     /**
      * @return array
      */
-    public function getAttrReferencesForForm()
+    public function getAttrReferencesForForm($appendNotSelected = true)
     {
         $result = [];
 
+        if ($appendNotSelected) {
+            $result['-Not selected-'] = 0;
+        }
+
         foreach ($this->getEnabledAttrReferences() as $ref) {
             $name = sprintf('%s - %s', $ref->getName(), $ref->getComment());
-            $result[$name] = $ref->getId()  ;
+            $result[$name] = $ref->getId();
         };
 
         ksort($result);
@@ -104,13 +108,14 @@ class AdminModel
         return $result;
     }
 
-    /**
-     * @return array
-     * TODO
-     */
-    public function getEnabledAttributesForForm()
+
+    public function getEnabledAttributesForForm($appendNotSelected = true)
     {
         $result = [];
+
+        if ($appendNotSelected) {
+            $result['-Not selected-'] = 0;
+        }
 
         foreach ($this->getEnabledProductAttributes() as $ref) {
             $name = sprintf('%s - %s', $ref->getName(), $ref->getComment());
@@ -212,7 +217,7 @@ class AdminModel
     public function getAttributesMapByProductId($id)
     {
         return $this->productsAttrMapRepo->findby([
-            'productId' => $id
+            'product' => $id
         ]);
     }
 
@@ -334,13 +339,18 @@ class AdminModel
         return $ent;
     }
 
-    public function addAttributeMapToProduct(Product $product, $attributeId)
+    public function createAttributeMap(Product $product, $attributeId)
     {
+        $this->productsAttrMapRepo->failOnExists([
+            'product'   => $product->getId(),
+            'attribute' => $attributeId,
+        ]);
+
         $ent = new ProductAttributeMap();
         $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTRIBUTE, $attributeId);
 
         $ent
-            ->setProduct($product->getId())
+            ->setProduct($product)
             ->setAttribute($attribute);
 
         $this->em->persist($ent);
