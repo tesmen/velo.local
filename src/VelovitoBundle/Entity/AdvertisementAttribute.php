@@ -36,7 +36,7 @@ class AdvertisementAttribute
 
     /**
      * @var string
-     * @ORM\Column(name="value", type="string", length=127)
+     * @ORM\Column(name="value", type="string", length=127, nullable=true)
      */
     private $value;
 
