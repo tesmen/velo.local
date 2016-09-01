@@ -22,7 +22,7 @@ class NewAdvertForm extends AbstractType
             C::FORM_PRODUCT,
             ChoiceType::class,
             [
-                'label'    => 'Что продаем?',
+                'label'    => 'Раздел',
                 'choices'  => $data[C::FORM_PRODUCT_LIST],
                 'required' => true,
             ]
