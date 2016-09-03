@@ -20,8 +20,8 @@ class AdminModel
         $this->em = $em;
 
         $this->productsRepo = $em->getRepository(C::REPO_PRODUCT);
-        $this->productsAttrRepo = $em->getRepository(C::REPO_PRODUCT_ATTRIBUTE);
-        $this->productsAttrMapRepo = $em->getRepository(C::REPO_PRODUCT_ATTRIBUTE_MAP);
+        $this->productsAttrRepo = $em->getRepository(C::REPO_PRODUCT_ATTR);
+        $this->productsAttrMapRepo = $em->getRepository(C::REPO_PRODUCT_ATTR_MAP);
         $this->productsAttrReferenceRepo = $em->getRepository(C::REPO_ATTRIBUTE_REFERENCE);
         $this->productCatRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
     }
@@ -82,7 +82,7 @@ class AdminModel
      */
     public function getEnabledProductAttributes()
     {
-        return $this->em->getRepository(C::REPO_PRODUCT_ATTRIBUTE)->findBy([
+        return $this->em->getRepository(C::REPO_PRODUCT_ATTR)->findBy([
             'active' => true
         ]);
     }
@@ -347,7 +347,7 @@ class AdminModel
         ]);
 
         $ent = new ProductAttributeMap();
-        $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTRIBUTE, $attributeId);
+        $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTR, $attributeId);
 
         $ent
             ->setProduct($product)

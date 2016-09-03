@@ -178,46 +178,38 @@ class AdvertController extends GeneralController
     public function editAdvertDetailsAction(Request $request, $advertId)
     {
         $adModel = $this->getModel();
-        $advertEnt = $adModel->getAdvertById($advertId);
-        $this->canUserEditAdvert($advertEnt);
+        $advert = $adModel->getAdvertById($advertId);
+        $this->canUserEditAdvert($advert);
 
         $formOptions = [
-            'entity' => $advertEnt,
+            'entity' => $advert,
         ];
 
-        $formOptions[C::FORM_ATTRIBUTE_LIST] = $adModel->getAttributesByProductId($advertEnt->getProduct()->getId());
-        $form = $this->createAdvertDetailsForm($advertEnt, true);
+        $formOptions[C::FORM_ATTRIBUTE_LIST] = $adModel->getAttributesByProductId($advert->getProduct()->getId());
+        $form = $this->createAdvertDetailsForm($advert, true);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                $formData = $form->getData();
-                $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
+            $formData = $form->getData();
 
-                try {
-                    $adModel->createNewAdvert($formData, $advertEnt);
-                    $this->addFlash(C::FLASH_SUCCESS, 'Изменения сохранены');
+            try {
+                $adModel->createAdvertAttributeMap($advert, $formData);
+                $this->addFlash(C::FLASH_SUCCESS, 'Объявление обновлено!');
 
-                    return $this->redirectToThis(
-                        ['advertId' => $advertId]
-                    );
-                } catch (\Exception $e) {
-                    $this->addFlash(C::FLASH_ERROR, $e->getMessage());
-                }
-
-                return $this->redirectToRoute(
-                    C::ROUTE_ADVERT_EDIT_MAIN,
-                    ['advertId' => $advertId]
-                );
+                return $this->redirectToRoute(C::ROUTE_MY_ADS);
+            } catch (\Exception $e) {
+                $this->addFlash(C::FLASH_ERROR, $e->getMessage());
             }
+
+            return $this->redirectToRoute(C::ROUTE_MY_ADS);
         }
 
         return $this->render(
             'VelovitoBundle:advert:edit_advert_details.html.twig',
             [
                 'form'       => $form->createView(),
-                'advert'     => $advertEnt,
+                'advert'     => $advert,
                 'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
             ]
         );

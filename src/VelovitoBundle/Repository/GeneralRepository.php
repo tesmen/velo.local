@@ -119,4 +119,31 @@ class GeneralRepository extends EntityRepository
         $orderItemEnt->setSerializedParams(array_merge($initialArray, $array));
         $this->_em->flush();
     }
+
+    /**
+     * @param integer|array $params
+     * @return object
+     * @throws \Exception
+     */
+    public function findOrCreate($params)
+    {
+        if (is_integer($params)) {
+            $criteria = [
+                'id' => $params,
+            ];
+        } elseif (is_array($params)) {
+            $criteria = $params;
+        } else {
+            throw new \Exception('wrong class passed to ' . __FUNCTION__);
+        }
+
+        $persistent = $this->findOneBy($criteria);
+
+        if ($persistent) {
+            return $persistent;
+        }
+
+        return new $this->_entityName;
+
+    }
 }

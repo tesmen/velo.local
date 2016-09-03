@@ -29,13 +29,13 @@ class AdvertisementModel
         $this->fileWorker = $fileWorker;
 
         $this->advertRepo = $this->em->getRepository(C::REPO_ADVERTISEMENT);
+        $this->advertAttrRepo = $em->getRepository(C::REPO_ADVERTISEMENT_ATTR);
         $this->categoriesRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
-        $this->userPhotoRepo = $this->em->getRepository(C::REPO_USER_PHOTO);
         $this->productRepo = $this->em->getRepository(C::REPO_PRODUCT);
-        $this->productAttrRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTRIBUTE);
-        $this->productAttrMapRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTRIBUTE_MAP);
+        $this->productAttrRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTR);
+        $this->productAttrMapRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTR_MAP);
         $this->referenceItemsRepo = $em->getRepository(C::REPO_ATTRIBUTE_REFERENCE_ITEM);
-
+        $this->userPhotoRepo = $this->em->getRepository(C::REPO_USER_PHOTO);
     }
 
     /**
@@ -278,13 +278,13 @@ class AdvertisementModel
     }
 
     /**
-     * @param Advertisement $advertisement
+     * @param Advertisement $advert
      * @param array $data
      * @return bool
      * @throws \Exception
      * todo check old advert attributes before writing
      */
-    public function createAdvertAttributeMap(Advertisement $advertisement, array $data)
+    public function createAdvertAttributeMap(Advertisement $advert, array $data)
     {
         $this->em->beginTransaction();
 
@@ -296,14 +296,22 @@ class AdvertisementModel
                     continue;
                 }
 
-                $map = new AdvertisementAttribute();
-                $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTRIBUTE, $matches[1]);
+                /**
+                 * @var $advertAttribute AdvertisementAttribute
+                 * @var $attribute ProductAttribute
+                 */
+                $advertAttribute = $this->advertAttrRepo->findOrCreate([
+                    'attribute' => $matches[1],
+                    'advertisement'    => $advert->getId(),
+                ]);
 
-                $map->setAdvertisement($advertisement)
+                $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTR, $matches[1]);
+
+                $advertAttribute->setAdvertisement($advert)
                     ->setAttribute($attribute)
                     ->setValue($value);
 
-                $this->em->persist($map);
+                $this->em->persist($advertAttribute);
             }
 
             $this->em->flush();
