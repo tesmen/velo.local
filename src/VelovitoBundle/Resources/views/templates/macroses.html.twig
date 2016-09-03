@@ -77,7 +77,7 @@
 
                 {% if app.user and showMenu %}|
 
-                    <a href="{{ url('advert_edit', {'advertId': advert.getId()}) }}">Редактировать</a>|
+                    <a href="{{ url('advert_edit_main', {'advertId': advert.getId()}) }}">Редактировать</a>|
                     <a href="{{ url('advert_unpublish', {'advertId': advert.getId()}) }}">Снять с публикации</a>|
                     {#<a href="{{ url('ad_delete', {'advertId': advert.getId()}) }}">Удалить</a>#}
                 {% endif %}

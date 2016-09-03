@@ -59,17 +59,8 @@ class AdvertController extends GeneralController
     {
         $adModel = $this->getModel();
         $advert = $adModel->getAdvertById($id);
-
-        if (!$adModel->userCanEditAdvert($advert)) {
-            $this->addFlash(C::FLASH_ERROR, 'Что-то пошло не так...');
-
-            return $this->redirectToRoute(C::ROUTE_MY_ADS);
-        }
-
-        // todo if empty redirect to my ads
-        $options[C::FORM_ATTRIBUTE_LIST] = $adModel->getAttributesByProductId($advert->getProduct()->getId());
-
-        $form = $this->createForm(FillAdvertForm::class, $options);
+        $this->canUserEditAdvert($advert);
+        $form = $this->createAdvertDetailsForm($advert);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -121,7 +112,7 @@ class AdvertController extends GeneralController
     }
 
 
-    public function editAdvertAction(Request $request, $advertId)
+    public function editAdvertMainAction(Request $request, $advertId)
     {
         $this->denyUnlessAuthenticatedFully();
         $adModel = $this->getModel();
@@ -130,7 +121,7 @@ class AdvertController extends GeneralController
         if (!$adModel->userCanEditAdvert($advertEnt)) {
             $this->addFlash(C::FLASH_ERROR, 'Что-то пошло не так...');
 
-            return $this->redirectToRoute('my_ads');
+            return $this->redirectToRoute(C::ROUTE_MY_ADS);
         }
 
         $formOptions = [
@@ -143,7 +134,59 @@ class AdvertController extends GeneralController
             C::FORM_DESCRIPTION  => $advertEnt->getDescription(),
         ];
 
-        $form = $this->createForm(NewAdvertForm::class, $formOptions);
+        $mainForm = $this->createForm(NewAdvertForm::class, $formOptions);
+        $options[C::FORM_ATTRIBUTE_LIST] = $adModel->getAttributesByProductId($advertEnt->getProduct()->getId());
+        $detailsForm = $this->createForm(FillAdvertForm::class, $options);
+
+        if ($request->isMethod('POST')) {
+            $mainForm->handleRequest($request);
+
+            if ($mainForm->isValid()) {
+                $formData = $mainForm->getData();
+                $formData[C::FORM_PHOTO_FILENAMES] = $request->get(C::FORM_PHOTO_FILENAMES);
+
+                try {
+                    $adModel->createNewAdvert($formData, $advertEnt);
+                    $this->addFlash(C::FLASH_SUCCESS, 'Изменения сохранены');
+
+                    return $this->redirectToThis(
+                        ['advertId' => $advertId]
+                    );
+                } catch (\Exception $e) {
+                    $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+                }
+
+                return $this->redirectToRoute(
+                    C::ROUTE_ADVERT_EDIT_MAIN,
+                    ['advertId' => $advertId]
+                );
+            }
+        }
+
+        return $this->render(
+            'VelovitoBundle:advert:edit_advert_main.html.twig',
+            [
+                'mainForm'       => $mainForm->createView(),
+                'detailsForm'       => $detailsForm->createView(),
+                'advert'     => $advertEnt,
+                'uploadForm' => $this->createForm(UploadPhotoForm::class)->createView(),
+            ]
+        );
+    }
+
+
+    public function editAdvertDetailsAction(Request $request, $advertId)
+    {
+        $adModel = $this->getModel();
+        $advertEnt = $adModel->getAdvertById($advertId);
+        $this->canUserEditAdvert($advertEnt);
+
+        $formOptions = [
+            'entity' => $advertEnt,
+        ];
+
+        $formOptions[C::FORM_ATTRIBUTE_LIST] = $adModel->getAttributesByProductId($advertEnt->getProduct()->getId());
+        $form = $this->createAdvertDetailsForm($advertEnt, true);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -164,14 +207,14 @@ class AdvertController extends GeneralController
                 }
 
                 return $this->redirectToRoute(
-                    C::ROUTE_ADVERT_EDIT,
+                    C::ROUTE_ADVERT_EDIT_MAIN,
                     ['advertId' => $advertId]
                 );
             }
         }
 
         return $this->render(
-            'VelovitoBundle:advert:edit_advert.html.twig',
+            'VelovitoBundle:advert:edit_advert_details.html.twig',
             [
                 'form'       => $form->createView(),
                 'advert'     => $advertEnt,

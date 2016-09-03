@@ -1,0 +1,15 @@
+{% extends 'VelovitoBundle::base.html.twig' %}
+{% import '@Velovito/templates/macroses.html.twig' as macro %}
+{% block body %}
+    {% include '@Velovito/templates/alert.html.twig' %}
+    <ul class="nav nav-tabs">
+        <li><a href="{{ url('advert_edit_main', {'advertId': advert.getId()}) }}">Основная информация</a></li>
+        <li class="active"><a href="{{ url('advert_edit_details', {'advertId': advert.getId()}) }}">Характеристики</a></li>
+    </ul>
+
+    <div id="characteristics">
+        {{ form_start(form) }}
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

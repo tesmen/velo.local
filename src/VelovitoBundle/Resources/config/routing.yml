@@ -114,9 +114,13 @@ advert_fill:
     path:     /fill-advert/{id}
     defaults: { _controller: VelovitoBundle:Advert:fillAdvert }
 
-advert_edit:
-    path:     /edit-advert/{advertId}
-    defaults: { _controller: VelovitoBundle:Advert:editAdvert}
+advert_edit_main:
+    path:     /edit-advert/{advertId}/main
+    defaults: { _controller: VelovitoBundle:Advert:editAdvertMain}
+
+advert_edit_details:
+    path:     /edit-advert/{advertId}/details
+    defaults: { _controller: VelovitoBundle:Advert:editAdvertDetails}
 
 advert_unpublish:
     path:     /unpublish-advert/{advertId}

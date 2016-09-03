@@ -2,15 +2,19 @@
 {% import '@Velovito/templates/macroses.html.twig' as macro %}
 {% block body %}
     {% include '@Velovito/templates/alert.html.twig' %}
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{{ url('advert_edit_main', {'advertId': advert.getId()}) }}">Основная информация</a></li>
+        <li><a href="{{ url('advert_edit_details', {'advertId': advert.getId()}) }}">Характеристики</a></li>
+    </ul>
 
-    <div>
-        {{ form_start(form) }}
+    <div id="main_info">
+        {{ form_start(mainForm) }}
         <div class="col-md-4">
-            {{ macro.bootstrapFormInput(form.title) }}
-            {{ macro.bootstrapFormInput(form.product) }}
-            {{ macro.bootstrapFormInput(form.price) }}
-            {{ macro.bootstrapFormInput(form.currency) }}
-            {{ macro.bootstrapFormInput(form.photo) }}
+            {{ macro.bootstrapFormInput(mainForm.title) }}
+            {{ macro.bootstrapFormInput(mainForm.product) }}
+            {{ macro.bootstrapFormInput(mainForm.price) }}
+            {{ macro.bootstrapFormInput(mainForm.currency) }}
+            {{ macro.bootstrapFormInput(mainForm.photo) }}
         </div>
 
         <div class="col-md-6">
@@ -22,12 +26,12 @@
                 {% endif %}
             </div>
 
-            {{ macro.bootstrapFormInput(form.description) }}
-            {{ form_rest(form) }}
+            {{ macro.bootstrapFormInput(mainForm.description) }}
+            {{ form_rest(mainForm) }}
         </div>
 
-        {{ form_widget(form.submit) }}
-        {{ form_end(form) }}
+        {{ form_widget(mainForm.submit) }}
+        {{ form_end(mainForm) }}
     </div>
 
     <script>

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
  */
-class AdvertisementAttribute
+class AdvertisementAttribute extends AbstractAttribute
 {
     /**
      * @var integer

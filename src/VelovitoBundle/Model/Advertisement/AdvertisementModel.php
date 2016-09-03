@@ -335,8 +335,16 @@ class AdvertisementModel
         return $result;
     }
 
+
+    /**
+     * @param $itemId
+     * @return \VelovitoBundle\Entity\AttributeReferenceItem
+     */
     private function getReferenceItem($itemId)
     {
         return $this->referenceItemsRepo->find($itemId);
     }
+
+
+
 }

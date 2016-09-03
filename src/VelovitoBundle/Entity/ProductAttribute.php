@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="product_attributes")
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\GeneralRepository")
  */
-class ProductAttribute
+class ProductAttribute extends AbstractAttribute
 {
     const FORM_PREFIX = 'attribute_';
 
@@ -198,10 +198,5 @@ class ProductAttribute
     public function getReference()
     {
         return $this->reference;
-    }
-
-    public function getFormId()
-    {
-        return self::FORM_PREFIX . $this->id;
     }
 }

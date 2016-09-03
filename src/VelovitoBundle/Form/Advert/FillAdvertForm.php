@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use VelovitoBundle\C;
+use VelovitoBundle\Entity\AbstractAttribute;
 use VelovitoBundle\Entity\ProductAttribute;
 use VelovitoBundle\Service\CommonFunction;
 
@@ -23,7 +24,7 @@ class FillAdvertForm extends AbstractType
         $attributes = $data[C::FORM_ATTRIBUTE_LIST];
 
         foreach ($attributes as $attribute) {
-            $formId = $attribute->getFormId();
+            $formId = AbstractAttribute::FORM_PREFIX . $attribute->getId();
 
             switch ($attribute->getType()) {
                 case ProductAttribute::ATTRIBUTE_TYPE_NUMBER:

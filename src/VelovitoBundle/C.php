@@ -49,7 +49,8 @@ class C
     const ROUTE_PROFILE = 'profile';
     const ROUTE_FAVORITED_ADS = 'favorites';
     const ROUTE_ADVERT_NEW = 'advert_new';
-    const ROUTE_ADVERT_EDIT = 'advert_edit';
+    const ROUTE_ADVERT_EDIT_MAIN = 'advert_edit_main';
+    const ROUTE_ADVERT_EDIT_DETAILS = 'advert_edit_details';
 
     const ROUTE_VK_AUTH_TOKEN = 'vk_auth_token';
     const ROUTE_VK_AUTH_SUCCESS = 'vk_auth_success';
