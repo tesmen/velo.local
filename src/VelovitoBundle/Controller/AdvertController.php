@@ -180,12 +180,6 @@ class AdvertController extends GeneralController
         $adModel = $this->getModel();
         $advert = $adModel->getAdvertById($advertId);
         $this->canUserEditAdvert($advert);
-
-        $formOptions = [
-            'entity' => $advert,
-        ];
-
-        $formOptions[C::FORM_ATTRIBUTE_LIST] = $adModel->getAttributesByProductId($advert->getProduct()->getId());
         $form = $this->createAdvertDetailsForm($advert, true);
 
         if ($request->isMethod('POST')) {

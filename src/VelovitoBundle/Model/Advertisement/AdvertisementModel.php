@@ -298,17 +298,17 @@ class AdvertisementModel
 
                 /**
                  * @var $advertAttribute AdvertisementAttribute
-                 * @var $attribute ProductAttribute
+                 * @var $productAttribute ProductAttribute
                  */
                 $advertAttribute = $this->advertAttrRepo->findOrCreate([
                     'attribute' => $matches[1],
                     'advertisement'    => $advert->getId(),
                 ]);
 
-                $attribute = $this->em->getReference(C::REPO_PRODUCT_ATTR, $matches[1]);
+                $productAttribute = $this->em->getReference(C::REPO_PRODUCT_ATTR, $matches[1]);
 
                 $advertAttribute->setAdvertisement($advert)
-                    ->setAttribute($attribute)
+                    ->setAttribute($productAttribute)
                     ->setValue($value);
 
                 $this->em->persist($advertAttribute);
