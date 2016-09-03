@@ -148,16 +148,11 @@ class AdvertController extends GeneralController
                 try {
                     $adModel->createNewAdvert($formData, $advertEnt);
                     $this->addFlash(C::FLASH_SUCCESS, 'Изменения сохранены');
-
-                    return $this->redirectToThis(
-                        ['advertId' => $advertId]
-                    );
                 } catch (\Exception $e) {
                     $this->addFlash(C::FLASH_ERROR, $e->getMessage());
                 }
 
-                return $this->redirectToRoute(
-                    C::ROUTE_ADVERT_EDIT_MAIN,
+                return $this->redirectToThis(
                     ['advertId' => $advertId]
                 );
             }
@@ -190,13 +185,13 @@ class AdvertController extends GeneralController
             try {
                 $adModel->createAdvertAttributeMap($advert, $formData);
                 $this->addFlash(C::FLASH_SUCCESS, 'Объявление обновлено!');
-
-                return $this->redirectToRoute(C::ROUTE_MY_ADS);
             } catch (\Exception $e) {
                 $this->addFlash(C::FLASH_ERROR, $e->getMessage());
             }
 
-            return $this->redirectToRoute(C::ROUTE_MY_ADS);
+            return $this->redirectToThis(
+                ['advertId' => $advertId]
+            );
         }
 
         return $this->render(
