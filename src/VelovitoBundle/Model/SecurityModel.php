@@ -107,6 +107,17 @@ class SecurityModel
         return $this->tokenStorage->getToken()->getUser();
     }
 
+    /**
+     * @param $id
+     * @return User
+     */
+    public function getUserById($id)
+    {
+        return $this->em->getRepository(C::REPO_USER)->findOneOrFail([
+            'id' => $id,
+        ]);
+    }
+
     public function getToken()
     {
         return $this->tokenStorage->getToken();

@@ -42,7 +42,7 @@ class SecurityController extends GeneralController
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->get(C::MODEL_SECURITY)->addVkAccountToUser($this->getUser());
 
-            return $this->redirectToRoute(C::ROUTE_PROFILE);
+            return $this->redirectToRoute(C::ROUTE_SETTINGS);
         }
 
         return $this->redirectToRoute(C::ROUTE_VK_AUTH_SUCCESS);

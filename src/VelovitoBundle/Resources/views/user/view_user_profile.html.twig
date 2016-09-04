@@ -1,0 +1,10 @@
+{% extends 'VelovitoBundle::base.html.twig' %}
+{% import '@Velovito/templates/macroses.html.twig' as macro %}
+
+{% block body %}
+    <div class="row">
+        <div class="section-title" style="display: block;">
+            Пользователь {{ user.firstName }}
+        </div>
+    </div>
+{% endblock %}

@@ -91,16 +91,18 @@ catalog:
     path:     /catalog
     defaults: { _controller: VelovitoBundle:Default:index }
 
+settings:
+    path:     /settings
+    defaults: { _controller: VelovitoBundle:User:settings }
 
-profile:
-    path:     /profile
-    defaults: { _controller: VelovitoBundle:User:profile }
+view_user_profile:
+    path:     /users/profile/{id}
+    defaults: { _controller: VelovitoBundle:User:viewUserProfile }
 
 
 my_ads:
     path:     /my-adverts
     defaults: { _controller: VelovitoBundle:User:myAds }
-
 
 favorites:
     path:     /favorite-adverts

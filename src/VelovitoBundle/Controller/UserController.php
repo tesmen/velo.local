@@ -9,7 +9,7 @@ use VelovitoBundle\Form\User\UserProfileForm;
 
 class UserController extends GeneralController
 {
-    public function profileAction(Request $request)
+    public function settingsAction(Request $request)
     {
         $this->denyUnlessAuthenticatedFully();
         $userInfo = $this->get(C::MODEL_VK_API)->getUserInfo();
@@ -23,12 +23,31 @@ class UserController extends GeneralController
         }
 
         return $this->render(
-            'VelovitoBundle:user:profile.html.twig',
+            'VelovitoBundle:user:settings.html.twig',
             [
                 'form'                => $form->createView(),
                 C::PARAM_VK_AUTH_LINK => $this->get(C::MODEL_VK_API)->getAuthLink(),
                 'user'                => $this->getUser(),
                 'vk_info'             => $userInfo,
+            ]
+        );
+    }
+    public function viewUserProfileAction(Request $request, $id)
+    {
+        $this->denyUnlessAuthenticatedFully();
+
+        try {
+            $user = $this->get(C::MODEL_SECURITY)->getUserById($id);
+        } catch (\Exception $e) {
+            $this->addFlash(C::FLASH_ERROR, $e->getMessage());
+            return $this->redirectToRoute(C::ROUTE_HOMEPAGE);
+        }
+
+        return $this->render(
+            'VelovitoBundle:user:view_user_profile.html.twig',
+            [
+                C::PARAM_VK_AUTH_LINK => $this->get(C::MODEL_VK_API)->getAuthLink(),
+                'user'                => $user,
             ]
         );
     }

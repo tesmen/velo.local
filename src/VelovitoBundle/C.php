@@ -47,7 +47,7 @@ class C
     const ROUTE_LOGIN = 'login';
     const ROUTE_LOGOUT = 'logout';
     const ROUTE_MY_ADS = 'my_ads';
-    const ROUTE_PROFILE = 'profile';
+    const ROUTE_SETTINGS = 'settings';
     const ROUTE_FAVORITED_ADS = 'favorites';
     const ROUTE_ADVERT_NEW = 'advert_new';
     const ROUTE_ADVERT_EDIT_MAIN = 'advert_edit_main';
