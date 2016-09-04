@@ -5,7 +5,7 @@ use VelovitoBundle\Entity\AttributeReferenceItem;
 
 class CommonFunction
 {
-    public static function entitiesToFormView($items, $field = 'Name', $appendNotSelected = true)
+    public static function entitiesToFormView($items, $field = 'Name', $appendNotSelected = false)
     {
         $result = [];
         $getter = 'get'.$field;
@@ -20,8 +20,7 @@ class CommonFunction
         ksort($result);
 
         if ($appendNotSelected) {
-            $notSelected['Не указано'] = null;
-            $result = array_merge($notSelected, $result);
+            $result = ['Не указано' => 'null'] + $result;
         }
 
         return $result;
