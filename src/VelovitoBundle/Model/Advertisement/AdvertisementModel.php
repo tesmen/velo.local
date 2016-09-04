@@ -332,6 +332,7 @@ class AdvertisementModel
     public function getAdvertAttributesArray(Advertisement $advertisement)
     {
         $allAttributes = $this->getAttributesByProductId($advertisement->getProduct()->getId());
+        $result = [];
 
         foreach ($allAttributes as $attribute) {
             $result[$attribute->getName()] = 'Не указано';
@@ -363,7 +364,4 @@ class AdvertisementModel
     {
         return $this->referenceItemsRepo->find($itemId);
     }
-
-
-
 }
