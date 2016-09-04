@@ -282,7 +282,6 @@ class AdvertisementModel
      * @param array $data
      * @return bool
      * @throws \Exception
-     * todo check old advert attributes before writing
      */
     public function createAdvertAttributeMap(Advertisement $advert, array $data)
     {
@@ -301,8 +300,8 @@ class AdvertisementModel
                  * @var $productAttribute ProductAttribute
                  */
                 $advertAttribute = $this->advertAttrRepo->findOrCreate([
-                    'attribute' => $matches[1],
-                    'advertisement'    => $advert->getId(),
+                    'attribute'     => $matches[1],
+                    'advertisement' => $advert->getId(),
                 ]);
 
                 $productAttribute = $this->em->getReference(C::REPO_PRODUCT_ATTR, $matches[1]);
@@ -334,9 +333,13 @@ class AdvertisementModel
             $attrName = $advertAttribute->getAttribute()->getName();
 
             if ($advertAttribute->getAttribute()->getType() === ProductAttribute::ATTRIBUTE_TYPE_REFERENCE) {
-                $result[$attrName] = $this->getReferenceItem($advertAttribute->getValue())->getName();
+                $result[$attrName] = is_null($advertAttribute->getValue())
+                    ? 'Не указано'
+                    : $this->getReferenceItem($advertAttribute->getValue())->getName();
             } else {
-                $result[$attrName] = $advertAttribute->getValue();
+                $result[$attrName] = is_null($advertAttribute->getValue())
+                    ? 'Не указано'
+                    : $advertAttribute->getValue();
             }
         }
 

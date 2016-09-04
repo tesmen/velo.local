@@ -76,7 +76,7 @@ class FillAdvertForm extends AbstractType
                         [
                             'label'    => $attribute->getName(),
                             'choices' => CommonFunction::entitiesToFormView($reference->getItems() ?: []),
-                            'required' => true,
+                            'required' => false,
                         ]
                     );
                     break;
