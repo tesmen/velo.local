@@ -69,7 +69,8 @@
                 {{ advert.getViewsCount() |number_format }} &nbsp;
 
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                {{ advert.getUser().getUserName() }} &nbsp;
+                <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
+
                 <a href="{{ url('adverts_search', {id: advert.Product.id }) }}">
                     <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                     {{ advert.Product.Name }}
