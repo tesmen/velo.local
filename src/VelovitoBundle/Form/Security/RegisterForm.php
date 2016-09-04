@@ -21,12 +21,13 @@ class RegisterForm extends AbstractType
             C::FORM_USERNAME,
             TextType::class,
             [
-                'label'    => 'Имя пользователя',
+                'label'    => 'Имя',
                 'required' => true,
                 'attr'     => [
-                    'placeholder'  => 'Имя пользователя',
+                    'placeholder'  => 'Имя',
                     'maxlength'    => C::GLOBAL_USERNAME_LENGTH,
                     'autocomplete' => 'off',
+                    'required' => true,
                 ],
             ]
         );
@@ -41,6 +42,7 @@ class RegisterForm extends AbstractType
                     'placeholder'  => 'Электронная почта',
                     'maxlength'    => C::GLOBAL_EMAIL_LENGTH,
                     'autocomplete' => 'off',
+                    'required' => true,
                 ],
             ]
         );
@@ -55,6 +57,7 @@ class RegisterForm extends AbstractType
                     'placeholder'  => 'Пароль',
                     'maxlength'    => C::GLOBAL_PASSWORD_LENGTH,
                     'autocomplete' => 'off',
+                    'required' => true,
                 ],
             ]
         );
@@ -69,6 +72,7 @@ class RegisterForm extends AbstractType
                     'placeholder'  => 'Подтверждение пароля',
                     'maxlength'    => C::GLOBAL_PASSWORD_LENGTH,
                     'autocomplete' => 'off',
+                    'required' => true,
                 ],
             ]
         );
