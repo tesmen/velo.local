@@ -327,11 +327,15 @@ class AdvertisementModel
     /**
      * @param Advertisement $advertisement
      * @return array
-     * возвращает ассоциаптиыный массив ['attrName' => attrValue]
+     * возвращает ассоциаптиыный массив для страницы просмотра advert ['attrName' => attrValue]
      */
     public function getAdvertAttributesArray(Advertisement $advertisement)
     {
-        $result = [];
+        $allAttributes = $this->getAttributesByProductId($advertisement->getProduct()->getId());
+
+        foreach ($allAttributes as $attribute) {
+            $result[$attribute->getName()] = 'Не указано';
+        }
 
         foreach ($advertisement->getAttributes() as $advertAttribute) {
             $attrName = $advertAttribute->getAttribute()->getName();
