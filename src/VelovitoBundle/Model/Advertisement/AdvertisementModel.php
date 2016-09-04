@@ -324,7 +324,11 @@ class AdvertisementModel
         return true;
     }
 
-
+    /**
+     * @param Advertisement $advertisement
+     * @return array
+     * возвращает ассоциаптиыный массив ['attrName' => attrValue]
+     */
     public function getAdvertAttributesArray(Advertisement $advertisement)
     {
         $result = [];
