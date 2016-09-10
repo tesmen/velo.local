@@ -1,4 +1,4 @@
-{% set basePath = url('homepage') | replace({'app_dev.php/':''})  %}
+{% set basePath = url('homepage') | replace({'app_dev.php/':''}) %}
 
 <!DOCTYPE html>
 <html>
@@ -10,16 +10,13 @@
         {% endif %}
         Velovito
     </title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
-    {% block js %}
-        <script src="{{ asset('js/jquery-2.2.1.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-ui.js') }}"></script>
-        <script src="{{ asset('js/common.js') }}"></script>
-        <script src="{{ asset('js/spinner.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+
+
+    {% block css %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('foundation/css/foundation.css') }}">
     {% endblock %}
 
     <!-- Yandex.Metrika counter -->
@@ -74,6 +71,14 @@
         {% block body %}        {% endblock %}
     </div>
 </div>
-
+{% block js %}
+    <script src="{{ asset('foundation/js/vendor/jquery.js') }}"></script>
+    <script src="{{ asset('foundation/js/vendor/foundation.js') }}"></script>
+    <script src="{{ asset('foundation/js/app.js') }}"></script>
+    {#<script src="{{ asset('js/jquery.validate.min.js') }}"></script>#}
+    {#<script src="{{ asset('js/jquery-ui.js') }}"></script>#}
+    <script src="{{ asset('js/common.js') }}"></script>
+    <script src="{{ asset('js/spinner.js') }}"></script>
+{% endblock %}
 </body>
 </html>
