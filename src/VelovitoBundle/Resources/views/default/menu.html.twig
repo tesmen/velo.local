@@ -1,24 +1,24 @@
 <div class="docs-code-live">
     <ul class="vertical menu dropdown" data-responsive-menu="drilldown medium-dropdown" style="width: 200px;"
         role="menubar" data-dropdown-menu="izn4yw-dropdown-menu" aria-expanded="false" data-is-click="false">
+
         {% for cat_id, cat_content in menu %}
             <li role="menuitem" class="is-dropdown-submenu-parent opens-right" aria-haspopup="true"
                 aria-expanded="false" aria-label="Item 1" data-is-click="false">
+
                 <a href="#" tabindex="0">{{ cat_content.name }}</a>
+
                 {% if cat_content.products is not empty %}
+                    <ul class="vertical menu submenu is-dropdown-submenu first-sub" aria-hidden="true" role="menu">
 
-
-                        <ul class="vertical menu submenu is-dropdown-submenu first-sub" aria-hidden="true"
-                            role="menu">
-                    {% for product_id, product_name in cat_content.products %}
+                        {% for product_id, product_name in cat_content.products %}
                             <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item">
                                 <a href="{{ url('adverts_search', {id: product_id}) }}">
                                     {{ product_name }}
                                 </a>
                             </li>
-                    {% endfor %}
-                        </ul>
-
+                        {% endfor %}
+                    </ul>
                 {% endif %}
             </li>
         {% endfor %}
