@@ -86,10 +86,10 @@
 
 
 {% macro advert(advert, showMenu = false) %}
-    {% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}
+    {#{% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}#}
 
     <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
+        <div class="thumbnail" style="min-height: 400px;">
 
             {% if advert.getPhoto is null %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
