@@ -91,7 +91,7 @@
 
             {% if advert.getPhoto is null %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ 0 | noPhoto(242,200) }}" alt="{{  advert.title }}" width="242" height="200">
+                    <img src="{{ 'no_photo.png' | getUserPhoto(242,200) }}" alt="{{  advert.title }}" width="242" height="200">
                 </a>
             {% else %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
