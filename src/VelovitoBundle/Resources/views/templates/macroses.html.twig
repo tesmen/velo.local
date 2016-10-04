@@ -86,14 +86,12 @@
 
 
 {% macro advert(advert, showMenu = false) %}
-    {#{% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}#}
-
     <div class="col-sm-6 col-md-4">
-        <div class="thumbnail" style="min-height: 400px;">
+        <div class="thumbnail">
 
             {% if advert.getPhoto is null %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ 0|noPhoto(242,200) }}" alt="Image" width="150" height="150">
+                    <img src="{{ 0 | noPhoto(242,200) }}" alt="Image" width="242" height="200">
                 </a>
             {% else %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
@@ -102,8 +100,8 @@
             {% endif %}
 
             <div class="caption">
-                <h3>Thumbnail label</h3>
-                <p>{{ advert.description }}</p>
+                <h3>{{  advert.title }}</h3>
+                <p>{{ advert.description | slice(0, 100) ~ '...' }}</p>
                 <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
             </div>
         </div>
