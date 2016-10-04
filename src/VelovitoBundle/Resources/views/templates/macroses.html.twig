@@ -91,6 +91,10 @@
         <div class="thumbnail">
 
             {% set userPhotoName = advert.getPhoto is empty ? null : advert.getPhoto.getFileName() %}
+            <ol class="breadcrumb">
+                <li><a href="{{ url('adverts_search', {id: advert.Product.id }) }}">{{ advert.Product.category.Name }}</a></li>
+                <li><a href="{{ url('adverts_search', {id: advert.Product.id }) }}">{{ advert.Product.Name }}</a></li>
+            </ol>
 
             <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
                 <img src="{{ userPhotoName | getUserPhoto(242,200) }}" alt="{{ advert.title }}">
@@ -105,6 +109,10 @@
 
                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 {{ advert.getViewsCount() |number_format }} &nbsp;
+
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
+
             </div>
         </div>
     </div>
