@@ -96,7 +96,7 @@
             </a>
 
             <div class="caption">
-                <h3>{{ advert.title }}</h3>
+                <h3>{{ advert.title | slice(0, 20)}}</h3>
                 <p>{{ advert.description | slice(0, 50) ~ '...' }}</p>
                 <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
                                                                                    role="button">Button</a></p>
