@@ -92,7 +92,9 @@
 
             {% set userPhotoName = advert.getPhoto is empty ? null : advert.getPhoto.getFileName() %}
             <ol class="breadcrumb">
-                <li><a href="{{ url('adverts_search', {id: advert.Product.id }) }}">{{ advert.Product.category.Name }}</a></li>
+                <li>
+                    <a href="{{ url('adverts_search', {id: advert.Product.id }) }}">{{ advert.Product.category.Name }}</a>
+                </li>
                 <li><a href="{{ url('adverts_search', {id: advert.Product.id }) }}">{{ advert.Product.Name }}</a></li>
             </ol>
 
@@ -101,17 +103,26 @@
             </a>
 
             <div class="caption">
-                <h3>{{ advert.title | slice(0, 20)}}</h3>
-                <p>{{ advert.description | slice(0, 50) ~ '...' }}</p>
+                <h3>{{ advert.title | slice(0, 20) }}</h3>
+
+                <div>
+                    {{ advert.getPrice() }} {{ advert.getCurrencyName }}
+                    <span class="pull-right">
+                        <span class="glyphicon glyphicon-user " aria-hidden="true"></span>
+                        <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
+                    </span>
+                </div>
+
 
                 <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                 {{ advert.getCreationDate() | days_ago }} &nbsp;
+                <span class="pull-right">
 
                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                {{ advert.getViewsCount() |number_format }} &nbsp;
+                    {{ advert.getViewsCount() |number_format }} &nbsp;
+                </span>
 
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
+                <p>{{ advert.description | slice(0, 50) ~ '...' }}</p>
 
             </div>
         </div>
