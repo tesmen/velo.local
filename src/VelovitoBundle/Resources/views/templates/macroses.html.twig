@@ -21,12 +21,11 @@
     </div>
 {% endmacro %}
 
-{% macro advert(advert, showMenu = false) %}
+{% macro advert_old(advert, showMenu = false) %}
     {% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}
 
     <div class="advert">
         <div class="photo">
-
             {% if advert.getPhoto is null %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
                     <img src="{{ 0|noPhoto(128,128) }}" alt="Image" width="150" height="150">
@@ -35,7 +34,6 @@
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
                     <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(128,128) }}" alt="Image">
                 </a>
-
             {% endif %}
         </div>
 
@@ -81,6 +79,32 @@
                     <a href="{{ url('advert_unpublish', {'advertId': advert.getId()}) }}">Снять с публикации</a>|
                     {#<a href="{{ url('ad_delete', {'advertId': advert.getId()}) }}">Удалить</a>#}
                 {% endif %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro advert(advert, showMenu = false) %}
+    {% set originalsDir = app.request.getSchemeAndHttpHost() ~ '/img/originals/' %}
+
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+
+            {% if advert.getPhoto is null %}
+                <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                    <img src="{{ 0|noPhoto(128,128) }}" alt="Image" width="150" height="150">
+                </a>
+            {% else %}
+                <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                    <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(128,128) }}" alt="Image">
+                </a>
+            {% endif %}
+
+            <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>{{ advert.description }}</p>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
             </div>
         </div>
     </div>
