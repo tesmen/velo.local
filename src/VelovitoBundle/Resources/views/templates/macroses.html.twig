@@ -89,20 +89,17 @@
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
 
-            {% if advert.getPhoto is null %}
-                <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ 'no_photo.png' | getUserPhoto(242,200) }}" alt="{{  advert.title }}" width="242" height="200">
-                </a>
-            {% else %}
-                <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(242,200) }}" alt="{{  advert.title }}"  width="242" height="200">
-                </a>
-            {% endif %}
+            {% set userPhotoName = advert.getPhoto is empty ? null : advert.getPhoto.getFileName() %}
+
+            <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                <img src="{{ userPhotoName | getUserPhoto(242,200) }}" alt="{{ advert.title }}">
+            </a>
 
             <div class="caption">
-                <h3>{{  advert.title }}</h3>
-                <p>{{ advert.description | slice(0, 100) ~ '...' }}</p>
-                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                <h3>{{ advert.title }}</h3>
+                <p>{{ advert.description | slice(0, 50) ~ '...' }}</p>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default"
+                                                                                   role="button">Button</a></p>
             </div>
         </div>
     </div>

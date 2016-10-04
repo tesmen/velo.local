@@ -37,21 +37,18 @@ class GregwarImageExtension extends \Twig_Extension
 
     public function getUserPhoto($fileName, $width, $heigth)
     {
-        $filePath = $this->fileWorker->getUserPhotoDir() . DIRECTORY_SEPARATOR . $fileName;
+        if (empty($fileName)) {
+            $filePath =  $this->getAssetImageFilePath('no_photo.png');
+        } else {
+            $filePath = $this->fileWorker->getUserPhotoDir() . DIRECTORY_SEPARATOR . $fileName;
+        }
 
         return $this->getBasePath() . $this->imageService->scaleResize($filePath, $width, $heigth);
     }
 
-    public function getAssetImage($fileName, $width, $heigth)
+    public function getAssetImageFilePath($fileName)
     {
-        $filePath = $this->fileWorker->getAssetImgDir() . DIRECTORY_SEPARATOR . $fileName;
-
-        return $this->getBasePath() . $this->imageService->scaleResize($filePath, $width, $heigth);
-    }
-
-    public function noPhoto($width, $heigth)
-    {
-        return $this->getAssetImage('no_photo.png', $width, $heigth);
+        return $this->fileWorker->getAssetImgDir() . DIRECTORY_SEPARATOR . $fileName;
     }
 
     public function getBasePath()
