@@ -97,7 +97,7 @@
                 </a>
             {% else %}
                 <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                    <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(128,128) }}" alt="Image">
+                    <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(242,200) }}" alt="Image">
                 </a>
             {% endif %}
 
