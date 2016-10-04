@@ -1,4 +1,4 @@
-{% set basePath = url('homepage') | replace({'app_dev.php/':''}) %}
+{% set basePath = url('homepage') | replace({'app_dev.php/':''})  %}
 
 <!DOCTYPE html>
 <html>
@@ -10,13 +10,19 @@
         {% endif %}
         Velovito
     </title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 
-    {% block css %}
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('foundation/css/foundation.css') }}">
+    {% block js %}
+        <script src="{{ asset('js/jquery-2.2.1.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/common.js') }}"></script>
+        <script src="{{ asset('js/spinner.js') }}"></script>
     {% endblock %}
 
     <!-- Yandex.Metrika counter -->
@@ -62,23 +68,10 @@
     <div class="col-md-12">
         {{ render(controller('VelovitoBundle:Default:header')) }}
     </div>
-
-    <div class="col-md-2">
-        {{ render(controller('VelovitoBundle:Default:menu')) }}
-    </div>
-
-    <div class="col-md-10">
+    <div class="col-md-12">
         {% block body %}        {% endblock %}
     </div>
 </div>
-{% block js %}
-    <script src="{{ asset('foundation/js/vendor/jquery.js') }}"></script>
-    <script src="{{ asset('foundation/js/vendor/foundation.js') }}"></script>
-    <script src="{{ asset('foundation/js/app.js') }}"></script>
-    {#<script src="{{ asset('js/jquery.validate.min.js') }}"></script>#}
-    {#<script src="{{ asset('js/jquery-ui.js') }}"></script>#}
-    <script src="{{ asset('js/common.js') }}"></script>
-    <script src="{{ asset('js/spinner.js') }}"></script>
-{% endblock %}
+
 </body>
 </html>

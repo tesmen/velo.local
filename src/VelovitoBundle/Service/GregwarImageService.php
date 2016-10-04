@@ -26,6 +26,6 @@ class GregwarImageService
     {
         $image = new Image($filePath);
 
-        return $image->scaleResize($width, $height);
+        return $image->scaleResize($width, $height,0xffffff);
     }
 }
