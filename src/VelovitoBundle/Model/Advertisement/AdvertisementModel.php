@@ -331,6 +331,8 @@ class AdvertisementModel
      */
     public function getAdvertAttributesArray(Advertisement $advertisement)
     {
+        $result = [];
+
         $allAttributes = $this->getAttributesByProductId($advertisement->getProduct()->getId());
 
         foreach ($allAttributes as $attribute) {
