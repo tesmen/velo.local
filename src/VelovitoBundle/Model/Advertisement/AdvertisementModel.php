@@ -364,6 +364,11 @@ class AdvertisementModel
         return $this->referenceItemsRepo->find($itemId);
     }
 
-
+    public function getCategoriesList()
+    {
+        return $this->categoriesRepo->findBy([
+            'active' => true,
+        ]);
+    }
 
 }

@@ -35,6 +35,7 @@ class DefaultController extends GeneralController
             [
                 C::PAGE_TITLE => $title,
                 'menu'        => $this->get(C::MODEL_DEFAULT)->getMenu(),
+                'categories'  => $this->get('model.advertisement')->getCategoriesList(),
             ]
         );
     }
