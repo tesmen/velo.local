@@ -5,10 +5,46 @@ use VelovitoBundle\Entity\AttributeReferenceItem;
 
 class CommonFunction
 {
+    public static function cutLineWords($line, $requiredLength)
+    {
+        $line = trim($line);
+        $textLength = $requiredLength - 3;
+        $dots = '...';
+
+        if (strlen($line) <= $requiredLength) {
+            return $line;
+        }
+
+        $rawCut = substr($line, 0, $textLength);
+
+        if ($rawCut[$textLength - 1] !== ' ') {
+            $lastSpacePos = self::getLastSymbolPosition($rawCut, ' ');
+
+            if (false === $lastSpacePos) {
+                return $rawCut . $dots;
+            }
+
+            return trim(substr($rawCut, 0, $lastSpacePos )) . $dots;
+        }
+
+        return trim($rawCut) . $dots;
+    }
+
+    public static function getLastSymbolPosition($line, $symbol)
+    {
+        $symPos = strpos(strrev($line), $symbol);
+
+        if (false === $symPos) {
+            return false;
+        }
+
+        return strlen($line) - $symPos;
+    }
+
     public static function entitiesToFormView($items, $field = 'Name', $appendNotSelected = false)
     {
         $result = [];
-        $getter = 'get'.$field;
+        $getter = 'get' . $field;
 
         foreach ($items as $item) {
             /**
@@ -149,7 +185,7 @@ class CommonFunction
 
     public static function checkDomainName($domain)
     {
-        if (!(filter_var('test@'.$domain, FILTER_VALIDATE_EMAIL))) {
+        if (!(filter_var('test@' . $domain, FILTER_VALIDATE_EMAIL))) {
             throw new \Exception('err_domain_not_valid');
         };
 
@@ -182,22 +218,22 @@ class CommonFunction
 
     public static function testDomainNameIntl($domain)
     {
-        return filter_var('test@'.$domain, FILTER_VALIDATE_EMAIL);
+        return filter_var('test@' . $domain, FILTER_VALIDATE_EMAIL);
     }
 
     public static function nplural($digit, $e1, $e2, $e3, $returnNumber = false)
     {
-        $txt = $returnNumber ? (String)$digit.' ' : '';
+        $txt = $returnNumber ? (String)$digit . ' ' : '';
         $digit = ($digit > 20) ? $digit % 10 : $digit;
 
         if ($digit >= 5 || $digit == 0) {
-            return $txt.$e3;
+            return $txt . $e3;
         }
         if ($digit >= 2) {
-            return $txt.$e2;
+            return $txt . $e2;
         }
 
-        return $txt.$e1;
+        return $txt . $e1;
     }
 
     public static function getFileExtension($fileName)
