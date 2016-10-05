@@ -12,7 +12,7 @@
             <h4>{{ advert.getTitle() }}</h4>
 
             {% if advert.getPhoto is null %}
-                <img src="{{ 0 | noPhoto(400,400) }}" class="gray-border" title="{{ advert.getTitle() }}">
+                <img src="{{ null | getUserPhoto(400,400) }}" class="gray-border" title="{{ advert.getTitle() }}">
             {% else %}
                 <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(400,400) }}" class="gray-border"
                      title="{{ advert.getTitle() }}">
