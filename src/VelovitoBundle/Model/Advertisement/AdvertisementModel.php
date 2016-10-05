@@ -103,7 +103,7 @@ class AdvertisementModel
                 ->setCurrency($formData[C::FORM_CURRENCY])
                 ->setProduct($product)
                 ->setProductCategory($category)
-                ->setTitle($formData[C::FORM_TITLE]);
+                ->setTitle(ucfirst(strtolower($formData[C::FORM_TITLE])));
 
             if (!empty($formData[C::FORM_PHOTO])) {
                 $photoFileName = $this->fileWorker->saveUserUploadedPhoto($formData[C::FORM_PHOTO]);
