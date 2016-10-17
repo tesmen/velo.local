@@ -2,10 +2,10 @@
 {% import '@Velovito/templates/macroses.html.twig' as macro %}
 
 {% block body %}
-    <div>
-        <a href="{{ url('view_category',{id: advert.ProductCategory.id}) }}">{{ advert.ProductCategory.Name }}</a> ->
-        <a href="{{ url('adverts_search',{id: advert.Product.id }) }}">{{ advert.Product.Name }}</a>
-    </div>
+    <ol class="breadcrumb">
+        <li><a href="{{ url('view_category',{id: advert.ProductCategory.id}) }}">{{ advert.ProductCategory.Name }}</a></li>
+        <li><a href="{{ url('adverts_search',{id: advert.Product.id }) }}">{{ advert.Product.Name }}</a></li>
+    </ol>
 
     <div class="row">
         <div class="col-md-6">

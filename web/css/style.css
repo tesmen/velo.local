@@ -6937,3 +6937,18 @@ a:hover {
 .sidebar-navigation div.category div.itemlist .category-item:hover {
   background: #eeeeee;
 }
+
+.spacer-50{
+  display: block;
+  min-height: 50px;
+}
+
+.spacer-100 {
+  display: block;
+  min-height: 100px;
+}
+
+.spacer-200 {
+  display: block;
+  min-height: 200px;
+}
