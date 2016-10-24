@@ -5,12 +5,27 @@
 <body>
 
 <div class="container">
-    <div class="col-md-12">
+    <div class="row">
         {{ render(controller('VelovitoBundle:Default:header')) }}
     </div>
-    <div class="col-md-12">
-        {% block body %}
-        {% endblock %}
+
+    <div class="row">
+        <div class="spacer-25 col-xs-12"></div>
+    </div>
+
+    <div class="row">
+        {{ render(controller('VelovitoBundle:Default:breadcrumbs')) }}
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 hidden-md">
+            {{ render(controller('VelovitoBundle:Default:leftBlock')) }}
+        </div>
+
+        <div class="col-xs-9">
+            {% block body %}
+            {% endblock %}
+        </div>
     </div>
 </div>
 

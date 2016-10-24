@@ -1,73 +1,130 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url('homepage') }}">VeloVito</a>
+<div class="services col-md-12">
+    <a class="item">Объявления</a>
+    <a class="item">Город</a>
+    <a class="item">Помощь</a>
+    <a class="item pull-right">Личный кабинет</a>
+</div>
+
+<div class="spacer-25 col-xs-12"></div>
+
+<div class="col-xs-3 dropdown hidden-xs">
+    <button type="button" class="col-xs-12 btn btn-default btn-md catalog-menu-button" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-th-list"></span>
+        <span class="">Catalog</span>
+    </button>
+
+
+    <div class="list-group dropdown-menu unbound-list-group catalog-menu">
+        <a href="#" class="list-group-item unclickable-dropdown-item"
+           data-label-for="menu1">Unclickable-dropdown-item</a>
+        <a href="#" class="list-group-item unclickable-dropdown-item" data-label-for="menu2">Unclickable-dropdown-item
+            2 </a>
+        <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+        <a href="#" class="list-group-item">Morbi leo risus</a>
+        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+        <a href="#" class="list-group-item">Vestibulum at eros</a>
+
+        <div class="list-group catalog-submenu unbound-list-group display-none" id="menu1">
+            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    {% if app.user %}
-                        <a href="{{ url('settings') }}">
-                            {{ app.user.getUserName() }}
-                        </a>
-                    {% endif %}
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Каталог <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        {% for category in categories %}
-                        <li><a href="{{ url('view_category', {'id': category.id}) }}">{{ category.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="{{ url('advert_new') }}">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        Добавить объявление
-                    </a>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">
-                        Личный кабинет <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu">
-                        {% if app.user %}
-                            {#<li><a href="#">{{ app.user.getUserName() }} (это вы)</a></li>#}
-                        {% else %}
-                            <li><a href="{{ url('login') }}">Войти</a></li>
-                            <li><a href="{{ url('registration') }}">Регистрация</a></li>
-                            <li role="separator" class="divider"></li>
-                        {% endif %}
-
-                        <li><a href="{{ url('my_ads') }}">Мои объявления</a></li>
-                        <li><a href="{{ url('settings') }}">Мой профиль</a></li>
-                        <li><a href="{{ url('favorites') }}">Закладки</a></li>
-
-                        {% if app.user %}
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{{ url('logout') }}">Выход</a></li>
-                        {% endif %}
-
-                    </ul>
-                </li>
-            </ul>
+        <div class="list-group catalog-submenu unbound-list-group display-none" id="menu2">
+            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item">Morbi leo risus</a>
+            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a>
         </div>
     </div>
-</nav>
+</div>
+
+<div class="col-lg-6">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+
+        <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Поиск!</button>
+                </span>
+    </div>
+</div>
+
+<div class="col-lg-3">
+    <button type="button" class="col-xs-12 btn btn-default btn-md">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span class="">Добавить объявление</span>
+    </button>
+</div>
+
+{#<nav class="navbar navbar-default">#}
+    {#<div class="container-fluid">#}
+    {#<!-- Brand and toggle get grouped for better mobile display -->#}
+    {#<div class="navbar-header">#}
+    {#<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"#}
+    {#data-target="#bs-example-navbar-collapse-1" aria-expanded="false">#}
+    {#<span class="sr-only">Toggle navigation</span>#}
+    {#<span class="icon-bar"></span>#}
+    {#<span class="icon-bar"></span>#}
+    {#<span class="icon-bar"></span>#}
+    {#</button>#}
+    {#<a class="navbar-brand" href="{{ url('homepage') }}">VeloVito</a>#}
+    {#</div>#}
+
+    {#<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+    {#<ul class="nav navbar-nav">#}
+    {#<li class="active">#}
+    {#{% if app.user %}#}
+    {#<a href="{{ url('settings') }}">#}
+    {#{{ app.user.getUserName() }}#}
+    {#</a>#}
+    {#{% endif %}#}
+    {#</li>#}
+
+    {#<li class="dropdown">#}
+    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"#}
+    {#aria-expanded="false">Каталог <span class="caret"></span></a>#}
+    {#<ul class="dropdown-menu">#}
+    {#{% for category in categories %}#}
+    {#<li><a href="{{ url('view_category', {'id': category.id}) }}">{{ category.name }}</a></li>#}
+    {#{% endfor %}#}
+    {#</ul>#}
+    {#</li>#}
+    {#</ul>#}
+
+    {#<ul class="nav navbar-nav navbar-right">#}
+    {#<li>#}
+    {#<a href="{{ url('advert_new') }}">#}
+    {#<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>#}
+    {#Добавить объявление#}
+    {#</a>#}
+    {#</li>#}
+
+    {#<li class="dropdown">#}
+    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"#}
+    {#aria-expanded="false">#}
+    {#Личный кабинет <span class="caret"></span>#}
+    {#</a>#}
+
+    {#<ul class="dropdown-menu">#}
+    {#{% if app.user %}#}
+    {#<li><a href="#">{{ app.user.getUserName() }} (это вы)</a></li>#}
+    {#{% else %}#}
+    {#<li><a href="{{ url('login') }}">Войти</a></li>#}
+    {#<li><a href="{{ url('registration') }}">Регистрация</a></li>#}
+    {#<li role="separator" class="divider"></li>#}
+    {#{% endif %}#}
+
+    {#<li><a href="{{ url('my_ads') }}">Мои объявления</a></li>#}
+    {#<li><a href="{{ url('settings') }}">Мой профиль</a></li>#}
+    {#<li><a href="{{ url('favorites') }}">Закладки</a></li>#}
+
+    {#{% if app.user %}#}
+    {#<li role="separator" class="divider"></li>#}
+    {#<li><a href="{{ url('logout') }}">Выход</a></li>#}
+    {#{% endif %}#}
+
+    {#</ul>#}
+    {#</li>#}
+    {#</ul>#}
+    {#</div>#}
+    {#</div>#}
+{#</nav>#}

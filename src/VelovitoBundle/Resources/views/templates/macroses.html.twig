@@ -86,7 +86,7 @@
 {% endmacro %}
 
 
-{% macro advert(advert, showMenu = false) %}
+{% macro advert_old(advert, showMenu = false) %}
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
 
@@ -129,26 +129,32 @@
     </div>
 {% endmacro %}
 
+{% macro advert(advert, showMenu = false) %}
+    {% set userPhotoName = advert.getPhoto is empty ? null : advert.getPhoto.getFileName() %}
 
-{% macro renderArray(array, route) %}
-    {% if array is not empty %}
-        {% set firstItem = array | first %}
-    {% endif %}
+    <div class="row advert-list-item">
+        <div class="col-md-2 col-xs-4" href="#">
+            <img src="{{ userPhotoName | getUserPhoto(150,150) }}" alt="{{ advert.title }}" class="img-thumbnail advert-photo">
 
-    <table width="100%">
-        <tr>
-            {% for key, value in firstItem %}
-                <th>{{ key }} {{ value }}</th>
-            {% endfor %}
-        </tr>
+        </div>
 
-        {% for item in array %}
-            {% set url = url(route, {'id': item.id}) %}
-            <tr>
-                {% for key, value in item %}
-                    <td><a href="{{ url }}">{{ value }}</a></td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+        <div class="col-md-7 col-xs-4 v-advert-info">
+            <div class="clip">
+                <a class="title" href="#">Dapibus ac facilisis in</a>
+            </div>
+
+            <div class="clip">
+                <span class="description text-gray" href="#">Dapibus ac facilisis in Vestibulum at erosDapibus ac facilisis in Vestibulum at erosDapibus ac facilisis in Vestibulum at eros</span>
+            </div>
+
+            <div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 col-xs-4 v-advert-info">
+            <span class="price one-half-rem">13 990 руб.</span>
+        </div>
+    </div>
 {% endmacro %}

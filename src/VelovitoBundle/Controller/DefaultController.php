@@ -40,6 +40,30 @@ class DefaultController extends GeneralController
         );
     }
 
+    public function breadcrumbsAction(Request $request, $title = null)
+    {
+        return $this->render(
+            'VelovitoBundle:default:breadcrumbs.html.twig',
+            [
+                C::PAGE_TITLE => $title,
+                'menu'        => $this->get(C::MODEL_DEFAULT)->getMenu(),
+                'categories'  => $this->get('model.advertisement')->getCategoriesList(),
+            ]
+        );
+    }
+
+    public function leftBlockAction(Request $request, $title = null)
+    {
+        return $this->render(
+            'VelovitoBundle:default:left_block.html.twig',
+            [
+                C::PAGE_TITLE => $title,
+                'menu'        => $this->get(C::MODEL_DEFAULT)->getMenu(),
+                'categories'  => $this->get('model.advertisement')->getCategoriesList(),
+            ]
+        );
+    }
+
     public function indexAction(Request $request)
     {
         return $this->render(
