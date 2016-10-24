@@ -4,6 +4,11 @@ login_check:
 logout:
     path: /logout
 
+test:
+    path: /test
+    defaults:
+        _controller: VelovitoBundle:Test:test
+
 #routes for real pages
 login:
     path: /login
