@@ -244,16 +244,12 @@ class AdvertController extends GeneralController
 
     public function searchAdvertAction(Request $request)
     {
-        $id = (int)$request->get('id');
-
-        if (empty($id)) {
-            return $this->redirectToRoute('homepage');
-        }
+        $search = $request->get('search');
 
         return $this->render(
-            'VelovitoBundle:default:index.html.twig',
+            'VelovitoBundle:advert:search.html.twig',
             [
-                'ads' => $this->getModel()->getLastAdvertsOfProduct($id),
+                'ads' => $this->getModel()->searchAdverts($search),
             ]
         );
     }

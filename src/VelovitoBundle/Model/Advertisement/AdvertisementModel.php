@@ -190,22 +190,19 @@ class AdvertisementModel
     }
 
     /**
-     * @param $params
+     * @param string $searchText
      * @return array|\VelovitoBundle\Entity\Advertisement[]
      * @throws \Doctrine\ORM\ORMException
-     * TODO unfinished
      */
-    public function searchAdverts($params)
+    public function searchAdverts($searchText)
     {
-        $category = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $id);
+        $result = $this->advertRepo->createQueryBuilder('o')
+            ->andWhere('o.title LIKE :title')
+            ->setParameter('title', '%' . $searchText . '%')
+            ->getQuery()
+            ->getResult();
 
-        return $this->advertRepo->findBy(
-            [
-                'productCategory' => $category,
-                'isPublished'     => true,
-            ],
-            ['creationDate' => 'DESC']
-        );
+        return $result;
     }
 
 
