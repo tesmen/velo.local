@@ -7,21 +7,21 @@ body {
     min-height: 500px;
 }
 
-.spacer-10 {
+.spacer-10px {
     display: block;
     min-height: 10px;
     height: 10px;
     content: close-quote;
 }
 
-.spacer-25 {
+.spacer-25px {
     display: block;
     min-height: 25px;
     height: 25px;
     content: close-quote;
 }
 
-.spacer-50 {
+.spacer-50px {
     display: block;
     min-height: 50px;
     height: 50px;
