@@ -17,15 +17,13 @@ class SocialModel
     public function getTenNews()
     {
         $result = [];
-        $users = $this->em->getRepository(C::REPO_USER)->getLastUsers();
+        $users = $this->em->getRepository(C::REPO_USER)->getLastUsers(5);
 
         foreach ($users as $user) {
-            $userName = (bool)$user->getFirstName() ? $user->getFirstName() : $user->getUsername();
-
             $result[] = (new NewsRecord())
                 ->setCreated($user->getRegisteredDate())
                 ->setSubject('Новый пользователь')
-                ->setText('Теперь с нами ' . $userName)
+                ->setText('Теперь с нами ' . $user->getUsername())
                 ->setPicture('plus1.png');
         }
 

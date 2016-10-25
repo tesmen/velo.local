@@ -30,13 +30,6 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=32, nullable=true)
-     */
-    private $firstName;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="phone_name", type="string", length=32, nullable=true)
      */
     private $phone;
@@ -44,10 +37,9 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=32, unique=true, nullable=true)
+     * @ORM\Column(name="email", type="string", length=64, unique=true, nullable=true)
      */
     private $email;
-
 
     /**
      * @var string
@@ -100,7 +92,7 @@ class User implements UserInterface, \Serializable
     private $registeredDate;
 
     /**
-     * @var \DateTime
+     * @var int
      *
      * @ORM\Column(name="vk_account_id", type="integer", nullable=true, unique=true)
      */
@@ -218,18 +210,6 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
     public function getPhone()
     {
         return $this->phone;
@@ -268,8 +248,6 @@ class User implements UserInterface, \Serializable
         } else {
             $this->registeredDate = $registeredDate;
         }
-
-
 
         return $this;
     }
