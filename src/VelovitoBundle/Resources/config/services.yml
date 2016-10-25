@@ -7,6 +7,10 @@ services:
         class: VelovitoBundle\Model\Maintenance\MaintenanceModel
         arguments: ["@doctrine.orm.entity_manager"]
 
+    model.social:
+        class: VelovitoBundle\Model\Social\SocialModel
+        arguments: ["@doctrine.orm.entity_manager", "@session"]
+
     model.default:
         class: VelovitoBundle\Model\DefaultModel
         arguments: ["@doctrine.orm.entity_manager", "@kernel", "@session"]

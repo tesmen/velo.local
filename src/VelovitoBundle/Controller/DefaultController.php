@@ -56,9 +56,7 @@ class DefaultController extends GeneralController
         return $this->render(
             'VelovitoBundle:default:left_block.html.twig',
             [
-                C::PAGE_TITLE => $title,
-                'menu'        => $this->get(C::MODEL_DEFAULT)->getMenu(),
-                'categories'  => $this->get('model.advertisement')->getCategoriesList(),
+                'news'  => $this->get('model.social')->getTenNews(),
             ]
         );
     }
