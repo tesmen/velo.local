@@ -190,6 +190,12 @@ body {
     border: 0;
 }
 
+.island ul{
+    margin-left: 0;
+    -webkit-padding-start: 10px;
+    -moz-padding-start: 10px;
+}
+
 .island-default {
     background-color: #f7f7f9;
     border: 1px solid #e1e1e8;

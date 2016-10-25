@@ -30,7 +30,7 @@ security:
                 default_target_path: homepage
             logout:
                 path: logout
-                target: login
+                target: homepage
 
     access_control:
         - { path: ^/user, roles: [ROLE_USER] }
