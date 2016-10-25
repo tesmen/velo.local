@@ -12,14 +12,22 @@
     </li>
 
     <li class="item dropdown pull-right ">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Личный кабинет <span class="caret"></span>
-        </a>
+
+        {% if app.user %}
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user " aria-hidden="true"></span>
+                Личный кабинет ({{ app.user.getUserName() }})
+            </a>
+        {% else %}
+            <a href="{{ url('login') }}">
+            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+            Вход и регистрация
+            </a>
+        {% endif %}
+
 
         <ul class="dropdown-menu">
-            {% if app.user %}
-                <li><a href="#">{{ app.user.getUserName() }} (это вы)</a></li>
-            {% else %}
+            {% if not app.user %}
                 <li><a href="{{ url('login') }}">Войти</a></li>
                 <li><a href="{{ url('registration') }}">Регистрация</a></li>
                 <li role="separator" class="divider"></li>
@@ -40,7 +48,7 @@
 
 <div class="col-xs-3 dropdown hidden-xs">
     <button type="button" class="col-xs-12 btn btn-default btn-md catalog-menu-button" data-toggle="dropdown">
-        <span class="glyphicon glyphicon-th-list"></span>
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
         <span class="">Каталог</span>
     </button>
 
@@ -52,10 +60,12 @@
 
             {% if category.products is not empty %}
                 <div class="list-group catalog-submenu unbound-list-group display-none" id="menu_{{ category.id }}">
-                    <a href="{{ url('view_category', {'id': category.id}) }}" class="list-group-item">Перейти в раздел {{ category.name }}</a>
+                    <a href="{{ url('view_category', {'id': category.id}) }}" class="list-group-item">Перейти в
+                        раздел {{ category.name }}</a>
 
                     {% for product in category.products %}
-                        <a href="{{ url('view_category', {'id': category.id}) }}" class="list-group-item">{{ product.name }}</a>
+                        <a href="{{ url('view_category', {'id': category.id}) }}"
+                           class="list-group-item">{{ product.name }}</a>
                     {% endfor %}
                 </div>
             {% endif %}
