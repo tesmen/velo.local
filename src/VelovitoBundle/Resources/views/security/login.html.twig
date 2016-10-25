@@ -1,34 +1,43 @@
 {% extends "VelovitoBundle::layout_blank.html.twig" %}
+
 {% block body %}
     {% include 'VelovitoBundle:templates:alert.html.twig' %}
 
-    <div class="col-md-6 center-block">
-        <h3>ВХОД В ЛИЧНЫЙ КАБИНЕТ</h3>
+    <div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
+        <div class="text-center">
+            <h3>АВТОРИЗАЦИЯ</h3>
+        </div>
+
         <form action="{{ url('login_check') }}" method="POST">
+            <div class="island island-default">
+                <div class="form-group">
+                    <label for="username">E-mail</label>
+                    <input type="text" class="form-control" id="username"
+                           name="_username" value="{{ last_username }}"
+                           placeholder="Адрес электронной почты" required style="margin-bottom: 10px"/>
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control" id="password"
+                           name="_password" placeholder="Пароль" required style="margin-bottom: 10px"/>
 
-            <div class="form-group">
-                <label for="username">E-mail</label>
-                <input type="text" class="form-control" id="username"
-                       name="_username" value="{{ last_username }}"
-                       placeholder="Адрес электронной почты" required style="margin-bottom: 10px"/>
-                <label for="password">Пароль</label>
-                <input type="password" class="form-control" id="password"
-                       name="_password" placeholder="пароль" required style="margin-bottom: 10px"/>
+                    <a href="{{ url('registration') }}" class="pull-right">Забыли пароль?</a>
+                    <button type="submit" class="btn btn-primary form-control">Войти</button>
 
-                {% if error %}
-                    <div class="bg-danger" style="margin-bottom: 10px">Неверное имя пользователя или пароль</div>
-                {% endif %}
+                    <hr>
 
-                <input type="submit" class="btn-primary form-control" name="login" value="Войти"/><br>
-                <a href="{{ url('registration') }}" class="btn-primary form-control">
-                    <center>Регистрация</center>
-                </a>
-                <a href="{{ vk_auth_link }}">Вход через VK </a>
+                    <a href="{{ vk_auth_link }}" class="btn btn-primary form-control">Вход через VK </a>
 
+                    <hr>
+
+                    <div style="text-align: center">
+                        <label>
+                            Ещё не зарегистрированы?
+
+                            <a href="{{ url('registration') }}">Регистрация</a>
+                        </label>
+                    </div>
+                </div>
             </div>
+
         </form>
     </div>
-    {#<div class="col-md-6">#}
-{##}
-    {#</div>#}
 {% endblock %}
