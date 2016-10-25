@@ -58,7 +58,7 @@ class ProductCategory
      *
      * @param string $name
      *
-     * @return Product
+     * @return ProductCategory
      */
     public function setName($name)
     {

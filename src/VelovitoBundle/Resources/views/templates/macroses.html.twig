@@ -133,28 +133,42 @@
     {% set userPhotoName = advert.getPhoto is empty ? null : advert.getPhoto.getFileName() %}
 
     <div class="row advert-list-item">
-        <div class="col-md-2 col-xs-4" href="#">
-            <img src="{{ userPhotoName | getUserPhoto(150,150) }}" alt="{{ advert.title }}" class="img-thumbnail advert-photo">
-
+        <div class="col-md-2 col-xs-4">
+            <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                <img src="{{ userPhotoName | getUserPhoto(150,150) }}" alt="{{ advert.title }}"
+                     class="img-thumbnail advert-photo">
+            </a>
         </div>
 
         <div class="col-md-7 col-xs-4 v-advert-info">
             <div class="clip">
-                <a class="title" href="#">Dapibus ac facilisis in</a>
+                <a class="title" href="#">{{ advert.title }}</a>
             </div>
 
             <div class="clip">
-                <span class="description text-gray" href="#">Dapibus ac facilisis in Vestibulum at erosDapibus ac facilisis in Vestibulum at erosDapibus ac facilisis in Vestibulum at eros</span>
+                <span class="description text-gray" href="#">{{ advert.description ?: 'Описания нет...' }}</span>
             </div>
 
             <div>
+                <span>Размещено: </span>
+                {#<span class="glyphicon glyphicon-time" aria-hidden="true"></span>#}
+                {{ advert.getCreationDate() | days_ago }} &nbsp;
 
             </div>
-
         </div>
 
         <div class="col-md-3 col-xs-4 v-advert-info">
-            <span class="price one-half-rem">13 990 руб.</span>
+            <span class="price one-half-rem"> {{ advert.getPrice() }} {{ advert.getCurrencyName }}</span>
+            <br>
+
+            <span class="glyphicon glyphicon-eye-open"></span>
+            {{ advert.getViewsCount() | number_format }} &nbsp;
+            <br>
+
+            <span class="glyphicon glyphicon-user " aria-hidden="true"></span>
+            <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
+
         </div>
     </div>
 {% endmacro %}
+

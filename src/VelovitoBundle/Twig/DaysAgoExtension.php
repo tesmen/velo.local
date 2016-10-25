@@ -13,6 +13,7 @@ class DaysAgoExtension extends \Twig_Extension
 
     public function paramsFilter($inputDate)
     {
+        // todo there is smth wrong with $thatDay
         $thatDay = new \DateTime($inputDate->format('Y-m-j'));
         $days = date_diff($thatDay, new \DateTime('now'))->format('%a');
 
@@ -26,10 +27,10 @@ class DaysAgoExtension extends \Twig_Extension
 
                 break;
             default:
-                $word = date_format($inputDate, 'Y-m-d');
+                $word = date_format($inputDate, 'd / m / Y');
         }
 
-        $date = $word.' в '.date_format($inputDate, 'H:i');
+        $date = $word . date_format($inputDate, ' в H:i');
 
         return $date;
     }
