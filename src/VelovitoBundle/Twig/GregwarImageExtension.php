@@ -32,7 +32,7 @@ class GregwarImageExtension extends \Twig_Extension
 
     public function resize($imageName, $width, $heigth)
     {
-        return $this->imageService->scaleResize($imageName, $width, $heigth);
+        return $this->imageService->zoomCrop($imageName, $width, $heigth);
     }
 
     public function getUserPhoto($fileName, $width, $heigth)
@@ -41,6 +41,17 @@ class GregwarImageExtension extends \Twig_Extension
             $filePath =  $this->getAssetImageFilePath('no_photo.png');
         } else {
             $filePath = $this->fileWorker->getUserPhotoDir() . DIRECTORY_SEPARATOR . $fileName;
+        }
+
+        return $this->getBasePath() . $this->imageService->zoomCrop($filePath, $width, $heigth);
+    }
+
+    public function getAssetImage($fileName, $width, $heigth)
+    {
+        if (empty($fileName)) {
+            $filePath =  $this->getAssetImageFilePath('no_photo.png');
+        } else {
+            $filePath = $this->fileWorker->getAssetImgDir() . DIRECTORY_SEPARATOR . $fileName;
         }
 
         return $this->getBasePath() . $this->imageService->scaleResize($filePath, $width, $heigth);

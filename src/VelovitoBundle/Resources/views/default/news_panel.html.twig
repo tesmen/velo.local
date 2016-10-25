@@ -1,0 +1,17 @@
+<h4 class="media-heading">Новости</h4>
+
+{% for record in news %}
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object" src="{{ record.picture | getAssetImage(64,64) }}" alt="..." width="64">
+            </a>
+        </div>
+
+        <div class="media-body">
+            <h4 class="media-heading clickable-link">{{ record.subject }}</h4>
+            {{ record.text }}
+        </div>
+    </div>
+
+{% endfor %}

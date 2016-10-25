@@ -54,7 +54,7 @@ class DefaultController extends GeneralController
     public function newsPanelAction(Request $request, $title = null)
     {
         return $this->render(
-            'VelovitoBundle:default:left_block.html.twig',
+            'VelovitoBundle:default:news_panel.html.twig',
             [
                 'news'  => $this->get('model.social')->getTenNews(),
             ]

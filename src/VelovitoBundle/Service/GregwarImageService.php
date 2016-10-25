@@ -22,10 +22,24 @@ class GregwarImageService
      * @param $height
      * @return mixed
      */
-    public function scaleResize($filePath, $width, $height)
+    public function zoomCrop($filePath, $width, $height)
     {
         $image = new Image($filePath);
 
         return $image->zoomCrop($width, $height,0xffffff);
+    }
+
+
+    /**
+     * @param $filePath /home/user/var/www/site/upload/img.png
+     * @param $width
+     * @param $height
+     * @return mixed
+     */
+    public function scaleResize($filePath, $width, $height)
+    {
+        $image = new Image($filePath);
+
+        return $image->scaleResize($width, $height,0xffffff);
     }
 }

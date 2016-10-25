@@ -4,6 +4,7 @@ namespace VelovitoBundle\Model\Social;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Session\Session;
+use VelovitoBundle\C;
 
 class SocialModel
 {
@@ -15,10 +16,19 @@ class SocialModel
 
     public function getTenNews()
     {
-        $qb = $this->em->getRepository('VelovitoBundle:User')->createQueryBuilder('user');
+        $result = [];
+        $users = $this->em->getRepository(C::REPO_USER)->getLastUsers();
 
-        $qb->addOrderBy('user.registeredDate', 'ASC');
-        var_dump($qb->getQuery()->getArrayResult());die;
-        return $qb->getQuery()->getArrayResult();
+        foreach ($users as $user) {
+            $userName = (bool)$user->getFirstName() ? $user->getFirstName() : $user->getUsername();
+
+            $result[] = (new NewsRecord())
+                ->setCreated($user->getRegisteredDate())
+                ->setSubject('Новый пользователь')
+                ->setText('Теперь с нами ' . $userName)
+                ->setPicture('plus1.png');
+        }
+
+        return $result;
     }
 }

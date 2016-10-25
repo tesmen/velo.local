@@ -48,4 +48,18 @@ class UserRepository extends GeneralRepository
             ->setParameter('name', C::SYSTEM_USER)
             ->getQuery()->getResult();
     }
+
+    /**
+     * @param int $count
+     * @param string $order
+     * @return User[]
+     */
+    public function getLastUsers($count = 10, $order = 'DESC')
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->addOrderBy('u.registeredDate', $order);
+        $qb->setMaxResults($count);
+
+        return $qb->getQuery()->getResult();
+    }
 }
