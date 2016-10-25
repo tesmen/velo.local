@@ -14,8 +14,10 @@
 
             {% if category.products is not empty %}
                 <div class="list-group catalog-submenu unbound-list-group display-none" id="menu_{{ category.id }}">
-                    <a href="{{ url('view_category', {'id': category.id}) }}" class="list-group-item">Перейти в
-                        раздел {{ category.name }}</a>
+                    <a href="{{ url('view_category', {'id': category.id}) }}" class="list-group-item">
+                        <span class="glyphicon glyphicon-folder-close pull-right"></span>
+                        Перейти в раздел {{ category.name }}
+                    </a>
 
                     {% for product in category.products %}
                         <a href="{{ url('view_category', {'id': category.id}) }}"
