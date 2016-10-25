@@ -23,7 +23,7 @@ class SocialModel
             $result[] = (new NewsRecord())
                 ->setCreated($user->getRegisteredDate())
                 ->setSubject('Новый пользователь')
-                ->setText('Теперь с нами ' . $user->getUsername())
+                ->setText('Теперь с нами <b>' . $user->getUsername() .'</b>')
                 ->setPicture('plus1.png');
         }
 

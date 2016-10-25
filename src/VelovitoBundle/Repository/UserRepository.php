@@ -15,10 +15,10 @@ class UserRepository extends GeneralRepository
 
         try {
             $user = new User();
+
             $user->setUsername($params['username'])
                 ->setRoles($params['role'])
                 ->setEmail($params['email'])
-                ->setFirstName(isset($params['first_name']) ? $params['first_name'] : null)
                 ->setPhone(isset($params['phone']) ? $params['phone'] : null)
                 ->setRegisteredDate()
                 ->setStatus(C::STATUS_USER_ACTIVE);
