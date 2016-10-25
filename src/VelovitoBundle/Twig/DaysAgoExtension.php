@@ -27,7 +27,7 @@ class DaysAgoExtension extends \Twig_Extension
 
                 break;
             default:
-                $word = date_format($inputDate, 'd / m / Y');
+                $word = date_format($inputDate, 'd/m/y');
         }
 
         $date = $word . date_format($inputDate, ' в H:i');
