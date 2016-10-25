@@ -51,7 +51,19 @@ class DefaultController extends GeneralController
         );
     }
 
-    public function leftBlockAction(Request $request, $title = null)
+    public function newsPanelAction(Request $request, $title = null)
+    {
+        return $this->render(
+            'VelovitoBundle:default:left_block.html.twig',
+            [
+                C::PAGE_TITLE => $title,
+                'menu'        => $this->get(C::MODEL_DEFAULT)->getMenu(),
+                'categories'  => $this->get('model.advertisement')->getCategoriesList(),
+            ]
+        );
+    }
+
+    public function searchPanelAction(Request $request, $title = null)
     {
         return $this->render(
             'VelovitoBundle:default:left_block.html.twig',
