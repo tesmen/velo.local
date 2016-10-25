@@ -16,7 +16,7 @@
                 <div class="list-group catalog-submenu unbound-list-group display-none" id="menu_{{ category.id }}">
                     <a href="{{ url('view_category', {'id': category.id}) }}" class="list-group-item">
                         <span class="glyphicon glyphicon-folder-close pull-right"></span>
-                        Перейти в раздел {{ category.name }}
+                        Перейти в раздел <b>{{ category.name }}</b>
                     </a>
 
                     {% for product in category.products %}
