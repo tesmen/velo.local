@@ -18,11 +18,11 @@
     {#</div>#}
 
     <div class="row">
-        <div class="col-md-3 hidden-xs">
+        <div class="col-md-3 hidden-sm hidden-xs">
             {{ render(controller('VelovitoBundle:Default:newsPanel')) }}
         </div>
 
-        <div class="col-xs-9">
+        <div class="col-md-9 col-xs-12">
             {% block body %}
             {% endblock %}
         </div>
