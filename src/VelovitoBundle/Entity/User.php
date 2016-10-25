@@ -30,7 +30,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="phone_name", type="string", length=32, nullable=true)
+     * @ORM\Column(name="phone_number", type="string", length=32, nullable=true)
      */
     private $phone;
 
