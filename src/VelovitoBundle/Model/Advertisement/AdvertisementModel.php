@@ -102,7 +102,7 @@ class AdvertisementModel
                 ->setPrice($formData[C::FORM_PRICE])
                 ->setCurrency($formData[C::FORM_CURRENCY])
                 ->setProduct($product)
-                ->setProductCategory($category)
+                ->setCategory($category)
                 ->setTitle(ucfirst(strtolower($formData[C::FORM_TITLE])));
 
             if (!empty($formData[C::FORM_PHOTO])) {
@@ -168,8 +168,8 @@ class AdvertisementModel
 
         return $this->advertRepo->findBy(
             [
-                'productCategory' => $category,
-                'isPublished'     => true,
+                'category'    => $category,
+                'isPublished' => true,
             ],
             ['creationDate' => 'DESC']
         );
@@ -193,8 +193,9 @@ class AdvertisementModel
      * @param string $searchText
      * @return array|\VelovitoBundle\Entity\Advertisement[]
      * @throws \Doctrine\ORM\ORMException
+     * @deprecated
      */
-    public function searchAdverts($searchText)
+    public function searchAdvertsOld($searchText)
     {
         $result = $this->advertRepo->createQueryBuilder('o')
             ->andWhere('o.title LIKE :title')
@@ -203,6 +204,13 @@ class AdvertisementModel
             ->getResult();
 
         return $result;
+    }
+
+    public function searchAdverts($request)
+    {
+        $searchModel = new AdvertSearch($this->advertRepo, $request);
+
+        return $searchModel->search();
     }
 
 

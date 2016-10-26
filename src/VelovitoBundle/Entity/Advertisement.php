@@ -116,7 +116,7 @@ class Advertisement
      * @ORM\ManyToOne(targetEntity="VelovitoBundle\Entity\ProductCategory")
      * @ORM\JoinColumn(name="product_category_id", referencedColumnName="id", nullable=true)
      */
-    private $productCategory;
+    private $category;
 
     /**
      * @var integer
@@ -420,13 +420,13 @@ class Advertisement
     /**
      * Set productCategoryId
      *
-     * @param ProductCategory $productCategory
+     * @param ProductCategory $category
      *
      * @return Advertisement
      */
-    public function setProductCategory($productCategory)
+    public function setCategory($category)
     {
-        $this->productCategory = $productCategory;
+        $this->category = $category;
 
         return $this;
     }
@@ -436,9 +436,9 @@ class Advertisement
      *
      * @return ProductCategory
      */
-    public function getProductCategory()
+    public function getCategory()
     {
-        return $this->productCategory;
+        return $this->category;
     }
 
     /**
