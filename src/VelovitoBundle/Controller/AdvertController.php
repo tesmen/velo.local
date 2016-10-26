@@ -244,10 +244,6 @@ class AdvertController extends GeneralController
 
     public function searchAdvertAction(Request $request)
     {
-
-
-        $search = $request->get('search');
-
         return $this->render(
             'VelovitoBundle:advert:search.html.twig',
             [

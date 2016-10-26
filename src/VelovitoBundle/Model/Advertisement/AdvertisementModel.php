@@ -3,6 +3,7 @@
 namespace VelovitoBundle\Model\Advertisement;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\C;
 use VelovitoBundle\Entity\AdvertisementAttribute;
 use VelovitoBundle\Entity\Product;
@@ -206,7 +207,7 @@ class AdvertisementModel
         return $result;
     }
 
-    public function searchAdverts($request)
+    public function searchAdverts(Request $request)
     {
         $searchModel = new AdvertSearch($this->advertRepo, $request);
 

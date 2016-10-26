@@ -19,7 +19,6 @@ class AdvertSearch implements SearchModelInterface
 
     /**
      * @return array
-     * todo move method to repo?
      */
     private function getRules()
     {
