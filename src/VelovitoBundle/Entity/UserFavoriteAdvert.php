@@ -41,7 +41,7 @@ class UserFavoriteAdvert
      *
      * @ORM\Column(name="creation_date", type="datetime")
      */
-    private $creationDate;
+    private $created;
 
     /**
      * Get id
@@ -56,13 +56,13 @@ class UserFavoriteAdvert
     /**
      * Set registeredDate
      *
-     * @param \DateTime $creationDate
+     * @param \DateTime $created
      *
      * @return UserFavoriteAdvert
      */
-    public function setCreationDate($creationDate)
+    public function setCreated($created)
     {
-        $this->creationDate = $creationDate;
+        $this->created = $created;
 
         return $this;
     }
@@ -72,9 +72,9 @@ class UserFavoriteAdvert
      *
      * @return \DateTime
      */
-    public function getCreationDate()
+    public function getCreated()
     {
-        return $this->creationDate;
+        return $this->created;
     }
 
     /**

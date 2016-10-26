@@ -41,7 +41,7 @@ class Advertisement
 
     public function __construct()
     {
-        $this->creationDate = new \DateTime();
+        $this->created = new \DateTime();
         $this->attributes = new ArrayCollection();
     }
 
@@ -81,7 +81,7 @@ class Advertisement
      *
      * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
-    private $creationDate;
+    private $created;
 
     /**
      * @var boolean
@@ -184,9 +184,9 @@ class Advertisement
      *
      * @return Advertisement
      */
-    public function setCreationDate($createdDate)
+    public function setCreated($createdDate)
     {
-        $this->creationDate = $createdDate;
+        $this->created = $createdDate;
 
         return $this;
     }
@@ -196,9 +196,9 @@ class Advertisement
      *
      * @return \DateTime
      */
-    public function getCreationDate()
+    public function getCreated()
     {
-        return $this->creationDate;
+        return $this->created;
     }
 
     /**

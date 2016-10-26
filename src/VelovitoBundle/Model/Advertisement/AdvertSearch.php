@@ -55,6 +55,8 @@ class AdvertSearch implements SearchModelInterface
             $closure($requestParams[$paramName]);
         }
 
+        $this->qb->addOrderBy('q.created','DESC');
+
         return $this->qb->getQuery()->getResult();
     }
 }

@@ -140,7 +140,7 @@ class AdvertisementModel
     {
         return $this->advertRepo->findBy(
             ['user' => $userId,],
-            ['creationDate' => 'DESC']
+            ['created' => 'DESC']
         );
     }
 
@@ -157,7 +157,7 @@ class AdvertisementModel
     {
         return $this->advertRepo->findBy(
             ['isPublished' => true],
-            ['creationDate' => 'DESC']
+            ['created' => 'DESC']
         );
     }
 
@@ -171,7 +171,7 @@ class AdvertisementModel
                 'category'    => $category,
                 'isPublished' => true,
             ],
-            ['creationDate' => 'DESC']
+            ['created' => 'DESC']
         );
     }
 
@@ -185,7 +185,7 @@ class AdvertisementModel
                 'product'     => $product,
                 'isPublished' => true,
             ],
-            ['creationDate' => 'DESC']
+            ['created' => 'DESC']
         );
     }
 
