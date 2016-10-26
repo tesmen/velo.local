@@ -14,13 +14,13 @@
 
             {% if category.products is not empty %}
                 <div class="list-group catalog-submenu unbound-list-group display-none" id="menu_{{ category.id }}">
-                    <a href="{{ url('view_category', {'id': category.id}) }}" class="list-group-item">
+                    <a href="{{ url('adverts_search', {'category_id': category.id}) }}" class="list-group-item">
                         <span class="glyphicon glyphicon-folder-close pull-right"></span>
                         Перейти в раздел <b>{{ category.name }}</b>
                     </a>
 
                     {% for product in category.products %}
-                        <a href="{{ url('view_category', {'id': category.id}) }}"
+                        <a href="{{ url('adverts_search', {'product_id': product.id}) }}"
                            class="list-group-item">{{ product.name }}</a>
                     {% endfor %}
                 </div>
