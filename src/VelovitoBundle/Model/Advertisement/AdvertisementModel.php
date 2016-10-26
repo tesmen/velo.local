@@ -211,9 +211,8 @@ class AdvertisementModel
     {
         $searchModel = new AdvertSearch($this->advertRepo, $request);
 
-        return $searchModel->search();
+        return $searchModel->buildQuery();
     }
-
 
     public function getAdStatusMap()
     {

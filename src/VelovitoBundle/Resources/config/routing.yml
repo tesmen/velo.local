@@ -82,6 +82,11 @@ ajax_upload_photo:
     path:     /ajax-upload-photo
     defaults: { _controller: VelovitoBundle:Ajax:uploadPhoto }
 
+
+api_adverts_search:
+    path:     /api/search-adverts
+    defaults: { _controller: VelovitoBundle:Advert:apiSearchAdvert}
+
 #--------------------------------------------------------
 
 velovito:

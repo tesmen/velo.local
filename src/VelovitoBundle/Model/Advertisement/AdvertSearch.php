@@ -42,7 +42,7 @@ class AdvertSearch implements SearchModelInterface
         return $rules;
     }
 
-    public function search()
+    public function buildQuery()
     {
         $requestParams  = $this->request->query->all();
 
@@ -56,6 +56,6 @@ class AdvertSearch implements SearchModelInterface
 
         $this->qb->addOrderBy('q.created','DESC');
 
-        return $this->qb->getQuery()->getResult();
+        return $this->qb->getQuery();
     }
 }

@@ -4,9 +4,7 @@
 {% block body %}
     <div class="row">
         <div class="col-md-3">
-            <div class="island island-default">
-                Пока только по названию
-            </div>
+            {{ render(controller('VelovitoBundle:Advert:searchPanel')) }}
         </div>
 
         <div class="col-md-9">

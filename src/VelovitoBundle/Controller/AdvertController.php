@@ -247,7 +247,17 @@ class AdvertController extends GeneralController
         return $this->render(
             'VelovitoBundle:advert:search.html.twig',
             [
-                'ads' => $this->getModel()->searchAdverts($request),
+                'ads' => $this->getModel()->searchAdverts($request)->getResult(),
+            ]
+        );
+    }
+
+
+    public function searchPanelAction(Request $request)
+    {
+        return $this->render(
+            'VelovitoBundle:advert:searchPanel.html.twig',
+            [
             ]
         );
     }
@@ -259,5 +269,12 @@ class AdvertController extends GeneralController
     private function getModel()
     {
         return $this->get(C::MODEL_ADVERTISEMENT);
+    }
+
+    // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*API-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+    public function apiSearchAdvertAction(Request $request)
+    {
+        return $this->returnJsonResponse(true, $this->getModel()->searchAdverts($request)->getArrayResult());
     }
 }

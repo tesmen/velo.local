@@ -7,5 +7,5 @@ use VelovitoBundle\C;
 
 interface SearchModelInterface
 {
-    public function search();
+    public function buildQuery();
 }
