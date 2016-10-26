@@ -156,9 +156,9 @@
             </div>
 
             <div>
-                <a href="{{ url('adverts_search', {id: advert.Product.id }) }}">{{ advert.Product.category.Name }}</a>
+                <a href="{{ url('adverts_search', {category_id: advert.Product.category.id }) }}">{{ advert.Product.category.Name }}</a>
                 /
-                <a href="{{ url('adverts_search', {id: advert.Product.id }) }}">{{ advert.Product.Name }}</a>
+                <a href="{{ url('adverts_search', {product_id: advert.Product.id }) }}">{{ advert.Product.Name }}</a>
             </div>
         </div>
 

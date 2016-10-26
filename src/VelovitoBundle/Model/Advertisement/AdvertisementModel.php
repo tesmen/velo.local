@@ -190,28 +190,16 @@ class AdvertisementModel
         );
     }
 
-    /**
-     * @param string $searchText
-     * @return array|\VelovitoBundle\Entity\Advertisement[]
-     * @throws \Doctrine\ORM\ORMException
-     * @deprecated
-     */
-    public function searchAdvertsOld($searchText)
-    {
-        $result = $this->advertRepo->createQueryBuilder('o')
-            ->andWhere('o.title LIKE :title')
-            ->setParameter('title', '%' . $searchText . '%')
-            ->getQuery()
-            ->getResult();
-
-        return $result;
-    }
-
     public function searchAdverts(Request $request)
     {
         $searchModel = new AdvertSearch($this->advertRepo, $request);
 
         return $searchModel->buildQuery();
+    }
+
+    public function getSearchPanelFields(Request $request)
+    {
+
     }
 
     public function getAdStatusMap()

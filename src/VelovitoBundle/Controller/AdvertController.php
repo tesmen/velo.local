@@ -258,6 +258,7 @@ class AdvertController extends GeneralController
         return $this->render(
             'VelovitoBundle:advert:searchPanel.html.twig',
             [
+                'fields' => $this->getModel()->getSearchPanelFields($request)
             ]
         );
     }
