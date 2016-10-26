@@ -4,18 +4,16 @@
 {% block body %}
     <div class="row">
         {% include '@Velovito/templates/alert.html.twig' %}
+        {% set userPhotoName = advert.getPhoto is empty ? null : advert.getPhoto.getFileName() %}
+
 
         <div class="col-md-4">
             <h2>{{ advert.getTitle() }}</h2>
 
             <div>
                 <div style="margin-bottom: 20px;">
-                    {% if advert.getPhoto is null %}
-                        <img src="{{ 0 | noPhoto(200,200) }}" class="gray-border" title="{{ advert.getTitle() }}">
-                    {% else %}
-                        <img src="{{ advert.getPhoto.getFileName() | getUserPhoto(200,200) }}" class="gray-border"
-                             title="{{ advert.getTitle() }}">
-                    {% endif %}
+                    <img src="{{ userPhotoName | getUserPhoto(200,200) }}" alt="{{ advert.title }}"
+                         class="img-thumbnail advert-photo">
                 </div>
             </div>
 
