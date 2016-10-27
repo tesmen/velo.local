@@ -15,17 +15,26 @@
     <script src="{{ asset('js/common.js') }}"></script>
     <script src="{{ asset('js/common-ui.js') }}"></script>
     <script src="{{ asset('js/spinner.js') }}"></script>
+    <script src="{{ asset('js/admin-js/controllers.js') }}"></script>
 </head>
 
 <body>
 
-<div class="container">
-    <div class="row">
-        {% block body %}
-        {% endblock %}
+<div class="container" ng-app="myApp">
+    <div>
+        <div class="nav navbar">
+            <a href="#red">Red</a>
+            <a href="#blue">Blue</a>
+        </div>
+
+        <ng-view></ng-view>
+
+        <script type="text/ng-template" id="blue.htm">
+            blue
+        </script>
     </div>
+
 </div>
 </body>
 
-{{ include('@Velovito/footer.html.twig') }}
 </html>

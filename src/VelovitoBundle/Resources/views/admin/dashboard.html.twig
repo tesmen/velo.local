@@ -1,17 +1,33 @@
-{% extends 'VelovitoBundle::layout_admin.html.twig' %}
-{% import '@Velovito/templates/macroses.html.twig' as macro %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title> admin </title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
-{% block body %}
-    <div>
-        <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Ave, Admin!</h1>
-    </div>
+    <script src="{{ asset('js/angular/angular.js') }}"></script>
+    <script src="{{ asset('js/angular/angular-route.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/common.js') }}"></script>
+    <script src="{{ asset('js/spinner.js') }}"></script>
+    <script src="{{ asset('js/admin-js/controllers.js') }}"></script>
+</head>
 
-    <div>
-        <a href="{{ url('admin_list_products') }}">Товары</a> <br>
-        <a href="{{ url('admin_list_categories') }}">Категории</a> <br>
-        <a href="{{ url('admin_list_attibutes') }}">Аттрибуты</a> <br>
-        <a href="{{ url('admin_list_references') }}">Списки</a> <br>
-    </div>
+<body>
+
+<div class="container" ng-app="myApp">
+    <ng-include src="'header.html'"></ng-include>
+
+    <ng-view></ng-view>
 
 
-{% endblock %}
+    {% include('@Velovito/admin/ng-templates.html.twig') %}
+</div>
+</body>
+
+</html>
