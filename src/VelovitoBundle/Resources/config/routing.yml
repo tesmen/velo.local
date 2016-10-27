@@ -37,7 +37,7 @@ vk_auth_success:
 #--------------------------------------------------------
 
 admin_dashBoard:
-    path:     /velo-admin
+    path:     /admin
     defaults: { _controller: VelovitoBundle:Admin:dashBoard }
 
 admin_api:

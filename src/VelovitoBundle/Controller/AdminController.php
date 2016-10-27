@@ -4,7 +4,6 @@ namespace VelovitoBundle\Controller;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\Entity\ProductAttribute;
 use VelovitoBundle\Form\Admin\EditAttributeForm;
