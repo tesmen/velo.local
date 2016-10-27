@@ -28,6 +28,7 @@ function myCtrl($scope, $http) {
             .success(
                 function (data) {
                     console.log(data)
+                    $location.path('/');
                 }
             )
     }
