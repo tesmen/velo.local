@@ -9,6 +9,10 @@ use VelovitoBundle\C;
 
 class AjaxController extends GeneralController
 {
+    const F_STATUS = 'status';
+    const F_DATA = 'data';
+    const F_MESSAGE = 'message';
+
     public function uploadPhotoAction(Request $request)
     {
         $form = $this->createForm(UploadPhotoForm::class);

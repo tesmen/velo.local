@@ -3,7 +3,7 @@
 
 {% block body %}
     <ol class="breadcrumb">
-        <li><a href="{{ url('view_category',{id: advert.ProductCategory.id}) }}">{{ advert.ProductCategory.Name }}</a></li>
+        <li><a href="{{ url('view_category',{id: advert.category.id}) }}">{{ advert.category.Name }}</a></li>
         <li><a href="{{ url('adverts_search',{id: advert.Product.id }) }}">{{ advert.Product.Name }}</a></li>
     </ol>
 

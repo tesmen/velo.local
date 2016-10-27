@@ -33,6 +33,13 @@ class GeneralController extends Controller
         return $this->redirectToRoute($this->getCurrentRoute(), $attr);
     }
 
+    /**
+     * @param $status
+     * @param null $data
+     * @param null $message
+     * @return JsonResponse
+     * @deprecated
+     */
     protected function returnJsonResponse($status, $data = null, $message = null)
     {
         return new JsonResponse([

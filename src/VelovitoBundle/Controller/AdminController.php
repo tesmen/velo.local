@@ -2,6 +2,8 @@
 
 namespace VelovitoBundle\Controller;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\Entity\ProductAttribute;
@@ -17,9 +19,37 @@ use VelovitoBundle\C;
 
 class AdminController extends GeneralController
 {
+    use AjaxControllerTrait;
+
     public function dashBoardAction(Request $request)
     {
         return $this->render('@Velovito/admin/dashboard.html.twig');
+    }
+
+    public function apiAction(Request $request, $entity, $method)
+    {
+        $data = [];
+
+        if (($repo = $this->getRepositoryByName($entity))) {
+            $data =  $repo->createQueryBuilder('q')->getQuery()->getResult(Query::HYDRATE_ARRAY);
+        }
+
+        return $this->jsonSuccess($data);
+    }
+
+    /**
+     * @param $entity
+     * @return EntityRepository
+     */
+    private function getRepositoryByName($entity)
+    {
+        $repoClass = 'VelovitoBundle\Entity\\' . ucfirst($entity);
+
+        if (class_exists($repoClass)) {
+            return $this->getDoctrine()->getRepository($repoClass);
+        }
+
+        return null;
     }
 
 
@@ -204,7 +234,7 @@ class AdminController extends GeneralController
             $formData = $form->getData();
 
             try {
-                $model->createOrUpdateProductAttribute($formData,$ent);
+                $model->createOrUpdateProductAttribute($formData, $ent);
                 $this->addFlash(C::FLASH_SUCCESS, 'ok!');
 
                 return $this->redirectToThis([

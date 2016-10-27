@@ -40,6 +40,11 @@ admin_dashBoard:
     path:     /admin
     defaults: { _controller: VelovitoBundle:Admin:dashBoard }
 
+admin_api:
+    path:     /api/admin/{entity}/{method}
+    defaults: {_controller: VelovitoBundle:Admin:api, method: get}
+
+
 admin_list_products:
     path:     /admin/list-products
     defaults: { _controller: VelovitoBundle:Admin:listProducts }
