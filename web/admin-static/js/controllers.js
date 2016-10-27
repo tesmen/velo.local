@@ -2,7 +2,7 @@ angular.module('myApp', ['ngRoute'])
     .config(function ($routeProvider) {
         $routeProvider
             .when("/dashboard", {
-                templateUrl: "/admin/views/dashboard.html",
+                templateUrl: "/admin-static/views/dashboard.html",
                 controller: "redCtrl",
                 reloadOnSearch: false
             })
@@ -10,7 +10,7 @@ angular.module('myApp', ['ngRoute'])
                 templateUrl: "dashboard.html"
             })
             .when("/products/list", {
-                templateUrl: "/admin/views/products.html",
+                templateUrl: "/admin-static/views/products.html",
                 controller: productsController,
                 reloadOnSearch: false
 
