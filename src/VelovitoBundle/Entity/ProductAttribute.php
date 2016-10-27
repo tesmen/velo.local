@@ -71,6 +71,12 @@ class ProductAttribute extends AbstractAttribute
     private $comment;
 
     /**
+     * @var string
+     * @ORM\Column(name="alias", type="string", length=32, nullable=true)
+     */
+    private $alias;
+
+    /**
      * Get id
      *
      * @return integer
@@ -198,5 +204,31 @@ class ProductAttribute extends AbstractAttribute
     public function getReference()
     {
         return $this->reference;
+    }
+
+
+
+    /**
+     * Set alias
+     *
+     * @param string $alias
+     *
+     * @return ProductAttribute
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
+
+    /**
+     * Get alias
+     *
+     * @return string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
     }
 }
