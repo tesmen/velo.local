@@ -1,19 +1,22 @@
 angular.module('myApp', ['ngRoute'])
     .config(function ($routeProvider) {
         $routeProvider
-            .when("/", {
-                templateUrl: "dashboard.html"
-            })
             .when("/dashboard", {
-                templateUrl: "dashboard.html",
+                templateUrl: "/admin/views/dashboard.html",
                 controller: "redCtrl",
                 reloadOnSearch: false
+            })
+            .when("/categories", {
+                templateUrl: "dashboard.html"
             })
             .when("/green", {
                 templateUrl: "green.htm"
             })
             .when("/blue", {
                 templateUrl: "blue.htm"
+            })
+            .otherwise({
+                redirectTo: '/dashboard'
             });
     })
     .controller('myCtrl', myCtrl)
