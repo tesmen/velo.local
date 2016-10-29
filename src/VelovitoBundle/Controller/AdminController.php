@@ -44,9 +44,10 @@ class AdminController extends GeneralController
         }
 
         $limit = (int)$request->query->get('limit');
+        $indexBy = $request->query->get('index_by');
 
         $data = $repo
-            ->createQueryBuilder('q')
+            ->createQueryBuilder('q', $indexBy ? "q.$indexBy" : null)
             ->setMaxResults($limit ?: AjaxController::F_LIMIT_DEFAULT)
             ->getQuery()
             ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)

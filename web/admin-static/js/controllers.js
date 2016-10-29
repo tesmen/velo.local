@@ -15,6 +15,12 @@ angular.module('myApp', ['ngRoute'])
                 reloadOnSearch: false
 
             })
+            .when("/categories/list", {
+                templateUrl: "/admin-static/views/categories.html",
+                controller: categoriesController,
+                reloadOnSearch: false
+
+            })
             .when("/blue", {
                 templateUrl: "blue.htm"
             })
@@ -33,7 +39,6 @@ function myCtrl($scope, $http) {
         $http.get('http://velo.local/api/search-adverts')
             .success(
             function (data) {
-                console.log(data)
                 $location.path('/');
             }
         )
@@ -41,11 +46,15 @@ function myCtrl($scope, $http) {
 }
 
 function dashBoardController($scope) {
-    $scope.red = 'red';
 }
 
 function productsController($scope, $http) {
-    $scope.products = 'red';
+    $scope.products = {};
+    $scope.categories = {};
+
+    $http.get('api/admin/productCategory?index_by=id').success(function (response) {
+        $scope.categories = response.data;
+    });
 
     $scope.loadProducts = function () {
         $http.get('api/admin/product').success(function (response) {
@@ -54,6 +63,18 @@ function productsController($scope, $http) {
     };
 
     $scope.loadProducts();
+}
+
+function categoriesController($scope, $http) {
+    $scope.list = {};
+
+    $scope.load = function () {
+        $http.get('api/admin/productCategory').success(function (response) {
+            $scope.list = response.data;
+        })
+    };
+
+    $scope.load();
 }
 
 function greetFilter() {
