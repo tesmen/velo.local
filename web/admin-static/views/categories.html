@@ -2,8 +2,8 @@
 <div class="row" ng-cloak>
     <div class="col-12-xs">
         <div class="btn-group">
-            <button type="button" class="btn btn-warning">Back</button>
-            <button type="button" class="btn btn-success">Add new</button>
+            <button class="btn btn-warning">Back</button>
+            <button class="btn btn-success">Add new</button>
         </div>
     </div>
 
@@ -18,9 +18,9 @@
                 <td>{{ item.category_name }}</td>
 
                 <td>
-                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                    <button type="button" class="btn btn-sm btn-success" ng-if="!item.active">Activate</button>
-                    <button type="button" class="btn btn-sm btn-danger" ng-if="item.active">Deactivate</button>
+                    <button class="btn btn-sm btn-primary" ng-click="editItem(item)">Edit</button>
+                    <button class="btn btn-sm btn-success" ng-if="!item.active">Activate</button>
+                    <button class="btn btn-sm btn-danger" ng-if="item.active">Deactivate</button>
                 </td>
             </tr>
         </table>

@@ -9,16 +9,16 @@ use VelovitoBundle\C;
 
 trait AjaxControllerTrait
 {
-    private function standardJsonArray($status = true, array $data = [], $message = '')
+    private function standardJsonArray($status = true, $data = [], $message = '')
     {
         return new JsonResponse( [
             AjaxController::F_STATUS  => (Bool)$status,
-            AjaxController::F_DATA    => (Array)$data,
+            AjaxController::F_DATA    => $data,
             AjaxController::F_MESSAGE => (String)$message,
         ]);
     }
 
-    private function jsonSuccess($data)
+    private function jsonSuccess($data = '')
     {
         return $this->standardJsonArray(true, $data);
     }
@@ -26,5 +26,10 @@ trait AjaxControllerTrait
     private function jsonFailure($message)
     {
         return $this->standardJsonArray(true, [], $message);
+    }
+
+    private function fromPayload(Request $request)
+    {
+        return json_decode($request->getContent(), true);
     }
 }

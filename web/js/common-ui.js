@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    $('.selectpicker').selectpicker();
+
+    $('.bootstrap-select').click(function () {
+        $('.selectpicker').selectpicker('refresh');
+    });
+
     $('.dropdown-menu').on('click', '.unclickable-dropdown-item', function (e) {
         e.preventDefault();
         e.stopPropagation();

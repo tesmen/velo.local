@@ -18,7 +18,7 @@
                 <td>{{ categories[item.category_id].name }}</td>
 
                 <td>
-                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="editItem(item)">Edit</button>
                     <button type="button" class="btn btn-sm btn-success" ng-if="!item.active">Activate</button>
                     <button type="button" class="btn btn-sm btn-danger" ng-if="item.active">Deactivate</button>
                 </td>

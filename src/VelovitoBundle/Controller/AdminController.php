@@ -15,6 +15,7 @@ use VelovitoBundle\Form\Admin\NewCategoryForm;
 use VelovitoBundle\Form\Admin\NewReferenceForm;
 use VelovitoBundle\Form\Admin\NewProductForm;
 use VelovitoBundle\C;
+use VelovitoBundle\Repository\GeneralRepository;
 
 class AdminController extends GeneralController
 {
@@ -38,7 +39,7 @@ class AdminController extends GeneralController
                 ->setParameter('id', $id)
                 ->getQuery()
                 ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
-                ->getResult(Query::HYDRATE_ARRAY);
+                ->getOneOrNullResult(Query::HYDRATE_ARRAY);
 
             return $this->jsonSuccess($data);
         }
@@ -56,9 +57,26 @@ class AdminController extends GeneralController
         return $this->jsonSuccess($data);
     }
 
+    public function apiPostAction(Request $request, $entityName, $id)
+    {
+        if (empty(($repo = $this->getRepositoryByName($entityName)))) {
+            return $this->jsonFailure('entity not found');
+        }
+
+        $data = $this->fromPayload($request);
+
+        if(empty($data['entity'])){
+            return $this->jsonSuccess();
+        }
+
+        $data = $repo->update($data['entity']);
+
+        return $this->jsonSuccess($data);
+    }
+
     /**
      * @param $entity
-     * @return EntityRepository
+     * @return EntityRepository | GeneralRepository
      */
     private function getRepositoryByName($entity)
     {

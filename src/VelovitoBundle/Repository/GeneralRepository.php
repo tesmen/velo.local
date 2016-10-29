@@ -15,12 +15,12 @@ class GeneralRepository extends EntityRepository
 
     public function failOnExists($criteria)
     {
-        if($this->isExists($criteria)) {
+        if ($this->isExists($criteria)) {
             throw new \Exception(
                 sprintf('%s already exists with %s',
                     $this->getClassName(),
                     json_encode($criteria)
-            ));
+                ));
         };
     }
 
@@ -28,12 +28,12 @@ class GeneralRepository extends EntityRepository
     {
 
         foreach ($data as $key => $value) {
-            $setMethod = 'set'.$key;
+            $setMethod = 'set' . $key;
             $ent->$setMethod($value);
         }
     }
 
-    public function update($id, array $data)
+    public function updateEntity($id, array $data)
     {
         $entity = $this->findOneOrFail(
             ['id' => $id,]
@@ -76,12 +76,12 @@ class GeneralRepository extends EntityRepository
                     $search[] = "$k => $v";
                 }
 
-                throw new NotFoundException($this->_entityName.' not found with params '.implode(', ', $search));
+                throw new NotFoundException($this->_entityName . ' not found with params ' . implode(', ', $search));
             }
         } else {
             // quick findById
             if (!$ent = $this->find($fields)) {
-                throw new NotFoundException($this->_entityName.' not found with id '.$fields);
+                throw new NotFoundException($this->_entityName . ' not found with id ' . $fields);
             }
         }
 
@@ -98,7 +98,7 @@ class GeneralRepository extends EntityRepository
                 $search[] = "$k => $v";
             }
 
-            throw new NotFoundException($this->_entityName.' not found with '.implode(', ', $search));
+            throw new NotFoundException($this->_entityName . ' not found with ' . implode(', ', $search));
         }
 
         return $ents;
@@ -145,5 +145,35 @@ class GeneralRepository extends EntityRepository
 
         return new $this->_entityName;
 
+    }
+
+    public function update($data)
+    {
+        $setlist = $this->createSetList($data);
+
+        $query = sprintf(
+            'UPDATE %s SET %s WHERE id = :id',
+            $this->getTableName(),
+            $setlist
+        );
+
+        $result = $this->_em->getConnection()->executeQuery($query, $data)->execute();
+
+        return $result;
+    }
+
+    private function createSetList($data)
+    {
+        $result = [];
+
+        if (isset($data['id'])) {
+            unset($data['id']);
+        }
+
+        foreach ($data as $key => $value) {
+            $result[] = "`$key` = :$key";
+        }
+
+        return implode(', ', $result);
     }
 }

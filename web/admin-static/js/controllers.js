@@ -15,6 +15,12 @@ angular.module('myApp', ['ngRoute'])
                 reloadOnSearch: false
 
             })
+            .when("/products/edit/:id", {
+                templateUrl: "/admin-static/views/product.html",
+                controller: editProductController,
+                reloadOnSearch: false
+
+            })
             .when("/categories/list", {
                 templateUrl: "/admin-static/views/categories.html",
                 controller: categoriesController,
@@ -30,7 +36,10 @@ angular.module('myApp', ['ngRoute'])
     })
     .controller('myCtrl', myCtrl)
     .controller('dashBoardController', dashBoardController)
-    .filter('greet', greetFilter);
+    .filter('greet', greetFilter)
+    .run(function () {
+        $('.selectpicker').selectpicker('refresh');
+    });
 
 function myCtrl($scope, $http) {
     $scope.foo = 1;
@@ -48,7 +57,7 @@ function myCtrl($scope, $http) {
 function dashBoardController($scope) {
 }
 
-function productsController($scope, $http) {
+function productsController($scope, $http, $location) {
     $scope.products = {};
     $scope.categories = {};
 
@@ -62,19 +71,40 @@ function productsController($scope, $http) {
         })
     };
 
+    $scope.editItem = function (item) {
+        $location.path('/products/edit/' + item.id);
+
+    };
+
     $scope.loadProducts();
+}
+
+function editProductController($scope, $http, $location, $routeParams) {
+    $scope.item = {};
+    $scope.categories = {};
+
+    $http.get('api/admin/productCategory?index_by=id').success(function (response) {
+        $scope.categories = response.data;
+    });
+
+    $http.get('api/admin/product/' + $routeParams.id).success(function (response) {
+        $scope.item = response.data;
+    });
+
+    $scope.save = function () {
+        $http.post('api/admin/product/' + $scope.item.id, {entity: $scope.item}).success(function (response) {
+            $location.path('/products/list')
+        })
+
+    };
 }
 
 function categoriesController($scope, $http) {
     $scope.list = {};
 
-    $scope.load = function () {
-        $http.get('api/admin/productCategory').success(function (response) {
-            $scope.list = response.data;
-        })
-    };
-
-    $scope.load();
+    $http.get('api/admin/productCategory').success(function (response) {
+        $scope.list = response.data;
+    })
 }
 
 function greetFilter() {
