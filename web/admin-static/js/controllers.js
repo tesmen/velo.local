@@ -37,8 +37,12 @@ angular.module('myApp', ['ngRoute'])
     .controller('myCtrl', myCtrl)
     .controller('dashBoardController', dashBoardController)
     .filter('greet', greetFilter)
-    .run(function () {
+    .run(function ($rootScope) {
         $('.selectpicker').selectpicker('refresh');
+
+        $rootScope.globalFoo = function() {
+            window.history.back();
+        };
     });
 
 function myCtrl($scope, $http) {
@@ -95,7 +99,6 @@ function editProductController($scope, $http, $location, $routeParams) {
         $http.post('api/admin/product/' + $scope.item.id, {entity: $scope.item}).success(function (response) {
             $location.path('/products/list')
         })
-
     };
 }
 
