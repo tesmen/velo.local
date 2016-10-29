@@ -1,9 +1,9 @@
 angular.module('myApp', ['ngRoute'])
     .config(function ($routeProvider) {
         $routeProvider
-            .when("/dashboard", {
+            .when("/", {
                 templateUrl: "/admin-static/views/dashboard.html",
-                controller: "redCtrl",
+                controller: dashBoardController,
                 reloadOnSearch: false
             })
             .when("/categories", {
@@ -19,11 +19,11 @@ angular.module('myApp', ['ngRoute'])
                 templateUrl: "blue.htm"
             })
             .otherwise({
-                redirectTo: '/dashboard'
+                redirectTo: '/'
             });
     })
     .controller('myCtrl', myCtrl)
-    .controller('redCtrl', redCtrl)
+    .controller('dashBoardController', dashBoardController)
     .filter('greet', greetFilter);
 
 function myCtrl($scope, $http) {
@@ -40,7 +40,7 @@ function myCtrl($scope, $http) {
     }
 }
 
-function redCtrl($scope) {
+function dashBoardController($scope) {
     $scope.red = 'red';
 }
 

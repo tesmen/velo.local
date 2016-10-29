@@ -25,13 +25,32 @@ class AdminController extends GeneralController
         return $this->render('@Velovito/admin/dashboard.html.twig');
     }
 
-    public function apiAction(Request $request, $entity, $method)
+    public function apiAction(Request $request, $entityName, $id)
     {
-        $data = [];
-
-        if (($repo = $this->getRepositoryByName($entity))) {
-            $data =  $repo->createQueryBuilder('q')->getQuery()->getResult(Query::HYDRATE_ARRAY);
+        if (empty(($repo = $this->getRepositoryByName($entityName)))) {
+            return $this->jsonFailure('entity not found');
         }
+
+        if ($id) {
+            $data = $repo
+                ->createQueryBuilder('q')
+                ->where('q.id = :id')
+                ->setParameter('id', $id)
+                ->getQuery()
+                ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
+                ->getResult(Query::HYDRATE_ARRAY);
+
+            return $this->jsonSuccess($data);
+        }
+
+        $limit = (int)$request->query->get('limit');
+
+        $data = $repo
+            ->createQueryBuilder('q')
+            ->setMaxResults($limit ?: AjaxController::F_LIMIT_DEFAULT)
+            ->getQuery()
+            ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
+            ->getResult(Query::HYDRATE_ARRAY);
 
         return $this->jsonSuccess($data);
     }

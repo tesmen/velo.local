@@ -1,3 +1,28 @@
-<ul>
-    <li ng-repeat="product in products">{{ product.name }}</li>
-</ul>
+<h4>Products</h4>
+<div class="row">
+    <div class="col-12-xs">
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-warning">Back</button>
+            <button type="button" class="btn btn-success">Add new</button>
+        </div>
+    </div>
+
+    <div class="col-12-xs spacer-10px">
+    </div>
+
+    <div class="col-12-xs">
+        <table class="table table-stripped">
+            <tr ng-repeat="product in products">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category_id }}</td>
+
+                <td>
+                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                    <button type="button" class="btn btn-sm btn-success" ng-if="!product.active">Activate</button>
+                    <button type="button" class="btn btn-sm btn-danger" ng-if="product.active">Deactivate</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

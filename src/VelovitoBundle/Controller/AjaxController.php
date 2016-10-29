@@ -13,6 +13,8 @@ class AjaxController extends GeneralController
     const F_DATA = 'data';
     const F_MESSAGE = 'message';
 
+    const F_LIMIT_DEFAULT = 50;
+
     public function uploadPhotoAction(Request $request)
     {
         $form = $this->createForm(UploadPhotoForm::class);
