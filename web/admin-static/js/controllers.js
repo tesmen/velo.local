@@ -89,6 +89,12 @@ function productsController($scope, $http, $location) {
         $location.path('/products/add');
     };
 
+    $scope.toggleActive = function (item) {
+        $http.post('api/admin/product/' + item.id, {entity: {active: !item.active}}).success(function (response) {
+            $scope.loadProducts();
+        })
+    };
+
     $scope.loadProducts();
 }
 

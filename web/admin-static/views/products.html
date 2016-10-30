@@ -1,5 +1,5 @@
 <h4>Products</h4>
-<div class="row" ng-cloak>
+<div class="row">
     <div class="col-12-xs">
         <div class="btn-group" role="group" aria-label="...">
             <button type="button" class="btn btn-warning" ng-click="globalBack()">Back</button>
@@ -19,8 +19,8 @@
 
                 <td>
                     <button type="button" class="btn btn-sm btn-primary" ng-click="editItem(item)">Edit</button>
-                    <button type="button" class="btn btn-sm btn-success" ng-if="!item.active">Activate</button>
-                    <button type="button" class="btn btn-sm btn-danger" ng-if="item.active">Deactivate</button>
+                    <button type="button" class="btn btn-sm btn-success" ng-if="!item.active" ng-click="toggleActive(item)">Activate</button>
+                    <button type="button" class="btn btn-sm btn-danger" ng-if="item.active" ng-click="toggleActive(item)">Deactivate</button>
                 </td>
             </tr>
         </table>
