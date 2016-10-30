@@ -21,12 +21,12 @@ class AdminController extends GeneralController
 {
     use AjaxControllerTrait;
 
-    public function dashBoardAction(Request $request)
+    public function dashBoardAction()
     {
         return $this->render('@Velovito/admin/dashboard.html.twig');
     }
 
-    public function apiAction(Request $request, $entityName, $id)
+    public function getAction(Request $request, $entityName, $id)
     {
         if (empty(($repo = $this->getRepositoryByName($entityName)))) {
             return $this->jsonFailure('entity not found');
@@ -57,7 +57,7 @@ class AdminController extends GeneralController
         return $this->jsonSuccess($data);
     }
 
-    public function apiPostAction(Request $request, $entityName, $id)
+    public function postAction(Request $request, $entityName, $id)
     {
         if (empty(($repo = $this->getRepositoryByName($entityName)))) {
             return $this->jsonFailure('entity not found');
@@ -65,11 +65,17 @@ class AdminController extends GeneralController
 
         $data = $this->fromPayload($request);
 
-        if(empty($data['entity'])){
+        if (empty($data['entity'])) {
             return $this->jsonSuccess();
         }
 
-        $data = $repo->update($data['entity']);
+        if ((int)$id) {
+            $data = $repo->update($data['entity'], $id);
+
+            return $this->jsonSuccess($data);
+        }
+
+        $data = $repo->insert($data['entity']);
 
         return $this->jsonSuccess($data);
     }

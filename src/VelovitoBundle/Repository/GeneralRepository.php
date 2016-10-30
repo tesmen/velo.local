@@ -144,17 +144,17 @@ class GeneralRepository extends EntityRepository
         }
 
         return new $this->_entityName;
-
     }
 
-    public function update($data)
+    public function update($data, $id)
     {
-        $setlist = $this->createSetList($data);
+        $setList = $this->createSetList($data);
+        $data['id'] = $id;
 
         $query = sprintf(
             'UPDATE %s SET %s WHERE id = :id',
             $this->getTableName(),
-            $setlist
+            $setList
         );
 
         $result = $this->_em->getConnection()->executeQuery($query, $data)->execute();
@@ -162,13 +162,54 @@ class GeneralRepository extends EntityRepository
         return $result;
     }
 
-    private function createSetList($data)
+    /**
+     * @param $data
+     * @return bool
+     * @throws \Doctrine\DBAL\DBALException
+     * INSERT INTO `geo_countries` (`id`, `name`) VALUES (NULL, 'А');
+     */
+    public function insert($data)
+    {
+        $columnList = $this->createColumnList($data);
+        $valueList = $this->createvalueList($data);
+
+        $query = sprintf(
+            'INSERT INTO %s (%s) VALUES (%s)',
+            $this->getTableName(),
+            $columnList,
+            $valueList
+        );
+
+        $result = $this->_em->getConnection()->executeQuery($query, $data);
+
+        return $result;
+    }
+
+    private function createColumnList($data)
     {
         $result = [];
 
-        if (isset($data['id'])) {
-            unset($data['id']);
+        foreach ($data as $key => $value) {
+            $result[] = "`$key`";
         }
+
+        return implode(', ', $result);
+    }
+
+    private function createValueList($data)
+    {
+        $result = [];
+
+        foreach ($data as $key => $value) {
+            $result[] = "\"$value\"";
+        }
+
+        return implode(', ', $result);
+    }
+
+    private function createSetList($data)
+    {
+        $result = [];
 
         foreach ($data as $key => $value) {
             $result[] = "`$key` = :$key";

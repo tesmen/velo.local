@@ -15,6 +15,12 @@ angular.module('myApp', ['ngRoute'])
                 reloadOnSearch: false
 
             })
+            .when("/products/add", {
+                templateUrl: "/admin-static/views/product.html",
+                controller: addProductController,
+                reloadOnSearch: false
+
+            })
             .when("/products/edit/:id", {
                 templateUrl: "/admin-static/views/product.html",
                 controller: editProductController,
@@ -40,7 +46,7 @@ angular.module('myApp', ['ngRoute'])
     .run(function ($rootScope) {
         $('.selectpicker').selectpicker('refresh');
 
-        $rootScope.globalFoo = function() {
+        $rootScope.globalBack = function() {
             window.history.back();
         };
     });
@@ -77,7 +83,10 @@ function productsController($scope, $http, $location) {
 
     $scope.editItem = function (item) {
         $location.path('/products/edit/' + item.id);
+    };
 
+    $scope.addItem = function () {
+        $location.path('/products/add');
     };
 
     $scope.loadProducts();
@@ -97,6 +106,25 @@ function editProductController($scope, $http, $location, $routeParams) {
 
     $scope.save = function () {
         $http.post('api/admin/product/' + $scope.item.id, {entity: $scope.item}).success(function (response) {
+            $location.path('/products/list')
+        })
+    };
+}
+
+function addProductController($scope, $http, $location, $routeParams) {
+    $scope.item = {};
+    $scope.categories = {};
+
+    $http.get('api/admin/productCategory?index_by=id').success(function (response) {
+        $scope.categories = response.data;
+    });
+
+    $http.get('api/admin/product/' + $routeParams.id).success(function (response) {
+        $scope.item = response.data;
+    });
+
+    $scope.save = function () {
+        $http.post('api/admin/product', {entity: $scope.item}).success(function (response) {
             $location.path('/products/list')
         })
     };

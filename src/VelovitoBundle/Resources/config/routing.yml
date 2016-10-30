@@ -40,18 +40,18 @@ admin_dashBoard:
     path:     /dashboard
     defaults: { _controller: VelovitoBundle:Admin:dashBoard }
 
-admin_api:
+admin_api_get:
     path:     /api/admin/{entityName}/{id}
     methods: GET
     defaults:
-        _controller: VelovitoBundle:Admin:api
+        _controller: VelovitoBundle:Admin:get
         id: null
 
 admin_api_post:
     path:     /api/admin/{entityName}/{id}
     methods: POST
     defaults:
-        _controller: VelovitoBundle:Admin:apiPost
+        _controller: VelovitoBundle:Admin:post
         id: null
 
 

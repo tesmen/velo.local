@@ -19,7 +19,7 @@
     </div>
 
     <select class="selectpicker">
-        <option ng-repeat="item in categories" ng-click="setCategory(item)">{{ item.name }}</option>
+        <option ng-repeat="item in categories" ng-click="setCategory(item)" ng-model="item.category_id">{{ item.name }}</option>
     </select>
 
     <div class="col-xs-12 spacer-10px">    </div>
