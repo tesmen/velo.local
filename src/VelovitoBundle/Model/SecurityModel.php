@@ -141,7 +141,8 @@ class SecurityModel
             ->setTo($target)
             ->setBody('hello');
 
-        return $this->mailer->send($message);
+        return $this->mailer
+            ->send($message);
     }
 
 }
