@@ -12,7 +12,7 @@ class TestController extends GeneralController
     public function testAction(Request $request)
     {
         return $this->render(
-            'VelovitoBundle::test.html.twig',
+            '@Velovito/email/greeting.html.twig',
             [
             ]
         );

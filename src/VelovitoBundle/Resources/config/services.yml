@@ -11,13 +11,17 @@ services:
         class: VelovitoBundle\Model\Social\SocialModel
         arguments: ["@doctrine.orm.entity_manager", "@session"]
 
+    model.feedback:
+        class: VelovitoBundle\Model\Feedback\FeedbackModel
+        arguments: ["@doctrine.orm.entity_manager", "@mailer", "@templating", "@router"]
+
     model.default:
         class: VelovitoBundle\Model\DefaultModel
         arguments: ["@doctrine.orm.entity_manager", "@kernel", "@session"]
 
     model.security:
         class: VelovitoBundle\Model\SecurityModel
-        arguments: ["@doctrine.orm.entity_manager", "@session", "@security.token_storage", "@model.vk_api", "@model.user", "@mailer"]
+        arguments: ["@doctrine.orm.entity_manager", "@session", "@security.token_storage", "@model.vk_api", "@model.user"]
 
     model.admin:
         class: VelovitoBundle\Model\Admin\AdminModel

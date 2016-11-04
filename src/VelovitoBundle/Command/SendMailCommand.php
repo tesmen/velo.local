@@ -20,7 +20,7 @@ class SendMailCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $em = $this->getContainer()->get('model.security')->sendConfirmationEmail();
+        $em = $this->getContainer()->get('model.feedback')->sendGreeting();
 
         $output->writeln('unpublished succesfully');
     }
