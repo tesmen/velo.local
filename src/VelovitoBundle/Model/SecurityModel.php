@@ -26,7 +26,8 @@ class SecurityModel
         Session $session,
         TokenStorage $tokenStorage,
         VkApiModel $vkApi,
-        UserModel $userModel
+        UserModel $userModel,
+        \Swift_Mailer $mailer
     )
     {
         $this->em = $em;
@@ -34,6 +35,7 @@ class SecurityModel
         $this->tokenStorage = $tokenStorage;
         $this->vkApi = $vkApi;
         $this->userModel = $userModel;
+        $this->mailer = $mailer;
 
         $this->userRepo = $em->getRepository(C::REPO_USER);
     }
@@ -122,4 +124,24 @@ class SecurityModel
     {
         return $this->tokenStorage->getToken();
     }
+
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function sendConfirmationEmail(User $user = null)
+    {
+        $message = \Swift_Message::newInstance();
+        $target = $user ? $user->getEmail() : 'tezmo@mail.ru';
+
+        $message
+            ->setSubject('Регистрация на сайте cyberpack.ru')
+            ->setFrom('info@velovito.ru')
+            ->setTo($target)
+            ->setBody('hello');
+
+        return $this->mailer->send($message);
+    }
+
 }
