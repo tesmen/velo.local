@@ -17,7 +17,7 @@ services:
 
     model.security:
         class: VelovitoBundle\Model\SecurityModel
-        arguments: ["@doctrine.orm.entity_manager", "@session", "@security.token_storage", "@model.vk_api", "@model.user"]
+        arguments: ["@doctrine.orm.entity_manager", "@session", "@security.token_storage", "@model.vk_api", "@model.user", "@mailer"]
 
     model.admin:
         class: VelovitoBundle\Model\Admin\AdminModel
