@@ -25,23 +25,6 @@ class FeedbackModel
         $this->router = $router;
     }
 
-    public function getTenNews()
-    {
-        $result = [];
-        $users = $this->em->getRepository(C::REPO_USER)->getLastUsers(5);
-
-        foreach ($users as $user) {
-            $result[] = (new NewsRecord())
-                ->setCreated($user->getRegisteredDate())
-                ->setSubject('Новый пользователь')
-                ->setText('Теперь с нами <b>' . $user->getUsername() . '</b>')
-                ->setPicture('plus1.png');
-        }
-
-        return $result;
-    }
-
-
     /**
      * @param User $user
      * @return mixed
