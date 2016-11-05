@@ -1,7 +1,7 @@
 #!/bin/sh
 git pull
 
-php bin/console assets:install
+php5.6 bin/console assets:install
 
-php bin/console cache:clear --env=prod
-php bin/console cache:clear --env=dev
+php5.6 bin/console cache:clear --env=prod
+php5.6 bin/console cache:clear --env=dev
