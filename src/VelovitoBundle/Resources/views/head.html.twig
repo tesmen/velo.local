@@ -8,22 +8,20 @@
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}"/>
-    {#<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}"/>#}
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap-select/css/bootstrap-select.min.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/velovito/css/style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap-select/css/bootstrap-select.min.css') }}"/>
 
     {% block js %}
-        <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-ui.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.js') }}"></script>
-        <script src="{{ asset('js/spinner.js') }}"></script>
+        <script src="{{ asset('vendor/jquery/jquery-3.1.0.min.js') }}"></script>
+        <script src="{{ asset('vendor/jquery/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('bundles/velovito/js/spinner.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
-        <script src="{{ asset('js/common.js') }}"></script>
-        <script src="{{ asset('js/common-ui.js') }}"></script>
+        <script src="{{ asset('bundles/velovito/js/common.js') }}"></script>
+        <script src="{{ asset('bundles/velovito/js/common-ui.js') }}"></script>
+        <script src="{{ asset('bundles/velovito/js/vk_api.js') }}"></script>
     {% endblock %}
 
     <!-- Yandex.Metrika counter -->
