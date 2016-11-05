@@ -22,6 +22,12 @@ registration:
         _controller: VelovitoBundle:Security:registration
         title: Регистрация
 
+restore_password:
+    path: /restore-password
+    defaults:
+        _controller: VelovitoBundle:Security:restorePassword
+        title: Восстановление пароля
+
 vk_auth_token:
     path: /vk-auth-token
     defaults:

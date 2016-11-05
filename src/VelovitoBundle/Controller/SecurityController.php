@@ -8,6 +8,7 @@ use VelovitoBundle\Form\Security\RegisterForm;
 use VelovitoBundle\C;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
+use VelovitoBundle\Form\Security\RestorePasswordForm;
 
 class SecurityController extends GeneralController
 {
@@ -89,6 +90,19 @@ class SecurityController extends GeneralController
             'VelovitoBundle:security:registration.html.twig',
             [
                 'form'                => $form->createView(),
+                C::PARAM_VK_AUTH_LINK => $this->get(C::MODEL_VK_API)->getAuthLink(),
+            ]
+        );
+    }
+
+
+    public function restorePasswordAction(Request $request)
+    {
+
+
+        return $this->render(
+            'VelovitoBundle:security:restore_password.html.twig',
+            [
                 C::PARAM_VK_AUTH_LINK => $this->get(C::MODEL_VK_API)->getAuthLink(),
             ]
         );
