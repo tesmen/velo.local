@@ -8,7 +8,6 @@
 /var/sessions/*
 /vendor/
 /web/bundles/
-/web/img/
 /web/cache/
 /web/user_photos/
 composer.phar
