@@ -71,7 +71,13 @@
     <script>
         $(function () {
             $('#submit_replica').on('click', function () {
-                $('#register_form_submit').click();
+                $.get("api/userExists", function (response) {
+                    if (response.data === true) {
+                        alert("Адрес электронной почты уже используется");
+                    } else {
+                        $('#register_form_submit').click();
+                    }
+                });
             });
 
             $("form").validate({
@@ -120,40 +126,8 @@
                         maxlength: "Максимальная длина 128 символов",
                         equalTo: "Пароли должны совпадать",
                     }
-                },
-//                errorPlacement: function (error, element) {
-//                    console.log('error '+$(element).attr('id'));
-//                    var parent = element.parent();
-//                    parent.addClass('has-error');
-//                    parent
-//                            .find('span.glyphicon')
-//                            .removeClass('hide')
-//                            .addClass('glyphicon-remove')
-//                            .removeClass('glyphicon-ok');
-//                },
-//                success: function (element) {
-//                    console.log('success '+$(element).attr('id'));
-//                    var parent = element.parent();
-//                    parent.removeClass('has-error');
-//                    parent
-//                            .find('span.glyphicon')
-//                            .removeClass('hide')
-//                            .removeClass('glyphicon-remove')
-//                            .addClass('glyphicon-ok');
-//                },
-//                highlight: function (element, errorClass) {
-//                    console.log('highlight '+$(element).attr('id'));
-//                    $(element).parents('.textfield').addClass('wrong');
-//                    $(element).parents('.field_item').find('div.smileyes').addClass('hide');
-//                    $(element).parents('.field_item').find('div.smileno').removeClass('bluenote').removeClass('hide');
-//                }
+                }
             });
         });
-
-        function callbackFunc(result) {
-            console.log(result);
-        }
-
-        var api = new vkApi();
     </script>
 {% endblock %}

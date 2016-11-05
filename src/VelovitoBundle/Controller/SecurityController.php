@@ -63,6 +63,7 @@ class SecurityController extends GeneralController
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                try{
                 $formData = $form->getData();
 
                 $this->get(C::MODEL_SECURITY)->createUser(
@@ -71,9 +72,14 @@ class SecurityController extends GeneralController
                     $formData[C::FORM_EMAIL]
                 );
 
-                $this->addFlash('success', 'Регистрация пройдена, теперь вы можете войти указав свои данные');
+                $this->addFlash(C::FLASH_SUCCESS, 'Регистрация пройдена, теперь вы можете войти указав свои данные');
 
                 return $this->redirectToRoute(C::ROUTE_LOGIN);
+                } catch(\Exception $e){
+                    $this->addFlash(C::FLASH_ERROR, 'Произошла ошибка');
+
+                    return $this->redirectToThis();
+                }
             } else {
                 $this->addFlash('warning', 'Форма заполнена неверно');
             }

@@ -4,8 +4,6 @@ namespace VelovitoBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use VelovitoBundle\Form\Ajax\UploadPhotoForm;
-use VelovitoBundle\C;
 
 trait AjaxControllerTrait
 {
@@ -25,7 +23,7 @@ trait AjaxControllerTrait
 
     private function jsonFailure($message)
     {
-        return $this->standardJsonArray(true, [], $message);
+        return $this->standardJsonArray(false, [], $message);
     }
 
     private function fromPayload(Request $request)

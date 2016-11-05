@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use VelovitoBundle\C;
 use Doctrine\ORM\EntityManager;
 use VelovitoBundle\Entity\User;
+use VelovitoBundle\Exception\ConsistencyException;
 use VelovitoBundle\Model\User\UserModel;
 use VelovitoBundle\Model\VkApi\VkApiModel;
 use VelovitoBundle\Service\CommonFunction;
@@ -40,6 +41,12 @@ class SecurityModel
 
     public function createUser($username, $password, $email = null)
     {
+        $user = $this->getUserByEmail($email);
+
+        if ($user) {
+            throw new ConsistencyException('Email already used');
+        }
+
         $params = [
             'username' => $username,
             'email'    => $email,
@@ -48,6 +55,13 @@ class SecurityModel
         ];
 
         return $this->em->getRepository('VelovitoBundle:User')->create($params);
+    }
+
+    public function getUserByEmail($email)
+    {
+        return $this->em->getRepository('VelovitoBundle:User')->findOneBy([
+            'email' => $email,
+        ]);
     }
 
     public function authenticateByVk()
