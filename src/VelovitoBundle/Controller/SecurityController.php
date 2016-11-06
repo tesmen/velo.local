@@ -98,12 +98,33 @@ class SecurityController extends GeneralController
 
     public function restorePasswordAction(Request $request)
     {
+        $form = $this->createForm(RestorePasswordForm::class);
 
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
 
+            if ($form->isValid()) {
+                try{
+                    $formData = $form->getData();
+
+                    $this->get(C::MODEL_SECURITY)->resetUserPassword($formData[C::FORM_EMAIL]);
+
+                    $this->addFlash(C::FLASH_SUCCESS, 'Регистрация пройдена, теперь вы можете войти указав свои данные');
+
+                    return $this->redirectToRoute(C::ROUTE_LOGIN);
+                } catch(\Exception $e){
+                    $this->addFlash(C::FLASH_ERROR, 'Произошла ошибка' . $e->getMessage());
+
+                    return $this->redirectToThis();
+                }
+            } else {
+                $this->addFlash('warning', 'Форма заполнена неверно');
+            }
+        }
         return $this->render(
             'VelovitoBundle:security:restore_password.html.twig',
             [
-                C::PARAM_VK_AUTH_LINK => $this->get(C::MODEL_VK_API)->getAuthLink(),
+                'form' => $form->createView(),
             ]
         );
     }

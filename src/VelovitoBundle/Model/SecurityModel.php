@@ -7,18 +7,27 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use VelovitoBundle\C;
 use Doctrine\ORM\EntityManager;
+use VelovitoBundle\Entity\ResetPasswordLink;
 use VelovitoBundle\Entity\User;
 use VelovitoBundle\Exception\ConsistencyException;
+use VelovitoBundle\Exception\NotFoundException;
+use VelovitoBundle\Exception\UserNotFoundException;
+use VelovitoBundle\Model\Feedback\FeedbackModel;
 use VelovitoBundle\Model\User\UserModel;
 use VelovitoBundle\Model\VkApi\VkApiModel;
+use VelovitoBundle\Model\Traits\RepoTrait;
 use VelovitoBundle\Service\CommonFunction;
 
 class SecurityModel
 {
+    use RepoTrait;
+
     private $em;
     private $session;
     private $tokenStorage;
     private $vkApi;
+    private $userModel;
+    private $feedBackModel;
 
     private $userRepo;
 
@@ -27,7 +36,8 @@ class SecurityModel
         Session $session,
         TokenStorage $tokenStorage,
         VkApiModel $vkApi,
-        UserModel $userModel
+        UserModel $userModel,
+        FeedbackModel $feedbackModel
     )
     {
         $this->em = $em;
@@ -35,6 +45,7 @@ class SecurityModel
         $this->tokenStorage = $tokenStorage;
         $this->vkApi = $vkApi;
         $this->userModel = $userModel;
+        $this->feedBackModel = $feedbackModel;
 
         $this->userRepo = $em->getRepository(C::REPO_USER);
     }
@@ -54,12 +65,16 @@ class SecurityModel
             'role'     => $this->em->getRepository(C::REPO_ROLE)->findOneOrFail(C::ROLE_USER),
         ];
 
-        return $this->em->getRepository('VelovitoBundle:User')->create($params);
+        return $this->em->getRepository(C::REPO_USER)->create($params);
     }
 
+    /**
+     * @param $email
+     * @return User | Object | null
+     */
     public function getUserByEmail($email)
     {
-        return $this->em->getRepository('VelovitoBundle:User')->findOneBy([
+        return $this->getUserRepo()->findOneBy([
             'email' => $email,
         ]);
     }
@@ -127,7 +142,7 @@ class SecurityModel
      */
     public function getUserById($id)
     {
-        return $this->em->getRepository(C::REPO_USER)->findOneOrFail([
+        return $this->getUserRepo()->findOneOrFail([
             'id' => $id,
         ]);
     }
@@ -137,4 +152,20 @@ class SecurityModel
         return $this->tokenStorage->getToken();
     }
 
+    public function resetUserPassword($email)
+    {
+        $link = $this->createResetLink($email);
+        $this->feedBackModel->sendResetLinkMail($email);
+    }
+
+    private function createResetLink($email)
+    {
+        $user = $this->getUserByEmail($email);
+
+        if (!$user) {
+            throw new UserNotFoundException();
+        }
+
+        return  $this->getResetLinkRepo()->create($user);
+    }
 }

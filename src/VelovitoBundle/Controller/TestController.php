@@ -12,8 +12,10 @@ class TestController extends GeneralController
     public function testAction(Request $request)
     {
         return $this->render(
-            '@Velovito/email/greeting.html.twig',
+            '@Velovito/email/reset_password.html.twig',
             [
+                'resetPasswordLink' => '#',
+
             ]
         );
     }
