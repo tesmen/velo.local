@@ -69,13 +69,43 @@
     </div>
 
     <script>
+        var _email = $('#register_form_email');
+
+        $.validator.addMethod("validateUserEmail", function (value, element) {
+//            var inputElem = $('#register-form :input[name="email"]');
+//            var data = {"emails": inputElem.val()};
+//            var eReport = ''; //error report
+            console.log(100)
+            $.ajax({
+                type: "POST",
+                url: 'api/userExists',
+                dataType: "json",
+                data: _email.val(),
+                success: function (data) {
+                    if (data !== 'true') {
+                        return 'This email address is already registered.';
+                    }
+                    else {
+                        return true;
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('ajax loading error... ... ' + url + query);
+                    return false;
+                }
+            });
+
+        }, '');
+
         $(function () {
             $('#submit_replica').on('click', function () {
+                $('#register_form_submit').click();
+                return;
                 $.get("api/userExists", function (response) {
                     if (response.data === true) {
-                        alert("Адрес электронной почты уже используется");
+                        _email.addClass('invalid');
                     } else {
-                        $('#register_form_submit').click();
+
                     }
                 });
             });
@@ -90,7 +120,8 @@
                     'register_form[email]': {
                         required: true,
                         minlength: 3,
-                        maxlength: 32
+                        maxlength: 32,
+                        validateUserEmail : true
                     },
                     'register_form[password]': {
                         required: true,

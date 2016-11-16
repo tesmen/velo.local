@@ -61,7 +61,7 @@ admin_api_post:
         id: null
 
 api_call:
-    path:     /api/{method}
+    path:     /api/{methodName}
     methods: {POST, GET}
     defaults: { _controller: VelovitoBundle:Api:call }
 

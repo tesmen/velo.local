@@ -2,8 +2,6 @@
 
 namespace VelovitoBundle\Controller;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use VelovitoBundle\Form\Security\RegisterForm;
 use VelovitoBundle\C;
 use Symfony\Component\HttpFoundation\Request;

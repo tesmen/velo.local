@@ -12,10 +12,15 @@ class ApiController extends GeneralController
     public function callAction(Request $request, $methodName)
     {
         if (!method_exists($this, $methodName)) {
-            return $this->jsonFailure("Method $methodName not implemented");
+            return $this->jsonFailure("Method '$methodName' not implemented");
         }
 
-        return $this->$methodName($request);
+        try {
+            return $this->$methodName($request);
+        } catch (\Exception $e) {
+            return $this->jsonFailure($e->getMessage());
+        }
+
     }
 
     public function userExists(Request $request)
