@@ -4,8 +4,8 @@
 {% block body %}
     {% include 'VelovitoBundle:templates:alert.html.twig' %}
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" ng-app="myApp">
+        <div class="modal-dialog" role="document" ng-controller="registerController">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
@@ -18,13 +18,39 @@
                 <div class="modal-body">
                     <div class="row">
                         <div id="register-form" class="col-md-12">
-                            {{ form_start(form) }}
-                            {{ macroses.bootstrapFormInput(form.username) }}
-                            {{ macroses.bootstrapFormInput(form.email) }}
-                            {{ macroses.bootstrapFormInput(form.password) }}
-                            {{ macroses.bootstrapFormInputNoLabel(form.confirm_password) }}
-                            {{ form_widget(form.submit, {'attr':{'class' : 'hidden' }}) }}
-                            {{ form_end(form) }}
+                            <form name="register_form" method="post" class="ng-pristine ng-valid">
+                                <div class="form-group">
+                                    <label for="register_form_username" class="required">Имя</label>
+                                    <input type="text" id="register_form_username" name="register_form[username]"
+                                           required="required" placeholder="Имя" maxlength="32" autocomplete="off"
+                                           class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register_form_email" class="required">Электронная почта</label>
+                                    <input type="text" id="register_form_email" name="register_form[email]"
+                                           required="required" placeholder="Электронная почта" maxlength="32"
+                                           autocomplete="off" class="form-control" ng-model="user.email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="register_form_password" class="required">Пароль</label>
+                                    <input type="password" id="register_form_password" name="register_form[password]"
+                                           required="required" placeholder="Пароль" maxlength="16" autocomplete="off"
+                                           class="form-control" ng-model="user.password">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" id="register_form_confirm_password"
+                                           name="register_form[confirm_password]" required="required"
+                                           placeholder="Подтверждение пароля" maxlength="16" autocomplete="off"
+                                           class="form-control" ng-model="user.confirm_password">
+                                </div>
+                                {{ user | json}}
+                                <button type="submit" id="register_form_submit" name="register_form[submit]"
+                                        class="hidden">Регистрация
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -69,96 +95,14 @@
     </div>
 
     <script>
-        var _email = $('#register_form_email');
+        function registerController($scope, $http) {
+            console.log('!initiated!');
 
-        $.validator.addMethod("validateUserEmail", function (value, element) {
-//            var inputElem = $('#register-form :input[name="email"]');
-//            var data = {"emails": inputElem.val()};
-//            var eReport = ''; //error report
-            console.log(100)
-            $.ajax({
-                type: "POST",
-                url: 'api/userExists',
-                dataType: "json",
-                data: _email.val(),
-                success: function (data) {
-                    if (data !== 'true') {
-                        return 'This email address is already registered.';
-                    }
-                    else {
-                        return true;
-                    }
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    alert('ajax loading error... ... ' + url + query);
-                    return false;
-                }
-            });
+            $scope.user = {};
+        }
 
-        }, '');
-
-        $(function () {
-            $('#submit_replica').on('click', function () {
-                $('#register_form_submit').click();
-                return;
-                $.get("api/userExists", function (response) {
-                    if (response.data === true) {
-                        _email.addClass('invalid');
-                    } else {
-
-                    }
-                });
-            });
-
-            $("form").validate({
-                rules: {
-                    'register_form[username]': {
-                        required: true,
-                        minlength: 3,
-                        maxlength: 32
-                    },
-                    'register_form[email]': {
-                        required: true,
-                        minlength: 3,
-                        maxlength: 32,
-                        validateUserEmail : true
-                    },
-                    'register_form[password]': {
-                        required: true,
-                        minlength: 8,
-                        maxlength: 16
-                    },
-                    'register_form[confirm_password]': {
-                        required: true,
-                        minlength: 8,
-                        maxlength: 16,
-                        equalTo: "#register_form_password"
-                    }
-                },
-                messages: {
-                    'register_form[username]': {
-                        required: "Обязательное поле",
-                        minlength: "Минимальная длина 3 символа",
-                        maxlength: "Максимальная длина 128 символов"
-                    },
-                    'register_form[email': {
-                        required: "Обязательное поле",
-                        minlength: "Минимальная длина 3 символа",
-                        maxlength: "Максимальная длина 128 символов"
-                    },
-                    'register_form[password]': {
-                        required: "Обязательное поле",
-                        minlength: "Минимальная длина 8 символов",
-                        maxlength: "Максимальная длина 128 символов"
-                    },
-                    'register_form[confirm_password]': {
-                        required: "Обязательное поле",
-                        minlength: "Минимальная длина 8 символов",
-                        maxlength: "Максимальная длина 128 символов",
-                        equalTo: "Пароли должны совпадать",
-                    }
-                }
-            });
-        });
+        angular.module('myApp', [])
+                .controller('registerController', registerController)
+        ;
     </script>
 {% endblock %}
