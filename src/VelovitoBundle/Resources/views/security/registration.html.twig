@@ -18,19 +18,26 @@
                 <div class="modal-body">
                     <div class="row">
                         <div id="register-form" class="col-md-12">
-                            <form name="register_form" method="post" class="ng-pristine ng-valid">
-                                <div class="form-group">
+                            <form name="reg_form" method="post" novalidate class="angular-form">
+                                <div class="form-group"
+                                     ng-class="{ 'has-error': (countObject(reg_form.name.$error) && (reg_form.$submitted || reg_form.name.$touched))}">
                                     <label for="register_form_username" class="required">Имя</label>
-                                    <input type="text" id="register_form_username" name="register_form[username]"
-                                           required="required" placeholder="Имя" maxlength="32" autocomplete="off"
-                                           class="form-control">
+                                    <input type="text" required placeholder="Имя" maxlength="16" autocomplete="off" name="name"
+                                           class="form-control" ng-model="user.name" minlength="3" maxlength="16"
+                                           ng-model-options="{ debounce: { default: 500, blur: 0 } }">
+
+                                    <div ng-show="reg_form.$submitted || reg_form.name.$touched">
+                                        <div ng-show="reg_form.name.$error.required" class="text-danger">Обязательное поле</div>
+                                        <div ng-show="reg_form.name.$error.minlength" class="text-danger">Минимум 3 символа</div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="register_form_email" class="required">Электронная почта</label>
                                     <input type="text" id="register_form_email" name="register_form[email]"
                                            required="required" placeholder="Электронная почта" maxlength="32"
-                                           autocomplete="off" class="form-control" ng-model="user.email">
+                                           ng-change="checkUserExistence()" class="form-control " ng-model="user.email"
+                                           ng-model-options="{ updateOn: blur }">
                                 </div>
 
                                 <div class="form-group">
@@ -46,7 +53,7 @@
                                            placeholder="Подтверждение пароля" maxlength="16" autocomplete="off"
                                            class="form-control" ng-model="user.confirm_password">
                                 </div>
-                                {{ user | json}}
+                                {[{ user | json }]}
                                 <button type="submit" id="register_form_submit" name="register_form[submit]"
                                         class="hidden">Регистрация
                                 </button>
@@ -95,14 +102,29 @@
     </div>
 
     <script>
+        function formDirective(form, field) {
+
+        }
+
         function registerController($scope, $http) {
-            console.log('!initiated!');
+            $scope.checkUserExistence = function () {
+                $http.get('/api/userExists?email='+ $scope.user.email)
+            };
+
+            $scope.countObject = function(myArray){
+                return Object.keys(myArray).map(function (key) {
+                    return myArray.hasOwnProperty(key)
+                }).length
+            }
 
             $scope.user = {};
         }
 
-        angular.module('myApp', [])
-                .controller('registerController', registerController)
-        ;
+        var module = angular.module('myApp', []);
+
+        module.controller('registerController', registerController);
+        module.config(function ($interpolateProvider) {
+            $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+        });
     </script>
 {% endblock %}

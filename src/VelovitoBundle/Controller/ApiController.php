@@ -20,14 +20,13 @@ class ApiController extends GeneralController
         } catch (\Exception $e) {
             return $this->jsonFailure($e->getMessage());
         }
-
     }
 
     public function userExists(Request $request)
     {
         $user = $this->get(C::MODEL_SECURITY)->getUserByEmail($request->get('email'));
 
-        return $this->jsonSuccess(true);
+        return $this->jsonSuccess(!empty($user));
     }
 
     private function dummy(Request $request)
