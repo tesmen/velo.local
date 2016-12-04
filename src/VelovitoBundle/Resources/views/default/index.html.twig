@@ -1,10 +1,22 @@
-{% extends 'VelovitoBundle::layout_news_panel.html.twig' %}
+{% extends 'VelovitoBundle::layout_blank.html.twig' %}
 {% import '@Velovito/templates/macroses.html.twig' as macroses %}
 
 {% block body %}
-    <h4 class="media-heading">Последние объявления</h4>
+    <div class="row">
+        <div class="col-xs-4">
+            <h4 class="media-heading">Самые популярные</h4>
 
-    {% for ad in ads %}
-        {{ macroses.advert(ad) }}
-    {% endfor %}
+            {% for ad in ads | slice(0,5) %}
+                {{ macroses.advert(ad) }}
+            {% endfor %}
+        </div>
+
+        <div class="col-xs-8">
+            <h4 class="media-heading">Последние объявления</h4>
+
+            {% for ad in ads %}
+                {{ macroses.advert(ad) }}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

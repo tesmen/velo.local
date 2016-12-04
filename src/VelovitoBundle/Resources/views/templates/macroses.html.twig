@@ -132,7 +132,7 @@
 {% macro advert(advert, showMenu = false) %}
     {% set userPhotoName = advert.getPhoto is empty ? null : advert.getPhoto.getFileName() %}
 
-    <div class="row advert-list-item">
+    <div class="row">
         <div class="col-md-2 col-xs-4">
             <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
                 <img src="{{ userPhotoName | getUserPhoto(150,150) }}" alt="{{ advert.title }}"
