@@ -162,6 +162,14 @@ class AdvertisementModel
         );
     }
 
+    public function getPopular($count)
+    {
+        return $this->advertRepo->findBy(
+            ['isPublished' => true],
+            ['viewsCount' => 'DESC']
+        );
+    }
+
 
     public function getLastAdvertsFromCategory($id)
     {

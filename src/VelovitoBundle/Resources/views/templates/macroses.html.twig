@@ -133,47 +133,98 @@
     {% set userPhotoName = advert.getPhoto is empty ? null : advert.getPhoto.getFileName() %}
 
     <div class="row">
-        <div class="col-md-2 col-xs-4">
-            <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
-                <img src="{{ userPhotoName | getUserPhoto(150,150) }}" alt="{{ advert.title }}"
-                     class="img-thumbnail advert-photo">
-            </a>
-        </div>
+        <div class="col-xs-12">
+            <div class="advert-list-item">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                            <img src="{{ userPhotoName | getUserPhoto(150,150) }}" alt="{{ advert.title }}"
+                                 class="img-thumbnail">
+                        </a>
+                    </div>
 
-        <div class="col-md-7 col-xs-4 v-advert-info">
-            <div class="clip">
-                <a class="title" href="{{ url('advert_view', {'advertId': advert.getId()}) }}">{{ advert.title }}</a>
+                    <div class="col-xs-6">
+                        <div class="clip">
+                            <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                                <span class="lead">{{ advert.title }}</span>
+                            </a>
+                        </div>
+
+                        <div class="clip">
+                            <span class="text-muted">{{ advert.description ?: 'Описания нет...' }}</span>
+                        </div>
+
+                        <div>
+                            <span>Размещено: </span>
+                            {{ advert.created | days_ago }}
+                            в
+                            <a href="{{ url('adverts_search', {category_id: advert.Product.category.id }) }}">{{ advert.Product.category.Name }}</a>
+                            /
+                            <a href="{{ url('adverts_search', {product_id: advert.Product.id }) }}">{{ advert.Product.Name }}</a>
+                        </div>
+
+                        <div>
+                            <span class="glyphicon glyphicon-user " aria-hidden="true"></span>
+                            <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3 text-center">
+                        <div>
+                            <span class="lead ">{{ advert.getPrice() }} {{ advert.getCurrencyName }}</span>
+                        </div>
+
+                        <div>
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            {{ advert.getViewsCount() | number_format }} &nbsp;
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="clip">
-                <span class="description text-gray" href="#">{{ advert.description ?: 'Описания нет...' }}</span>
-            </div>
-
-            <div>
-                <span>Размещено: </span>
-                {#<span class="glyphicon glyphicon-time" aria-hidden="true"></span>#}
-                {{ advert.created | days_ago }} &nbsp;
-            </div>
-
-            <div>
-                <a href="{{ url('adverts_search', {category_id: advert.Product.category.id }) }}">{{ advert.Product.category.Name }}</a>
-                /
-                <a href="{{ url('adverts_search', {product_id: advert.Product.id }) }}">{{ advert.Product.Name }}</a>
-            </div>
-        </div>
-
-        <div class="col-md-3 col-xs-4 v-advert-info">
-            <span class="price one-half-rem"> {{ advert.getPrice() }} {{ advert.getCurrencyName }}</span>
-            <br>
-
-            <span class="glyphicon glyphicon-eye-open"></span>
-            {{ advert.getViewsCount() | number_format }} &nbsp;
-            <br>
-
-            <span class="glyphicon glyphicon-user " aria-hidden="true"></span>
-            <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
-
         </div>
     </div>
 {% endmacro %}
 
+
+{% macro advert_mini(advert, showMenu = false) %}
+    {% set userPhotoName = advert.getPhoto is empty ? null : advert.getPhoto.getFileName() %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="advert-list-item" style="padding-bottom: 3px">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                            <img src="{{ userPhotoName | getUserPhoto(250,250) }}" alt="{{ advert.title }}"
+                                 class="img-thumbnail">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="clip padding-left-10">
+                            <a href="{{ url('advert_view', {'advertId': advert.getId()}) }}">
+                                <span class="lead">{{ advert.title }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span class="padding-left-10">{{ advert.getPrice() }} {{ advert.getCurrencyName }}</span>
+
+                        <span class="glyphicon glyphicon-user padding-left-10" aria-hidden="true"></span>
+                        <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
+
+                        <div class="pull-right">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            {{ advert.getViewsCount() | number_format }} &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

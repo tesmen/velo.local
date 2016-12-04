@@ -3,15 +3,15 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-3">
             <h4 class="media-heading">Самые популярные</h4>
 
-            {% for ad in ads | slice(0,5) %}
-                {{ macroses.advert(ad) }}
+            {% for ad in popularAdverts | slice(0,3) %}
+                {{ macroses.advert_mini(ad) }}
             {% endfor %}
         </div>
 
-        <div class="col-xs-8">
+        <div class="col-xs-9">
             <h4 class="media-heading">Последние объявления</h4>
 
             {% for ad in ads %}
