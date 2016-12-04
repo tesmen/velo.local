@@ -213,14 +213,23 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <span class="padding-left-10">{{ advert.getPrice() }} {{ advert.getCurrencyName }}</span>
+                        <div class=" padding-left-10">
+                            <span>{{ advert.getPrice() }} {{ advert.getCurrencyName }}</span>
 
-                        <span class="glyphicon glyphicon-user padding-left-10" aria-hidden="true"></span>
-                        <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
+                            <a class="pull-right" href="{{ url('adverts_search', {product_id: advert.Product.id }) }}">
+                                {{ advert.Product.Name }} &nbsp;
+                            </a>
+                        </div>
 
-                        <div class="pull-right">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            {{ advert.getViewsCount() | number_format }} &nbsp;
+                        <div class=" padding-left-10">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <a href="{{ url('view_user_profile',{id: advert.user.id}) }}">{{ advert.user.userName }}</a>
+
+
+                            <div class="pull-right">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                {{ advert.getViewsCount() | number_format }} &nbsp;
+                            </div>
                         </div>
                     </div>
                 </div>
