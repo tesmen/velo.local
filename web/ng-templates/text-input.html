@@ -1,0 +1,17 @@
+<div class="form-group"
+     ng-class="{ 'has-error': (countObject(reg_form.name.$error) && (reg_form.$submitted || reg_form.name.$touched))}">
+    <label class="required">Имя</label>
+    <input type="text" required placeholder="Имя" maxlength="16" autocomplete="off" name="name"
+           class="form-control" ng-model="user.name" minlength="3" maxlength="16"
+           ng-model-options="{ debounce: { default: 500, blur: 0 } }">
+
+    <div ng-show="reg_form.$submitted || reg_form.name.$touched">
+        <div ng-show="reg_form.name.$error.required" class="text-danger">Обязательное поле</div>
+        <div ng-show="reg_form.name.$error.minlength" class="text-danger">Минимум 3 символа</div>
+    </div>
+</div>
+
+<div ng-show="reg_form.$submitted || reg_form.name.$touched">
+    <div ng-show="reg_form.name.$error.required" class="text-danger">Обязательное поле</div>
+    <div ng-show="reg_form.name.$error.minlength" class="text-danger">Минимум 3 символа</div>
+</div>

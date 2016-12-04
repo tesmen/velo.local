@@ -19,40 +19,71 @@
                     <div class="row">
                         <div id="register-form" class="col-md-12">
                             <form name="reg_form" method="post" novalidate class="angular-form">
-                                <div class="form-group"
-                                     ng-class="{ 'has-error': (countObject(reg_form.name.$error) && (reg_form.$submitted || reg_form.name.$touched))}">
+                                <div class="form-group" vv-has-error-form="reg_form">
                                     <label for="register_form_username" class="required">Имя</label>
-                                    <input type="text" required placeholder="Имя" maxlength="16" autocomplete="off" name="name"
+
+                                    <input type="text" required placeholder="Имя" maxlength="16" autocomplete="off"
                                            class="form-control" ng-model="user.name" minlength="3" maxlength="16"
-                                           ng-model-options="{ debounce: { default: 500, blur: 0 } }">
+                                           ng-model-options="{ debounce: { default: 500, blur: 0 } }" name="uName">
 
                                     <div ng-show="reg_form.$submitted || reg_form.name.$touched">
-                                        <div ng-show="reg_form.name.$error.required" class="text-danger">Обязательное поле</div>
-                                        <div ng-show="reg_form.name.$error.minlength" class="text-danger">Минимум 3 символа</div>
+                                        <div ng-show="reg_form.uName.$error.required" class="text-danger">
+                                            Обязательное поле
+                                        </div>
+
+                                        <div ng-show="reg_form.uName.$error.minlength" class="text-danger">
+                                            Минимум 3 символа
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="register_form_email" class="required">Электронная почта</label>
-                                    <input type="text" id="register_form_email" name="register_form[email]"
-                                           required="required" placeholder="Электронная почта" maxlength="32"
-                                           ng-change="checkUserExistence()" class="form-control " ng-model="user.email"
-                                           ng-model-options="{ updateOn: blur }">
+                                <div class="form-group"
+                                     ng-class="{ 'has-error': (countObject(reg_form.name.$error) && (reg_form.$submitted || reg_form.name.$touched))}">
+                                    <label for="register_form_username" class="required">Имя</label>
+
+                                    <input type="email" required placeholder="Имя" maxlength="16" autocomplete="off"
+                                           class="form-control" ng-model="user.name" minlength="3" maxlength="16"
+                                           ng-model-options="{ debounce: { default: 500, blur: 0 } }" name="name">
+
+                                    {#<foo-directive field="reg_form.name" form="reg_form">#}
+
+                                    <div ng-show="reg_form.$submitted || reg_form.name.$touched">
+                                        <div ng-show="reg_form.name.$error.required" class="text-danger">
+                                            Обязательное поле
+                                        </div>
+
+                                        <div ng-show="reg_form.name.$error.minlength" class="text-danger">
+                                            Минимум 3 символа
+                                        </div>
+
+                                        <div ng-show="reg_form.name.$error.email" class="text-danger">
+                                            Неверный формат e-mail
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="register_form_password" class="required">Пароль</label>
-                                    <input type="password" id="register_form_password" name="register_form[password]"
-                                           required="required" placeholder="Пароль" maxlength="16" autocomplete="off"
-                                           class="form-control" ng-model="user.password">
-                                </div>
 
-                                <div class="form-group">
-                                    <input type="password" id="register_form_confirm_password"
-                                           name="register_form[confirm_password]" required="required"
-                                           placeholder="Подтверждение пароля" maxlength="16" autocomplete="off"
-                                           class="form-control" ng-model="user.confirm_password">
-                                </div>
+                                {#<div class="form-group">#}
+                                {#<label for="register_form_email" class="required">Электронная почта</label>#}
+                                {#<input type="text" id="register_form_email" name="register_form[email]"#}
+                                {#required="required" placeholder="Электронная почта" maxlength="32"#}
+                                {#ng-change="checkUserExistence()" class="form-control " ng-model="user.email"#}
+                                {#ng-model-options="{ updateOn: blur }">#}
+                                {#</div>#}
+
+                                {#<div class="form-group">#}
+                                {#<label for="register_form_password" class="required">Пароль</label>#}
+                                {#<input type="password" id="register_form_password" name="register_form[password]"#}
+                                {#required="required" placeholder="Пароль" maxlength="16" autocomplete="off"#}
+                                {#class="form-control" ng-model="user.password">#}
+                                {#</div>#}
+
+                                {#<div class="form-group">#}
+                                {#<input type="password" id="register_form_confirm_password"#}
+                                {#name="register_form[confirm_password]" required="required"#}
+                                {#placeholder="Подтверждение пароля" maxlength="16" autocomplete="off"#}
+                                {#class="form-control" ng-model="user.confirm_password">#}
+                                {#</div>#}
                                 {[{ user | json }]}
                                 <button type="submit" id="register_form_submit" name="register_form[submit]"
                                         class="hidden">Регистрация
@@ -102,27 +133,58 @@
     </div>
 
     <script>
-        function formDirective(form, field) {
+        function fooDirective($interval) {
+            return {
+                restrict: 'E',
+                link: function (scope, element, attrs) {
+                    console.log('fooDirective');
+//                    console.log(scope[attrs.form].$error);
 
+                    $interval(function () {
+                        console.log(scope[attrs.form].$error)
+                    }, 500)
+                }
+            };
+        }
+
+        function hasErrorDirective($interval) {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attrs) {
+                    var formName = element.parent().attr('name');
+                    var fieldName = element.find('input').attr('name');
+
+                    $interval(function () {
+                        if (countObject(scope[formName][fieldName].$error) && (scope[formName].$submitted || scope[formName][fieldName].$touched)) {
+                            element.addClass('has-error')
+                        } else {
+                            element.removeClass('has-error')
+                        }
+                    }, 500)
+                }
+            };
         }
 
         function registerController($scope, $http) {
+            $scope.user = {};
+
             $scope.checkUserExistence = function () {
-                $http.get('/api/userExists?email='+ $scope.user.email)
+                $http.get('/api/userExists?email=' + $scope.user.email)
             };
 
-            $scope.countObject = function(myArray){
+            $scope.countObject = function (myArray) {
                 return Object.keys(myArray).map(function (key) {
                     return myArray.hasOwnProperty(key)
                 }).length
-            }
-
-            $scope.user = {};
+            };
         }
 
         var module = angular.module('myApp', []);
 
         module.controller('registerController', registerController);
+        module.directive('fooDirective', fooDirective);
+        module.directive('vvHasErrorForm', hasErrorDirective);
+
         module.config(function ($interpolateProvider) {
             $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
         });

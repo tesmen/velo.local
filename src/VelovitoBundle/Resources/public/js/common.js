@@ -1,3 +1,7 @@
+countObject = function(obj){
+    return Object.keys(obj).map(function(key) {return obj.hasOwnProperty(key)} ).length
+};
+
 var words_roubles = ["рубль", "рубля", "рублей"];
 var words_months = ["месяц", "месяца", "месяцев"];
 var _discounts = {
