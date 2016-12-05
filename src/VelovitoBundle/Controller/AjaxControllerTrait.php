@@ -16,7 +16,7 @@ trait AjaxControllerTrait
         ]);
     }
 
-    private function jsonSuccess($data = '')
+    private function jsonSuccess($data = [])
     {
         return $this->standardJsonArray(true, $data);
     }

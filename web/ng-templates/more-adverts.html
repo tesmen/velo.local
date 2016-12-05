@@ -22,7 +22,7 @@
 
                     <div>
                         <span>Размещено: </span>
-                         advert.created | days_ago }}
+                         {{ advert.creation_date }}
                         в
                         <a href=#> advert.Product.category.Name }}</a>
                         /
@@ -46,6 +46,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="advert-list-item text-center cursor-pointer" ng-click="loadMore()">
+            <span class="lead">Показать ещё</span>
         </div>
     </div>
 </div>

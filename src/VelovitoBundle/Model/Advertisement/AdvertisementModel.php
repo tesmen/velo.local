@@ -3,6 +3,7 @@
 namespace VelovitoBundle\Model\Advertisement;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
 use Symfony\Component\HttpFoundation\Request;
 use VelovitoBundle\C;
 use VelovitoBundle\Entity\AdvertisementAttribute;
@@ -374,11 +375,17 @@ class AdvertisementModel
         ]);
     }
 
-    public function getMoreAdverts()
+    public function getMoreAdverts($id)
     {
+        if (empty($id)) {
+            return [];
+        }
 
-        return $this->categoriesRepo->findBy([
-            'active' => true,
-        ]);
+        $conn = $this->em->getConnection();
+        $sql = "SELECT * FROM advertisement a WHERE a.is_published = TRUE AND a.id < :last_id LIMIT 5";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue("last_id", $id);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }

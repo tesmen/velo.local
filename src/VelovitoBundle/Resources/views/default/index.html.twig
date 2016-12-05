@@ -11,7 +11,7 @@
             {% endfor %}
         </div>
 
-        <div class="col-xs-9" ng-controller="mainCtrl">
+        <div class="col-xs-9">
             <div class="row">
                 <div class="col-xs-12">
                     <h4 class="media-heading">Последние объявления</h4>
@@ -28,24 +28,28 @@
                     <ng-view></ng-view>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="advert-list-item text-center cursor-pointer" ng-click="loadMore()">
-                        <span class="lead">Показать ещё</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
     <script>
         function mainCtrl($scope, $http) {
-            $scope.adverts = [{id:1},{id:2}]
+            $scope.adverts = [];
+            $scope.foo = 100;
+
+            $scope.makeFoo = function(){
+                $scope.foo = 200;
+                $scope.adverts = [1,2,3];
+            };
+
             $scope.loadMore = function(){
                 $scope.loading = true;
+                $scope.adverts = [1,2,3];
 
-                $http.get('api/showMoreAdverts')
+                $http.get('api/showMoreAdverts?last_id=10')
+                        .then(function (response) {
+                            $scope.adverts = response.data.data;
+                            console.log($scope.adverts)
+                        })
             }
         }
 
@@ -55,7 +59,7 @@
                     $routeProvider
                             .when("/", {
                                 templateUrl: "/ng-templates/more-adverts.html",
-                                controller: mainCtrl,
+                                controller: 'mainCtrl',
                                 reloadOnSearch: false
                             })
                             .otherwise({

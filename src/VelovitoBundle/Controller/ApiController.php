@@ -31,9 +31,10 @@ class ApiController extends GeneralController
 
     private function showMoreAdverts(Request $request)
     {
-        $adModel = $this->get('model.advertisement')->getMoreAdverts();
+        $last_id = $request->get('last_id');
+        $result = $this->get('model.advertisement')->getMoreAdverts($last_id);
 
-        return $this->jsonSuccess(!empty([]));
+        return $this->jsonSuccess($result);
     }
 
     private function dummy(Request $request)
