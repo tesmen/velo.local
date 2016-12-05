@@ -29,6 +29,13 @@ class ApiController extends GeneralController
         return $this->jsonSuccess(!empty($user));
     }
 
+    private function showMoreAdverts(Request $request)
+    {
+        $adModel = $this->get('model.advertisement')->getMoreAdverts();
+
+        return $this->jsonSuccess(!empty([]));
+    }
+
     private function dummy(Request $request)
     {
 

@@ -374,4 +374,11 @@ class AdvertisementModel
         ]);
     }
 
+    public function getMoreAdverts()
+    {
+
+        return $this->categoriesRepo->findBy([
+            'active' => true,
+        ]);
+    }
 }

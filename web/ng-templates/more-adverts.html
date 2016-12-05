@@ -1,0 +1,51 @@
+<div class="row" ng-repeat="advert in adverts">
+    <div class="col-xs-12">
+        <div class="advert-list-item">
+            <div class="row">
+                <div class="col-xs-3">
+                    <a href="">
+                        <img src="advert.photo_link" alt="{{ advert.title }}"
+                             class="img-thumbnail">
+                    </a>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="clip">
+                        <a href="#">
+                            <span class="lead">{{ advert.title }}</span>
+                        </a>
+                    </div>
+
+                    <div class="clip">
+                        <span class="text-muted">?: 'Описания нет...' }}</span>
+                    </div>
+
+                    <div>
+                        <span>Размещено: </span>
+                         advert.created | days_ago }}
+                        в
+                        <a href=#> advert.Product.category.Name }}</a>
+                        /
+                        <a href="#"> advert.Product.Name }}</a>
+                    </div>
+
+                    <div>
+                        <span class="glyphicon glyphicon-user " aria-hidden="true"></span>
+                        <a href="#"> advert.user.userName }}</a>
+                    </div>
+                </div>
+
+                <div class="col-xs-3 text-center">
+                    <div>
+                        <span class="lead ">{{ advert.getPrice() }} {{ advert.getCurrencyName }}</span>
+                    </div>
+
+                    <div>
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                         advert.getViewsCount() |  }} &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
