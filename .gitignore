@@ -4,7 +4,8 @@
 /app/config/parameters.yml
 /app/phpunit.xml
 /var/sessions/*
-/var/
+/var/logs
+/var/cache
 /dumps/
 /vendor/
 /web/bundles/
