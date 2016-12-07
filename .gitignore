@@ -5,6 +5,7 @@
 /app/phpunit.xml
 /var/sessions/*
 /var/
+/dumps/
 /vendor/
 /web/bundles/
 /web/cache/
