@@ -20,6 +20,7 @@ class User implements UserInterface, \Serializable
      */
     private $id;
 
+
     /**
      * @var string
      *
