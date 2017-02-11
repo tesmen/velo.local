@@ -60,10 +60,10 @@ admin_api_post:
         _controller: VelovitoBundle:Admin:post
         id: null
 
-api_call:
-    path:     /api/{methodName}
-    methods: {POST, GET}
-    defaults: { _controller: VelovitoBundle:Api:call }
+#api_call:
+#    path:     /api/{methodName}
+#    methods: {POST, GET}
+#    defaults: { _controller: VelovitoBundle:Api:call }
 
 admin_list_products:
     path:     /admin/list-products
