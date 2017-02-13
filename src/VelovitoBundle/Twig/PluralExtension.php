@@ -18,8 +18,8 @@ class PluralExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            'plural'  => new \Twig_Filter_Method($this, 'plural'),
-            'nplural' => new \Twig_Filter_Method($this, 'nplural'),
+            'plural'  => new \Twig_SimpleFilter('plural', [$this, 'plural']),
+            'nplural' => new \Twig_SimpleFilter('nplural', [$this, 'nplural']),
         ];
     }
 
@@ -32,13 +32,13 @@ class PluralExtension extends \Twig_Extension
 
         $digit = ($digit > 20) ? $digit % 10 : $digit;
         if ($digit >= 5 || $digit == 0) {
-            return $text.' '.$e3;
+            return $text . ' ' . $e3;
         }
         if ($digit >= 2) {
-            return $text.' '.$e2;
+            return $text . ' ' . $e2;
         }
 
-        return $text.' '.$e1;
+        return $text . ' ' . $e1;
     }
 
     /*

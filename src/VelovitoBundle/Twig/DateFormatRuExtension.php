@@ -12,7 +12,7 @@ class DateFormatRuExtension extends \Twig_Extension
 
     public function getFilters()
     {
-        return ['ru_date' => new \Twig_Filter_Method($this, 'ruDateFormat')];
+        return ['ru_date' => new \Twig_SimpleFilter('ruDateFormat', [$this, 'ruDateFormat'])];
     }
 
     public function ruDateFormat($dateRaw)
