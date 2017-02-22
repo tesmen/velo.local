@@ -48,10 +48,10 @@ class ProductCategoryRepository extends GeneralRepository
     {
         $q = $this->_em->getConnection()->prepare(
             'SELECT p.id, p.name, pc.name as category_name
-FROM `products` p
-JOIN `product_categories` pc
+FROM "products" p
+JOIN "product_categories" pc
 on p.category_id = pc.id
-where p.active = 1'
+where p.active = true'
         );
 
         $q->execute();
@@ -64,10 +64,10 @@ where p.active = 1'
         $result = [];
         $q = $this->_em->getConnection()->prepare(
             'SELECT p.id, p.name, pc.id as category_id, pc.name as category_name
-                FROM `products` p
-                JOIN `product_categories` pc
+                FROM "products" p
+                JOIN "product_categories" pc
                 on p.category_id = pc.id
-                where p.active = 1'
+                where p.active = true'
         );
 
         $q->execute();

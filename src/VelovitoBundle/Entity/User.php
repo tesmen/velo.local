@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  *
- * @ORM\Table()
+ * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="VelovitoBundle\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable

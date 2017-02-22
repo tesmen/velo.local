@@ -79,6 +79,10 @@ class SecurityModel
         ]);
     }
 
+    public function setUser($user){
+        $this->forceAuthenticate($user);
+    }
+
     public function authenticateByVk()
     {
         try {
