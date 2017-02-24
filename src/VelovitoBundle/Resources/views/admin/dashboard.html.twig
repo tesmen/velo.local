@@ -4,33 +4,24 @@
     <title> admin </title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap-select/css/bootstrap-select.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/velovito/css/style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/velovito/vendor/bootstrap/css/bootstrap.min.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
-    <script src="bundles/velovito/vendor/angular/angular.js"></script>
+    <script src="{{ asset('bundles/velovito/js/common.js') }}"></script>
+    <script src="{{ asset('bundles/velovito/js/filters.js') }}"></script>
+    <script src="{{ asset('bundles/velovito/js/services.js') }}"></script>
+    <script src="{{ asset('bundles/velovito/vendor/angular/angular.js') }}"></script>
     <script src="{{ asset('bundles/velovito/vendor/angular/angular-route.js') }}"></script>
     <script src="{{ asset('bundles/velovito/vendor/jquery/jquery-3.1.0.min.js') }}"></script>
-    <script src="{{ asset('bundles/velovito/vendor/jquery/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('bundles/velovito/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bundles/velovito/js/common.js') }}"></script>
-    <script src="{{ asset('bundles/velovito/vendor/bootstrap/common-ui.js') }}"></script>
-    <script src="{{ asset('bundles/velovito/vendor/bootstrap/spinner.js') }}"></script>
-    <script src="{{ asset('admin-static/js/controllers.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('bundles/velovito/admin-static/js/controllers.js') }}"></script>
 </head>
 
 <body>
-
-<div class="container" ng-app="myApp">
-    <ng-include src="'header.html'"></ng-include>
-111
-    <ng-view ng-cloak></ng-view>
-222
-
-    {% include('@Velovito/admin/ng-templates.html.twig') %}
+<div class="container" ng-app="myApp" ng-cloak>
+    <ng-include src="'/bundles/velovito/admin-static/views/header.html'"></ng-include>
+    <ng-view></ng-view>
 </div>
 </body>
-
 </html>

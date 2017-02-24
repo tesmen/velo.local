@@ -1,55 +1,39 @@
 angular.module('myApp', ['ngRoute'])
-    .config(function ($routeProvider) {
+    .config(function ($routeProvider, $locationProvider) {
+        $locationProvider.hashPrefix('');
+        var templatesBase = '/bundles/velovito/admin-static/views';
+
         $routeProvider
             .when("/", {
-                templateUrl: "/admin-static/views/dashboard.html",
-                controller: dashBoardController,
-                reloadOnSearch: false
+                templateUrl: templatesBase + "/dashboard.html",
+                controller: dashBoardController
             })
             .when("/categories", {
                 templateUrl: "dashboard.html"
             })
             .when("/products/list", {
-                templateUrl: "/admin-static/views/products.html",
-                controller: productsController,
-                reloadOnSearch: false
-
+                templateUrl: templatesBase + "/products.html",
+                controller: productsController
             })
             .when("/products/add", {
-                templateUrl: "/admin-static/views/product.html",
-                controller: addProductController,
-                reloadOnSearch: false
-
+                templateUrl: templatesBase + "/product.html",
+                controller: addProductController
             })
             .when("/products/edit/:id", {
-                templateUrl: "/admin-static/views/product.html",
-                controller: editProductController,
-                reloadOnSearch: false
-
+                templateUrl: templatesBase + "/product.html",
+                controller: editProductController
             })
             .when("/categories/list", {
-                templateUrl: "/admin-static/views/categories.html",
-                controller: categoriesController,
-                reloadOnSearch: false
-
-            })
-            .when("/blue", {
-                templateUrl: "blue.htm"
+                templateUrl: templatesBase + "/categories.html",
+                controller: categoriesController
             })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: "/"
             });
     })
     .controller('myCtrl', myCtrl)
     .controller('dashBoardController', dashBoardController)
-    .filter('greet', greetFilter)
-    .run(function ($rootScope) {
-        $('.selectpicker').selectpicker('refresh');
-
-        $rootScope.globalBack = function() {
-            window.history.back();
-        };
-    });
+    .filter('greet', greetFilter);
 
 function myCtrl($scope, $http) {
     $scope.foo = 1;
@@ -65,6 +49,7 @@ function myCtrl($scope, $http) {
 }
 
 function dashBoardController($scope) {
+    $scope.name = 'dashBoardController';
 }
 
 function productsController($scope, $http, $location) {
@@ -142,10 +127,4 @@ function categoriesController($scope, $http) {
     $http.get('api/admin/productCategory').success(function (response) {
         $scope.list = response.data;
     })
-}
-
-function greetFilter() {
-    return function (name) {
-        return 'Hello, ' + name + '!';
-    }
 }
