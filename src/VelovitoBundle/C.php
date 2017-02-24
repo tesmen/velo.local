@@ -4,9 +4,9 @@ namespace VelovitoBundle;
 
 class C
 {
-    const ROLE_USER = 1;
-    const ROLE_MODERATOR = 2;
-    const ROLE_ADMIN = 3;
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_MODERATOR = 'ROLE_MODERATOR';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
 
     const ADVERT_STATUS_DRAFT = 10;
     const ADVERT_STATUS_PUBLISHED = 20;

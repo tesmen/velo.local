@@ -11,7 +11,7 @@ class MaintenanceModel
 {
     private $em;
 
-    public function  __construct(EntityManager $em)
+    public function __construct(EntityManager $em)
     {
         $this->em = $em;
 
@@ -22,9 +22,9 @@ class MaintenanceModel
     function loadRoles()
     {
         $roles = [
-            C::ROLE_USER      => 'ROLE_USER',
-            C::ROLE_MODERATOR => 'ROLE_MODERATOR',
-            C::ROLE_ADMIN     => 'ROLE_ADMIN',
+            C::ROLE_USER,
+            C::ROLE_MODERATOR,
+            C::ROLE_ADMIN,
         ];
 
         $this->em->getRepository(C::REPO_ROLE)->load($roles);
@@ -35,9 +35,14 @@ class MaintenanceModel
         $category = $this->productCatRepo->create('Велосипеды');
 
         $this->productsRepo->create([
-            C::FORM_TITLE=> 'Горные',
-            C::FORM_CATEGORY=> $category->getId(),
+            C::FORM_TITLE    => 'Горные',
+            C::FORM_CATEGORY => $category->getId(),
 
         ]);
+    }
+
+    public function load()
+    {
+        $this->loadRoles();
     }
 }

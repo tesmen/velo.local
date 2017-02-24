@@ -66,12 +66,11 @@ where p.active = true'
             'SELECT p.id, p.name, pc.id as category_id, pc.name as category_name
                 FROM "products" p
                 JOIN "product_categories" pc
-                on p.category_id = pc.id
+                ON p.category_id = pc.id
                 where p.active = true'
         );
 
         $q->execute();
-
 
         foreach ($q->fetchAll() as $row) {
             $categoryId = $row['category_id'];

@@ -16,27 +16,28 @@ class Role implements RoleInterface
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="created", type="datetime")
      */
-    private $createdAt;
+    private $created;
 
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->created = new \DateTime();
     }
 
     public function getRole()
@@ -94,12 +95,12 @@ class Role implements RoleInterface
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param \DateTime $created
      * @return Role
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($created)
     {
-        $this->createdAt = $createdAt;
+        $this->created = $created;
 
         return $this;
     }
@@ -111,6 +112,6 @@ class Role implements RoleInterface
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->created;
     }
 }

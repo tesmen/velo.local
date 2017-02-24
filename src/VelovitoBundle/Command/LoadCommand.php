@@ -31,14 +31,8 @@ class LoadCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $task = $input->getArgument('task');
-
-        if ($task) {
-            $task = 'load'.$task;
-            $this->getContainer()->get(C::MODEL_MAINTENANCE)->$task();
-        } else {
-            $output->writeln('task not defined');
-        }
+        $model = $this->getContainer()->get(C::MODEL_MAINTENANCE);
+        $model->load();
     }
 }
