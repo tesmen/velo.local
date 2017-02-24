@@ -1,0 +1,40 @@
+<h4>Products</h4>
+
+<div class="row">
+    <div class="col-12-xs">
+        <div class="btn-group">
+            <button type="button" class="btn btn-warning" ng-click="globalBack()">Back</button>
+            <button type="button" class="btn btn-success" ng-click="addItem()">Add new</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12-xs">
+        <table class="table table-stripped" border="1">
+            <thead>
+                <th ng-repeat="val in items[0] | objectKeys"><b>{{val}}</b></th>
+            </thead>
+
+            <tr ng-repeat="item in items">
+                <td>
+                    {{ item.id }}
+                </td>
+
+                <td>{{ item.name }}</td>
+
+                <td>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="editItem(item)">Edit</button>
+
+                    <button type="button" class="btn btn-sm btn-success" ng-click="toggleActive(item)"
+                            ng-if="!item.active && (item.active === false || item.active === true)">Activate
+                    </button>
+
+                    <button type="button" class="btn btn-sm btn-danger" ng-click="toggleActive(item)"
+                            ng-if="item.active && (item.active === false || item.active === true)">Deactivate
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

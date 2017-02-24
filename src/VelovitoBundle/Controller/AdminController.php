@@ -21,45 +21,35 @@ class AdminController extends GeneralController
 {
     use AjaxControllerTrait;
 
+    private function getQueryBuilder()
+    {
+        return $this->container->get('doctrine.orm.default_entity_manager')->getConnection()->createQueryBuilder();
+    }
+
     public function dashBoardAction()
     {
         return $this->render('@Velovito/admin/dashboard.html.twig');
     }
 
-    public function getAction(Request $request, $entityName, $id)
+    public function getAction(Request $request, $tableName, $id)
     {
-        if (empty(($repo = $this->getRepositoryByName($entityName)))) {
-            return $this->jsonFailure('entity not found');
-        }
+        $query = $this->getQueryBuilder()
+            ->select('*')
+            ->from($tableName);
 
         if ($id) {
-            $data = $repo
-                ->createQueryBuilder('q')
-                ->where('q.id = :id')
-                ->setParameter('id', $id)
-                ->getQuery()
-                ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
-                ->getOneOrNullResult(Query::HYDRATE_ARRAY);
-
-            return $this->jsonSuccess($data);
+            $query->where(sprintf("id = %d", $id));
+            $data = $query->execute()->fetch();
+        }else {
+            $data = $query->execute()->fetchAll();
         }
-
-        $limit = (int)$request->query->get('limit');
-        $indexBy = $request->query->get('index_by');
-
-        $data = $repo
-            ->createQueryBuilder('q', $indexBy ? "q.$indexBy" : null)
-            ->setMaxResults($limit ?: AjaxController::F_LIMIT_DEFAULT)
-            ->getQuery()
-            ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true)
-            ->getResult(Query::HYDRATE_ARRAY);
 
         return $this->jsonSuccess($data);
     }
 
-    public function postAction(Request $request, $entityName, $id)
+    public function postAction(Request $request, $tableName, $id)
     {
-        if (empty(($repo = $this->getRepositoryByName($entityName)))) {
+        if (empty(($repo = $this->getRepositoryByName($tableName)))) {
             return $this->jsonFailure('entity not found');
         }
 
@@ -268,7 +258,9 @@ class AdminController extends GeneralController
             C::FORM_TITLE          => $ent->getName(),
             C::FORM_COMMENT        => $ent->getComment(),
             C::FORM_ATTRIBUTE_TYPE => $ent->getType(),
-            C::FORM_REFERENCE      => $ent->getReference() ? $ent->getReference()->getId() : null,
+            C::FORM_REFERENCE      => $ent->getReference()
+                ? $ent->getReference()->getId()
+                : null,
             C::FORM_REFERENCE_LIST => $model->getAttrReferencesForForm(),
         ]);
 

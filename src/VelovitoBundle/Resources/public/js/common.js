@@ -1,6 +1,42 @@
-countObject = function(obj){
-    return Object.keys(obj).map(function(key) {return obj.hasOwnProperty(key)} ).length
-};
+function countObject(obj) {
+    return Object.keys(obj).map(function (key) {
+        return obj.hasOwnProperty(key)
+    }).length
+}
+
+function pick(array, value, field) {
+    if (undefined === field) {
+        field = 'id'
+    }
+
+    for (var i in array) {
+        var obj = array[i];
+
+        if (obj.hasOwnProperty(field) && obj[field] === value) {
+            return obj;
+        }
+    }
+}
+
+function objectToArray(obj, removeHashKey) {
+    if (undefined === removeHashKey) {
+        removeHashKey = true;
+    }
+
+    var result = [];
+
+    for (var key in obj) {
+        if (removeHashKey && '$$hashKey' === key) { // angular thing
+            continue;
+        }
+
+        if (obj.hasOwnProperty(key)) {
+            result.push(key);
+        }
+    }
+
+    return result;
+}
 
 var words_roubles = ["рубль", "рубля", "рублей"];
 var words_months = ["месяц", "месяца", "месяцев"];

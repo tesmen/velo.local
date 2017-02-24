@@ -1,16 +1,14 @@
-<h4>Product {{ item.id }} - {{ item.name }}</h4>
-
-<div class="row">
+<div class="row top-buffer">
     <div class="col-xs-12">
-        <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-warning" ng-click="globalBack()">Back</button>
+        <div class="btn-group">
+            <button type="button" class="btn btn-warning" ng-click="back()">Back</button>
             <button type="button" class="btn btn-success" ng-click="save()">Save</button>
         </div>
     </div>
+</div>
 
-    <div class="col-xs-12 spacer-10px">    </div>
-
-    <div class="col-xs-2">
+<div class="row top-buffer">
+    <div class="col-xs-1">
         <input class="form-control" ng-model="item.id" disabled>
     </div>
 
@@ -18,29 +16,14 @@
         <input class="form-control" ng-model="item.name">
     </div>
 
-    <select class="selectpicker">
-        <option ng-repeat="item in categories" ng-click="setCategory(item)" ng-model="item.category_id">{{ item.name }}</option>
-    </select>
-
-    <div class="col-xs-12 spacer-10px">    </div>
+    <div class="col-xs-3">
+        <select class="form-control"
+                ng-options="cat as cat.name for cat in categories track by cat.id" ng-model="asd">
+        </select>
+    </div>
 
     <div class="col-xs-4">
         <button type="button" class="btn btn-sm btn-success" ng-if="!item.active">Activate</button>
         <button type="button" class="btn btn-sm btn-danger" ng-if="item.active">Deactivate</button>
     </div>
-
-
-    <table class="table table-stripped">
-        <tr ng-repeat="item in products">
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ categories[item.category_id].name }}</td>
-
-            <td>
-                <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                <button type="button" class="btn btn-sm btn-success" ng-if="!item.active">Activate</button>
-                <button type="button" class="btn btn-sm btn-danger" ng-if="item.active">Deactivate</button>
-            </td>
-        </tr>
-    </table>
 </div>

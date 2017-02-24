@@ -221,3 +221,7 @@ body {
 .cursor-default {
     cursor: default;
 }
+
+.top-buffer {
+    margin-top: 20px;
+}
