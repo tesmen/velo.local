@@ -2,6 +2,7 @@
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Advertisement
@@ -78,8 +79,8 @@ class Advertisement
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="creation_date", type="datetime", nullable=false, options={"default":"1"})
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
      */
     private $created;
 
