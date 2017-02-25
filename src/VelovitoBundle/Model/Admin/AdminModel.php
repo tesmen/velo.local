@@ -39,6 +39,7 @@ class AdminModel
         return [
             $this->productsRepo->getTableName(),
             $this->productCatRepo->getTableName(),
+            'role',
         ];
     }
 

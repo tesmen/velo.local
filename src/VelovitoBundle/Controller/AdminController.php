@@ -49,16 +49,9 @@ class AdminController extends GeneralController
 
     public function postAction(Request $request, $tableName, $id)
     {
+        $post = $this->fromPayload($request);
+        $data = $this->get(C::MODEL_ADMIN)->insert($tableName, $post);
 
-        var_dump(1);
-        $data = $this->fromPayload($request);
-
-//        if (empty($data['entity'])) {
-//            return $this->jsonSuccess();
-//        }
-
-        $this->get(C::MODEL_ADMIN)->insert($tableName, $data);
-        die;
         return $this->jsonSuccess($data);
     }
 

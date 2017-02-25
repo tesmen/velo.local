@@ -113,11 +113,11 @@ function commonController($rootScope, $scope, adminApi) {
     };
 
     $scope.getCategoryById = function (id) {
-        return pick($scope.categories, id)
+        return pick($scope.categories, id);
     };
 
     $scope.button = function () {
-        adminApi.save('products', $scope.item.id, {a:100, b:'asdasd'}).then(function (response) {
+        adminApi.save('role', null, {id: 998, name: 100, created: 'now()'}).then(function (response) {
         });
     };
 }
