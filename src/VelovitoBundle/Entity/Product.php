@@ -33,9 +33,9 @@ class Product
 
     /**
      * @var string
-     * @ORM\Column(name="active", type="boolean", nullable=false)
+     * @ORM\Column(name="active", type="boolean", nullable=false,options={"default":true})
      */
-    private $active = true;
+    private $active;
 
     /**
      * Get id

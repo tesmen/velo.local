@@ -16,7 +16,7 @@ class DefaultController extends GeneralController
 
     public function menuAction(Request $request, $title = null)
     {
-        $repo = $this->get('doctrine.orm.default_entity_manager')->getRepository(C::REPO_PRODUCT_CATEGORY);
+        $repo = $this->get('doctrine.orm.default_entity_manager')->getRepository(C::REPO_CATEGORY);
 
 
         return $this->render(

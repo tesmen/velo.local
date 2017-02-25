@@ -75,14 +75,14 @@ class DefaultModel
      */
     public function getMenuParentCategories($parentId = null)
     {
-        return $this->em->getRepository(C::REPO_PRODUCT_CATEGORY)->findBy([
+        return $this->em->getRepository(C::REPO_CATEGORY)->findBy([
             'parent' => null
         ]);
     }
 
     public function getMenu($parentId = null)
     {
-        return $this->em->getRepository(C::REPO_PRODUCT_CATEGORY)->findAll();
+        return $this->em->getRepository(C::REPO_CATEGORY)->findAll();
     }
 
     public function loadConfigFromYaml($config)

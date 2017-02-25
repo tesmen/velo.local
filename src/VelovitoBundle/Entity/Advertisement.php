@@ -79,7 +79,7 @@ class Advertisement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creation_date", type="datetime", nullable=false)
+     * @ORM\Column(name="creation_date", type="datetime", nullable=false, options={"default":"NOW()"})
      */
     private $created;
 

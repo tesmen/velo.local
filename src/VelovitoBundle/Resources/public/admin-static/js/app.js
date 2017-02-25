@@ -60,6 +60,7 @@ function productsController($scope, $http, $location, adminApi) {
 
 function editProductController($scope, $location, $routeParams, adminApi) {
     $scope.item = {};
+    $scope.loadCategories();
 
     if ($routeParams.id) {
         $scope.setName('Edit product');
@@ -71,15 +72,13 @@ function editProductController($scope, $location, $routeParams, adminApi) {
         $scope.setName('Add product');
     }
 
-    $scope.loadCategories();
-
     $scope.back = function () {
         $location.path('/products');
     };
 
     $scope.save = function () {
         adminApi.save('products', $scope.item.id, $scope.item).then(function (response) {
-            $scope.item = response.data.data;
+
         });
     };
 }
@@ -115,5 +114,10 @@ function commonController($rootScope, $scope, adminApi) {
 
     $scope.getCategoryById = function (id) {
         return pick($scope.categories, id)
+    };
+
+    $scope.button = function () {
+        adminApi.save('products', $scope.item.id, {a:100, b:'asdasd'}).then(function (response) {
+        });
     };
 }

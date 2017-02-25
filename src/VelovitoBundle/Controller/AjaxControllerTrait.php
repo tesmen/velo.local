@@ -9,7 +9,7 @@ trait AjaxControllerTrait
 {
     private function standardJsonArray($status = true, $data = [], $message = '')
     {
-        return new JsonResponse( [
+        return new JsonResponse([
             AjaxController::F_STATUS  => (Bool)$status,
             AjaxController::F_DATA    => $data,
             AjaxController::F_MESSAGE => (String)$message,
@@ -26,8 +26,12 @@ trait AjaxControllerTrait
         return $this->standardJsonArray(false, [], $message);
     }
 
-    private function fromPayload(Request $request)
+    private function fromPayload($request = null)
     {
+        if (empty($request)) {
+            $request = $this->container->get('request_stack')->getCurrentRequest();
+        }
+
         return json_decode($request->getContent(), true);
     }
 }

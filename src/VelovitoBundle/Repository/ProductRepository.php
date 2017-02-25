@@ -10,7 +10,7 @@ class ProductRepository extends GeneralRepository
     public function create(array $data)
     {
         $ent = new Product();
-        $cat = $this->_em->getReference(C::REPO_PRODUCT_CATEGORY, $data[C::FORM_CATEGORY]);
+        $cat = $this->_em->getReference(C::REPO_CATEGORY, $data[C::FORM_CATEGORY]);
         $ent
             ->setActive(true)
             ->setCategory($cat)

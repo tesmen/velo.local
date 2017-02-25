@@ -32,7 +32,7 @@ class AdvertisementModel
 
         $this->advertRepo = $this->em->getRepository(C::REPO_ADVERTISEMENT);
         $this->advertAttrRepo = $em->getRepository(C::REPO_ADVERTISEMENT_ATTR);
-        $this->categoriesRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
+        $this->categoriesRepo = $em->getRepository(C::REPO_CATEGORY);
         $this->productRepo = $this->em->getRepository(C::REPO_PRODUCT);
         $this->productAttrRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTR);
         $this->productAttrMapRepo = $this->em->getRepository(C::REPO_PRODUCT_ATTR_MAP);
@@ -174,7 +174,7 @@ class AdvertisementModel
 
     public function getLastAdvertsFromCategory($id)
     {
-        $category = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $id);
+        $category = $this->em->getReference(C::REPO_CATEGORY, $id);
 
         return $this->advertRepo->findBy(
             [

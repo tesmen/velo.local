@@ -23,7 +23,7 @@ class AdminModel
         $this->productsAttrRepo = $em->getRepository(C::REPO_PRODUCT_ATTR);
         $this->productsAttrMapRepo = $em->getRepository(C::REPO_PRODUCT_ATTR_MAP);
         $this->productsAttrReferenceRepo = $em->getRepository(C::REPO_ATTRIBUTE_REFERENCE);
-        $this->productCatRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
+        $this->productCatRepo = $em->getRepository(C::REPO_CATEGORY);
     }
 
     /**
@@ -32,6 +32,14 @@ class AdminModel
     public function getAllProducts()
     {
         return $this->productsRepo->findAll();
+    }
+
+    public function getApiTables()
+    {
+        return [
+            $this->productsRepo->getTableName(),
+            $this->productCatRepo->getTableName(),
+        ];
     }
 
     /**
@@ -49,13 +57,14 @@ class AdminModel
     {
         return $this->productsAttrRepo->findAll();
     }
+
     /**
      * @return ProductAttribute[]
      */
     public function getAttributesByProductId($id)
     {
         return $this->productsAttrRepo->findBy([
-            ''
+            '',
         ]);
     }
 
@@ -73,7 +82,7 @@ class AdminModel
     public function getEnabledAttrReferences()
     {
         return $this->em->getRepository(C::REPO_ATTRIBUTE_REFERENCE)->findBy([
-            'active' => true
+            'active' => true,
         ]);
     }
 
@@ -83,7 +92,7 @@ class AdminModel
     public function getEnabledProductAttributes()
     {
         return $this->em->getRepository(C::REPO_PRODUCT_ATTR)->findBy([
-            'active' => true
+            'active' => true,
         ]);
     }
 
@@ -119,7 +128,7 @@ class AdminModel
 
         foreach ($this->getEnabledProductAttributes() as $ref) {
             $name = sprintf('%s - %s', $ref->getName(), $ref->getComment());
-            $result[$name] = $ref->getId()  ;
+            $result[$name] = $ref->getId();
         };
 
         ksort($result);
@@ -217,7 +226,7 @@ class AdminModel
     public function getAttributesMapByProductId($id)
     {
         return $this->productsAttrMapRepo->findby([
-            'product' => $id
+            'product' => $id,
         ]);
     }
 
@@ -255,7 +264,7 @@ class AdminModel
         $ent = is_null($productAttribute)
             ? new ProductAttribute()
             : $productAttribute;
-        $reference = $this->em->getReference(C::REPO_ATTRIBUTE_REFERENCE,$formData[C::FORM_REFERENCE]);
+        $reference = $this->em->getReference(C::REPO_ATTRIBUTE_REFERENCE, $formData[C::FORM_REFERENCE]);
 
         $ent
             ->setName($formData[C::FORM_TITLE])
@@ -327,7 +336,7 @@ class AdminModel
     public function updateProduct($id, $formData)
     {
         $ent = $this->getProductById($id);
-        $cat = $this->em->getReference(C::REPO_PRODUCT_CATEGORY, $formData[C::FORM_CATEGORY]);
+        $cat = $this->em->getReference(C::REPO_CATEGORY, $formData[C::FORM_CATEGORY]);
 
         $ent
             ->setName($formData[C::FORM_TITLE])
@@ -375,5 +384,33 @@ class AdminModel
     public function getCategoriesForForm()
     {
         return $this->productCatRepo->getActiveCategoriesList();
+    }
+
+    public function insert($tableName, $data)
+    {
+        if (!in_array($tableName, $this->getApiTables())) {
+            return false;
+        }
+
+        foreach ($data as $key => &$datum) {
+            if (is_scalar($datum)) {
+                continue;
+            }
+
+            if (is_array($datum) && isset($datum['id'])) {
+                $datum = $datum['id'];
+                continue;
+            }
+
+            unset($data[$key]);
+        }
+
+        $qb = $this->em->getConnection()->createQueryBuilder()->insert($tableName);
+
+        foreach ($data as $key => $val) {
+            $qb->setValue($key, ':' . $key);
+        }
+
+        return $qb->setParameters($data)->execute();
     }
 }

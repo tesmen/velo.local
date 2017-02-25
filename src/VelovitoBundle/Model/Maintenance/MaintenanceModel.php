@@ -15,7 +15,7 @@ class MaintenanceModel
     {
         $this->em = $em;
 
-        $this->productCatRepo = $em->getRepository(C::REPO_PRODUCT_CATEGORY);
+        $this->productCatRepo = $em->getRepository(C::REPO_CATEGORY);
         $this->productsRepo = $em->getRepository(C::REPO_PRODUCT);
     }
 

@@ -36,7 +36,7 @@ class C
     const REPO_PRODUCT_ATTR_MAP = 'VelovitoBundle:ProductAttributeMap';
     const REPO_ATTRIBUTE_REFERENCE = 'VelovitoBundle:AttributeReference';
     const REPO_ATTRIBUTE_REFERENCE_ITEM = 'VelovitoBundle:AttributeReferenceItem';
-    const REPO_PRODUCT_CATEGORY = 'VelovitoBundle:ProductCategory';
+    const REPO_CATEGORY = 'VelovitoBundle:ProductCategory';
     const REPO_PARTS_VENDOR = 'VelovitoBundle:PartsVendor';
     const REPO_PRODUCT = 'VelovitoBundle:Product';
     const REPO_USER_FAVORITES = 'VelovitoBundle:UserFavoriteAdvert';
