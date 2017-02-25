@@ -56,29 +56,29 @@ function productsController($scope, $http, $location, adminApi) {
     $scope.addItem = function () {
         $location.path('/products/add');
     };
-
-    $scope.toggleActive = function (item) {
-        $http.post('api/admin/product/' + item.id, {entity: {active: !item.active}}).then(function (response) {
-            $scope.loadProducts();
-        })
-    };
 }
 
-function editProductController($scope, $http, $location, $routeParams, adminApi) {
-    $scope.setName('Edit product');
+function editProductController($scope, $location, $routeParams, adminApi) {
     $scope.item = {};
 
+    if ($routeParams.id) {
+        $scope.setName('Edit product');
+
+        adminApi.loadProduct($routeParams.id).then(function (response) {
+            $scope.item = response.data.data;
+        });
+    } else {
+        $scope.setName('Add product');
+    }
+
     $scope.loadCategories();
-    adminApi.loadProduct($routeParams.id).then(function (response) {
-        $scope.item = response.data.data;
-    });
 
     $scope.back = function () {
         $location.path('/products');
     };
 
     $scope.save = function () {
-        adminApi.save($routeParams.id).then(function (response) {
+        adminApi.save('products', $scope.item.id, $scope.item).then(function (response) {
             $scope.item = response.data.data;
         });
     };
@@ -106,7 +106,6 @@ function commonController($rootScope, $scope, adminApi) {
     $scope.loadCategories = function () {
         adminApi.loadCategories().then(function (response) {
             $scope.categories = response.data.data;
-            console.log($scope.categories);
         });
     };
 

@@ -8,7 +8,9 @@ function adminApiService($http) {
     };
 
     this.save = function (tableName, id, data) {
-        return $http.post('api/admin/' + tableName + '/' + id, data);
+        var intId = Number(id) ? '/' + Number(id) : '';
+
+        return $http.post('api/admin/' + tableName + intId, data);
     };
 
     this.loadProducts = function () {

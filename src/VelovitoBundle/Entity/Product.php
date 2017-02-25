@@ -15,7 +15,7 @@ class Product
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -35,7 +35,7 @@ class Product
      * @var string
      * @ORM\Column(name="active", type="boolean", nullable=false)
      */
-    private $active;
+    private $active = true;
 
     /**
      * Get id

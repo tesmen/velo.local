@@ -1,12 +1,12 @@
 <div class="row top-buffer">
     <div class="col-xs-12">
-        <div class="btn-group pull-right">
+        <div class="btn-group">
             <button type="button" class="btn btn-success" ng-click="addItem()">Add new</button>
         </div>
     </div>
 </div>
 
-<div class="row  top-buffer">
+<div class="row top-buffer">
     <div class="col-xs-12">
         <table class="table table-stripped table-condensed table-hover">
             <tr ng-repeat="item in products">
@@ -17,9 +17,9 @@
                 <td>
                     <button type="button" class="btn btn-sm btn-primary" ng-click="editItem(item)">Edit</button>
 
-                    <button type="button" class="btn btn-sm" ng-class="{'btn-success':!item.active, 'btn-danger': item.active}"
-                            ng-click="toggleActive(item)">Activate
-                    </button>
+                    <!--<button type="button" class="btn btn-sm" ng-class="{'btn-success':!item.active, 'btn-danger': item.active}"-->
+                            <!--ng-click="toggleActive(item)">Activate-->
+                    <!--</button>-->
                 </td>
             </tr>
         </table>
